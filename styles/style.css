@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  height: 100vh;
+  padding: .5rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 8vh 1fr;
+      grid-template-rows: 8vh 1fr;
+}
+
+.navScheduling {
+  position: relative;
+  height: 100%;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navScheduling__Icon {
+  cursor: pointer;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[3];
+      grid-template-rows: repeat(3, 1fr);
+  gap: 10%;
+  height: 2rem;
+  width: 2rem;
+  padding: .5rem;
+  z-index: 99;
+}
+
+.navScheduling__Icon div {
+  background: black;
+}
+
+.navScheduling__List {
+  width: 50%;
+  z-index: 99;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-transition: all .33s ease-in-out;
+  transition: all .33s ease-in-out;
+}
+
+.navScheduling__List.open {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.navScheduling__List--Item {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.navScheduling__List--Item.textTransition {
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+
+.navScheduling__List--Item:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
+}
+
+.navScheduling__List--Item a {
+  text-decoration: none;
+  color: black;
+}
+
+.navScheduling__Search {
+  cursor: pointer;
+  margin-left: auto;
+  border: 1px solid transparent;
+  border-radius: 50000px;
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.navScheduling__Search:hover {
+  border-color: black;
+}
+
+.navScheduling__Search:hover > input {
+  width: 100%;
+}
+
+.navScheduling__Search input {
+  border: none;
+  width: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.mainScheduling {
+  background: white;
+}
+
+.mainScheduling * {
+  color: white;
+}
+
+.mainScheduling > div {
+  display: none;
+  height: 100vh;
+}
+
+.mainScheduling > div img {
+  height: 100%;
+  width: 100%;
+}
+
+.mainScheduling > div h1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.mainScheduling .sections, .mainScheduling .professors {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  -ms-grid-rows: (minmax(150px, 1fr))[auto-fill];
+      grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 5px;
+}
+
+.mainScheduling .sections__Card, .mainScheduling .professors__Card {
+  position: relative;
+  cursor: pointer;
+}
+
+.mainScheduling .sections__Card::before, .mainScheduling .professors__Card::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.6;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+.mainScheduling .sections__Card:hover::before, .mainScheduling .sections__Card:hover h1, .mainScheduling .professors__Card:hover::before, .mainScheduling .professors__Card:hover h1 {
+  opacity: 0;
+}
+
+.mainScheduling .rooms {
+  grid-gap: 10px;
+  -ms-grid-rows: (1fr)[auto-fill];
+      grid-template-rows: repeat(auto-fill, 1fr);
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  padding: 5px;
+  color: white;
+}
+
+.mainScheduling .rooms__Floors {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[7];
+      grid-template-columns: repeat(7, auto);
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
+  place-content: center;
+  grid-gap: 5px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.mainScheduling .rooms__Floors h1 {
+  z-index: 1;
+}
+
+.mainScheduling .rooms__Floors::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.6;
+  -webkit-transition: .7s ease-in-out;
+  transition: .7s ease-in-out;
+}
+
+.mainScheduling .rooms__Floors:hover::before, .mainScheduling .rooms__Floors:hover > h1 {
+  opacity: 0;
+}
+
+.mainScheduling .rooms__Floors--room {
+  position: relative;
+  cursor: pointer;
+}
+
+.mainScheduling .rooms__Floors--room::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.6;
+  -webkit-transition: .7s ease-in-out;
+  transition: .7s ease-in-out;
+}
+
+.mainScheduling .rooms__Floors--room:hover::before, .mainScheduling .rooms__Floors--room:hover h1 {
+  opacity: 0;
+}
+/*# sourceMappingURL=style.css.map */
