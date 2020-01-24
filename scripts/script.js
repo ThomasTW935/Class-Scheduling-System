@@ -1,4 +1,4 @@
-navItems = document.querySelectorAll(".navScheduling__List--Item");
+/*navItems = document.querySelectorAll(".navScheduling__List--Item");
 
 for(let navItem of navItems){
    let navName = navItem.id;
@@ -25,3 +25,4 @@ navIcon.addEventListener('click', ()=>{
       delay += 0.1;
    }
 });
+*/
