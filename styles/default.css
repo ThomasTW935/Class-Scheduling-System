@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+}
+
+body button, body a, body input {
+  padding: .3em .7em;
+}
+
+body a {
+  text-decoration: none;
+  color: black;
+  opacity: 0.5;
+}
+
+body a:hover {
+  opacity: 1;
+}
+
+body button {
+  background: #00a8ff;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+body input {
+  display: block;
+  margin: 0.5em 0;
+  outline: none;
+  border: none;
+  position: relative;
+}
+
+body input:focus {
+  border-bottom: .2em solid #00a8ff;
+}
+/*# sourceMappingURL=default.css.map */
