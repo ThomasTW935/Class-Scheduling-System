@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if(!isset($_SESSION['admin'])){
+      header("Location: ./studentview.php");
+      exit();
+   }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,4 +23,7 @@
          <li class="navScheduling__List--Item"><a href="professors">Professors</a></li>
          <li class="navScheduling__List--Item"><a href="subjects">Subjects</a></li>
       </ul>
+      <form action="./includes/logout.inc.php" method="POST">
+         <button type="submit" name="logout-Button" >Logout</button>
+      </form>
    </nav>
