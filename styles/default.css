@@ -14,13 +14,8 @@ body button, body a, body input {
 }
 
 body a {
+  cursor: pointer;
   text-decoration: none;
-  color: black;
-  opacity: 0.5;
-}
-
-body a:hover {
-  opacity: 1;
 }
 
 body button {
@@ -40,5 +35,9 @@ body input {
 
 body input:focus {
   border-bottom: .2em solid #00a8ff;
+}
+
+body li {
+  list-style: none;
 }
 /*# sourceMappingURL=default.css.map */

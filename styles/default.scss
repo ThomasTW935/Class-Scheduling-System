@@ -6,15 +6,12 @@
 body{
    line-height: 1.5;
    button,a,input{
-      padding: .3em .7em;
+      padding: .3em .7em; 
    }
    a{
+      cursor:pointer;
       text-decoration:none;
-      color:black;
-      opacity:0.5;
-      &:hover{
-         opacity:1;
-      }
+      
    }
    button{
       background:#00a8ff;
@@ -32,4 +29,7 @@ body{
          border-bottom: .2em solid #00a8ff;
       }
    } 
+   li{
+      list-style: none;
+   }
 }
