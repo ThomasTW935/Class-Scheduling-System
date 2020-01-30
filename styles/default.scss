@@ -26,7 +26,7 @@ body{
       &--Item{
          cursor:pointer;
          padding: .2em .5em;
-         &:active{
+         &:active,&:hover{
             background:rgba(white,0.5);
          }
       }

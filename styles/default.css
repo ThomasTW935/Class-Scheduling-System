@@ -42,7 +42,7 @@ body a {
   padding: .2em .5em;
 }
 
-.nav__List--Item:active {
+.nav__List--Item:active, .nav__List--Item:hover {
   background: rgba(255, 255, 255, 0.5);
 }
 /*# sourceMappingURL=default.css.map */
