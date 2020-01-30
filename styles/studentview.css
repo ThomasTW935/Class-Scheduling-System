@@ -7,140 +7,104 @@
 
 body {
   line-height: 1.5;
+  height: 150vh;
 }
 
-body button, body a, body input {
-  padding: .3em .7em;
+body ul {
+  list-style: none;
 }
 
 body a {
-  cursor: pointer;
   text-decoration: none;
-}
-
-body button {
-  background: #00a8ff;
-  color: white;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-body input {
-  display: block;
-  margin: 0.5em 0;
-  outline: none;
-  border: none;
-  position: relative;
-}
-
-body input:focus {
-  border-bottom: .2em solid #00a8ff;
-}
-
-body li {
-  list-style: none;
 }
 
 .nav {
   background: #00a8ff;
   position: -webkit-sticky;
   position: sticky;
-  padding: 1rem;
-}
-
-.nav__Burger {
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  position: relative;
-  cursor: pointer;
-}
-
-.nav__Burger::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: black;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-  border-radius: 50%;
-  opacity: 0;
-}
-
-.nav__Burger:active::before {
-  opacity: 0.25;
-}
-
-.nav__Burger--Line {
-  height: 4px;
-  width: 100%;
-  background: white;
+  top: 0;
+  color: white;
+  padding: .7em;
 }
 
 .nav__List {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  width: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background: #00a8ff;
-  color: white;
-  -webkit-clip-path: circle(100px at -90% -10%);
-          clip-path: circle(100px at -90% -10%);
-  -webkit-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
 }
 
-.nav__List.open {
-  -webkit-clip-path: circle(2000px at -90% -10%);
-          clip-path: circle(2000px at -90% -10%);
+.nav__List--Item {
+  cursor: pointer;
+  padding: .2em .5em;
 }
 
 .nav__List--Item:active {
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .nav__Burger {
-    display: none;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    position: relative;
+    cursor: pointer;
+  }
+  .nav__Burger::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: black;
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    border-radius: 50%;
+    opacity: 0;
+  }
+  .nav__Burger:active::before {
+    opacity: 0.25;
+  }
+  .nav__Burger--Line {
+    height: 4px;
+    width: 100%;
+    background: white;
   }
   .nav__List {
-    position: relative;
-    height: 100%;
-    width: 50%;
-    -webkit-box-orient: horizontal;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-clip-path: none;
-            clip-path: none;
-    -webkit-transition: none;
-    transition: none;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background: #00a8ff;
+    -webkit-clip-path: circle(100px at -90% -10%);
+            clip-path: circle(100px at -90% -10%);
+    -webkit-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+  }
+  .nav__List.open {
+    -webkit-clip-path: circle(2000px at -90% -10%);
+            clip-path: circle(2000px at -90% -10%);
   }
 }
 /*# sourceMappingURL=studentview.css.map */

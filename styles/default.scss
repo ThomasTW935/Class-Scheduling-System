@@ -5,31 +5,30 @@
 }
 body{
    line-height: 1.5;
-   button,a,input{
-      padding: .3em .7em; 
+   height:150vh;
+   ul{
+      list-style:none; 
    }
    a{
-      cursor:pointer;
-      text-decoration:none;
-      
+      text-decoration: none;
    }
-   button{
-      background:#00a8ff;
-      color:white;
-      cursor:pointer;
-      font-size:1.2rem;
-   } 
-   input{
-      display:block;
-      margin: 0.5em 0;
-      outline:none;
-      border:none;
-      position:relative;
-      &:focus{
-         border-bottom: .2em solid #00a8ff;
+}
+.nav{
+   background:#00a8ff;
+   position:sticky;
+   top:0;
+   color:white;
+   padding: .7em;
+   &__List{
+      width:60%;
+      display:flex;
+      justify-content: space-evenly;
+      &--Item{
+         cursor:pointer;
+         padding: .2em .5em;
+         &:active{
+            background:rgba(white,0.5);
+         }
       }
-   } 
-   li{
-      list-style: none;
    }
 }

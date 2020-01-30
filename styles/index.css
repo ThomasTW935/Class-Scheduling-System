@@ -24,7 +24,7 @@ body a {
   position: sticky;
   top: 0;
   color: white;
-  padding: .7em;
+  padding: 1rem;
 }
 
 .nav__List {
@@ -36,13 +36,4 @@ body a {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
-
-.nav__List--Item {
-  cursor: pointer;
-  padding: .2em .5em;
-}
-
-.nav__List--Item:active {
-  background: rgba(255, 255, 255, 0.5);
-}
-/*# sourceMappingURL=default.css.map */
+/*# sourceMappingURL=index.css.map */
