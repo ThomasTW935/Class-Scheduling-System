@@ -23,7 +23,6 @@ body a {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  color: white;
   padding: .7em;
 }
 
@@ -86,7 +85,7 @@ body a {
   left: 0;
   height: 100vh;
   width: 15%;
-  background: #00aaff88;
+  background: rgba(0, 170, 255, 0.1);
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
   -webkit-transform-origin: left;

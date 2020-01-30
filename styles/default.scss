@@ -17,7 +17,6 @@ body{
    background:#00a8ff;
    position:sticky;
    top:0;
-   color:white;
    padding: .7em;
    &__Burger{
       z-index:2;
@@ -57,7 +56,7 @@ body{
       left:0;
       height:100vh;
       width:15%;
-      background:#00aaff88;
+      background:rgba(0,170,255,0.1);
       transform: scaleX(0);
       transform-origin: left;
       transition: all .5s ease-in-out;
