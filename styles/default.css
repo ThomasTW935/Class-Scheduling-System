@@ -86,7 +86,7 @@ body a {
   left: 0;
   height: 100vh;
   width: 15%;
-  background: #00a8ff;
+  background: #00aaff88;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
   -webkit-transform-origin: left;
