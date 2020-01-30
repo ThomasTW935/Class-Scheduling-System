@@ -13,7 +13,10 @@
 <body>   
    <form class="form" action="includes/login.inc.php" method="POST">
       <label class="form__Label">Sign in</label>
-      <input class="form__Input" type="text" name="username" placeholder="Username" required>
+      <div>
+         <label for="input-username" class="form__Label--focus">Username</label>
+         <input class="form__Input" id="input-username" type="text" name="username" required>
+      </div>
       <!-- <input class="form__Input" type="password" name="password" placeholder="Password" required> -->
       <button  class="form__Button" type="submit" name="login-Submit">NEXT</button>
    </form>

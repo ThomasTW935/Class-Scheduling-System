@@ -30,9 +30,9 @@ body a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -42,11 +42,11 @@ body a {
 }
 
 .form::before {
-  content: "";
-  position: absolute;
-  top: 0;
+  content: '';
   height: 10%;
   width: 100%;
+  position: absolute;
+  top: 0;
   background: #00aaff;
 }
 
@@ -56,15 +56,35 @@ body a {
 
 .form__Label {
   text-align: center;
+}
+
+.form div {
   position: relative;
-  top: -2em;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.form div:focus-within .form__Label--focus {
+  opacity: 1;
+  font-size: 0.95rem;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.form__Label--focus {
+  position: relative;
+  bottom: -2.5em;
+  opacity: 0.6;
+  cursor: text;
+  -webkit-transition: .3s ease-out;
+  transition: .3s ease-out;
 }
 
 .form__Input {
   border: none;
   border-bottom: 1px solid rgba(0, 170, 255, 0.2);
   padding: 1em 0 .3em;
-  margin: 1em 0;
 }
 
 .form__Input:focus {
@@ -77,5 +97,7 @@ body a {
   color: white;
   border: none;
   border-radius: 1000000px;
+  margin: 0 auto;
+  padding: .5em .2em;
 }
 /*# sourceMappingURL=login.css.map */

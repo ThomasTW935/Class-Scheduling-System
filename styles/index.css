@@ -7,7 +7,6 @@
 
 body {
   line-height: 1.5;
-  height: 150vh;
 }
 
 body ul {
@@ -16,24 +15,5 @@ body ul {
 
 body a {
   text-decoration: none;
-}
-
-.nav {
-  background: #00a8ff;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  color: white;
-  padding: 1rem;
-}
-
-.nav__List {
-  width: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
 }
 /*# sourceMappingURL=index.css.map */
