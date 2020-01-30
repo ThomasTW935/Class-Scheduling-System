@@ -1,1 +1,81 @@
-/* No CSS *//*# sourceMappingURL=login.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+}
+
+body ul {
+  list-style: none;
+}
+
+body a {
+  text-decoration: none;
+}
+
+.form {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 180px);
+  width: 360px;
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 1px solid #f1f1f5;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(181, 181, 181, 0.7);
+          box-shadow: 0 2px 4px 0 rgba(181, 181, 181, 0.7);
+}
+
+.form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 10%;
+  width: 100%;
+  background: #00aaff;
+}
+
+.form * {
+  font-size: 1.1rem;
+}
+
+.form__Label {
+  text-align: center;
+  position: relative;
+  top: -2em;
+}
+
+.form__Input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 170, 255, 0.2);
+  padding: 1em 0 .3em;
+  margin: 1em 0;
+}
+
+.form__Input:focus {
+  border-bottom-color: #00aaff;
+}
+
+.form__Button {
+  width: 60%;
+  background: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 1000000px;
+}
+/*# sourceMappingURL=login.css.map */

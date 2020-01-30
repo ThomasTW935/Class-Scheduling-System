@@ -1,0 +1,48 @@
+@import 'default.scss';
+
+.form{
+   position:absolute;
+   top:calc(50% - 150px);
+   left:calc(50% - 180px);
+   width: 360px;
+   min-height: 300px;
+   display:flex;
+   flex-direction:column;
+   justify-content: center;
+   align-items: center;
+   border-top: 1px solid #f1f1f5;
+   box-shadow: 0 2px 4px 0 rgba(181,181,181,.7);
+   &::before{
+      content:"";
+      position:absolute;
+      top: 0;
+      height:10%;
+      width:100%;
+      background:rgba(0,170,255,1);
+   }
+   *{
+      font-size:1.1rem;
+   }
+   &__Label{
+      text-align: center;
+      position:relative;
+      top: -2em;
+   }
+   &__Input{
+      border:none;
+      border-bottom:1px solid rgba(0,170,255,0.2);
+      padding: 1em 0 .3em;
+      margin: 1em 0;
+      &:focus{
+         border-bottom-color:rgba(0,170,255,1);
+      }
+   }
+   &__Button{
+      width:60%;
+      background: rgba(0,170,255,1);
+      color:white;
+      border:none;
+      border-radius:1000000px;
+   }
+
+}

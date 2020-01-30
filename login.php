@@ -11,13 +11,11 @@
    <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>   
-   <form action="includes/login.inc.php" method="POST">
-      <input class="form__Input--text" type="text" name="username" placeholder="Username" required>
-      <input class="form__Input--pass" type="password" name="password" placeholder="Password" required>
-      <div>
-         <button type="submit" name="login-Submit">SUBMIT</button>
-         <a href="./studentview.php">CANCEL</a>
-      </div>
+   <form class="form" action="includes/login.inc.php" method="POST">
+      <label class="form__Label">Sign in</label>
+      <input class="form__Input" type="text" name="username" placeholder="Username" required>
+      <!-- <input class="form__Input" type="password" name="password" placeholder="Password" required> -->
+      <button  class="form__Button" type="submit" name="login-Submit">NEXT</button>
    </form>
 </body>
 </html>
