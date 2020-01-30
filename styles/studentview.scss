@@ -46,6 +46,11 @@
          &.open{
             clip-path: circle(2000px at -90% -10%);
          }
+         &--Item{
+            &:active{
+               background:rgba(white,0.5);
+            }
+         }
       }
    }
 

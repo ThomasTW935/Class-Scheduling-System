@@ -40,9 +40,10 @@ body a {
 .nav__List--Item {
   cursor: pointer;
   padding: .2em .5em;
+  border-radius: 15%;
 }
 
-.nav__List--Item:active, .nav__List--Item:hover {
+.nav__List--Item:hover {
   background: rgba(255, 255, 255, 0.5);
 }
 /*# sourceMappingURL=default.css.map */
