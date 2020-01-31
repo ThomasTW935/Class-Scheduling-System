@@ -19,7 +19,7 @@
       </div>
       <div class="form__Input">
          <label for="input-username" class="form__Label--focus  form__Signin--hide">Username</label>
-         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username">
+         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username" autofocus>
          <label for="input-password" class="form__Label--focus form__Signin--display">Password</label>
          <input class="form__Input form__Signin--display" id="input-password" type="password" name="password" autofocus>
          <span class="form__Error"></span>
