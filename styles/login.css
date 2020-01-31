@@ -37,6 +37,7 @@ body a {
       -ms-flex-align: center;
           align-items: center;
   border-top: 1px solid #f1f1f5;
+  padding: 1em 0;
   -webkit-box-shadow: 0 2px 4px 0 rgba(181, 181, 181, 0.7);
           box-shadow: 0 2px 4px 0 rgba(181, 181, 181, 0.7);
 }
@@ -54,10 +55,6 @@ body a {
   font-size: 1.1rem;
 }
 
-.form__Label {
-  text-align: center;
-}
-
 .form div {
   position: relative;
   display: -ms-grid;
@@ -65,11 +62,16 @@ body a {
   place-content: center;
 }
 
-.form div:focus-within .form__Label--focus {
-  opacity: 1;
-  font-size: 0.95rem;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+.form .form__Message label {
+  font-size: 1.4rem;
+}
+
+.form .form__Message p {
+  display: none;
+}
+
+.form .form__Message span {
+  font-weight: bolder;
 }
 
 .form__Label--focus {
@@ -91,7 +93,30 @@ body a {
   border-bottom-color: #00aaff;
 }
 
+.form__Input:focus-within .form__Label--focus {
+  opacity: 1;
+  font-size: 0.95rem;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.form__Input input:invalid {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form__Signin--display {
+  display: none;
+}
+
+.form__Error {
+  display: block;
+  color: red;
+  font-size: 0.8rem;
+}
+
 .form__Button {
+  cursor: pointer;
   width: 60%;
   background: #00aaff;
   color: white;

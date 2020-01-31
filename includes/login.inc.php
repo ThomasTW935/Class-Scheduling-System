@@ -1,17 +1,30 @@
 <?php
-if(isset($_POST['login-Submit'])){
+$error="";
+if(isset($_POST['login-Username'])){
    
    $username = $_POST['username'];
-   $password = $_POST['password'];
-   if($username == "admin" && $password == "admin"){
-      session_start();
-      $_SESSION['admin'] = true;
-      header("Location: ../index.php");
-   } else {
-      header("Location: ../login.php");
+   if($username == "admin"){  
+      header("Location: ../login.php?username=admin");
+      exit();
+   } else{
+      $error = "username";
+      header("Location: ../login.php?error=$error");
       exit();
    }
-} else {
+} else if(isset($_POST['login-Password'])){
+   $password = $_POST['password'];
+   if($password == "admin"){
+      session_start();
+      $_SESSION['admin'] = true;
+      header("Location: ../index.php?signin=success");
+      exit();
+   } else {
+      $error = "password";
+      header("Location: ../login.php?error=$error");
+      exit();
+   }
+}
+ else {
    header("Location: ../studentview.php");
    exit();
 }

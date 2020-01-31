@@ -9,16 +9,23 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Document</title>
    <link rel="stylesheet" href="styles/login.css">
+   <script defer src="./scripts/login.js"></script>
 </head>
 <body>   
    <form class="form" action="includes/login.inc.php" method="POST">
-      <label class="form__Label">Sign in</label>
-      <div>
-         <label for="input-username" class="form__Label--focus">Username</label>
-         <input class="form__Input" id="input-username" type="text" name="username" required>
+      <div class="form__Message">
+         <label class="form__Label">Sign in</label>
+         <p class="form__Signin--display">as <span></span></p>
       </div>
-      <!-- <input class="form__Input" type="password" name="password" placeholder="Password" required> -->
-      <button  class="form__Button" type="submit" name="login-Submit">NEXT</button>
+      <div class="form__Input">
+         <label for="input-username" class="form__Label--focus  form__Signin--hide">Username</label>
+         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username"   autofocus>
+         <label for="input-password" class="form__Label--focus form__Signin--display">Password</label>
+         <input class="form__Input form__Signin--display" id="input-password" type="password" name="password" autofocus>
+         <span class="form__Error"></span>
+      </div>
+      <button class="form__Button form__Signin--hide" type="submit" name="login-Username">NEXT</button>
+      <button class="form__Button form__Signin--display" type="submit" name="login-Password">NEXT</button>
    </form>
 </body>
 </html>

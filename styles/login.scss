@@ -11,6 +11,7 @@
    justify-content: space-evenly;
    align-items: center;
    border-top: 1px solid #f1f1f5;
+   padding: 1em 0;
    box-shadow: 0 2px 4px 0 rgba(181,181,181,.7);
    &::before{
       content:'';
@@ -23,17 +24,20 @@
    *{
       font-size:1.1rem;
    }
-   &__Label{
-      text-align: center;
-   }
    div{
       position:relative;
       display:grid;
       place-content: center;
-      &:focus-within .form__Label--focus{
-         opacity:1;
-         font-size:0.95rem;
-         transform: translateY(-100%);
+   }
+   .form__Message{
+      label{
+         font-size:1.4rem;
+      }
+      p{
+         display:none;
+      }
+      span{
+         font-weight: bolder;
       }
    }
    &__Label--focus{
@@ -50,9 +54,25 @@
       &:focus{
          border-bottom-color:rgba(0,170,255,1);
       }
-      
+      &:focus-within .form__Label--focus{
+         opacity:1;
+         font-size:0.95rem;
+         transform: translateY(-100%);
+      }
+      input:invalid {
+         box-shadow: none;
+      }
+   }
+   &__Signin--display{
+      display:none;
+   } 
+   &__Error{
+      display:block;
+      color:red;
+      font-size:0.8rem;
    }
    &__Button{
+      cursor:pointer;
       width:60%;
       background: rgba(0,170,255,1);
       color:white;

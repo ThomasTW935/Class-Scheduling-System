@@ -17,13 +17,18 @@
 </head>
 <body>
    <nav class="nav">
+      <div class="nav__Burger">
+         <div class="nav__Burger--Line"></div>
+         <div class="nav__Burger--Line"></div>
+         <div class="nav__Burger--Line"></div>
+      </div>
       <ul class="nav__List">
          <li class="nav__List--Item"><a href="index.php?sections">Sections</a></li>
          <li class="nav__List--Item"><a href="index.php?room">Room</a></li>
          <li class="nav__List--Item"><a href="index.php?professors">Professors</a></li>
          <li class="nav__List--Item"><a href="index.php?subjects">Subjects</a></li>
       </ul>
-      <form action="./includes/logout.inc.php" method="POST">
+      <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
          <button type="submit" name="logout-Button" >Logout</button>
       </form>
    </nav>
