@@ -49,6 +49,7 @@
    }
    &__Input{
       border:none;
+      outline:none;
       border-bottom:1px solid rgba(0,170,255,0.2);
       padding: 1em 0 .3em;
       &:focus{
