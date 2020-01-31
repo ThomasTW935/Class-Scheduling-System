@@ -10,6 +10,7 @@ body{
    }
    a{
       text-decoration: none;
+      color:black;
    }
    button{
       cursor:pointer;
@@ -76,6 +77,13 @@ body{
          &:hover,&:active{
             background:rgba(white,0.5);
          }
+      }
+   }
+}
+@media screen and (max-width: 768px){
+   .nav{
+      &__List{
+         width:100%;
       }
    }
 }

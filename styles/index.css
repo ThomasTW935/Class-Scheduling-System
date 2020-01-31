@@ -15,6 +15,7 @@ body ul {
 
 body a {
   text-decoration: none;
+  color: black;
 }
 
 body button {
@@ -114,6 +115,12 @@ body button {
 
 .nav__List--Item:hover, .nav__List--Item:active {
   background: rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .nav__List {
+    width: 100%;
+  }
 }
 
 .nav__Button {

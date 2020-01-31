@@ -1,8 +1,9 @@
 <?php
 $error="";
 if(isset($_POST['login-Username'])){
-   
+
    $username = $_POST['username'];
+   echo $username; 
    if($username == "admin"){  
       header("Location: ../login.php?username=admin");
       exit();

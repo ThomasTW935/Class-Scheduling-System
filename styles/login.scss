@@ -86,5 +86,12 @@
       margin: 0 auto;
       padding: .5em .2em;
    }
-
+}
+@media screen and (max-width: 768px){
+   .form{
+      top:0;
+      left:0;
+      width:100vw;
+      height:100vh;
+   }
 }
