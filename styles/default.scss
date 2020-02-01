@@ -81,7 +81,7 @@ body{
       background:#2C384A;
       transform: scaleX(0);
       transform-origin: right;
-      transition: all .5s ease-in-out;
+      transition: all .25s ease-in-out;
       &.open{
          transform: scaleX(1);
       }
