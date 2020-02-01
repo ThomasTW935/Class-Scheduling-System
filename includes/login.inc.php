@@ -1,9 +1,10 @@
 <?php
 $error="";
+$username = "";
+$password = "";
 if(isset($_POST['login-Username'])){
 
    $username = $_POST['username'];
-   echo $username; 
    if($username == "admin"){  
       header("Location: ../login.php?username=admin");
       exit();
@@ -14,6 +15,7 @@ if(isset($_POST['login-Username'])){
    }
 } else if(isset($_POST['login-Password'])){
    $password = $_POST['password'];
+   $username = $_POST['username'];
    if($password == "admin"){
       session_start();
       $_SESSION['admin'] = true;
@@ -21,7 +23,7 @@ if(isset($_POST['login-Username'])){
       exit();
    } else {
       $error = "password";
-      header("Location: ../login.php?error=$error");
+      header("Location: ../login.php?error=$error&username=$username");
       exit();
    }
 }

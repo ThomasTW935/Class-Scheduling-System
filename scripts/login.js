@@ -1,22 +1,32 @@
 let url = document.URL
 let urlParams = url.split('?')[1]
-let paramTitle = urlParams.split("=")[0]
-let paramContent = urlParams.split("=")[1]
-
+let getParams = urlParams.split("&")
+let params = {}
+getParams.forEach( (item,index) => {
+   let paramSplit = getParams[index].split('=')
+   params[paramSplit[0]] = paramSplit[1]
+})
+console.log(params.username)
 let error = document.querySelector('.form__Error')
-if(paramTitle == "error" && paramContent == "username"){
+if(params.error == "username"){
    let errorMessage = "Sorry, we don't recognize this Username"
    error.innerHTML = errorMessage
    error.style.display = "block"
    
-} else if(paramTitle == "error" && paramContent == "password"){
+} 
+if(params.error == "password"){
    let errorMessage = "Wrong Password"
    error.innerHTML = errorMessage
    error.style.display = "block"
-}  
+   PasswordForm()
+}    
+if(params.error == null){
+   PasswordForm()
+}
 
 
-if(paramTitle == "username"){
+
+function PasswordForm(){
    let formDisplay = document.querySelectorAll('.form__Signin--display')
    let formHide = document.querySelectorAll('.form__Signin--hide')
    formDisplay.forEach( (item,index) => {
@@ -26,5 +36,5 @@ if(paramTitle == "username"){
       formHide[index].style.display = "none"
    })
    let signinName = document.querySelector('.form__Message span')
-   signinName.innerHTML = paramContent
+   signinName.innerHTML = params.username
 }

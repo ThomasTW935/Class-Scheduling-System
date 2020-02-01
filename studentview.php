@@ -15,6 +15,9 @@
          <div class="nav__Burger--Line"></div>
          <div class="nav__Burger--Line"></div>
       </div>
+      <div class="nav__Logo">
+         <img src="./drawables/images/STI_LOGO.png" alt="STI">
+      </div>
       <ul class="nav__List">
          <li class="nav__List--Item"><a>IT</a></li>
          <li class="nav__List--Item"><a>HRM</a></li>

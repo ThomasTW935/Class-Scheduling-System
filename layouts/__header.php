@@ -25,7 +25,7 @@
       <ul class="nav__List">
          <li class="nav__List--Item"><a href="index.php?sections">Sections</a></li>
          <li class="nav__List--Item"><a href="index.php?room">Room</a></li>
-         <li class="nav__List--Item"><a href="index.php?professors">Professors</a></li>
+         <li class="nav__List--Item"><a href="professor.php">Professors</a></li>
          <li class="nav__List--Item"><a href="index.php?subjects">Subjects</a></li>
       </ul>
       <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
