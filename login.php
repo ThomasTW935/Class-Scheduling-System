@@ -1,8 +1,12 @@
 <?php
    session_start();
-   $username = "";
+   $display = "autofocus";
+   $buttonName = "login-Username";
    if(isset($_GET['username'])){
       $username = $_GET['username'];
+      $disabled = "disabled";
+      $buttonName = "login-Password";
+      $display = " value='$username' ";
    }
 ?>
 <!DOCTYPE html>
@@ -23,13 +27,12 @@
       </div>
       <div class="form__Input">
          <label for="input-username" class="form__Label--focus  form__Signin--hide">Username</label>
-         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username" value="<?php echo $username ?>" autofocus>
+         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username" <?php echo $display ?>>
          <label for="input-password" class="form__Label--focus form__Signin--display">Password</label>
          <input class="form__Input form__Signin--display" id="input-password" type="password" name="password" autofocus>
          <span class="form__Error"></span>
       </div>
-      <button class="form__Button form__Signin--hide" type="submit" name="login-Username">NEXT</button>
-      <button class="form__Button form__Signin--display" type="submit" name="login-Password">NEXT</button>
+      <button class="form__Button" type="submit" name="<?php echo $buttonName ?>">NEXT</button>
    </form>
 </body>
 </html>

@@ -3,6 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -15,7 +16,7 @@ body ul {
 
 body a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 body button {
@@ -27,7 +28,7 @@ body button {
 }
 
 .nav {
-  background: #00a8ff;
+  background: #014887;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -38,6 +39,7 @@ body button {
   z-index: 2;
   width: 32px;
   height: 32px;
+  margin-left: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -74,6 +76,22 @@ body button {
   background: white;
 }
 
+.nav__Logo {
+  margin-right: auto;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 1em;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.nav__Logo img {
+  max-width: 180px;
+  max-height: 31px;
+}
+
 .nav__List {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -90,16 +108,16 @@ body button {
           justify-content: space-evenly;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   height: 100vh;
   width: 15%;
-  background: rgba(0, 170, 255, 0.1);
+  background: #2C384A;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
-  -webkit-transform-origin: left;
-          transform-origin: left;
-  -webkit-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .nav__List.open {
@@ -125,7 +143,7 @@ body button {
 
 .nav__Button {
   position: absolute;
-  right: 1em;
+  margin-right: auto;
   top: 0;
   height: 100%;
   width: 10%;
