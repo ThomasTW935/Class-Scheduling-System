@@ -200,40 +200,85 @@ body button {
   font-weight: bolder;
 }
 
-.form__Label--focus {
+.form__Groups {
+  width: 60%;
+}
+
+.form__Groups .form__Group {
   position: relative;
-  bottom: -2.5em;
-  opacity: 0.6;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.form__Groups .form__Signin--display {
+  display: none;
+}
+
+.form__Groups .form__Field {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  background: transparent;
+  -webkit-transition: border-color 0.2s;
+  transition: border-color 0.2s;
+}
+
+.form__Groups .form__Field::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field::placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field:placeholder-shown ~ .form__Label--placeholder {
+  font-size: 1.3rem;
   cursor: text;
-  -webkit-transition: .3s ease-out;
-  transition: .3s ease-out;
+  top: 20px;
 }
 
-.form__Input input {
-  border: none;
-  outline: none;
-  border-bottom: 1px solid rgba(0, 170, 255, 0.2);
-  padding: 1em 0 .3em;
+.form__Groups .form__Field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
 }
 
-.form__Input:focus {
-  border-bottom-color: #00aaff;
+.form__Groups .form__Field:focus ~ .form__Label--placeholder {
+  position: absolute;
+  top: 0;
+  display: block;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: black;
+  font-weight: 700;
 }
 
-.form__Input:focus-within .form__Label--focus {
-  opacity: 1;
-  font-size: 0.95rem;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+.form__Groups .form__Label--placeholder {
+  position: absolute;
+  top: 0;
+  display: block;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+  border-color: #00aaff;
 }
 
-.form__Input input:invalid {
+.form__Groups .form__Field:required, .form__Groups .form__Field:invalid {
   -webkit-box-shadow: none;
           box-shadow: none;
-}
-
-.form__Signin--display {
-  display: none;
 }
 
 .form__Error {

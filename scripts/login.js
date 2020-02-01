@@ -6,13 +6,11 @@ getParams.forEach( (item,index) => {
    let paramSplit = getParams[index].split('=')
    params[paramSplit[0]] = paramSplit[1]
 })
-console.log(params.username)
 let error = document.querySelector('.form__Error')
 if(params.error == "username"){
    let errorMessage = "Sorry, we don't recognize this Username"
    error.innerHTML = errorMessage
    error.style.display = "block"
-   
 } 
 if(params.error == "password"){
    let errorMessage = "Wrong Password"
@@ -20,11 +18,9 @@ if(params.error == "password"){
    error.style.display = "block"
    PasswordForm()
 }    
-if(params.error == null){
+if(params.error == undefined && params.username != undefined){
    PasswordForm()
 }
-
-
 
 function PasswordForm(){
    let formDisplay = document.querySelectorAll('.form__Signin--display')

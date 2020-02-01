@@ -42,35 +42,61 @@
          font-weight: bolder;
       }
    }
-   &__Label--focus{
-      position:relative;
-      bottom: -2.5em;
-      opacity: 0.6;
-      cursor: text;
-      transition: .3s ease-out;
+   &__Groups{
+      width: 60%;
+      .form__Group{
+         position: relative;
+         padding: 15px 0 0;
+         margin-top: 10px;
+      }
+      .form__Signin--display{
+         display:none;
+      } 
+      .form__Field{
+         width: 100%;
+         border: 0;
+         border-bottom: 2px solid #9b9b9b;
+         outline: 0;
+         font-size: 1.3rem;
+         padding: 7px 0;
+         background: transparent;
+         transition: border-color 0.2s;
+         &::placeholder {
+            color: transparent;
+         }
+         &:placeholder-shown ~ .form__Label--placeholder {
+            font-size: 1.3rem;
+            cursor: text;
+            top: 20px;
+         }
+         &:focus {
+            ~ .form__Label--placeholder {
+              position: absolute;
+              top: 0;
+              display: block;
+              transition: 0.2s;
+              font-size: 1rem;
+              color: black;
+              font-weight:700;    
+            }
+            padding-bottom: 6px;  
+            font-weight: 700;
+            border-width: 3px;
+          }
+      }
+      .form__Label--placeholder{
+         position: absolute;
+         top: 0;
+         display: block;
+         transition: 0.2s;
+         font-size: 1rem;
+         color: #9b9b9b;
+         border-color:rgba(0,170,255,1);
+      }
+      .form__Field{
+         &:required,&:invalid { box-shadow:none; }
+       }
    }
-   &__Input{
-      input{
-         border:none;
-         outline:none;
-         border-bottom:1px solid rgba(0,170,255,0.2);
-         padding: 1em 0 .3em;
-      }
-      &:focus{
-         border-bottom-color:rgba(0,170,255,1);
-      }
-      &:focus-within .form__Label--focus{
-         opacity:1;
-         font-size:0.95rem;
-         transform: translateY(-100%);
-      }
-      input:invalid {
-         box-shadow: none;
-      }
-   }
-   &__Signin--display{
-      display:none;
-   } 
    &__Error{
       display:block;
       color:red;

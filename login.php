@@ -25,11 +25,15 @@
          <label class="form__Label">Sign in</label>
          <p class="form__Signin--display">as <span></span></p>
       </div>
-      <div class="form__Input">
-         <label for="input-username" class="form__Label--focus  form__Signin--hide">Username</label>
-         <input class="form__Input form__Signin--hide" id="input-username" type="text" name="username" <?php echo $display ?>>
-         <label for="input-password" class="form__Label--focus form__Signin--display">Password</label>
-         <input class="form__Input form__Signin--display" id="input-password" type="password" name="password" autofocus>
+      <div class="form__Groups">
+         <div class="form__Group form__Signin--hide">
+            <input type="text"  class="form__Field" placeholder="Username" id='username' name="username" <?php echo $display ?>>
+            <label for='username' class="form__Label--placeholder">Username</label>
+         </div>
+         <div class="form__Group form__Signin--display">
+            <input type="password" class="form__Field form__Signin--display" placeholder="Password" id='password'  name="password" autofocus>
+            <label for="password" class="form__Label--placeholder form__Signin--display">Password</label>
+         </div>
          <span class="form__Error"></span>
       </div>
       <button class="form__Button" type="submit" name="<?php echo $buttonName ?>">NEXT</button>
