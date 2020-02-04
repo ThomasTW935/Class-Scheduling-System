@@ -19,7 +19,7 @@ if(isset($_POST['login-Username'])){
    if($password == "admin"){
       session_start();
       $_SESSION['admin'] = true;
-      header("Location: ../index.php?signin=success");
+      header("Location: ../admin.php?signin=success");
       exit();
    } else {
       $error = "password";
@@ -28,6 +28,6 @@ if(isset($_POST['login-Username'])){
    }
 }
  else {
-   header("Location: ../studentview.php");
+   header("Location: ../index.php");
    exit();
 }
