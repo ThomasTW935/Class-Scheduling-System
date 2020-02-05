@@ -146,74 +146,14 @@ body main {
   }
 }
 
-.professors {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: relative;
+.Schedule {
+  height: 350px;
+  width: 500px;
+  background: red;
 }
 
-.professors__Title {
-  font-weight: bolder;
-  text-transform: uppercase;
-}
-
-.professors__List {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: .5em;
-  border-bottom: 1px solid #00aaff;
-  padding-bottom: 1em;
-}
-
-.professors__Add {
-  display: -ms-grid;
-  display: grid;
-  color: white;
-  place-content: center;
-  position: fixed;
-  bottom: 10%;
-  right: 10%;
-  z-index: 99;
-  width: 48px;
-  height: 48px;
-  background: #00aaff;
-  border-radius: 50%;
-  font-size: 2rem;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-}
-
-.professors__Add:active {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.nav__Button {
-  position: absolute;
-  margin-right: auto;
-  top: 0;
+.Schedule img {
   height: 100%;
-  width: 10%;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-}
-
-.nav__Button button {
-  padding: .5em .7em;
+  width: 100%;
 }
 /*# sourceMappingURL=index.css.map */

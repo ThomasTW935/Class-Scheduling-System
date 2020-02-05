@@ -1,0 +1,14 @@
+@import 'default.scss';
+@import 'professors.scss';
+.nav__Button{
+   position:absolute;
+   margin-right:auto;
+   top:0;
+   height:100%;
+   width:10%;
+   display:grid;
+   place-items: center;
+   button{
+      padding: .5em .7em;
+   }
+}
