@@ -14,11 +14,6 @@ body ul {
   list-style: none;
 }
 
-body a {
-  text-decoration: none;
-  color: white;
-}
-
 body button {
   cursor: pointer;
   background: #00aaff;
@@ -27,12 +22,22 @@ body button {
   padding: .5em .2em;
 }
 
+body main {
+  position: relative;
+}
+
 .nav {
   background: #014887;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   padding: .7em;
+  z-index: 100;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
 }
 
 .nav__Burger {
@@ -139,5 +144,15 @@ body button {
   .nav__List {
     width: 100%;
   }
+}
+
+.Schedule {
+  height: 350px;
+  width: 500px;
+}
+
+.Schedule img {
+  height: 100%;
+  width: 100%;
 }
 /*# sourceMappingURL=studentview.css.map */

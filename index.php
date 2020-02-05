@@ -26,5 +26,9 @@
          <li class="nav__List--Item"><a>CS</a></li>
       </ul>
    </nav>
+   <div class="Schedule">
+      <img src="./drawables/images/Schedule.JPG" alt="Schedule">
+      <h2>BSIT - 601</h2>
+   </div>
 </body>
 </html>
