@@ -1,4 +1,4 @@
 <?php
    session_unset();
    session_destroy();
-   header("Location: ../studentview.php");
+   header("Location: ../index.php");
