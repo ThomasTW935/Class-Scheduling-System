@@ -23,6 +23,7 @@
          <div class="nav__Burger--Line"></div>
       </div>
       <ul class="nav__List">
+         <li class="nav__List--Item"><a href="./dashboard.php">Dashboard</a></li>
          <li class="nav__List--Item"><a href="./sections.php">Sections</a></li>
          <li class="nav__List--Item"><a href="./rooms.php">Room</a></li>
          <li class="nav__List--Item"><a href="./professors.php">Professors</a></li>

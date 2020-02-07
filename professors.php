@@ -30,9 +30,13 @@
             ?>
             <a href="?add" class="professors__Add form__Redirect">+</a>
             <form action="./includes/professors.inc.php" class="professors__Form">
-               <input class="form__Input" type="text" name="firstName" placeholder="First Name">
+               <input class="form__Input" type="text" name="employeeID" placeholder="Employee ID">
                <input class="form__Input" type="text" name="lastName" placeholder="Last Name">
-               <select class="form__Select" name="deptName" id="">
+               <input class="form__Input" type="text" name="firstName" placeholder="First Name">
+               <input class="form__Input" type="text" name="middleInitial" placeholder="M.I">
+               <input class="form__Input" type="text" name="suffix" placeholder="Suffix">
+               <label for="formSelect">Department</label>
+               <select class="form__Select" name="deptName" id="formSelect">
                   <option class="form__Option" value="bsit">bsit</option>
                   <option class="form__Option" value="bscs">bscs</option>
                   <option class="form__Option" value="bsce">bsce</option>

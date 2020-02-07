@@ -6,6 +6,10 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+  height: 100vh;
+}
+
 body {
   line-height: 1.5;
 }
@@ -243,5 +247,24 @@ body main {
 
 .nav__Button button {
   padding: .5em .7em;
+}
+
+.dashboard {
+  padding: 1em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}
+
+.dashboard__Card {
+  background: red;
+  min-height: 250px;
+}
+
+.dashboard__Card img {
+  height: 100%;
+  width: 100%;
 }
 /*# sourceMappingURL=admin.css.map */
