@@ -1,5 +1,6 @@
 @import 'default.scss';
 @import 'professors.scss';
+@import 'rooms.scss';
 .nav__Button{
    position:absolute;
    margin-right:auto;
@@ -15,14 +16,19 @@
 .dashboard{
    padding: 1em;
    display:grid;
-   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
    gap:1em;
    &__Card{
-      background:red;
-      min-height:250px;
+      display:flex;
+      flex-direction:column;
+      justify-content: space-evenly;
+      align-items: center;
+      height:200px;
+      box-shadow: 0px 0px 6px 6px rgba(181,181,181,.7);
       img{
-         height:100%;
-         width:100%;
+         height:55%;
+         width:50%;
       }
+      
    }
 }

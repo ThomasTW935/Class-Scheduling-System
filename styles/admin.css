@@ -144,6 +144,11 @@ body main {
   background: rgba(255, 255, 255, 0.5);
 }
 
+.card__Design {
+  color: black;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 768px) {
   .nav__List {
     width: 100%;
@@ -234,6 +239,40 @@ body main {
   text-transform: uppercase;
 }
 
+.rooms__Floor {
+  padding: .5em;
+  margin: .5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.rooms__Card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .3em;
+  -webkit-box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
+          box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
+}
+
+.rooms__Card h3 {
+  text-transform: capitalize;
+}
+
 .nav__Button {
   position: absolute;
   margin-right: auto;
@@ -253,18 +292,32 @@ body main {
   padding: 1em;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1em;
 }
 
 .dashboard__Card {
-  background: red;
-  min-height: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 200px;
+  -webkit-box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
+          box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
 }
 
 .dashboard__Card img {
-  height: 100%;
-  width: 100%;
+  height: 55%;
+  width: 50%;
 }
 /*# sourceMappingURL=admin.css.map */

@@ -3,13 +3,30 @@
 ?>
       
 <main class="dashboard">
-   <div class="dashboard__Card">
-      <img src="./drawables/images/professor.png" alt="Professors">
-   </div>
-   <div class="dashboard__Card">dd</div>
-   <div class="dashboard__Card">dd</div>
-   <div class="dashboard__Card">dd</div>
-   <div class="dashboard__Card">dd</div>
+   <a class="dashboard__Card card__Design" href="./professors.php">
+      <h1>Professors</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
+   <a class="dashboard__Card card__Design" href="./rooms.php">
+      <h1>Rooms</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
+   <a class="dashboard__Card card__Design" href="#">
+      <h1>Course</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
+   <a class="dashboard__Card card__Design" href="#">
+      <h1>Departments</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
+   <a class="dashboard__Card card__Design" href="#">
+      <h1>Course</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
+   <a class="dashboard__Card card__Design" href="#">
+      <h1>Course</h1>
+      <img src="./drawables/icons/professor-default.svg" alt="Professors">
+   </a>
 </main>
       
 <?php
