@@ -1,7 +1,6 @@
 .professors{
     display:flex;
     flex-direction:column;
-    position:relative;
     &__Title{
         font-weight: bolder;
         text-transform: uppercase;
@@ -33,6 +32,7 @@
         }
     }
     &__Form{
+        z-index:2;
         position:fixed;
         top:50%;
         left:50%;
@@ -47,6 +47,45 @@
         border-top: 1px solid #f1f1f5;
         border-radius: 10px;
         box-shadow: 2px 6px 6px 6px rgba(181,181,181,.7);
+        label{
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .form__Title{
+            margin-bottom: 1em;
+        }
+        input,select,button{
+            border: 1px solid #2283CA;
+            border-radius: 10px;
+            padding: .5em .7em;
+            text-transform: uppercase;
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .form__Input{
+            width: 236px;
+            text-align: center;
+            margin: .3em 0;
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        div{
+            width: 236px;
+            margin: .5em 0 1em;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        button{
+            width:100px;
+            box-shadow:none;
+        }
+    }
+    .form__Background{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(1px);
     }
 }
-

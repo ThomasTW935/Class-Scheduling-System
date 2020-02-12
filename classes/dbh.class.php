@@ -7,8 +7,8 @@ class Dbh {
    private $dbName = "ClassSchedulingSystem";
 
    protected function connect(){
-      $dsn = 'mysql:host='. $this->$host .';dbname='. $this->$dbName;
-      $pdo = new PDO($dsn, $this->user, $this->$pwd);
+      $dsn = 'mysql:host='. $this->host .';dbname='. $this->dbName;
+      $pdo = new PDO($dsn, $this->user, $this->pwd);
       $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       return $pdo;
    }
@@ -24,7 +24,8 @@ class Dbh {
                `dept_name` VARCHAR(5) NOT NULL , 
                `dept_desc` TEXT NOT NULL , 
                `dept_type` ENUM('shs','tertiary') NOT NULL ,
-                PRIMARY KEY (`dept_id`)"
+                PRIMARY KEY (`dept_id`)",
+                "CREATE TABLE `classschedulingsystem`.`professors` ( `id` INT NOT NULL AUTO_INCREMENT , `emp_no` INT NOT NULL , `last_name` TINYTEXT NOT NULL , `first_name` TINYTEXT NOT NULL , `middle_initital` TINYTEXT NOT NULL , `suffix` TINYTEXT NOT NULL , `dept_id` INT NOT NULL , PRIMARY KEY (`id`))"
       ];
    }
 }

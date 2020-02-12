@@ -29,21 +29,25 @@
 
             ?>
             <a href="?add" class="professors__Add form__Redirect">+</a>
-            <form action="./includes/professors.inc.php" class="professors__Form">
+            <form action="./includes/professors.inc.php" class="professors__Form" method="POST">
+               <label for="formSelect" class="form__Title">Professor's Information</label>
                <input class="form__Input" type="text" name="employeeID" placeholder="Employee ID">
                <input class="form__Input" type="text" name="lastName" placeholder="Last Name">
                <input class="form__Input" type="text" name="firstName" placeholder="First Name">
                <input class="form__Input" type="text" name="middleInitial" placeholder="M.I">
                <input class="form__Input" type="text" name="suffix" placeholder="Suffix">
-               <label for="formSelect">Department</label>
-               <select class="form__Select" name="deptName" id="formSelect">
-                  <option class="form__Option" value="bsit">bsit</option>
-                  <option class="form__Option" value="bscs">bscs</option>
-                  <option class="form__Option" value="bsce">bsce</option>
-                  <option class="form__Option" value="bsat">bsat</option>
-               </select>
-               <button type="submit">Submit</button>
+               <div>
+                  <label for="formSelect">Department:</label>
+                  <select class="form__Select" name="deptName" id="formSelect">
+                     <option class="form__Option" value="1">BSIT</option>
+                     <option class="form__Option" value="2">BSCS</option>
+                     <option class="form__Option" value="3">BSCE</option>
+                     <option class="form__Option" value="4">BSAT</option>
+                  </select>
+               </div>
+               <button class="form__Button" type="submit" name="submit">Submit</button>
             </form>
+            <div class="form__Background"></div>
       </main>
       
 <?php

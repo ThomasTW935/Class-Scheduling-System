@@ -48,7 +48,7 @@ body main {
   z-index: 2;
   width: 32px;
   height: 32px;
-  margin-left: auto;
+  margin-right: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,11 +86,11 @@ body main {
 }
 
 .nav__Logo {
-  margin-right: auto;
   position: absolute;
+  z-index: 10000;
   height: 100%;
-  top: 0;
-  left: 1em;
+  top: 50%;
+  left: 50%;
   display: -ms-grid;
   display: grid;
   place-items: center;
@@ -117,14 +117,14 @@ body main {
           justify-content: space-evenly;
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100vh;
   width: 15%;
   background: #2C384A;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
-  -webkit-transform-origin: right;
-          transform-origin: right;
+  -webkit-transform-origin: left;
+          transform-origin: left;
   -webkit-transition: all .25s ease-in-out;
   transition: all .25s ease-in-out;
 }
@@ -163,7 +163,6 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  position: relative;
 }
 
 .professors__Title {
@@ -210,6 +209,7 @@ body main {
 }
 
 .professors__Form {
+  z-index: 2;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -233,6 +233,63 @@ body main {
   border-radius: 10px;
   -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
           box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+}
+
+.professors__Form label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.professors__Form .form__Title {
+  margin-bottom: 1em;
+}
+
+.professors__Form input, .professors__Form select, .professors__Form button {
+  border: 1px solid #2283CA;
+  border-radius: 10px;
+  padding: .5em .7em;
+  text-transform: uppercase;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.professors__Form .form__Input {
+  width: 236px;
+  text-align: center;
+  margin: .3em 0;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.professors__Form div {
+  width: 236px;
+  margin: .5em 0 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.professors__Form button {
+  width: 100px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.professors .form__Background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
 }
 
 .rooms__Floor {
@@ -271,8 +328,8 @@ body main {
 
 .nav__Button {
   position: absolute;
-  margin-right: auto;
   top: 0;
+  right: 0;
   height: 100%;
   width: 10%;
   display: -ms-grid;

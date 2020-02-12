@@ -4,6 +4,7 @@
       header("Location: ./index.php");
       exit();
    }
+   include './includes/autoloader.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
