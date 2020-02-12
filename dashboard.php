@@ -15,7 +15,7 @@
       <h1>Course</h1>
       <img src="./drawables/icons/professor-default.svg" alt="Professors">
    </a>
-   <a class="dashboard__Card card__Design" href="#">
+   <a class="dashboard__Card card__Design" href="./departments.php">
       <h1>Departments</h1>
       <img src="./drawables/icons/professor-default.svg" alt="Professors">
    </a>

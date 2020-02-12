@@ -12,4 +12,19 @@ class Dbh {
       $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       return $pdo;
    }
+   private function sql(){
+      $tables = [
+         'CREATE TABLE `classschedulingsystem`.`dept_faculty` ( 
+            `dept_id` INT(2) NOT NULL AUTO_INCREMENT , 
+            `dept_name` VARCHAR(5) NOT NULL , 
+            `dept_desc` TEXT NOT NULL , 
+            PRIMARY KEY (`dept_id`))',
+            "CREATE TABLE `classschedulingsystem`.`dept_student` ( 
+               `dept_id` INT(2) NOT NULL AUTO_INCREMENT , 
+               `dept_name` VARCHAR(5) NOT NULL , 
+               `dept_desc` TEXT NOT NULL , 
+               `dept_type` ENUM('shs','tertiary') NOT NULL ,
+                PRIMARY KEY (`dept_id`)"
+      ];
+   }
 }
