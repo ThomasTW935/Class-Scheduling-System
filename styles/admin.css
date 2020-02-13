@@ -27,7 +27,8 @@ body button {
 }
 
 body main {
-  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .nav {
@@ -156,33 +157,32 @@ body main {
 }
 
 .professors {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  background: red;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.professors__Container {
+  width: 90vw;
 }
 
 .professors__Title {
   font-weight: bolder;
-  text-transform: uppercase;
 }
 
 .professors__List {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: .5em;
-  border-bottom: 1px solid #00aaff;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr (1fr)[4];
+      grid-template-columns: 1fr 3fr repeat(4, 1fr);
+  gap: .5em;
   padding-bottom: 1em;
+}
+
+.professors__Item {
+  text-align: center;
+  border: 1px solid black;
 }
 
 .professors__Add {

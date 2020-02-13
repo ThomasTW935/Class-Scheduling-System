@@ -48,7 +48,7 @@ body main {
   z-index: 2;
   width: 32px;
   height: 32px;
-  margin-left: auto;
+  margin-right: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,11 +86,11 @@ body main {
 }
 
 .nav__Logo {
-  margin-right: auto;
   position: absolute;
+  z-index: 10000;
   height: 100%;
-  top: 0;
-  left: 1em;
+  top: 50%;
+  left: 50%;
   display: -ms-grid;
   display: grid;
   place-items: center;
@@ -117,14 +117,14 @@ body main {
           justify-content: space-evenly;
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100vh;
   width: 15%;
   background: #2C384A;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
-  -webkit-transform-origin: right;
-          transform-origin: right;
+  -webkit-transform-origin: left;
+          transform-origin: left;
   -webkit-transition: all .25s ease-in-out;
   transition: all .25s ease-in-out;
 }
