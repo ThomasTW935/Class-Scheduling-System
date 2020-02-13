@@ -26,10 +26,6 @@ body button {
   padding: .5em .2em;
 }
 
-body main {
-  position: relative;
-}
-
 .nav {
   background: #014887;
   position: -webkit-sticky;

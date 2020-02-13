@@ -26,11 +26,6 @@ body button {
   padding: .5em .2em;
 }
 
-body main {
-  height: 100%;
-  width: 100%;
-}
-
 .nav {
   background: #014887;
   position: -webkit-sticky;
