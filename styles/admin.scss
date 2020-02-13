@@ -14,21 +14,25 @@
    }
 }
 .dashboard{
-   padding: 1em;
    display:grid;
-   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-   gap:1em;
+   place-content: center;
+   &__Container{
+      display:grid;
+      grid-template-columns: repeat(4,minmax(200px,300px));
+      grid-template-rows: repeat(2,minmax(200px,300px));
+      gap:1em;
+   }
    &__Card{
       display:flex;
-      flex-direction:column;
+      flex-direction:column-reverse;
       justify-content: space-evenly;
       align-items: center;
-      height:200px;
       box-shadow: 0px 0px 6px 6px rgba(181,181,181,.7);
       img{
          height:55%;
          width:50%;
-      }
-      
+         border: 1px solid rgba(0, 0, 0, 0.25);
+         border-radius: 50%;
+      } 
    }
 }
