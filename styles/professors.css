@@ -1,48 +1,51 @@
 .professors {
-  background: red;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .professors__Container {
-  width: 90vw;
-}
-
-.professors__Title {
-  font-weight: bolder;
+  height: 87%;
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid black;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 .professors__List {
+  width: 100%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 3fr (1fr)[4];
-      grid-template-columns: 1fr 3fr repeat(4, 1fr);
-  gap: .5em;
-  padding-bottom: 1em;
+  -ms-grid-columns: minmax(150px, 180px) minmax(150px, 500px) (minmax(150px, 180px))[4];
+      grid-template-columns: minmax(150px, 180px) minmax(150px, 500px) repeat(4, minmax(150px, 180px));
+  padding: .25em 0;
+  margin: 0 auto .5em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .professors__Item {
   text-align: center;
-  border: 1px solid black;
 }
 
 .professors__Add {
-  display: -ms-grid;
-  display: grid;
-  color: white;
-  place-content: center;
-  position: fixed;
-  bottom: 10%;
-  right: 10%;
-  z-index: 99;
-  width: 48px;
-  height: 48px;
-  background: #00aaff;
-  border-radius: 50%;
-  font-size: 2rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 1em 0;
   -webkit-transform: scale(1);
           transform: scale(1);
+  text-decoration: none;
 }
 
 .professors__Add:active {

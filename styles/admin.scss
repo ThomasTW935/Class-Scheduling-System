@@ -4,9 +4,8 @@
 .nav__Button{
    position:absolute;
    top:0;
-   right:0;
+   right:2em;
    height:100%;
-   width:10%;
    display:grid;
    place-items: center;
    button{
@@ -14,8 +13,6 @@
    }
 }
 .dashboard{
-   display:grid;
-   place-content: center;
    &__Container{
       display:grid;
       grid-template-columns: repeat(4,minmax(200px,300px));
@@ -34,5 +31,10 @@
          border: 1px solid rgba(0, 0, 0, 0.25);
          border-radius: 50%;
       } 
+      h3{
+         font-family: 'Times New Roman', Times, serif;
+         text-decoration: underline;
+         
+      }
    }
 }

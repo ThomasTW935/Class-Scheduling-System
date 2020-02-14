@@ -10,19 +10,19 @@
 ?>
       
       <main class='professors'>
-         <a href='?add' class='professors__Add form__Redirect'>+</a>
+         <a href='?add' class='professors__Add form__Redirect button'>ADD</a>
          <div class='professors__Container'>
             <ul class='professors__List professors__Title'>
-               <li class='professors__Item'>Employee ID</li>
+               <li class='professors__Item list__item--RightBorder'>Employee ID</li>
                <li class='professors__Item'>Employee Name</li>
                <li class='professors__Item'>Department</li>
-               <li class='professors__Item'>CheckSchedule</li>
-               <li class='professors__Item'>Edit</li>
-               <li class='professors__Item'>Remove</li>
+               <li class='professors__Item'></li>
+               <li class='professors__Item'></li>
+               <li class='professors__Item'></li>
             </ul>
             <ul class='professors__List'>
                <li class='professors__Item'>064000</li>
-               <li class='professors__Item'>Thomas, Daryl P.</li>
+               <li class='professors__Item'>Thomsdsdsdssdsddsdsdsdsdsdas, Daryl P.</li>
                <li class='professors__Item'>BS-IT</li>
                <li class='professors__Item'>CheckSchedule</li>
                <li class='professors__Item'>Edit</li>

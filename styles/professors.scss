@@ -1,37 +1,35 @@
 .professors{
-    background:red;
-    display:grid;
-    place-items: center;
+    display:flex;
+    flex-direction: column;
     &__Container{
-        width:90vw;
-    }
-    &__Title{
-        font-weight: bolder;
+        height:87%;
+        width:auto;
+        display:flex;
+        flex-direction: column;
+        border: 1px solid black;
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
     }
     &__List{
+        width:100%;
         display:grid;
-        grid-template-columns: 1fr 3fr repeat(4,1fr);
-        gap: .5em;
-        padding-bottom:1em;
+        grid-template-columns: minmax(150px,180px) minmax(150px,500px) repeat(4,minmax(150px,180px));
+        padding: .25em 0;
+        margin: 0 auto .5em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+    &__Title{
+
     }
     &__Item{
         text-align: center;
-        border:1px solid black;
     }
     &__Add{
-        display:grid;
-        color:white;
-        place-content: center;
-        position:fixed;
-        bottom: 10%;
-        right:10%;
-        z-index: 99;
-        width:48px;
-        height:48px;
-        background:rgba(0,170,255,1);
-        border-radius:50%;
-        font-size: 2rem;
+        align-self: flex-end;
+       
+        margin: 1em 0;
         transform: scale(1);
+        text-decoration: none;
         &:active{
             transform: scale(1.2);
         }
