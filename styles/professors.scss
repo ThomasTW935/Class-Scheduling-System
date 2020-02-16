@@ -1,6 +1,9 @@
 .professors{
     display:flex;
     flex-direction: column;
+    a{
+        text-decoration: none;
+    }
     &__Container{
         height:87%;
         width:auto;
@@ -29,7 +32,6 @@
        
         margin: 1em 0;
         transform: scale(1);
-        text-decoration: none;
         &:active{
             transform: scale(1.2);
         }
@@ -54,6 +56,20 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+        .form__Close{
+            position:absolute;
+            display:grid;
+            place-content: center;
+            top:.5em;
+            right:1em;
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            &:active{ 
+                background:rgba(0, 0, 0, 0.25);
+                color:black;
+            }
+        }
         .form__Title{
             margin-bottom: 1em;
         }
@@ -61,14 +77,16 @@
             border: 1px solid #2283CA;
             border-radius: 10px;
             padding: .5em .7em;
-            text-transform: uppercase;
             box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .form__Input{
             width: 236px;
             text-align: center;
-            margin: .3em 0;
             box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .form__Error{
+            color:red;
+            font-size: .85rem;
         }
         div{
             width: 236px;
@@ -82,7 +100,7 @@
             box-shadow:none;
         }
     }
-    .form__Background{
+    &__formBackground{
         position:absolute;
         top:0;
         left:0;
@@ -90,5 +108,6 @@
         height:100vh;
         background: rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(1px);
+        cursor:default;
     }
 }

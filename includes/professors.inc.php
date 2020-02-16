@@ -1,6 +1,5 @@
 <?php
 
-
 if(!isset($_POST['submit'])){
    header('Location: ../dashboard.php');
    exit();
@@ -8,21 +7,16 @@ if(!isset($_POST['submit'])){
 
 include 'autoloader.inc.php';
 
-$employeeID = $_POST['employeeID'];
-$lastName = $_POST['lastName'];
-$firstName = $_POST['firstName'];
-$middleInitial = $_POST['middleInitial'];
-$suffix = $_POST['suffix'];
-$deptName = $_POST['deptName'];
-
-
-$prof = ['employeeID'=> $employeeID, 
-         'lastName'=> $lastName,
-         'firstName'=> $firstName,
-         'middleInitial'=> $middleInitial,
-         'suffix'=> $suffix,
-         'deptName'=> $deptName
-      ];
+$validation = new ProfessorsVal($_POST);
+$errors = $validation->validateForm();
+if(!empty($errors)){
+   $query =  http_build_query($errors);
+   parse_str($query,$error);
+   header('Location: ../professors.php?add&' . $query);
+   exit();
+}
 
 $profClass = new ProfessorsContr();
-$profClass->CreateProfessors($employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptName);
+$profClass->CreateProfessors($_POST['employeeID'],$_POST['lastName'],$_POST['firstName'],$_POST['middleInitial'],$_POST['suffix'],$_POST['deptID']);
+
+header('Location: ../professors.php');

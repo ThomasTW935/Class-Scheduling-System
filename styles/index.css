@@ -26,22 +26,26 @@ body ul {
   list-style: none;
 }
 
-body button {
-  cursor: pointer;
-  background: #00aaff;
+body button, body .button {
   color: white;
-  border-radius: 1000000px;
-  padding: .5em .2em;
+  cursor: pointer;
+  height: 38px;
+  width: 68px;
+  background: #00aaff;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 20px;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
 }
 
 body main {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
-  padding: 2em 0;
+  padding: 0 2em;
 }
 
 .nav {

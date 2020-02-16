@@ -13,8 +13,10 @@
    }
 }
 .dashboard{
+   padding-top:2em;
    &__Container{
       display:grid;
+      place-content: center;
       grid-template-columns: repeat(4,minmax(200px,300px));
       grid-template-rows: repeat(2,minmax(200px,300px));
       gap:1em;

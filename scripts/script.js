@@ -5,4 +5,3 @@ navBurger.addEventListener("click", () => {
    navList.classList.toggle("open")
    navBurgetr_Line.classList.toggle("lineColor")
 })
-
