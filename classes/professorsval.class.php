@@ -20,6 +20,7 @@ class ProfessorsVal{
       $this->validateFirstName();
       $this->validateLastName();
       $this->validateMiddleInitial();
+      $this->validateSuffix();
 
       return $this->errors;
    }
@@ -28,12 +29,18 @@ class ProfessorsVal{
       $val = trim($this->data['employeeID']);
       if(empty($val)){
          $this->addError('employeeID','Employee ID cannot be empty');
-      } else {
-         if(!preg_match('/^[0-9]{8,}$/', $val)){
-            echo $val . '</br>';
-            $this->addError('employeeID', 'Employee ID must only be numbers and at least 8 numbers');
-         }
       }
+      else if(!preg_match('/^[0-9]{8,}$/', $val)){
+         $this->addError('employeeID', 'Employee ID must only be numbers and at least 8 numbers');
+      }
+      else{
+         $prof = new ProfessorsView();
+         $result = $prof->CheckProfessor($val);
+         if(!empty($result)){
+            $this->addError('employeeID', 'Employee already exist');
+         }
+      } 
+      
 
    }
    private function validateFirstName(){
@@ -55,7 +62,7 @@ class ProfessorsVal{
       if(empty($val)){
          $this->addError('lastName','Last name cannot be empty');
       } else {
-         if(!preg_match('/^[a-zA-Z]*$/', $val)){
+         if(!preg_match('/^[a-zA-Z ]*$/', $val)){
             echo $val . '</br>';
             $this->addError('lastName', 'Last name must only contain letters');
          }
@@ -66,7 +73,7 @@ class ProfessorsVal{
    private function validateMiddleInitial(){
 
       $val = trim($this->data['middleInitial']);
-         if(!preg_match('/^[a-zA-Z]{1,2}$/', $val)){
+         if(!preg_match('/^[a-zA-Z ]{0,2}$/', $val)){
             $this->addError('middleInitial', 'Last name must only contain letters and have 1-2 characters');
          }
 
@@ -75,7 +82,7 @@ class ProfessorsVal{
    private function validateSuffix(){
 
       $val = trim($this->data['suffix']);
-         if(!preg_match('/^[a-zA-Z]{1,3}$/', $val)){
+         if(!preg_match('/^[a-zA-Z ]{0,3}$/', $val)){
             $this->addError('suffix', 'Suffix must only contain letters and have 1-3 characters');
          }
 

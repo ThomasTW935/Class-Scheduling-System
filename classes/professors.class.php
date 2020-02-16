@@ -13,4 +13,17 @@ class Professors extends Dbh{
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessor($empID){
+      $sql = "select * from professors where emp_no = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$empID]);
+      $result = $stmt->fetchAll();
+      return $result;
+   }
+   protected function deleteProfessor($id){
+      $sql = "update professors set is_active=0 where id = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute($id);
+
+   }
 }

@@ -18,5 +18,4 @@ if(!empty($errors)){
 
 $profClass = new ProfessorsContr();
 $profClass->CreateProfessors($_POST['employeeID'],$_POST['lastName'],$_POST['firstName'],$_POST['middleInitial'],$_POST['suffix'],$_POST['deptID']);
-
 header('Location: ../professors.php');

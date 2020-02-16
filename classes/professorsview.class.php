@@ -1,6 +1,11 @@
 <?php
 
 class ProfessorsView extends Professors{
+
+   public function CheckProfessor($empID){
+      $result = $this->getProfessor($empID);
+      return $result;
+   }
    public function DisplayProfessors(){
       $results = $this->getProfessors();
       foreach($results as $result){
@@ -10,8 +15,8 @@ class ProfessorsView extends Professors{
             <li class='professors__Item'>". $fullName ."</li>
             <li class='professors__Item'>". $result['dept_id'] ."</li>
             <li class='professors__Item'>CheckSchedule</li>
-            <li class='professors__Item'>Edit</li>
-            <li class='professors__Item'>Remove</li>
+            <li class='professors__Item'><a href=?id='". $result['id'] ."'>Edit</a></li>
+            <li class='professors__Item'><a href=?id='". $result['id'] ."'>Remove</a></li>
          </ul>";
       }
    }

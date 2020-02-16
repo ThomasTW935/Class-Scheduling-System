@@ -12,7 +12,7 @@
    <input class='form__Input' type='text' value='' name='lastName' placeholder='Last Name' required>
    <div class="form__Error"><?php echo $errors['lastName'] ?? '' ?></div>
    <input class='form__Input' type='text' value='' name='firstName' placeholder='First Name' required>
-   <div class="form__Error"><?php echo $errors['lastName'] ?? '' ?></div>
+   <div class="form__Error"><?php echo $errors['firstName'] ?? '' ?></div>
    <input class='form__Input' type='text' value='' name='middleInitial' placeholder='M.I' >
    <div class="form__Error"><?php echo $errors['middleInitial'] ?? '' ?></div>
    <input class='form__Input' type='text' value='' name='suffix' placeholder='Suffix'>
