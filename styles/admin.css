@@ -322,6 +322,7 @@ body main {
   width: 100px;
   -webkit-box-shadow: none;
           box-shadow: none;
+  text-transform: uppercase;
 }
 
 .professors__formBackground {
@@ -392,10 +393,10 @@ body main {
   display: -ms-grid;
   display: grid;
   place-content: center;
-  -ms-grid-columns: (minmax(200px, 300px))[4];
-      grid-template-columns: repeat(4, minmax(200px, 300px));
-  -ms-grid-rows: (minmax(200px, 300px))[2];
-      grid-template-rows: repeat(2, minmax(200px, 300px));
+  -ms-grid-columns: (minmax(100px, 250px))[4];
+      grid-template-columns: repeat(4, minmax(100px, 250px));
+  -ms-grid-rows: (minmax(100px, 250px))[2];
+      grid-template-rows: repeat(2, minmax(100px, 250px));
   gap: 1em;
 }
 
@@ -415,6 +416,7 @@ body main {
           align-items: center;
   -webkit-box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
           box-shadow: 0px 0px 6px 6px rgba(181, 181, 181, 0.7);
+  border-radius: 10px;
 }
 
 .dashboard__Card img {

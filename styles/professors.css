@@ -147,6 +147,7 @@
   width: 100px;
   -webkit-box-shadow: none;
           box-shadow: none;
+  text-transform: uppercase;
 }
 
 .professors__formBackground {

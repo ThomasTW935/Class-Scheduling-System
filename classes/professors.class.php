@@ -20,10 +20,21 @@ class Professors extends Dbh{
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorByID($id){
+      $sql = "select * from professors where id = $id";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$id]);
+      $result = $stmt->fetchAll();
+      return $result;
+   }
    protected function deleteProfessor($id){
       $sql = "update professors set is_active=0 where id = ?";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute($id);
-
+      $stmt->execute([$id]);
+   }
+   protected function updateProfessor($id,$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID){
+      $sql = "update professors set emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?,dept_id = ? where id = $id";
+      $stmt= $this->connect()->prepare($sql);
+      $stmt->execute([$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$id]);
    }
 }

@@ -13,22 +13,13 @@
                <li class='professors__Item'></li>
                <li class='professors__Item'></li>
             </ul>
-            <ul class='professors__List'>
-               <li class='professors__Item'>064000</li>
-               <li class='professors__Item'>Thomsdsdsdssdsddsdsdsdsdsdas, Daryl P.</li>
-               <li class='professors__Item'>BS-IT</li>
-               <li class='professors__Item'>CheckSchedule</li>
-               <li class='professors__Item'>Edit</li>
-               <li class='professors__Item'>Remove</li>
-            </ul>
             <?php
-               $profList = new ProfessorsView();
-               $profList->DisplayProfessors();
+               $profView = new ProfessorsView();
+               $profView->DisplayProfessors();
             ?>
          </div>
          <?php
             if(isset($_GET['add']) || isset($_GET['id'])){
-              
                include_once './layouts/professorsform.php';
             }
          ?>
