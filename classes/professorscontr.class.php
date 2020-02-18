@@ -10,4 +10,8 @@ class ProfessorsContr extends Professors{
       $this->deleteProfessor($id);
    }
 
+   public function ModifyProfessor($data){
+      $this->updateProfessor($data['id'],$data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID']);
+   }
+
 }

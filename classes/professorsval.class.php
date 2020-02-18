@@ -11,7 +11,7 @@ class ProfessorsVal{
    public function validateForm(){
       foreach(self::$fields as $field){
          if(!array_key_exists($field, $this->data)){
-            trigger_error("$field is not presend in data");
+            trigger_error("$field is not present in data");
             return;
          }
       }
@@ -27,6 +27,7 @@ class ProfessorsVal{
    private function validateID(){
 
       $val = trim($this->data['employeeID']);
+      $id = trim($this->data['id']);
       if(empty($val)){
          $this->addError('employeeID','Employee ID cannot be empty');
       }
@@ -34,9 +35,14 @@ class ProfessorsVal{
          $this->addError('employeeID', 'Employee ID must only be numbers and at least 8 numbers');
       }
       else{
-         $prof = new ProfessorsView();
-         $result = $prof->CheckProfessor($val);
-         if(!empty($result)){
+         $profView = new ProfessorsView();
+         $result = $profView->FetchProfessorByEmpID($val);
+         $prof = $profView->FetchProfessorByID($id);
+         $idOrig = $prof[0]['id'];
+         $idGet = $result[0]['id'];
+         echo $result[0]['id'].'<br>';
+         echo $prof[0]['id'] . '<br>';
+         if(!empty($result) && isset($_POST['submit']) xor $idOrig != $idGet){
             $this->addError('employeeID', 'Employee already exist');
          }
       } 

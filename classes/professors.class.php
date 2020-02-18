@@ -33,7 +33,7 @@ class Professors extends Dbh{
       $stmt->execute([$id]);
    }
    protected function updateProfessor($id,$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID){
-      $sql = "update professors set emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?,dept_id = ? where id = $id";
+      $sql = "update professors set emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?,dept_id = ? where id = ?";
       $stmt= $this->connect()->prepare($sql);
       $stmt->execute([$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$id]);
    }

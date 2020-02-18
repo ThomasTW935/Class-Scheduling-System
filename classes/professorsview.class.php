@@ -2,7 +2,7 @@
 
 class ProfessorsView extends Professors{
 
-   public function CheckProfessor($empID){
+   public function FetchProfessorByEmpID($empID){
       $result = $this->getProfessor($empID);
       return $result;
    }

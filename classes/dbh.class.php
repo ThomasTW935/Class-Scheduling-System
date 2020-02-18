@@ -7,10 +7,14 @@ class Dbh {
    private $dbName = "ClassSchedulingSystem";
 
    protected function connect(){
-      $dsn = 'mysql:host='. $this->host .';dbname='. $this->dbName;
-      $pdo = new PDO($dsn, $this->user, $this->pwd);
-      $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-      return $pdo;
+      try{
+         $dsn = 'mysql:host='. $this->host .';dbname='. $this->dbName;
+         $pdo = new PDO($dsn, $this->user, $this->pwd);
+         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+         return $pdo;
+      } catch(PDOException $e){
+         trigger_error("Error: " . $e->getMessage());
+      }
    }
    private function sql(){
       $tables = [
