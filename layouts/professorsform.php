@@ -10,8 +10,7 @@
       $result = $profView->FetchProfessorByID($id);
       $prof = $result[0];
       $button = "update";
-   }
-       
+   }    
 ?>
 
 <form action='./includes/professors.inc.php' class='module__Form' method='POST'>
@@ -31,10 +30,15 @@
    <div>
       <label for='formSelect'>Department:</label>
       <select class='form__Select' name='deptID' id='formSelect'>
-         <option class='form__Option' value='1'>BSIT</option>
-         <option class='form__Option' value='2'>BSCS</option>
-         <option class='form__Option' value='3'>BSCE</option>
-         <option class='form__Option' value='4'>BSAT</option>
+         <?php
+         
+            $deptView = new DepartmentsView();
+            $departments = $deptView->FetchDeptFaculty();
+            foreach($departments as $dept){
+               echo "<option class='form__Option' value='". $dept['dept_id'] ."'>". $dept['dept_name'] ."</option>";
+            }
+
+         ?>
       </select>
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>

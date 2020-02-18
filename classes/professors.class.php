@@ -7,7 +7,7 @@ class Professors extends Dbh{
       $stmt->execute([$employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID]);         
    }
    protected function getProfessors(){
-      $sql = "select * from professors where is_active = 1";
+      $sql = "SELECT * FROM professors INNER JOIN dept_faculty ON professors.dept_id = dept_faculty.dept_id WHERE is_active = 1";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();

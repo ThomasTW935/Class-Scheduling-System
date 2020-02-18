@@ -17,7 +17,7 @@ class ProfessorsView extends Professors{
          echo "<ul class='module__List'>
             <li class='module__Item'>". $result['emp_no'] ."</li>
             <li class='module__Item'>". $fullName ."</li>
-            <li class='module__Item'>". $result['dept_id'] ."</li>
+            <li class='module__Item'>". $result['dept_name'] ."</li>
             <li class='module__Item'>CheckSchedule</li>
             <li class='module__Item'><a href=?id='". $result['id'] ."'>Edit</a></li>
             <li class='module__Item'>
