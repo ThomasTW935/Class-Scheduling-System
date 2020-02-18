@@ -1,1 +1,5 @@
-/* No CSS *//*# sourceMappingURL=departments.css.map */
+.departments .module__List {
+  -ms-grid-columns: 1fr 3fr (1fr)[2];
+      grid-template-columns: 1fr 3fr repeat(2, 1fr);
+}
+/*# sourceMappingURL=departments.css.map */

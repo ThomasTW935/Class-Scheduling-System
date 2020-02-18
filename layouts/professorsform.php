@@ -14,7 +14,7 @@
        
 ?>
 
-<form action='./includes/professors.inc.php' class='professors__Form' method='POST'>
+<form action='./includes/professors.inc.php' class='module__Form' method='POST'>
    <a href="professors.php" class='form__Close'>X</a>
    <label for='formSelect' class='form__Title'>Professor's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $prof['id'] ?? '' ?>' name='id'>
@@ -39,4 +39,4 @@
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="professors.php" class='professors__formBackground'></a>
+<a href="professors.php" class='module__formBackground'></a>

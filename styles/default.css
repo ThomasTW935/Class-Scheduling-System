@@ -167,6 +167,194 @@ body main {
   text-decoration: none;
 }
 
+.module {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.module a {
+  text-decoration: none;
+}
+
+.module__Header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: .5em 0;
+}
+
+.module__Header img {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.module__Add {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.module__Add:active {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.module__Container {
+  height: 87%;
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid black;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.module__List {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.module__Item {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  padding: .3em 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.module__Item:last-child {
+  border: none;
+}
+
+.module__Form {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 1em 0;
+  width: 500px;
+  min-height: 450px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  border-top: 1px solid #f1f1f5;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+          box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+}
+
+.module__Form label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.module__Form .form__Close {
+  position: absolute;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  top: .5em;
+  right: 1em;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.module__Form .form__Close:active {
+  background: rgba(0, 0, 0, 0.25);
+  color: black;
+}
+
+.module__Form .form__Title {
+  margin-bottom: 1em;
+}
+
+.module__Form input, .module__Form select, .module__Form button {
+  border: 1px solid #2283CA;
+  border-radius: 10px;
+  padding: .5em .7em;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.module__Form .form__Input {
+  width: 236px;
+  text-align: center;
+  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.module__Form .form__Error {
+  color: red;
+  font-size: .85rem;
+}
+
+.module__Form div {
+  width: 236px;
+  margin: .5em 0 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Form button {
+  width: 100px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  text-transform: uppercase;
+}
+
+.module__formBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+  cursor: default;
+}
+
 @media screen and (max-width: 768px) {
   .nav__List {
     width: 100%;

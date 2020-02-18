@@ -28,7 +28,7 @@
          <h3>STUDENT DEPARTMENT</h3>
          <img src="./drawables/icons/studentdepartment.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="#">
+      <a class="dashboard__Card card__Design" href="./facultydepartment.php">
          <h3>FACULTY DEPARTMENT</h3>
          <img src="./drawables/icons/faculty.svg" alt="Professors">
       </a>
