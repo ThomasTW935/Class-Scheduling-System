@@ -29,16 +29,24 @@ body ul {
 body button, body .button {
   color: white;
   cursor: pointer;
-  height: 38px;
+  height: 35px;
   width: 68px;
   background: #00aaff;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 20px;
+  outline: none;
   display: -ms-grid;
   display: grid;
   place-content: center;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+body button:active, body .button:active {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 body main {
@@ -53,6 +61,7 @@ body main {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  height: 7%;
   padding: .7em;
   z-index: 100;
 }
@@ -62,104 +71,14 @@ body main {
   text-decoration: none;
 }
 
-.nav__Burger {
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  margin-right: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  position: relative;
-  cursor: pointer;
-}
-
-.nav__Burger::before {
-  content: "";
-  width: 100%;
-  height: 100%;
+.nav__Button {
   position: absolute;
-  background: black;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-  border-radius: 50%;
-  opacity: 0;
-}
-
-.nav__Burger:active::before {
-  opacity: 0.25;
-}
-
-.nav__Burger--Line {
-  height: 4px;
-  width: 100%;
-  background: white;
-}
-
-.nav__Logo {
-  position: absolute;
-  z-index: 10000;
+  top: 0;
+  right: 2em;
   height: 100%;
-  top: 50%;
-  left: 50%;
   display: -ms-grid;
   display: grid;
   place-items: center;
-}
-
-.nav__Logo img {
-  max-width: 180px;
-  max-height: 31px;
-}
-
-.nav__List {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 15%;
-  background: #2C384A;
-  -webkit-transform: scaleX(0);
-          transform: scaleX(0);
-  -webkit-transform-origin: left;
-          transform-origin: left;
-  -webkit-transition: all .25s ease-in-out;
-  transition: all .25s ease-in-out;
-}
-
-.nav__List.open {
-  -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-}
-
-.nav__List--Item {
-  cursor: pointer;
-  padding: .2em .5em;
-  border-radius: 10px;
-}
-
-.nav__List--Item:hover, .nav__List--Item:active {
-  background: rgba(255, 255, 255, 0.5);
 }
 
 .card__Design {
@@ -201,16 +120,6 @@ body main {
   border-radius: 50%;
 }
 
-.module__Add {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.module__Add:active {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
 .module__Container {
   height: 87%;
   width: auto;
@@ -235,6 +144,10 @@ body main {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.module__Title li {
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .module__Item {

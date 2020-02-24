@@ -7,10 +7,10 @@ class Professors extends Dbh{
       $stmt->execute([$employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID]);         
    }
    protected function getProfessors(){
-      $sql = "SELECT * FROM professors INNER JOIN dept_faculty ON professors.dept_id = dept_faculty.dept_id WHERE is_active = 1";
+      $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE is_active = 1";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute();
-      $result = $stmt->fetchAll();
+      $result = $stmt->fetchAll();                                               
       return $result;
    }
    protected function getProfessor($empID){
@@ -21,8 +21,8 @@ class Professors extends Dbh{
       return $result;
    }
    protected function getProfessorByID($id){
-      $sql = "select * from professors where id = $id";
-      $stmt = $this->connect()->prepare($sql);
+      $sql = "select * from professors where id = ?";
+      $stmt = $this->connect()->prepare($sql);      
       $stmt->execute([$id]);
       $result = $stmt->fetchAll();
       return $result;

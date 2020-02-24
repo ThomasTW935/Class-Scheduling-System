@@ -17,19 +17,15 @@
          <img src="./drawables/icons/rooms.svg" alt="Professors">
       </a>
       <a class="dashboard__Card card__Design" href="./departments.php">
-         <h3>TERTIARY COURSES</h3>
+         <h3>COURSES</h3>
          <img src="./drawables/icons/tertiary.svg" alt="Professors">
       </a>
       <a class="dashboard__Card card__Design" href="#">
-         <h3>SHS STRAND</h3>
+         <h3>STRANDS</h3>
          <img src="./drawables/icons/shs.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="#">
-         <h3>STUDENT DEPARTMENT</h3>
-         <img src="./drawables/icons/studentdepartment.svg" alt="Professors">
-      </a>
-      <a class="dashboard__Card card__Design" href="./facultydepartment.php">
-         <h3>FACULTY DEPARTMENT</h3>
+      <a class="dashboard__Card card__Design" href="./faculty.php">
+         <h3>FACULTY</h3>
          <img src="./drawables/icons/faculty.svg" alt="Professors">
       </a>
       <a class="dashboard__Card card__Design" href="#">

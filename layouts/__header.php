@@ -18,19 +18,14 @@
 </head>
 <body>
    <nav class="nav">
-      <div class="nav__Burger">
-         <div class="nav__Burger--Line"></div>
-         <div class="nav__Burger--Line"></div>
-         <div class="nav__Burger--Line"></div>
-      </div>
-      <ul class="nav__List">
-         <li class="nav__List--Item"><a href="./dashboard.php">Dashboard</a></li>
-         <li class="nav__List--Item"><a href="./sections.php">Sections</a></li>
-         <li class="nav__List--Item"><a href="./rooms.php">Room</a></li>
-         <li class="nav__List--Item"><a href="./professors.php">Professors</a></li>
-         <li class="nav__List--Item"><a href="./subjects.php">Subjects</a></li>
-      </ul>
+      <?php
+         $url = $_SERVER['REQUEST_URI'];
+         if(!strpos($url, "dashboard")){
+            echo "<a href='dashboard.php' class='button'>BACK</a>";
+         }
+
+      ?>
       <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
-         <button type="submit" name="logout-Button" >Logout</button>
+         <button type="submit" name="logout-Button" class="button">Log out</button>
       </form>
    </nav>

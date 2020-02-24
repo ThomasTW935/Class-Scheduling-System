@@ -2,12 +2,16 @@
 
 class DepartmentsView extends Departments{
 
-   public function FetchDeptFaculty(){
-      $results = $this->getDepartmentsFaculty();
+   public function FetchDepts($type){
+      $results = $this->getDepartments($type);
       return $results;
    }
-   public function FetchDeptFacultyByID($id){
-      $results = $this->getDepartmentFacultyByID($id);
+   public function FetchDeptByID($id){
+      $results = $this->getDepartmentByID($id);
+      return $results;
+   }
+   public function FetchDeptByName($name){
+      $results = $this->getDepartmentByName($name);
       return $results;
    }
 }

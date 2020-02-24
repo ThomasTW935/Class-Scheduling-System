@@ -31,11 +31,11 @@
       <label for='formSelect'>Department:</label>
       <select class='form__Select' name='deptID' id='formSelect'>
          <?php
-         
             $deptView = new DepartmentsView();
-            $departments = $deptView->FetchDeptFaculty();
+            $departments = $deptView->FetchDepts("Faculty");
             foreach($departments as $dept){
-               echo "<option class='form__Option' value='". $dept['dept_id'] ."'>". $dept['dept_name'] ."</option>";
+               $selected = ($prof['dept_id'] == $dept['dept_id']) ? 'selected' : '';
+               echo "<option class='form__Option' value='". $dept['dept_id'] ."' ". $selected .">". $dept['dept_name'] ."</option>";
             }
 
          ?>

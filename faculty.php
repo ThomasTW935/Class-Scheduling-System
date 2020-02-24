@@ -17,7 +17,7 @@
             </ul>
             <?php
                $deptView = new DepartmentsView();
-               $depts = $deptView->FetchDeptFaculty();
+               $depts = $deptView->FetchDepts("Faculty");
                foreach($depts as $dept){
                   echo "<ul class='module__List'>
                      <li class='module__Item'>". $dept['dept_name'] ."</li>
@@ -35,7 +35,7 @@
          </div>
          <?php
             if(isset($_GET['add']) || isset($_GET['id'])){
-               include_once './layouts/deptfaculty.form.php';
+               include_once './layouts/departments.form.php';
             }
          ?>
    

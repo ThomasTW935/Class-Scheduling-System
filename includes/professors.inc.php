@@ -28,9 +28,6 @@ if(isset($_POST['submit'])){
       header('Location: ../professors.php?id='.$_POST['id'] . $query);
       exit();
    }
-   var_dump($_POST);
-   echo '</br>';
-   var_dump($errors);
    $profContr->ModifyProfessor($_POST);
    header('Location: ../professors.php');
 } else {
