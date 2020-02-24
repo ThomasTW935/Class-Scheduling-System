@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2020 at 04:33 PM
+-- Generation Time: Feb 24, 2020 at 07:45 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -25,35 +25,46 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dept_faculty`
+-- Table structure for table `departments`
 --
 
-CREATE TABLE `dept_faculty` (
-  `dept_id` int(2) NOT NULL,
+CREATE TABLE `departments` (
+  `dept_id` int(11) NOT NULL,
   `dept_name` varchar(5) NOT NULL,
   `dept_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `dept_faculty`
+-- Dumping data for table `departments`
 --
 
-INSERT INTO `dept_faculty` (`dept_id`, `dept_name`, `dept_desc`) VALUES
-(1, 'IT', 'Information Technology'),
-(2, 'CS', 'Computer Science');
+INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`) VALUES
+(1, 'BSIT', 'Bachelor of Science in Information Technology'),
+(2, 'BSCS', 'Bachelor of Science in Computer Science'),
+(3, 'GAS', 'GAS'),
+(4, 'GE', 'General Education');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dept_student`
+-- Table structure for table `dept_type`
 --
 
-CREATE TABLE `dept_student` (
-  `dept_id` int(2) NOT NULL,
-  `dept_name` varchar(5) NOT NULL,
-  `dept_desc` text NOT NULL,
-  `dept_type` enum('shs','tertiary') NOT NULL
+CREATE TABLE `dept_type` (
+  `id` int(11) NOT NULL,
+  `type` enum('Faculty','SHS','Tertiary') NOT NULL,
+  `dept_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dept_type`
+--
+
+INSERT INTO `dept_type` (`id`, `type`, `dept_id`) VALUES
+(3, 'SHS', 3),
+(4, 'Faculty', 1),
+(5, 'Tertiary', 2),
+(6, 'Faculty', 4);
 
 -- --------------------------------------------------------
 
@@ -77,29 +88,30 @@ CREATE TABLE `professors` (
 --
 
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `is_active`) VALUES
-(1, 2999, 'Thomas', 'Daryl', 'P', '', 1, 1),
-(2, 2999, 'Thomas', 'Daryl', 'P', '', 1, 1),
-(3, 0, 'sdsd23', 'e232', '', '', 1, 1),
-(4, 123456789, 'Thomas', 'Daryl', 'P', '', 1, 1),
-(5, 123456789, 'Thomas', 'Daryl', 'P', '', 1, 1),
-(6, 12345678, 'Thomas', 'Daryl', 'P', 'jr', 1, 1),
-(7, 12345677, 'De Peralta', 'Hushaia', '', '', 1, 1);
+(1, 2999, 'Thomas', 'Daryl', 'P', '', 1, 0),
+(2, 2999, 'Thomas', 'Daryl', 'P', '', 1, 0),
+(3, 0, 'sdsd23', 'e232', '', '', 1, 0),
+(6, 12345678, 'Thomas', 'Daryl', 'P', 'jr', 1, 0),
+(7, 12345677, 'De Peralt', 'Hushaia', 'P', '', 1, 0),
+(8, 77777777, 'Aparato', 'Christine', '', '', 1, 1),
+(10, 123456789, 'TThomas', 'DDaryl', '', '', 4, 1),
+(11, 88888888, 'De Peralta', 'Hushaia', 'P', '', 1, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `dept_faculty`
+-- Indexes for table `departments`
 --
-ALTER TABLE `dept_faculty`
+ALTER TABLE `departments`
   ADD PRIMARY KEY (`dept_id`);
 
 --
--- Indexes for table `dept_student`
+-- Indexes for table `dept_type`
 --
-ALTER TABLE `dept_student`
-  ADD PRIMARY KEY (`dept_id`);
+ALTER TABLE `dept_type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `professors`
@@ -112,22 +124,22 @@ ALTER TABLE `professors`
 --
 
 --
--- AUTO_INCREMENT for table `dept_faculty`
+-- AUTO_INCREMENT for table `departments`
 --
-ALTER TABLE `dept_faculty`
-  MODIFY `dept_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `departments`
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `dept_student`
+-- AUTO_INCREMENT for table `dept_type`
 --
-ALTER TABLE `dept_student`
-  MODIFY `dept_id` int(2) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `dept_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
