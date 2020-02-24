@@ -34,13 +34,16 @@ class DepartmentsVal{
       else{
          $deptView = new DepartmentsView();
          $result = $deptView->FetchDeptByName($val);
-         $dept = $deptView->FetchDeptByID($id);
-         $idOrig = $dept[0]['id'];
-         $idGet = $result[0]['id'];
-         echo $result[0]['id'].'<br>';
-         echo $dept[0]['id'] . '<br>';
-         if(!empty($result) && isset($_POST['submit']) xor $idOrig != $idGet){
-            $this->addError('Name', 'Name already exist');
+         if(!empty($result)){
+            if(isset($this->data['update'])){
+               $prof = $profView->FetchProfessorByID($id);
+               $idOrig = $prof[0]['id'] ?? '';
+               $idGet = $result[0]['id'] ?? '';
+               if($idOrig == $idGet){
+                  return;
+               }
+            }
+            $this->addError('employeeID', 'Employee already exist');
          }
       } 
    }

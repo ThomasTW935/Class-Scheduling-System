@@ -27,26 +27,19 @@ body ul {
 }
 
 body button, body .button {
-  color: white;
   cursor: pointer;
   height: 35px;
   width: 68px;
-  background: #00aaff;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
-  border-radius: 20px;
+  text-decoration: none;
   outline: none;
   display: -ms-grid;
   display: grid;
   place-content: center;
-  -webkit-transform: scale(1);
-          transform: scale(1);
 }
 
-body button:active, body .button:active {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+body button:hover, body .button:hover {
+  text-decoration: underline;
 }
 
 body main {
@@ -66,9 +59,25 @@ body main {
   z-index: 100;
 }
 
-.nav a {
+.nav button, .nav a {
   color: white;
-  text-decoration: none;
+  background: none;
+}
+
+.nav .back {
+  position: relative;
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+}
+
+.nav .back::before {
+  content: '<';
+  position: absolute;
+  height: 100%;
+  font-size: 1.3rem;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
 }
 
 .nav__Button {
@@ -78,7 +87,11 @@ body main {
   height: 100%;
   display: -ms-grid;
   display: grid;
-  place-items: center;
+  place-content: center;
+}
+
+.nav__Button button {
+  font-weight: bold;
 }
 
 .card__Design {
@@ -98,6 +111,12 @@ body main {
 
 .module a {
   text-decoration: none;
+}
+
+.module__Add {
+  background: #00aaff;
+  color: white;
+  border-radius: 20px;
 }
 
 .module__Header {
@@ -131,8 +150,8 @@ body main {
       -ms-flex-direction: column;
           flex-direction: column;
   border: 1px solid black;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
 
@@ -143,11 +162,12 @@ body main {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid black;
 }
 
 .module__Title li {
   font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
 }
 
 .module__Item {
@@ -155,11 +175,19 @@ body main {
   display: grid;
   place-content: center;
   padding: .3em 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid black;
+}
+
+.module__Item a {
+  color: black;
 }
 
 .module__Item:last-child {
   border: none;
+}
+
+.module__Item:last-child button {
+  background: none;
 }
 
 .module__Form {

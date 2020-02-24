@@ -21,11 +21,11 @@
       <?php
          $url = $_SERVER['REQUEST_URI'];
          if(!strpos($url, "dashboard")){
-            echo "<a href='dashboard.php' class='button'>BACK</a>";
+            echo "<a href='dashboard.php' class='button back'>BACK</a>";
          }
 
       ?>
       <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
-         <button type="submit" name="logout-Button" class="button">Log out</button>
+         <button type="submit" name="logout-Button" class="button">LOG OUT</button>
       </form>
    </nav>
