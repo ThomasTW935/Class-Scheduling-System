@@ -16,11 +16,11 @@
          <h3>ROOMS</h3>
          <img src="./drawables/icons/rooms.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="./departments.php">
+      <a class="dashboard__Card card__Design" href="./course.php">
          <h3>COURSES</h3>
          <img src="./drawables/icons/tertiary.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="#">
+      <a class="dashboard__Card card__Design" href="./strand.php">
          <h3>STRANDS</h3>
          <img src="./drawables/icons/shs.svg" alt="Professors">
       </a>

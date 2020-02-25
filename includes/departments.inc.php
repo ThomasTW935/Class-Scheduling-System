@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
    $result = $deptView->FetchDeptByName($_POST['name']);
    var_dump($_POST);
    if(!empty($result)){
-      $deptContr->CreateDepartmentType($_POST['department'], $_POST['id']);
+      $deptContr->CreateDepartmentType($_POST['department'], $result[0]['dept_id']);
    } else {
       $deptContr->CreateDepartment($_POST);
    }
