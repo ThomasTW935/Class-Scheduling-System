@@ -17,7 +17,7 @@
    <a href="professors.php" class='form__Close'>X</a>
    <label for='formSelect' class='form__Title'>Professor's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $prof['id'] ?? '' ?>' name='id'>
-   <input class='form__Input' type='text' value='<?php echo $prof['emp_no'] ?? '' ?>' name='employeeID' placeholder='Employee ID' required>
+   <input class='form__Input' type='text' value='<?php echo $prof['emp_no'] ?? '' ?>' name='employeeID' placeholder='Employee ID'  required>
    <div class="form__Error"><?php echo $errors['employeeID'] ?? '' ?></div>
    <input class='form__Input' type='text' value='<?php echo $prof['last_name'] ?? '' ?>' name='lastName' placeholder='Last Name' required>
    <div class="form__Error"><?php echo $errors['lastName'] ?? '' ?></div>

@@ -66,8 +66,7 @@ body main {
 
 .nav .back {
   position: relative;
-  -webkit-transform: translateX(5px);
-          transform: translateX(5px);
+  left: 30px;
 }
 
 .nav .back::before {
@@ -78,6 +77,8 @@ body main {
   display: -ms-grid;
   display: grid;
   place-content: center;
+  -webkit-transform: translateX(-10px);
+          transform: translateX(-10px);
 }
 
 .nav__Button {
@@ -113,12 +114,6 @@ body main {
   text-decoration: none;
 }
 
-.module__Add {
-  background: #00aaff;
-  color: white;
-  border-radius: 20px;
-}
-
 .module__Header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -137,6 +132,15 @@ body main {
   height: 70px;
   border: 1px solid black;
   border-radius: 50%;
+}
+
+.module__Header a {
+  background: #00aaff;
+  color: white;
+  border-radius: 20px;
+  position: relative;
+  right: 4em;
+  font-weight: bold;
 }
 
 .module__Container {
@@ -182,11 +186,16 @@ body main {
   color: black;
 }
 
+.module__Item a:hover {
+  text-decoration: underline;
+}
+
 .module__Item:last-child {
   border: none;
 }
 
 .module__Item:last-child button {
+  font-size: 1rem;
   background: none;
 }
 
