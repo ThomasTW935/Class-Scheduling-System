@@ -35,8 +35,8 @@
                      <li class='module__Item'>". $dept['dept_desc'] ."</li>
                      <li class='module__Item'><a href=?id=". $dept['dept_id'] .">Edit</a></li>
                      <li class='module__Item'>
-                        <form action='./includes/departments.inc.php' method='POST'>
-                           <input type='hidden' value='". $department ."' name='department'>
+                        <form onsubmit='return submitForm(this)' action='./includes/departments.inc.php' method='POST'>
+                           <input name='department' type='hidden' value='". $department ."'>
                            <input name='id' type='hidden' value='". $dept['dept_id'] ."'>
                            <button name='delete' type='submit'>Remove</button>
                         </form>
