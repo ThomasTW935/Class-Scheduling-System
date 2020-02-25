@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2020 at 07:45 AM
+-- Generation Time: Feb 25, 2020 at 06:09 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -39,10 +39,8 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`) VALUES
-(1, 'BSIT', 'Bachelor of Science in Information Technology'),
-(2, 'BSCS', 'Bachelor of Science in Computer Science'),
-(3, 'GAS', 'GAS'),
-(4, 'GE', 'General Education');
+(17, 'IT', 'Information Technolo'),
+(18, 'GE', 'General Education');
 
 -- --------------------------------------------------------
 
@@ -51,8 +49,8 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`) VALUES
 --
 
 CREATE TABLE `dept_type` (
-  `id` int(11) NOT NULL,
-  `type` enum('Faculty','SHS','Tertiary') NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `type` enum('Faculty','Strand','Course') NOT NULL,
   `dept_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,11 +58,10 @@ CREATE TABLE `dept_type` (
 -- Dumping data for table `dept_type`
 --
 
-INSERT INTO `dept_type` (`id`, `type`, `dept_id`) VALUES
-(3, 'SHS', 3),
-(4, 'Faculty', 1),
-(5, 'Tertiary', 2),
-(6, 'Faculty', 4);
+INSERT INTO `dept_type` (`type_id`, `type`, `dept_id`) VALUES
+(17, 'Course', 17),
+(19, 'Faculty', 17),
+(20, 'Faculty', 18);
 
 -- --------------------------------------------------------
 
@@ -93,9 +90,13 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 (3, 0, 'sdsd23', 'e232', '', '', 1, 0),
 (6, 12345678, 'Thomas', 'Daryl', 'P', 'jr', 1, 0),
 (7, 12345677, 'De Peralt', 'Hushaia', 'P', '', 1, 0),
-(8, 77777777, 'Aparato', 'Christine', '', '', 1, 1),
-(10, 123456789, 'TThomas', 'DDaryl', '', '', 4, 1),
-(11, 88888888, 'De Peralta', 'Hushaia', 'P', '', 1, 1);
+(8, 77777777, 'Aparato', 'Christine', '', '', 1, 0),
+(10, 2147483647, 'TThomas', 'DDaryl', '', '', 4, 1),
+(11, 88888888, 'De Peralta', 'Hushaia', 'P', '', 4, 1),
+(12, 2147483647, 'Mercado', 'Jenny', 'F', '', 4, 0),
+(13, 66666666, 'Aparato', 'Christine', '', '', 3, 1),
+(14, 111234567, 'Thomas', 'Daryl', '', '', 1, 1),
+(15, 2121212121, 'Thomas', 'Daryl', '', '', 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -111,7 +112,7 @@ ALTER TABLE `departments`
 -- Indexes for table `dept_type`
 --
 ALTER TABLE `dept_type`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`type_id`);
 
 --
 -- Indexes for table `professors`
@@ -127,19 +128,19 @@ ALTER TABLE `professors`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `dept_type`
 --
 ALTER TABLE `dept_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
