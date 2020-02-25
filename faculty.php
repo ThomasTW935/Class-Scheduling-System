@@ -16,8 +16,19 @@
                <li class='module__Item'></li>
             </ul>
             <?php
+               
+               $url = $_SERVER['REQUEST_URI'];
+               $path = parse_url($url, PHP_URL_PATH);
+
+               $department = "";
+               $departments = ['faculty','strand','course'];
+               foreach($departments as $item){
+                  if(strpos($path,$item)){
+                     $department = $item;
+                  }
+               }
                $deptView = new DepartmentsView();
-               $depts = $deptView->FetchDepts("Faculty");
+               $depts = $deptView->FetchDepts($department);
                foreach($depts as $dept){
                   echo "<ul class='module__List'>
                      <li class='module__Item'>". $dept['dept_name'] ."</li>
@@ -25,6 +36,7 @@
                      <li class='module__Item'><a href=?id=". $dept['dept_id'] .">Edit</a></li>
                      <li class='module__Item'>
                         <form action='./includes/departments.inc.php' method='POST'>
+                           <input type='hidden' value='". $department ."' name='department'>
                            <input name='id' type='hidden' value='". $dept['dept_id'] ."'>
                            <button name='delete' type='submit'>Remove</button>
                         </form>

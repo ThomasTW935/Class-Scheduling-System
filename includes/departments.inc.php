@@ -12,27 +12,36 @@ $deptContr = new DepartmentsContr();
 $deptVal = new DepartmentsVal($_POST);
 
 $department = $_POST['department'] . ".php";
-
 if(!isset($_POST['delete'])){
    $errors = $deptVal->validateForm();
-   exit();
    $query = '&' . http_build_query($errors);
 }
-
 if(isset($_POST['submit'])){
    if(!empty($errors)){
       header('Location: ../'. $department .'?add' . $query);
       exit();
    }
-   $deptContr->CreateDepartment($_POST);
+   $result = $deptView->FetchDeptByName($_POST['name']);
+   var_dump($_POST);
+   if(!empty($result)){
+      $deptContr->CreateDepartmentType($_POST['department'], $_POST['id']);
+   } else {
+      $deptContr->CreateDepartment($_POST);
+   }
 } else if(isset($_POST['delete'])){
-   $profContr->RemoveProfessor($_POST['id']);
+   $results = $deptView->FetchDeptTypes($_POST['id']);
+   $length = sizeof($results);
+   if(sizeof($results) > 1){
+      $deptContr->RemoveDepartmentType($_POST['department'],$_POST['id']);
+   } else{
+      $deptContr->RemoveDepartment($_POST['department'],$_POST['id']);
+   }
 } else if(isset($_POST['update'])){
    if(!empty($errors)){
       header('Location: ../'. $department .'?id='.$_POST['id'] . $query);
       exit();
    }
-   $profContr->ModifyProfessor($_POST);
+   $deptContr->ModifyDepartment($_POST);
 } 
 header('Location: ../'.$department);
 

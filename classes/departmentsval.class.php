@@ -16,12 +16,12 @@ class DepartmentsVal{
          }
       }
 
-      $this->validateID();
+      $this->validateName();
       $this->validateDescription();
 
       return $this->errors;
    }
-   private function validateID(){
+   private function validateName(){
 
       $val = trim($this->data['name']);
       $id = trim($this->data['id']);
@@ -32,14 +32,15 @@ class DepartmentsVal{
          $this->addError('name', 'Name must only contain and up to 5 chars only');
       }
       else{
+         $type = trim($this->data['department']);
          $deptView = new DepartmentsView();
-         $result = $deptView->FetchDeptByName($val);
-         if(!empty($result)){
+         $results = $deptView->FetchDeptByNameAndType($val,$type);
+         if(!empty($results)){
+            $idResult = $results[0]['id'] ?? '';
             if(isset($this->data['update'])){
-               $prof = $profView->FetchProfessorByID($id);
-               $idOrig = $prof[0]['id'] ?? '';
-               $idGet = $result[0]['id'] ?? '';
-               if($idOrig == $idGet){
+               $dept = $deptView->FetchDeptByID($id);
+               $idOrig = $dept[0]['id'] ?? '';
+               if($idOrig == $idResult){
                   return;
                }
             }

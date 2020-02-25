@@ -14,4 +14,12 @@ class DepartmentsView extends Departments{
       $results = $this->getDepartmentByName($name);
       return $results;
    }
+   public function FetchDeptByNameAndType($name,$type){
+      $result = $this->getDepartmentByNameAndType($name,$type);
+      return $result;
+   }
+   public function FetchDeptTypes($id){
+      $result = $this->getDepartmentTypes($id);
+      return $result;
+   }
 }
