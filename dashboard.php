@@ -32,6 +32,10 @@
          <h3>SECTIONS</h3>
          <img src="./drawables/icons/section.svg" alt="SECTIONS">
       </a>
+      <a class="dashboard__Card card__Design" href="./subjects.php">
+         <h3>SUBJECTS</h3>
+         <img src="./drawables/icons/section.svg" alt="SUBJECTS">
+      </a>
    </div>
 </main>
       
