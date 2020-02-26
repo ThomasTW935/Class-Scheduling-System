@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2020 at 06:09 PM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Generation Time: Feb 26, 2020 at 01:49 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,8 +39,12 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`) VALUES
-(17, 'IT', 'Information Technolo'),
-(18, 'GE', 'General Education');
+(17, 'IT', 'Information Technology'),
+(18, 'GE', 'General Education'),
+(19, 'HUMMS', 'alkdmsaldkm'),
+(20, 'BSCS', 'Bachelor of Science in Computer Science'),
+(21, 'SHS', 'asldknlk'),
+(22, 'SHSHS', 'fdfd');
 
 -- --------------------------------------------------------
 
@@ -59,9 +63,12 @@ CREATE TABLE `dept_type` (
 --
 
 INSERT INTO `dept_type` (`type_id`, `type`, `dept_id`) VALUES
-(17, 'Course', 17),
 (19, 'Faculty', 17),
-(20, 'Faculty', 18);
+(20, 'Faculty', 18),
+(22, 'Strand', 19),
+(23, 'Course', 20),
+(24, 'Faculty', 21),
+(25, 'Faculty', 22);
 
 -- --------------------------------------------------------
 
@@ -85,18 +92,20 @@ CREATE TABLE `professors` (
 --
 
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `is_active`) VALUES
-(1, 2999, 'Thomas', 'Daryl', 'P', '', 1, 0),
-(2, 2999, 'Thomas', 'Daryl', 'P', '', 1, 0),
-(3, 0, 'sdsd23', 'e232', '', '', 1, 0),
-(6, 12345678, 'Thomas', 'Daryl', 'P', 'jr', 1, 0),
-(7, 12345677, 'De Peralt', 'Hushaia', 'P', '', 1, 0),
-(8, 77777777, 'Aparato', 'Christine', '', '', 1, 0),
-(10, 2147483647, 'TThomas', 'DDaryl', '', '', 4, 1),
-(11, 88888888, 'De Peralta', 'Hushaia', 'P', '', 4, 1),
-(12, 2147483647, 'Mercado', 'Jenny', 'F', '', 4, 0),
-(13, 66666666, 'Aparato', 'Christine', '', '', 3, 1),
-(14, 111234567, 'Thomas', 'Daryl', '', '', 1, 1),
-(15, 2121212121, 'Thomas', 'Daryl', '', '', 2, 1);
+(1, 123456789, 'Thomas', 'Daryl', '', '', 18, 1),
+(2, 321654987, 'Aparato', 'Christine', '', '', 17, 0),
+(3, 21474836, 'Aparato', 'Christine', 'B', '', 17, 1),
+(4, 45253257, 'Abalos', 'Romabel', 'S', '', 17, 1),
+(5, 45762315, 'Bermejo', 'Christine', 'M', '', 17, 1),
+(6, 98713564, 'Gajasan', 'Jonathan', 'F', '', 18, 1),
+(7, 78945378, 'De Peralta', 'Hushaia Faith', '', '', 18, 1),
+(8, 56287936, 'Legarde', 'Princess Dianne', '', '', 17, 1),
+(9, 72455545, 'Lopez', 'Jaime', '', '', 17, 1),
+(10, 25483544, 'Teruel', 'Jeric Jasper', '', '', 18, 1),
+(11, 558432788, 'Pacleb', 'Roland', 'P', '', 17, 1),
+(12, 46582355, 'Mendoza', 'Christiane', 'M', '', 17, 1),
+(13, 55446688, 'Garcia', 'Kenneth', 'L', '', 17, 1),
+(14, 29038838, 'firstname', 'lastname', '', '', 21, 1);
 
 --
 -- Indexes for dumped tables
@@ -128,19 +137,19 @@ ALTER TABLE `professors`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `dept_type`
 --
 ALTER TABLE `dept_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
