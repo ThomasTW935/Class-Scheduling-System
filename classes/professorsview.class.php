@@ -21,7 +21,7 @@ class ProfessorsView extends Professors{
             <li class='module__Item'><a href='#'>CheckSchedule</a></li>
             <li class='module__Item'><a href=?id=". $result['id'] ."> Edit</a></li>
             <li class='module__Item'>
-               <form action='./includes/professors.inc.php' method='POST'>
+               <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
                   <input name='id' type='hidden' value='". $result['id'] ."'>
                   <button name='profDelete' type='submit'>Remove</button>
                </form>
