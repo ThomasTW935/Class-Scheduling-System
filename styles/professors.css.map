@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACG,WADQ,CACR,aAAa,CAAA;EACV,qBAAqB,EAAE,GAAG,CAAC,GAAG,CAAC,cAAa;CAC9C",
-    "sources": [
-        "professors.scss"
-    ],
-    "names": [],
-    "file": "professors.css"
-}

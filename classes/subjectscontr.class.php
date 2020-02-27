@@ -5,7 +5,7 @@ class SubjectsContr extends Subjects{
       $this->setSubject($data['code'],$data['desc']);
    }
    public function ModifySubject($data){
-      $this->setSubject($data['code'],$data['desc'],$data['id']);
+      $this->updateSubject($data['code'],$data['desc'],$data['id']);
    }
    public function RemoveSubject($id){
       $this->deleteSubject($id);

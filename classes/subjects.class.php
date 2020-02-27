@@ -27,8 +27,8 @@ class Subjects extends Dbh{
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$code,$desc]);
    }
-   protected function updateSubject($id,$code,$desc){
-      $sql = "UPDATE subjects SET subj_code = ? subj_desc = ? WHERE subj_id = ?";
+   protected function updateSubject($code,$desc,$id){
+      $sql = "UPDATE subjects SET subj_code = ? , subj_desc = ? WHERE subj_id = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$code,$desc,$id]);
    }

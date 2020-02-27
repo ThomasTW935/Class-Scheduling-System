@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACG,YADS,CACT,aAAa,CAAA;EACV,qBAAqB,EAAE,GAAG,CAAC,GAAG,CAAC,cAAa;CAC9C",
-    "sources": [
-        "departments.scss"
-    ],
-    "names": [],
-    "file": "departments.css"
-}

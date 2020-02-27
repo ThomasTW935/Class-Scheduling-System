@@ -320,11 +320,6 @@ body main {
   }
 }
 
-.professors .module__List {
-  -ms-grid-columns: 1fr 3fr (1fr)[4];
-      grid-template-columns: 1fr 3fr repeat(4, 1fr);
-}
-
 .rooms__Floor {
   padding: .5em;
   margin: .5em;
@@ -357,11 +352,6 @@ body main {
 
 .rooms__Card h3 {
   text-transform: capitalize;
-}
-
-.departments .module__List {
-  -ms-grid-columns: 1fr 3fr (1fr)[2];
-      grid-template-columns: 1fr 3fr repeat(2, 1fr);
 }
 
 .dashboard {
@@ -409,5 +399,15 @@ body main {
 
 .dashboard__Card h3 {
   font-family: 'Times New Roman', Times, serif;
+}
+
+.departments .module__List, .subjects .module__List {
+  -ms-grid-columns: 1fr 3fr (1fr)[2];
+      grid-template-columns: 1fr 3fr repeat(2, 1fr);
+}
+
+.professors .module__List {
+  -ms-grid-columns: 1fr 3fr (1fr)[4];
+      grid-template-columns: 1fr 3fr repeat(4, 1fr);
 }
 /*# sourceMappingURL=admin.css.map */
