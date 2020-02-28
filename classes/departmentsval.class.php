@@ -44,7 +44,7 @@ class DepartmentsVal{
                   return;
                }
             }
-            $this->addError('employeeID', 'Employee already exist');
+            $this->addError('name', 'name already exist');
          }
       } 
    }

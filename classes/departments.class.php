@@ -5,7 +5,11 @@ class Departments extends Dbh{
    protected function getDepartments($type){
       $sql = 'select * from departments INNER JOIN dept_type ON departments.dept_id = dept_type.dept_id where type = ?';
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$type]);
+      try{
+         $stmt->execute([$type]);
+      }catch(PDOException $e){
+         trigger_error("Error: " . $e->getMessage());
+      }
       $result = $stmt->fetchAll();
       return $result;
    }
@@ -44,7 +48,11 @@ class Departments extends Dbh{
    }
    protected function setDepartmentType($type,$id){
       $sql = 'INSERT INTO dept_type(type,dept_id) VALUES(?,?)';
-      $stmt = $this->connect()->prepare($sql);
+      try{
+         $stmt = $this->connect()->prepare($sql);
+      }catch(PDOException $e){
+         trigger_error("Error: " . $e->getMessage());
+      }
       $stmt->execute([$type,$id]);
    }
    protected function updateDepartment($name,$desc,$id){
