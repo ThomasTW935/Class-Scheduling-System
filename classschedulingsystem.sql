@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2020 at 01:49 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Generation Time: Feb 28, 2020 at 11:40 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -84,28 +84,51 @@ CREATE TABLE `professors` (
   `middle_initial` tinytext NOT NULL,
   `suffix` tinytext NOT NULL,
   `dept_id` int(11) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `prof_img` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `professors`
 --
 
-INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `is_active`) VALUES
-(1, 123456789, 'Thomas', 'Daryl', '', '', 18, 1),
-(2, 321654987, 'Aparato', 'Christine', '', '', 17, 0),
-(3, 21474836, 'Aparato', 'Christine', 'B', '', 17, 1),
-(4, 45253257, 'Abalos', 'Romabel', 'S', '', 17, 1),
-(5, 45762315, 'Bermejo', 'Christine', 'M', '', 17, 1),
-(6, 98713564, 'Gajasan', 'Jonathan', 'F', '', 18, 1),
-(7, 78945378, 'De Peralta', 'Hushaia Faith', '', '', 18, 1),
-(8, 56287936, 'Legarde', 'Princess Dianne', '', '', 17, 1),
-(9, 72455545, 'Lopez', 'Jaime', '', '', 17, 1),
-(10, 25483544, 'Teruel', 'Jeric Jasper', '', '', 18, 1),
-(11, 558432788, 'Pacleb', 'Roland', 'P', '', 17, 1),
-(12, 46582355, 'Mendoza', 'Christiane', 'M', '', 17, 1),
-(13, 55446688, 'Garcia', 'Kenneth', 'L', '', 17, 1),
-(14, 29038838, 'firstname', 'lastname', '', '', 21, 1);
+INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `is_active`, `prof_img`) VALUES
+(1, 123456789, 'Thomas', 'Daryl', '', '', 18, 1, ''),
+(2, 321654987, 'Aparato', 'Christine', '', '', 17, 0, ''),
+(3, 21474836, 'Aparato', 'Christine', 'B', '', 17, 1, 'Aparato.5e58eb65e0614.png'),
+(4, 45253257, 'Abalos', 'Romabel', 'S', '', 17, 1, ''),
+(5, 45762315, 'Bermejo', 'Christine', 'M', '', 17, 1, ''),
+(6, 98713564, 'Gajasan', 'Jonathan', 'F', '', 18, 1, ''),
+(7, 78945378, 'De Peralta', 'Hushaia Faith', '', '', 18, 1, ''),
+(8, 56287936, 'Legarde', 'Princess Dianne', '', '', 17, 1, ''),
+(9, 72455545, 'Lopez', 'Jaime', '', '', 17, 1, ''),
+(10, 25483544, 'Teruel', 'Jeric Jasper', '', '', 18, 1, ''),
+(11, 558432788, 'Pacleb', 'Roland', 'P', '', 17, 1, ''),
+(12, 46582355, 'Mendoza', 'Christiane', 'M', '', 17, 1, ''),
+(13, 55446688, 'Garcia', 'Kenneth', 'L', '', 17, 1, ''),
+(14, 29038838, 'firstname', 'lastname', '', '', 21, 1, ''),
+(15, 12875638, 'klatbasd', 'kasjdnk', 'k', '', 17, 1, ''),
+(16, 32323232, 'adsedsa', 'ewew', '', '', 17, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `subj_id` int(11) NOT NULL,
+  `subj_code` varchar(12) NOT NULL,
+  `subj_desc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`) VALUES
+(1, 'ACTS', 'Mobile Development'),
+(2, 'ACTSSE', 'Mobile Development');
 
 --
 -- Indexes for dumped tables
@@ -130,6 +153,12 @@ ALTER TABLE `professors`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`subj_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -149,7 +178,13 @@ ALTER TABLE `dept_type`
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
