@@ -28,7 +28,7 @@ class DepartmentsVal{
       if(empty($val)){
          $this->addError('name','Name cannot be empty');
       }
-      else if(!preg_match('/^[a-zA-Z ]$/', $val)){
+      else if(!preg_match('/^[a-zA-Z ]*$/', $val)){
          $this->addError('name', 'Name must only contain letters');
       }
       else{
