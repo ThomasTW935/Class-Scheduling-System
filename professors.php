@@ -10,7 +10,7 @@
          </div>
          <div class='module__Container'>
             <ul class='module__List module__Title'>
-               <li class='module__Item'>Employee ID</li>
+               <li class='module__Item'> ID</li>
                <li class='module__Item'>Employee Name</li>
                <li class='module__Item'>Department</li>
                <li class='module__Item'></li>
@@ -22,17 +22,30 @@
                $profView->DisplayProfessors();
             ?>
          </div>
+         <form class="form" action="includes/login.inc.php" method="POST">
+      <div class="form__Message">
+         <label class="form__Label">Sign in</label>
+         <p class="form__Signin--display">as <span></span></p>
+      </div>
+      <div class="form__Groups">
+         <div class="form__Group form__Signin--hide">
+            <input type="text"  class="form__Field" placeholder="Username" id='username' name="username" >
+            <label for='username' class="form__Label--placeholder">Username</label>
+         </div>
+         <div class="form__Group form__Signin--display">
+            <input type="password" class="form__Field form__Signin--display" placeholder="Password" id='password'  name="password" autofocus>
+            <label for="password" class="form__Label--placeholder form__Signin--display">Password</label>
+         </div>
+         <span class="form__Error"></span>
+      </div>
+      <button class="form__Button" type="submit" name="<?php echo $buttonName ?>">NEXT</button>
+   </form>
          <?php
             //if(isset($_GET['add']) || isset($_GET['id'])){
                //include_once './layouts/professors.form.php';
             //}
          ?>
-         <form action='./includes/professors.inc.php'  method='POST' enctype="multipart/form-data">
-               <span>asldkmsaldkmsaldkasmd</span>
-            <input type="text">
-            <input type="text">
-            <input type="text">
-         </form>
+        
    
       </main>
       
