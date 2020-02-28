@@ -27,7 +27,7 @@
                //include_once './layouts/professors.form.php';
             //}
          ?>
-         <form action='./includes/professors.inc.php' class='module__Form' method='POST' enctype="multipart/form-data">
+         <form action='./includes/professors.inc.php'  method='POST' enctype="multipart/form-data">
    
             <input type="text">
             <input type="text">
