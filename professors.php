@@ -28,12 +28,11 @@
             //}
          ?>
          <form action='./includes/professors.inc.php'  method='POST' enctype="multipart/form-data">
-   
+               <span>asldkmsaldkmsaldkasmd</span>
             <input type="text">
             <input type="text">
             <input type="text">
          </form>
-<a href="professors.php" class='module__formBackground'></a>
    
       </main>
       
