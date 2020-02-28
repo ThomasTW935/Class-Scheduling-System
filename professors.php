@@ -4,7 +4,10 @@
       
       <main class='professors module'>
          <div class="module__Header">
-            <div></div>
+            <form method="GET" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+               <input id="liveSearch" type="search" name="q" placeholder="Search...">
+               <button name="search" type="submit">Send</button>
+            </form>
             <img src="drawables/icons/professor.svg">
             <a href='?add' class='module__Add button'>ADD</a>
          </div>
@@ -20,7 +23,14 @@
             </ul>
             <?php
                $profView = new ProfessorsView();
-               $results = $profView->DisplayProfessors();
+               if(isset($_GET['q'])){
+                  $results = $profView->FetchProfessorsBySearch($_GET['q']);
+                  if(empty($results))
+                     echo '<h2>No matches found.</h2>';
+               } else{
+                  $results = $profView->DisplayProfessors();
+               }
+               
                foreach($results as $result){
                   $imgSrc = $result['prof_img'];
                   if(empty($result['prof_img']))

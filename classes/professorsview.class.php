@@ -14,4 +14,8 @@ class ProfessorsView extends Professors{
       $results = $this->getProfessors();
       return $results;
    }
+   public function FetchProfessorsBySearch($search){
+      $results = $this->getProfessorsBySearch($search);
+      return $results;
+   }
 }

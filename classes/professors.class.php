@@ -27,6 +27,15 @@ class Professors extends Dbh{
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorsBySearch($search){
+      $sql =   "SELECT * FROM professors INNER JOIN departments 
+               ON professors.dept_id = departments.dept_id 
+               WHERE emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ? ";
+      $stmt = $this->connect()->prepare($sql);      
+      $stmt->execute([$search,$search,$search,$search,$search]);
+      $results = $stmt->fetchAll();
+      return $results;
+   }
    protected function deleteProfessor($id){
       $sql = "update professors set is_active=0 where id = ?";
       $stmt = $this->connect()->prepare($sql);
