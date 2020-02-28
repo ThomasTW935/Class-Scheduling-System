@@ -24,7 +24,7 @@
          </div>
          <?php
             if(isset($_GET['add']) || isset($_GET['id'])){
-               include_once './layouts/professorsform.php';
+               include_once './layouts/professors.form.php';
             }
          ?>
    

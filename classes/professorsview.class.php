@@ -23,7 +23,7 @@ class ProfessorsView extends Professors{
             <li class='module__Item'>
                <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
                   <input name='id' type='hidden' value='". $result['id'] ."'>
-                  <button name='profDelete' type='submit'>Remove</button>
+                  <button name='delete' type='submit'>Remove</button>
                </form>
             </li>
          </ul>";

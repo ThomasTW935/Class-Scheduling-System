@@ -2,8 +2,8 @@
 
 class ProfessorsContr extends Professors{
    
-   public function CreateProfessors($employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptName){
-      $this->setProfessors($employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptName);
+   public function CreateProfessors($data){
+      $this->setProfessors($data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID']);
    }
 
    public function RemoveProfessor($id){

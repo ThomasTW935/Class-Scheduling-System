@@ -8,9 +8,9 @@
          <h3>PROFESSORS</h3>
          <img src="./drawables/icons/professor.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="#">
-         <h3>STUDENTS</h3>
-         <img src="./drawables/icons/student.svg" alt="Professors">
+      <a class="dashboard__Card card__Design" href="./users.php">
+         <h3>USERS</h3>
+         <img src="./drawables/icons/student.svg" alt="Users">
       </a>
       <a class="dashboard__Card card__Design" href="./rooms.php">
          <h3>ROOMS</h3>
