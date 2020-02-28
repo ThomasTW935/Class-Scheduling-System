@@ -3,7 +3,7 @@
 class ProfessorsContr extends Professors{
    
    public function CreateProfessors($data){
-      $this->setProfessors($data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID']);
+      $this->setProfessors($data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID'],$data['image']);
    }
 
    public function RemoveProfessor($id){
@@ -11,7 +11,7 @@ class ProfessorsContr extends Professors{
    }
 
    public function ModifyProfessor($data){
-      $this->updateProfessor($data['id'],$data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID']);
+      $this->updateProfessor($data['id'],$data['employeeID'],$data['lastName'],$data['firstName'],$data['middleInitial'],$data['suffix'],$data['deptID'],$data['image']);
    }
 
 }

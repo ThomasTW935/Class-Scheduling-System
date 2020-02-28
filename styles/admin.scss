@@ -36,6 +36,19 @@
 }
 .professors{
    .module__List{
-      grid-template-columns: 1fr 3fr repeat(4,1fr);
+      grid-template-columns: 60px 1fr 3fr repeat(4,1fr); 
+      li {
+         display:flex;
+         justify-content: center;
+         align-items: center;
+         &:first-child{
+            height:65px;
+            img{
+               height:100%;
+               width:100%;
+            }
+         }
+         
+      }
    }
 }

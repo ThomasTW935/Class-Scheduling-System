@@ -83,7 +83,7 @@ class ProfessorsVal{
 
       $val = trim($this->data['middleInitial']);
          if(!preg_match('/^[a-zA-Z ]{0,2}$/', $val)){
-            $this->addError('middleInitial', 'Last name must only contain letters and have 1-2 characters');
+            $this->addError('middleInitial', 'Middle Initital must only contain letters and have 1-2 characters');
          }
 
    }

@@ -1,10 +1,10 @@
 <?php
 
 class Professors extends Dbh{
-   protected function setProfessors($employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID){
-      $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,dept_id) VALUES(?,?,?,?,?,?)";
+   protected function setProfessors($employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$imgName){
+      $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,dept_id,prof_img) VALUES(?,?,?,?,?,?,?)";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID]);         
+      $stmt->execute([$employeeID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$imgName]);         
    }
    protected function getProfessors(){
       $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE is_active = 1";
@@ -32,9 +32,9 @@ class Professors extends Dbh{
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
    }
-   protected function updateProfessor($id,$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID){
-      $sql = "update professors set emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?,dept_id = ? where id = ?";
+   protected function updateProfessor($id,$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$imgName){
+      $sql = "update professors set emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?,dept_id = ?, prof_img = ? where id = ?";
       $stmt= $this->connect()->prepare($sql);
-      $stmt->execute([$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$id]);
+      $stmt->execute([$empID,$lastName,$firstName,$middleInitial,$suffix,$deptID,$imgName,$id]);
    }
 }

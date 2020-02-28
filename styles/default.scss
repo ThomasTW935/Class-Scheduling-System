@@ -107,13 +107,14 @@ body{
        }
    }
    &__Container{
-       height:87%;
+       height:80vh;
        width:auto;
        display:flex;
        flex-direction: column;
        border: 1px solid black;
        box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
        border-radius: 5px;
+       overflow: auto;
    }
    &__List{
        width:100%;
@@ -122,6 +123,9 @@ body{
        border-bottom: 1px solid rgba(0, 0, 0, 1);
    }
    &__Title{
+       position:sticky;
+       top:0;
+       background:white;
       li{
          font-family: 'Times New Roman', Times, serif;
          font-weight: bold;
@@ -212,11 +216,11 @@ body{
        }
    }
    &__formBackground{
-       position:absolute;
+       position:fixed;
        top:0;
        left:0;
        width:100vw;
-       height:100vh;
+       height:100%;
        background: rgba(0, 0, 0, 0.25);
        backdrop-filter: blur(1px);
        cursor:default;

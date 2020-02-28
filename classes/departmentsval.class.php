@@ -28,8 +28,8 @@ class DepartmentsVal{
       if(empty($val)){
          $this->addError('name','Name cannot be empty');
       }
-      else if(!preg_match('/^[a-zA-Z ]{0,5}$/', $val)){
-         $this->addError('name', 'Name must only contain and up to 5 chars only');
+      else if(!preg_match('/^[a-zA-Z ]$/', $val)){
+         $this->addError('name', 'Name must only contain letters');
       }
       else{
          $type = trim($this->data['department']);

@@ -6,6 +6,9 @@ $profView = new ProfessorsView();
 $profContr = new ProfessorsContr();
 $profVal = new ProfessorsVal($_POST);
 
+$middleInitial = explode('.',$_POST['middleInitial']);
+$_POST['middleInitial'] = strtoupper(implode('', $middleInitial));
+
 if(!isset($_POST['delete'])){
    $errors = $profVal->validateForm();
    
@@ -16,6 +19,8 @@ if(!isset($_POST['delete'])){
       $imgNameArray = explode('.', $imgName);
       $imgExt = strtolower(end($imgNameArray));
       $imgFullName = $_POST['lastName'].'.'.uniqid().'.'.$imgExt;
+
+      $_POST += ['image'=>$imgFullName];
    
       if(!empty($imgError))
          $errors += ['image' => $imgError];

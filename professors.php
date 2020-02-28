@@ -10,7 +10,8 @@
          </div>
          <div class='module__Container'>
             <ul class='module__List module__Title'>
-               <li class='module__Item'> ID</li>
+               <li class='module__Item'></li>
+               <li class='module__Item'>Employee ID</li>
                <li class='module__Item'>Employee Name</li>
                <li class='module__Item'>Department</li>
                <li class='module__Item'></li>
@@ -19,33 +20,36 @@
             </ul>
             <?php
                $profView = new ProfessorsView();
-               $profView->DisplayProfessors();
+               $results = $profView->DisplayProfessors();
+               foreach($results as $result){
+                  $imgSrc = $result['prof_img'];
+                  if(empty($result['prof_img']))
+                     $imgSrc = "professor.png";
+
+                  $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'].'.' : '';
+                  $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}"; 
+                  echo "<ul class='module__List'>
+                     <li class='module__Item'><img src='./drawables/images/". $imgSrc ."'></li>
+                     <li class='module__Item'>". $result['emp_no'] ."</li>
+                     <li class='module__Item'>". $fullName ."</li>
+                     <li class='module__Item'>". $result['dept_name'] ."</li>
+                     <li class='module__Item'><a href='#'>CheckSchedule</a></li>
+                     <li class='module__Item'><a href=?id=". $result['id'] ."> Edit</a></li>
+                     <li class='module__Item'>
+                        <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
+                           <input name='id' type='hidden' value='". $result['id'] ."'>
+                           <button name='delete' type='submit'>Remove</button>
+                        </form>
+                     </li>
+                  </ul>";
+               }
             ?>
          </div>
-         <form class="form" action="includes/login.inc.php" method="POST">
-      <div class="form__Message">
-         <label class="form__Label">Sign in</label>
-         <p class="form__Signin--display">as <span></span></p>
-      </div>
-      <div class="form__Groups">
-         <div class="form__Group form__Signin--hide">
-            <input type="text"  class="form__Field" placeholder="Username" id='username' name="username" >
-            <label for='username' class="form__Label--placeholder">Username</label>
-         </div>
-         <div class="form__Group form__Signin--display">
-            <input type="password" class="form__Field form__Signin--display" placeholder="Password" id='password'  name="password" autofocus>
-            <label for="password" class="form__Label--placeholder form__Signin--display">Password</label>
-         </div>
-         <span class="form__Error"></span>
-      </div>
-      <button class="form__Button" type="submit" name="<?php echo $buttonName ?>">NEXT</button>
-   </form>
          <?php
-            //if(isset($_GET['add']) || isset($_GET['id'])){
-               //include_once './layouts/professors.form.php';
-            //}
+            if(isset($_GET['add']) || isset($_GET['id'])){
+               include_once './layouts/professors.form.php';
+            }
          ?>
-        
    
       </main>
       

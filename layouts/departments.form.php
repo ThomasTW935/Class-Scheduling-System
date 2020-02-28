@@ -20,9 +20,9 @@
    <input class='form__Input' type='hidden' value='<?php echo $deptRe['dept_id'] ?? '' ?>' name='id'>
    <input class='form__Input' type='hidden' value='<?php echo $department ?>' name='department'>
    <input class='form__Input' type='text' value='<?php echo $deptRe['dept_name'] ?? '' ?>' name='name' placeholder='Name' required>
-   <div class="form__Error"><?php echo $errors['dept_name'] ?? '' ?></div>
+   <div class="form__Error"><?php echo $errors['name'] ?? '' ?></div>
    <input class='form__Input' type='text' value='<?php echo $deptRe['dept_desc'] ?? '' ?>' name='desc' placeholder='Description' required>
-   <div class="form__Error"><?php echo $errors['dept_desc'] ?? '' ?></div>
+   <div class="form__Error"><?php echo $errors['desc'] ?? '' ?></div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href="<?php echo $path ?>" class='module__formBackground'></a>
