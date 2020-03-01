@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2020 at 11:40 AM
+-- Generation Time: Mar 01, 2020 at 07:29 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -44,7 +44,26 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`) VALUES
 (19, 'HUMMS', 'alkdmsaldkm'),
 (20, 'BSCS', 'Bachelor of Science in Computer Science'),
 (21, 'SHS', 'asldknlk'),
-(22, 'SHSHS', 'fdfd');
+(22, 'SHSHS', 'fdfd'),
+(23, 'BSI', 'laskdmlasd'),
+(24, 'DSDSD', 'ewew'),
+(25, 'TMMMM', 'ldksmdlskm'),
+(26, 'ewewe', 'sdsds'),
+(27, 'trtew', 'dsds'),
+(28, 'TMMMM', 'alskdmsld'),
+(29, 'BSITT', 'dasdsa'),
+(30, 'BSITT', 'dasdsa'),
+(31, 'BSITT', 'dasdsa'),
+(32, 'ASCT ', 'asldksmadlk'),
+(33, 'BSITT', 'lsakdmlaskd'),
+(34, 'BSITT', 'lsakdmlaskd'),
+(35, 'BSITT', 'lsakdmlaskd'),
+(36, 'BSITT', 'lsakdmlaskd'),
+(37, 'BSITT', 'lsakdmlaskd'),
+(38, 'BSITT', 'lsakdmlaskd'),
+(39, 'ewew', 'dsdsd'),
+(40, 'ewewq', 'fdfdf'),
+(41, 'eqwew', 'sdsds');
 
 -- --------------------------------------------------------
 
@@ -68,7 +87,11 @@ INSERT INTO `dept_type` (`type_id`, `type`, `dept_id`) VALUES
 (22, 'Strand', 19),
 (23, 'Course', 20),
 (24, 'Faculty', 21),
-(25, 'Faculty', 22);
+(25, 'Faculty', 22),
+(26, 'Course', 23),
+(27, 'Faculty', 26),
+(28, 'Strand', 26),
+(29, 'Course', 39);
 
 -- --------------------------------------------------------
 
@@ -108,7 +131,8 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 (13, 55446688, 'Garcia', 'Kenneth', 'L', '', 17, 1, ''),
 (14, 29038838, 'firstname', 'lastname', '', '', 21, 1, ''),
 (15, 12875638, 'klatbasd', 'kasjdnk', 'k', '', 17, 1, ''),
-(16, 32323232, 'adsedsa', 'ewew', '', '', 17, 1, '');
+(16, 32323232, 'adsedsa', 'ewew', '', '', 17, 1, ''),
+(17, 12345678, 'Thomas', 'Daryl', '', '', 17, 1, 'Thomas.5e59fcce06d0c.png');
 
 -- --------------------------------------------------------
 
@@ -119,16 +143,32 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 CREATE TABLE `subjects` (
   `subj_id` int(11) NOT NULL,
   `subj_code` varchar(12) NOT NULL,
-  `subj_desc` text NOT NULL
+  `subj_desc` text NOT NULL,
+  `units` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`) VALUES
-(1, 'ACTS', 'Mobile Development'),
-(2, 'ACTSSE', 'Mobile Development');
+INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`) VALUES
+(1, 'ACTS', 'Mobile Development', 3),
+(2, 'ACTSSE', 'Mobile Development', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `email` text DEFAULT NULL,
+  `password` varchar(25) NOT NULL,
+  `role_level` int(11) NOT NULL,
+  `prof_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -159,6 +199,12 @@ ALTER TABLE `subjects`
   ADD PRIMARY KEY (`subj_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -166,25 +212,31 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `dept_type`
 --
 ALTER TABLE `dept_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
   MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
