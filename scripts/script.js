@@ -7,22 +7,24 @@ let liveSearch = document.querySelector('#liveSearch')
 if(liveSearch != null){
    liveSearch.addEventListener('keyup', ()=>{
       let val = liveSearch.value;
-      if(val !== ""){
-         searchData(val)
-      }
+      if(val === "")
+         location.reload()
+
+      searchData(val.trim())
    })
 }
 
 function searchData(val){
    let xhr = new XMLHttpRequest()
    xhr.onreadystatechange = function(){
-      if(this.readyState === 4 && this.status === 200){
-         console.log(this.responseText)
+      if(this.readyState === 4 && this.status){
+         let response = this.responseText
+         console.log(response)
          let con = document.querySelector('.professors__Container')
-         con.innerHTML = this.reponseText
+         con.innerHTML = response
       }
    }
-   xhr.open("GET", '../includes/professors.inc.php?q='+val,true)
+   xhr.open("GET", 'includes/ajax.inc.php?q='+val,true)
    xhr.send()
 }
 

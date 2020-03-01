@@ -44,7 +44,8 @@
          ?>
       </select>
    </div>
-   <input class='form__Input' type='file' value='<?php echo $prof['username'] ?? '' ?>' name='image' accept="image/*">
+   <label for="image">Select Image:</label>
+   <input id='image' class='form__File' type='file' value='<?php echo $prof['username'] ?? '' ?>' name='image' accept="image/*">
    <div class="form__Error"><?php echo $errors['image'] ?? '' ?></div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>

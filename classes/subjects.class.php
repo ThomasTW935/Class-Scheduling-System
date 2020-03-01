@@ -22,15 +22,15 @@ class Subjects extends Dbh{
       $results = $stmt->fetchAll();
       return $results;
    }
-   protected function setSubject($code,$desc){
-      $sql = "INSERT INTO subjects(subj_code,subj_desc) VALUES(?,?)";
+   protected function setSubject($code,$desc,$units){
+      $sql = "INSERT INTO subjects(subj_code,subj_desc, units) VALUES(?,?,?)";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$code,$desc]);
+      $stmt->execute([$code,$desc,$units]);
    }
-   protected function updateSubject($code,$desc,$id){
-      $sql = "UPDATE subjects SET subj_code = ? , subj_desc = ? WHERE subj_id = ?";
+   protected function updateSubject($code,$desc,$units,$id){
+      $sql = "UPDATE subjects SET subj_code = ? , subj_desc = ?, units = ? WHERE subj_id = ?";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$code,$desc,$id]);
+      $stmt->execute([$code,$desc,$units,$id]);
    }
    protected function deleteSubject($id){
       $sql = "DELETE FROM subjects WHERE subj_id = ?";

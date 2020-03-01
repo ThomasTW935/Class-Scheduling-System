@@ -12,6 +12,7 @@
             <ul class='module__List module__Title'>
                <li class='module__Item'>Subject Code</li>
                <li class='module__Item'>Subject Description</li>
+               <li class='module__Item'>Unit/s</li>
                <li class='module__Item'></li>
                <li class='module__Item'></li>
             </ul>
@@ -22,6 +23,7 @@
                   echo "<ul class='module__List'>
                      <li class='module__Item'>". $subj['subj_code'] ."</li>
                      <li class='module__Item'>". $subj['subj_desc'] ."</li>
+                     <li class='module__Item'>". $subj['units'] ."</li>
                      <li class='module__Item'><a href=?id=". $subj['subj_id'] .">Edit</a></li>
                      <li class='module__Item'>
                         <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>

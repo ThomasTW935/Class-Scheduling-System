@@ -153,7 +153,7 @@ body main {
 }
 
 .module__Container {
-  height: 87%;
+  height: 80vh;
   width: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -166,6 +166,7 @@ body main {
   -webkit-box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
           box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  overflow: auto;
 }
 
 .module__List {
@@ -176,6 +177,13 @@ body main {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border-bottom: 1px solid black;
+}
+
+.module__Title {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: white;
 }
 
 .module__Title li {
@@ -261,19 +269,11 @@ body main {
   margin-bottom: 1em;
 }
 
-.module__Form input, .module__Form select, .module__Form button {
-  border: 1px solid #2283CA;
-  border-radius: 10px;
-  padding: .5em .7em;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .module__Form .form__Input {
   width: 236px;
-  text-align: center;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-bottom: 1px solid #2283CA;
+  padding: .5em .7em;
 }
 
 .module__Form .form__Error {
@@ -303,11 +303,11 @@ body main {
 }
 
 .module__formBackground {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.25);
   -webkit-backdrop-filter: blur(1px);
           backdrop-filter: blur(1px);

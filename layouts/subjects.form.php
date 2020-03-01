@@ -19,6 +19,8 @@
    <input class='form__Input' type='text' value='<?php echo $subj['subj_code'] ?? '' ?>' name='code' placeholder='Subject Code'  required>
    <div class="form__Error"><?php echo $errors['subjectCode'] ?? '' ?></div>
    <input class='form__Input' type='text' value='<?php echo $subj['subj_desc'] ?? '' ?>' name='desc' placeholder='Subject Description' required>
+   <input class='form__Input' type='number' value='<?php echo $subj['units'] ?? '' ?>' name='units' placeholder='Units'  required>
+   <div class="form__Error"><?php echo $errors['units'] ?? '' ?></div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href="subjects.php" class='module__formBackground'></a>

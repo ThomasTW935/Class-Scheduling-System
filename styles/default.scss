@@ -187,16 +187,11 @@ body{
        .form__Title{
            margin-bottom: 1em;
        }
-       input,select,button{
-           border: 1px solid #2283CA;
-           border-radius: 10px;
-           padding: .5em .7em;
-           box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-       }
        .form__Input{
            width: 236px;
-           text-align: center;
-           box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+           border:none;
+           border-bottom: 1px solid #2283CA;
+           padding: .5em .7em;
        }
        .form__Error{
            color:red;

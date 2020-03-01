@@ -269,19 +269,11 @@ body main {
   margin-bottom: 1em;
 }
 
-.module__Form input, .module__Form select, .module__Form button {
-  border: 1px solid #2283CA;
-  border-radius: 10px;
-  padding: .5em .7em;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .module__Form .form__Input {
   width: 236px;
-  text-align: center;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-bottom: 1px solid #2283CA;
+  padding: .5em .7em;
 }
 
 .module__Form .form__Error {
@@ -362,6 +354,102 @@ body main {
   text-transform: capitalize;
 }
 
+.schedules {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 4fr;
+      grid-template-columns: 1fr 4fr;
+  padding: 0;
+}
+
+.schedules__Details {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.schedules__Table {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 10fr;
+      grid-template-columns: 1fr 10fr;
+  -ms-grid-rows: 10vh 10fr;
+      grid-template-rows: 10vh 10fr;
+      grid-template-areas: ". days" "hours items";
+  padding-right: 2em;
+  position: relative;
+}
+
+.schedules__Hours {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: hours;
+}
+
+.schedules__Hours li {
+  padding-bottom: 1em;
+}
+
+.schedules__Days {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: days;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.schedules__Items {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: items;
+}
+
+.schedules__Subjects {
+  font-size: .9rem;
+  padding: 1em;
+}
+
+.schedules__Subjects form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.schedules__Subjects form input {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+
+.schedules__Subjects form input:focus {
+  border-color: #00aaff;
+}
+
+.schedules__Subjects #searchSubjects__Results {
+  margin-top: 1em;
+  background: white;
+  border: 1px solid black;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.schedules__Subjects #searchSubjects__Results li {
+  cursor: pointer;
+}
+
 .dashboard {
   display: -ms-grid;
   display: grid;
@@ -409,14 +497,35 @@ body main {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.departments .module__List, .subjects .module__List {
+.departments .module__List {
   -ms-grid-columns: 1fr 3fr (1fr)[2];
       grid-template-columns: 1fr 3fr repeat(2, 1fr);
 }
 
+.subjects .module__List {
+  -ms-grid-columns: 1fr 3fr (1fr)[3];
+      grid-template-columns: 1fr 3fr repeat(3, 1fr);
+}
+
+.professors .liveSearch__Form {
+  background: red;
+}
+
+.professors .liveSearch__Form input {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+
+.professors .liveSearch__Form input:focus {
+  border-color: #00aaff;
+}
+
 .professors .module__List {
-  -ms-grid-columns: 60px 1fr 3fr (1fr)[4];
-      grid-template-columns: 60px 1fr 3fr repeat(4, 1fr);
+  -ms-grid-columns: 80px 1fr 3fr (1fr)[4];
+      grid-template-columns: 80px 1fr 3fr repeat(4, 1fr);
 }
 
 .professors .module__List li {

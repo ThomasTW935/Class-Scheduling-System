@@ -28,6 +28,7 @@ class Professors extends Dbh{
       return $result;
    }
    protected function getProfessorsBySearch($search){
+      $search = "%{$search}%";
       $sql =   "SELECT * FROM professors INNER JOIN departments 
                ON professors.dept_id = departments.dept_id 
                WHERE emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ? ";

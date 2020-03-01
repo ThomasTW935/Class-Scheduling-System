@@ -14,6 +14,7 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <link rel="stylesheet" href="./styles/admin.css"/>
    <script defer src="scripts/script.js"></script>
+   <script defer src="scripts/schedule.js"></script>
    <title>Class Scheduling System</title>
 </head>
 <body>
