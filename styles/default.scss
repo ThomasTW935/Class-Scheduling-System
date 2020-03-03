@@ -151,25 +151,21 @@ body{
       }
    }
    &__Form{
-       z-index:2;
+       z-index:10000000;
        position:fixed;
        top:50%;
        left:50%;
        transform: translate(-50%, -50%);
        padding: 1em 0;
-       width: 500px;
-       min-height: 450px;
+       max-height:90vh;
+       max-width:70vw;       
+       padding:2em;
        display:flex;
        flex-direction:column;
        align-items: center;
        background: white;
-       border-top: 1px solid #f1f1f5;
        border-radius: 10px;
        box-shadow: 2px 6px 6px 6px rgba(181,181,181,.7);
-       label{
-           text-transform: uppercase;
-           font-weight: bold;
-       }
        .form__Close{
            position:absolute;
            display:grid;
@@ -185,29 +181,57 @@ body{
            }
        }
        .form__Title{
-           margin-bottom: 1em;
+           margin: 1em;
+           text-transform: uppercase;
+           font-weight: bold;
        }
-       .form__Input{
-           width: 236px;
-           border:none;
-           border-bottom: 1px solid #2283CA;
-           padding: .5em .7em;
-       }
-       .form__Error{
-           color:red;
-           font-size: .85rem;
-       }
-       div{
-           width: 236px;
-           margin: .5em 0 1em;
-           display: flex;
-           justify-content: space-evenly;
-           align-items: center;
-       }
-       button{
+        .form__Container{
+            display:grid;
+            grid-template-columns: 1fr 2fr;
+            width:100%;
+            margin: 1em 0;
+            *{
+                font-size:1rem;
+            }
+            .form__Input{
+                *:not(div){
+                    padding:.5em .75em;
+                    border:1px solid #d8d8e8;
+                    border-radius: 4px; 
+                    width: 100%;
+                    &:focus{
+                        border-color: rgba(0,170,255,1);
+                    }
+                }
+                input[type="number"]{
+                    appearance: none;
+                }
+                .name{
+                    width:140px;
+                    &--short{
+                        width:80px;
+                    }
+                }
+                .form__Error{
+                    color:red;
+                    font-size: .8rem;
+                    margin-left: .75em;
+                }
+            }
+        }
+        
+       .form__Button{
            width:100px;
            box-shadow:none;
            text-transform:uppercase;
+           background: rgba(0,170,255,1);
+           color:white;
+           font-weight: bold;
+           border-radius:10px;
+           font-size: 1rem;
+           &:hover{
+               background: rgba(0,170,255,.6);
+           }
        }
    }
    &__formBackground{
