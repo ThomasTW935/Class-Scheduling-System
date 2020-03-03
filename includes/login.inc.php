@@ -1,32 +1,34 @@
 <?php
-$error = "";
-$username = "";
-$password = "";
+
+include './autoloader.inc.php';
+
+$usersView = new UsersView();
+$username = $_POST['username'];
+$password = $_POST['password'];
+$result = $usersView->FetchUserByUsername($username);
+
 if (isset($_POST['login-Username'])) {
 
-   $username = $_POST['username'];
-   if ($username == "admin") {
-      header("Location: ../index.php?username=admin");
-      exit();
-   } else {
+   if (empty($result)) {
       $error = "username";
       header("Location: ../index.php?error=$error");
       exit();
    }
+   header("Location: ../index.php?username=admin");
 } else if (isset($_POST['login-Password'])) {
-   $password = $_POST['password'];
-   $username = $_POST['username'];
-   if ($password == "admin") {
+
+   $user = $result[0];
+   $passwordReal = $user['password'];
+
+   $passCheck = password_verify($password, $passwordReal);
+
+   if ($passCheck) {
       session_start();
-      $_SESSION['admin'] = true;
+      $_SESSION['id'] = $user['user_id'];
+      $_SESSION['type'] = $user['role_level'];
       header("Location: ../dashboard.php?signin=success");
-      exit();
    } else {
       $error = "password";
       header("Location: ../index.php?error=$error&username=$username");
-      exit();
    }
-} else {
-   header("Location: ../index.php");
-   exit();
 }

@@ -8,6 +8,13 @@ if (isset($_GET['username'])) {
    $buttonName = "login-Password";
    $display = " value='$username' ";
 }
+$error = $_GET['error'];
+$errorMessage = '';
+if ($error == 'username') {
+   $errorMessage = 'Username not found.';
+} elseif ($error == 'password') {
+   $errorMessage = 'Password Incorrect.';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +23,8 @@ if (isset($_GET['username'])) {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Document</title>
+   <title>Login</title>
    <link rel="stylesheet" href="styles/login.css">
-   <script defer src="./scripts/login.js"></script>
 </head>
 
 <body>
@@ -36,7 +42,7 @@ if (isset($_GET['username'])) {
             <input type="password" class="form__Field form__Signin--display" placeholder="Password" id='password' name="password" autofocus>
             <label for="password" class="form__Label--placeholder form__Signin--display">Password</label>
          </div>
-         <span class="form__Error"></span>
+         <span class="form__Error"><?php echo $errorMessage ?></span>
       </div>
       <button class="form__Button" type="submit" name="<?php echo $buttonName ?>">NEXT</button>
    </form>
