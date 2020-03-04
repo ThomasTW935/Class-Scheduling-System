@@ -26,7 +26,8 @@ body ul {
   list-style: none;
 }
 
-body button, body .button {
+body button,
+body .button {
   cursor: pointer;
   height: 35px;
   width: 68px;
@@ -38,7 +39,8 @@ body button, body .button {
   place-content: center;
 }
 
-body button:hover, body .button:hover {
+body button:hover,
+body .button:hover {
   text-decoration: underline;
 }
 
@@ -55,7 +57,7 @@ body main {
   position: sticky;
   top: 0;
   height: 7%;
-  padding: .7em;
+  padding: 0.7em;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -65,10 +67,11 @@ body main {
           align-items: center;
 }
 
-.nav button, .nav a {
+.nav button,
+.nav a {
   color: white;
   background: none;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .nav .back {
@@ -77,7 +80,7 @@ body main {
 }
 
 .nav .back::before {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(50% - 8px);
   left: -5px;
@@ -133,7 +136,7 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
 
 .module__Header img {
@@ -150,6 +153,22 @@ body main {
   position: relative;
   right: 4em;
   font-weight: bold;
+}
+
+.module__Header .liveSearch__Form {
+  background: red;
+}
+
+.module__Header .liveSearch__Form input {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+
+.module__Header .liveSearch__Form input:focus {
+  border-color: #00aaff;
 }
 
 .module__Container {
@@ -187,7 +206,7 @@ body main {
 }
 
 .module__Title li {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: bold;
 }
 
@@ -195,25 +214,82 @@ body main {
   display: -ms-grid;
   display: grid;
   place-content: center;
-  padding: .3em 0;
+  padding: 0.3em 0;
   border-right: 1px solid black;
 }
 
-.module__Item a {
-  color: black;
-}
-
-.module__Item a:hover {
-  text-decoration: underline;
-}
-
 .module__Item:last-child {
-  border: none;
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
-.module__Item:last-child button {
-  font-size: 1rem;
+.module__Item:last-child div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Item:last-child div form {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.module__Item:last-child div form button {
   background: none;
+}
+
+.module__Item:last-child div form,
+.module__Item:last-child div a {
+  position: relative;
+  width: 50px;
+}
+
+.module__Item:last-child div form span,
+.module__Item:last-child div a span {
+  font-size: 1rem;
+  text-transform: capitalize;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.module__Item:last-child div form span::after,
+.module__Item:last-child div a span::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.module__Item:last-child div form:hover span,
+.module__Item:last-child div a:hover span {
+  opacity: 1;
+  visibility: visible;
 }
 
 .module__Form {
@@ -248,7 +324,7 @@ body main {
   display: -ms-grid;
   display: grid;
   place-content: center;
-  top: .5em;
+  top: 0.5em;
   right: 1em;
   width: 30px;
   height: 30px;
@@ -280,7 +356,7 @@ body main {
 }
 
 .module__Form .form__Container .form__Input *:not(div) {
-  padding: .5em .75em;
+  padding: 0.5em 0.75em;
   border: 1px solid #d8d8e8;
   border-radius: 4px;
   width: 100%;
@@ -306,8 +382,8 @@ body main {
 
 .module__Form .form__Container .form__Input .form__Error {
   color: red;
-  font-size: .8rem;
-  margin-left: .75em;
+  font-size: 0.8rem;
+  margin-left: 0.75em;
 }
 
 .module__Form .form__Button {
@@ -518,38 +594,28 @@ body main {
 }
 
 .dashboard__Card h3 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .departments .module__List {
+  -ms-grid-columns: 1fr 3fr 1fr;
+      grid-template-columns: 1fr 3fr 1fr;
+}
+
+.subjects .module__List,
+.rooms .module__List {
   -ms-grid-columns: 1fr 3fr (1fr)[2];
       grid-template-columns: 1fr 3fr repeat(2, 1fr);
 }
 
-.subjects .module__List {
-  -ms-grid-columns: 1fr 3fr (1fr)[3];
-      grid-template-columns: 1fr 3fr repeat(3, 1fr);
-}
-
-.professors .liveSearch__Form {
-  background: red;
-}
-
-.professors .liveSearch__Form input {
-  border: 0;
-  border-bottom: 2px solid #9b9b9b;
-  outline: 0;
-  font-size: 1rem;
-  padding: 7px 0;
-}
-
-.professors .liveSearch__Form input:focus {
-  border-color: #00aaff;
+.users .module__List {
+  -ms-grid-columns: 1fr 2fr (1fr)[2];
+      grid-template-columns: 1fr 2fr repeat(2, 1fr);
 }
 
 .professors .module__List {
-  -ms-grid-columns: 80px 1fr 3fr (1fr)[4];
-      grid-template-columns: 80px 1fr 3fr repeat(4, 1fr);
+  -ms-grid-columns: 70px 1fr 3fr (1fr)[3];
+      grid-template-columns: 70px 1fr 3fr repeat(3, 1fr);
 }
 
 .professors .module__List li {
@@ -565,7 +631,7 @@ body main {
 }
 
 .professors .module__List li:first-child {
-  height: 65px;
+  height: 70px;
 }
 
 .professors .module__List li:first-child img {

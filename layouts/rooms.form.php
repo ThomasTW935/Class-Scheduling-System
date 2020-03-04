@@ -12,30 +12,30 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<form action='./includes/subjects.inc.php' class='module__Form' method='POST'>
-   <a href="subjects.php" class='form__Close'>X</a>
+<form action='./includes/rooms.inc.php' class='module__Form' method='POST'>
+   <a href="rooms.php" class='form__Close'>X</a>
    <label for='formSelect' class='form__Title'>Room's Information</label>
-   <input class='form__Input' type='hidden' value='<?php echo $room['subj_id'] ?? '' ?>' name='id'>
+   <input class='form__Input' type='hidden' value='<?php echo $room['rm_id'] ?? '' ?>' name='id'>
    <div class="form__Container">
       <label for='' class='form__Label'>Name:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['subj_code'] ?? '' ?>' name='code' placeholder='Subject Code' required>
-         <div class="form__Error"><?php echo $errors['subjectCode'] ?? '' ?></div>
+         <input class='form__Input' type='text' value='<?php echo $room['rm_name'] ?? '' ?>' name='name' placeholder='Room Name' required>
+         <div class="form__Error"><?php echo $errors['name'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['subj_desc'] ?? '' ?>' name='desc' placeholder='Subject Description' required>
+         <input class='form__Input' type='text' value='<?php echo $room['rm_desc'] ?? '' ?>' name='desc' placeholder='Room Description' required>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Floor:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $room['units'] ?? '' ?>' name='units' placeholder='Units' required>
-         <div class="form__Error"><?php echo $errors['units'] ?? '' ?></div>
+         <input class='form__Input' type='number' value='<?php echo $room['rm_floor'] ?? '' ?>' name='floor' placeholder='Floor' required>
+         <div class="form__Error"><?php echo $errors['floor'] ?? '' ?></div>
       </div>
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="subjects.php" class='module__formBackground'></a>
+<a href="rooms.php" class='module__formBackground'></a>

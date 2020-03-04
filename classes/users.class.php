@@ -6,22 +6,34 @@ class Users extends Dbh
    protected function setUser($username, $pass, $email, $roleLevel)
    {
       $sql = 'INSERT INTO users (username,email,password,role_level) VALUES (?,?,?,?)';
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$username, $pass, $email, $roleLevel]);
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$username, $pass, $email, $roleLevel]);
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
    }
    protected function updateUser($username,  $email, $pass, $roleLevel, $id)
    {
       $sql = 'UPDATE users SET username = ?, email = ?, password = ?, role_level = ? WHERE user_id = ?';
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$username, $email, $pass, $roleLevel, $id]);
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$username, $email, $pass, $roleLevel, $id]);
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
    }
    protected function getUsers()
    {
       $sql = 'SELECT * FROM users';
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
-      $results = $stmt->fetchAll();
-      return $results;
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute();
+         $results = $stmt->fetchAll();
+         return $results;
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
    }
    protected function getUser($id)
    {

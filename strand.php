@@ -12,8 +12,7 @@ include_once './layouts/__header.php';
       <ul class='module__List module__Title'>
          <li class='module__Item'>Department Name</li>
          <li class='module__Item'>Description</li>
-         <li class='module__Item'></li>
-         <li class='module__Item'></li>
+         <li class='module__Item'>Actions</li>
       </ul>
       <?php
 
@@ -33,13 +32,15 @@ include_once './layouts/__header.php';
          echo "<ul class='module__List'>
                      <li class='module__Item'>" . $dept['dept_name'] . "</li>
                      <li class='module__Item'>" . $dept['dept_desc'] . "</li>
-                     <li class='module__Item'><a href=?id=" . $dept['dept_id'] . ">Edit</a></li>
                      <li class='module__Item'>
+                     <div>
+                        <a href=?id=" . $dept['dept_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
                         <form onsubmit='return submitForm(this)' action='./includes/departments.inc.php' method='POST'>
-                           <input name='department' type='hidden' value='" . $department . "'>
                            <input name='id' type='hidden' value='" . $dept['dept_id'] . "'>
-                           <button name='delete' type='submit'>Remove</button>
+                           <button name='delete' type='submit'><img src='drawables/icons/delete.svg' alter='Delete'/></button>
+                           <span>Delete</span>
                         </form>
+                     </div>
                      </li>
                   </ul>";
       }

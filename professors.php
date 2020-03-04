@@ -1,28 +1,23 @@
 <?php
 include_once './layouts/__header.php';
+$state = isset($_GET['archive']) ? 0 : 1;
 ?>
 
 <main class='professors module'>
    <div class="module__Header">
       <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="q" placeholder="Search...">
+         <input id="liveSearch" type="search" name="searchProf" placeholder="Search...">
+         <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
       </form>
       <img src="drawables/icons/professor.svg">
-      <a href='professorsadd.php' class='module__Add button'>ADD</a>
+      <a href='?add' class='module__Add button'>ADD</a>
    </div>
    <div class='professors__Container module__Container'>
-      <ul class='module__List module__Title'>
-         <li class='module__Item'></li>
-         <li class='module__Item'>Employee ID</li>
-         <li class='module__Item'>Employee Name</li>
-         <li class='module__Item'>Department</li>
-         <li class='module__Item'></li>
-         <li class='module__Item'></li>
-         <li class='module__Item'></li>
-      </ul>
       <?php
+
       $profView = new ProfessorsView();
-      $profView->DisplayProfessors()
+      $results = $profView->FetchProfessorsByState($state);
+      $profView->DisplayProfessors($results);
 
       ?>
    </div>

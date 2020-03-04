@@ -13,8 +13,7 @@ include_once './layouts/__header.php';
          <li class='module__Item'>Subject Code</li>
          <li class='module__Item'>Subject Description</li>
          <li class='module__Item'>Unit/s</li>
-         <li class='module__Item'></li>
-         <li class='module__Item'></li>
+         <li class='module__Item'>Actions</li>
       </ul>
       <?php
       $subjView = new SubjectsView();
@@ -24,12 +23,15 @@ include_once './layouts/__header.php';
                      <li class='module__Item'>" . $result['subj_code'] . "</li>
                      <li class='module__Item'>" . $result['subj_desc'] . "</li>
                      <li class='module__Item'>" . $result['units'] . "</li>
-                     <li class='module__Item'><a href=?id=" . $result['subj_id'] . ">Edit</a></li>
                      <li class='module__Item'>
-                        <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
-                           <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
-                           <button name='delete' type='submit'>Remove</button>
-                        </form>
+                        <div>
+                           <a href=?id=" . $result['subj_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
+                           <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+                              <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
+                              <button name='delete' type='submit'><img src='drawables/icons/delete.svg' alter='Delete'/></button>
+                              <span>Delete</span>
+                           </form>
+                        </div>
                      </li>
                   </ul>";
       }
