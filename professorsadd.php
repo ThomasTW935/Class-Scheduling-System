@@ -1,5 +1,6 @@
 <?php
-include_once './includes/autoloader.inc.php';
+include 'professors.php';
+
 $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
