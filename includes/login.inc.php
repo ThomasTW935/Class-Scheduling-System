@@ -2,33 +2,28 @@
 
 include './autoloader.inc.php';
 
-$usersView = new UsersView();
-$username = $_POST['username'];
-$password = $_POST['password'];
-$result = $usersView->FetchUserByUsername($username);
 
-if (isset($_POST['login-Username'])) {
+if (!isset($_POST)) {
+   header('Location: ../index.php');
+}
 
-   if (empty($result)) {
-      $error = "username";
-      header("Location: ../index.php?error=$error");
+if (isset($_POST['submit'])) {
+
+   $usersView = new UsersView();
+   $loginVal = new loginVal($_POST);
+   $username = $_POST['username'];
+   $password = $_POST['password'];
+
+   $errors = $loginVal->validateForm();
+   if (!empty($errors)) {
+      $query = '&' . http_build_query($errors);
+      header("Location: ../index.php?error$query");
       exit();
    }
-   header("Location: ../index.php?username=admin");
-} else if (isset($_POST['login-Password'])) {
-
+   $result = $usersView->FetchUserByUsername($username);
    $user = $result[0];
-   $passwordReal = $user['password'];
-
-   $passCheck = password_verify($password, $passwordReal);
-
-   if ($passCheck) {
-      session_start();
-      $_SESSION['id'] = $user['user_id'];
-      $_SESSION['type'] = $user['role_level'];
-      header("Location: ../dashboard.php?signin=success");
-   } else {
-      $error = "password";
-      header("Location: ../index.php?error=$error&username=$username");
-   }
+   session_start();
+   $_SESSION['id'] = $user['user_id'];
+   $_SESSION['type'] = $user['role_level'];
+   header("Location: ../dashboard.php?signin=success");
 }

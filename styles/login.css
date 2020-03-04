@@ -346,11 +346,9 @@ body main {
 
 .form {
   position: absolute;
-  top: calc(50% - 300px);
-  left: calc(50% - 180px);
-  padding: 1em 0;
-  width: 360px;
-  min-height: 600px;
+  top: 50%;
+  left: 50%;
+  padding: 3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -371,7 +369,7 @@ body main {
 }
 
 .form::before {
-  content: '';
+  content: "";
   height: 7%;
   width: 100%;
   position: absolute;
@@ -498,7 +496,7 @@ body main {
   border: none;
   border-radius: 1000000px;
   margin: 0 auto;
-  padding: .5em .2em;
+  padding: 0.5em 0.2em;
 }
 
 @media screen and (max-width: 768px) {

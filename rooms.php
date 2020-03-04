@@ -1,41 +1,48 @@
 <?php
-   include_once './layouts/__header.php';
-
-   
+include_once './layouts/__header.php';
 ?>
 
-<main class="rooms">
-   <fieldset class="rooms__Floor">
-      <legend>Ground Floor</legend>
-         <a class="rooms__Card card__Design" href="./rooms.php">
-            <h1>101</h1>
-            <h3>laboratory</h3>
-         </a>
-         <a class="rooms__Card card__Design" href="./rooms.php">
-            <h1>102</h1>
-            <h3>kitchen</h3>
-         </a>
-   </fieldset>
-   
-   <?php
-      $floors = ['Second Floor','Third Floor'];
-      $count = 201;
-      foreach($floors as $floor){
-         echo '<fieldset class="rooms__Floor">
-                  <legend>'.$floor.'</legend>';
-         for($i = 1; $i <= 11; $i++){
-            echo '<a class="rooms__Card card__Design" href="./rooms.php">
-                     <h1>'.$count.'</h1>
-                     <h3>classroom</h3>
-                  </a>';
-            $count++;
-         }
-         $count = 301;
-         echo '</fieldset>';
+<main class='rooms module'>
+   <div class="module__Header">
+      <div></div>
+      <img src="drawables/icons/subjects.svg" alt="Subjects">
+      <a href='?add' class='module__Add button'>ADD</a>
+   </div>
+   <div class='module__Container'>
+      <ul class='module__List module__Title'>
+         <li class='module__Item'>Name</li>
+         <li class='module__Item'>Description</li>
+         <li class='module__Item'>Floor</li>
+         <li class='module__Item'></li>
+         <li class='module__Item'></li>
+      </ul>
+      <?php
+      $subjView = new SubjectsView();
+      $results = $subjView->DisplaySubjects();
+      foreach ($results as $result) {
+         echo "<ul class='module__List'>
+                     <li class='module__Item'>" . $result['subj_code'] . "</li>
+                     <li class='module__Item'>" . $result['subj_desc'] . "</li>
+                     <li class='module__Item'>" . $result['units'] . "</li>
+                     <li class='module__Item'><a href=?id=" . $result['subj_id'] . ">Edit</a></li>
+                     <li class='module__Item'>
+                        <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+                           <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
+                           <button name='delete' type='submit'>Remove</button>
+                        </form>
+                     </li>
+                  </ul>";
       }
+      ?>
+   </div>
+   <?php
+   if (isset($_GET['add']) || isset($_GET['id'])) {
+      include_once './layouts/subjects.form.php';
+   }
    ?>
+
 </main>
 
 <?php
-   include_once './layouts/__footer.php';
+include_once './layouts/__footer.php';
 ?>

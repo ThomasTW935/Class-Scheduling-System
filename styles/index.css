@@ -344,13 +344,163 @@ body main {
   }
 }
 
-.Schedule {
-  height: 350px;
-  width: 500px;
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 4em 2em 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 1px solid #f1f1f5;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+          box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
 }
 
-.Schedule img {
-  height: 100%;
+.form::before {
+  content: "";
+  height: 7%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  border-radius: 10px 10px 0 0;
+  background: #014887;
+}
+
+.form * {
+  font-size: 1.1rem;
+}
+
+.form div {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.form .form__Message label {
+  font-size: 1.4rem;
+}
+
+.form .form__Message p {
+  display: none;
+}
+
+.form .form__Message span {
+  font-weight: bolder;
+}
+
+.form__Groups {
+  width: 100%;
+}
+
+.form__Groups .form__Group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.form__Groups .form__Field {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  background: transparent;
+  -webkit-transition: border-color 0.2s;
+  transition: border-color 0.2s;
+}
+
+.form__Groups .form__Field::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field::placeholder {
+  color: transparent;
+}
+
+.form__Groups .form__Field:placeholder-shown ~ .form__Label--placeholder {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__Groups .form__Field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+}
+
+.form__Groups .form__Field:focus ~ .form__Label--placeholder {
+  position: absolute;
+  top: 0;
+  display: block;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: black;
+  font-weight: 700;
+}
+
+.form__Groups .form__Label--placeholder {
+  position: absolute;
+  top: 0;
+  display: block;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+  border-color: #00aaff;
+}
+
+.form__Groups .form__Field:required, .form__Groups .form__Field:invalid {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form__Error {
+  display: block;
+  color: red;
+  font-size: 0.8rem;
+}
+
+.form__Button {
+  cursor: pointer;
+  width: 60%;
+  background: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 1000000px;
+  margin: 2em auto 0;
+  padding: 0.5em 0.2em;
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
 }
 /*# sourceMappingURL=index.css.map */
