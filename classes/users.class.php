@@ -23,19 +23,25 @@ class Users extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getUsers()
+   protected function updateUserState($state, $id)
    {
-      $sql = 'SELECT * FROM users';
+      $sql = 'UPDATE users SET is_active = ? WHERE user_id = ?';
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$state, $id]);
+   }
+   protected function getUsersByState($state)
+   {
+      $sql = 'SELECT * FROM users WHERE is_active = ?';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute();
+         $stmt->execute([$state]);
          $results = $stmt->fetchAll();
          return $results;
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getUser($id)
+   protected function getUserByID($id)
    {
       $sql = 'SELECT * FROM users WHERE user_id = ?';
       $stmt = $this->connect()->prepare($sql);
@@ -51,10 +57,17 @@ class Users extends Dbh
       $results = $stmt->fetchAll();
       return $results;
    }
-   protected function deleteUser($id)
+   protected function getUsersBySearch($search, $state)
    {
-      $sql = 'SELECT * FROM users WHERE user_id = ?';
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$id]);
+      $search = "%{$search}%";
+      $sql = 'SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ?';
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$search, $search, $search, $state]);
+         $results = $stmt->fetchAll();
+         return $results;
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
    }
 }

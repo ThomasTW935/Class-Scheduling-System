@@ -2,11 +2,11 @@
 
 class Professors extends Dbh
 {
-   protected function setProfessors($employeeID, $lastName, $firstName, $middleInitial, $suffix, $deptID, $imgName)
+   protected function setProfessors($employeeID, $lastName, $firstName, $middleInitial, $suffix, $deptID, $userID, $imgName)
    {
-      $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,dept_id,prof_img) VALUES(?,?,?,?,?,?,?)";
+      $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,dept_id,user_id,prof_img) VALUES(?,?,?,?,?,?,?,?)";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$employeeID, $lastName, $firstName, $middleInitial, $suffix, $deptID, $imgName]);
+      $stmt->execute([$employeeID, $lastName, $firstName, $middleInitial, $suffix, $deptID, $userID, $imgName]);
    }
    protected function getProfessorsByState($state)
    {
@@ -26,7 +26,7 @@ class Professors extends Dbh
    }
    protected function getProfessorByID($id)
    {
-      $sql = "select * from professors where id = ?";
+      $sql = "SELECT * FROM professors INNER JOIN users ON professors.user_id = users.user_id WHERE id = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
       $result = $stmt->fetchAll();

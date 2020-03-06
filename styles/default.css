@@ -139,20 +139,51 @@ body main {
   margin: 0.5em 0;
 }
 
-.module__Header img {
+.module__Header .module__Logo img {
   width: 70px;
   height: 70px;
   border: 1px solid black;
   border-radius: 50%;
+  -webkit-transition: border-color 0.2s ease-out;
+  transition: border-color 0.2s ease-out;
 }
 
-.module__Header a {
+.module__Header .module__Logo img:hover {
+  border-color: #00aaff;
+}
+
+.module__Header .module__Logo a {
+  display: block;
+  text-align: center;
+}
+
+.module__Header .module__Links {
+  position: relative;
+  right: 4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Header .module__Links .module__Add {
   background: #00aaff;
   color: white;
   border-radius: 20px;
-  position: relative;
-  right: 4em;
   font-weight: bold;
+}
+
+.module__Header .module__Links .module__Archive {
+  font-size: 0.9rem;
+  position: relative;
+  color: black;
+  bottom: -1em;
 }
 
 .module__Header .liveSearch__Form {

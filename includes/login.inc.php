@@ -25,5 +25,6 @@ if (isset($_POST['submit'])) {
    session_start();
    $_SESSION['id'] = $user['user_id'];
    $_SESSION['type'] = $user['role_level'];
+   var_dump($_SESSION);
    header("Location: ../dashboard.php?signin=success");
 }

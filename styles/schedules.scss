@@ -1,65 +1,72 @@
-.schedules{
-   display:grid;
-   grid-template-columns: 1fr 4fr;
-   padding:0;
-   &__Details{
-      background: rgba(0,0,0,0.05);
-   }
-   &__Table{
-      display:grid;
-      grid-template-columns: 1fr 10fr;
-      grid-template-rows: 10vh 10fr;
-      grid-template-areas:
-      ". days"
-      "hours items";
-      padding-right:2em;
-      position:relative;
-   }
-   &__Hours{
-      grid-area: hours;
-      li{
-         padding-bottom:1em;
+.schedules {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  position: relative;
+  padding: 0;
+  &__Details {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  &__Table {
+    display: flex;
+    flex-direction: column;
+    height: 89vh;
+    overflow: auto;
+  }
+  &__Days {
+    position: sticky;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    color: white;
+    background: rgba(0, 170, 255, 1);
+    li {
+      background: blue;
+      text-align: center;
+    }
+  }
+  &__Items {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    ul {
+      border-right: 1px solid black;
+    }
+    li {
+      text-align: center;
+      border-bottom: 1px solid black;
+      span {
+        visibility: hidden;
       }
-   }
-   &__Days{
-      grid-area: days;
-      position:sticky;
-      top:0;
-      display:flex;
-      justify-content: space-around;
-      align-items: center;
-   }
-   &__Items{
-      grid-area: items;
-   }
-   &__Subjects{
-      font-size:.9rem;
-      padding:1em;
-      form{
-         display:flex;
-         flex-direction: column;
-         input{
-
-            border: 0;
-            border-bottom: 2px solid #9b9b9b;
-            outline: 0;
-            font-size: 1rem;
-            padding: 7px 0;
-            &:focus{
-               border-color:rgba(0,170,255,1);
-            }
-         }
+    }
+    .schedules__Timeslot {
+      background: red;
+    }
+  }
+  &__Subjects {
+    font-size: 0.9rem;
+    padding: 1em;
+    form {
+      display: flex;
+      flex-direction: column;
+      input {
+        border: 0;
+        border-bottom: 2px solid #9b9b9b;
+        outline: 0;
+        font-size: 1rem;
+        padding: 7px 0;
+        &:focus {
+          border-color: rgba(0, 170, 255, 1);
+        }
       }
-      #searchSubjects__Results{
-         margin-top:1em;
-         background:white;
-         border:1px solid black;
-         max-height:70vh;
-         overflow: auto;
-         li{
-            cursor:pointer;
-         }
-         
+    }
+    #searchSubjects__Results {
+      margin-top: 1em;
+      background: white;
+      border: 1px solid black;
+      max-height: 70vh;
+      overflow: auto;
+      li {
+        cursor: pointer;
       }
-   }
+    }
+  }
 }

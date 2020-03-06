@@ -13,3 +13,8 @@ if (isset($_GET['searchRooms'])) {
    $results = $roomsView->FetchRoomsBySearch($_GET['searchRooms'], $_GET['status']);
    $roomsView->DisplayRooms($results);
 }
+if (isset($_GET['searchUsers'])) {
+   $usersView = new UsersView();
+   $results = $usersView->FetchUsersBySearch($_GET['searchUsers'], $_GET['status']);
+   $usersView->DisplayUsers($results);
+}

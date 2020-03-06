@@ -2,16 +2,23 @@
 
 class UsersContr extends Users
 {
+  public function HashPass($pass)
+  {
+    $passHash = password_hash($pass, PASSWORD_DEFAULT);
+    return $passHash;
+  }
   public function CreateUser($data)
   {
-    $this->setUser($data['username'], $data['email'], $data['password'], $data['roleLevel']);
+    $passNew = $this->HashPass($data['password']);
+    $this->setUser($data['username'], $data['email'], $passNew, $data['roleLevel']);
   }
   public function ModifyUser($data)
   {
-    $this->updateUser($data['username'], $data['email'], $data['password'], $data['roleLevel'], $data['id']);
+    $passNew = $this->HashPass($data['password']);
+    $this->updateUser($data['username'], $data['email'], $oassNew, $data['roleLevel'], $data['userID']);
   }
-  public function RemoveUser($id)
+  public function ModifyUserState($state, $id)
   {
-    $this->deleteUser($id);
+    $this->updateUserState($state, $id);
   }
 }

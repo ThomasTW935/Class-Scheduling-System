@@ -139,20 +139,51 @@ body main {
   margin: 0.5em 0;
 }
 
-.module__Header img {
+.module__Header .module__Logo img {
   width: 70px;
   height: 70px;
   border: 1px solid black;
   border-radius: 50%;
+  -webkit-transition: border-color 0.2s ease-out;
+  transition: border-color 0.2s ease-out;
 }
 
-.module__Header a {
+.module__Header .module__Logo img:hover {
+  border-color: #00aaff;
+}
+
+.module__Header .module__Logo a {
+  display: block;
+  text-align: center;
+}
+
+.module__Header .module__Links {
+  position: relative;
+  right: 4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Header .module__Links .module__Add {
   background: #00aaff;
   color: white;
   border-radius: 20px;
-  position: relative;
-  right: 4em;
   font-weight: bold;
+}
+
+.module__Header .module__Links .module__Archive {
+  font-size: 0.9rem;
+  position: relative;
+  color: black;
+  bottom: -1em;
 }
 
 .module__Header .liveSearch__Form {
@@ -459,6 +490,7 @@ body main {
   display: grid;
   -ms-grid-columns: 1fr 4fr;
       grid-template-columns: 1fr 4fr;
+  position: relative;
   padding: 0;
 }
 
@@ -467,52 +499,60 @@ body main {
 }
 
 .schedules__Table {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 10fr;
-      grid-template-columns: 1fr 10fr;
-  -ms-grid-rows: 10vh 10fr;
-      grid-template-rows: 10vh 10fr;
-      grid-template-areas: ". days" "hours items";
-  padding-right: 2em;
-  position: relative;
-}
-
-.schedules__Hours {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: hours;
-}
-
-.schedules__Hours li {
-  padding-bottom: 1em;
-}
-
-.schedules__Days {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: days;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 89vh;
+  overflow: auto;
+}
+
+.schedules__Days {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  color: white;
+  background: #00aaff;
+}
+
+.schedules__Days li {
+  background: blue;
+  text-align: center;
 }
 
 .schedules__Items {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: items;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+}
+
+.schedules__Items ul {
+  border-right: 1px solid black;
+}
+
+.schedules__Items li {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.schedules__Items li span {
+  visibility: hidden;
+}
+
+.schedules__Items .schedules__Timeslot {
+  background: red;
 }
 
 .schedules__Subjects {
-  font-size: .9rem;
+  font-size: 0.9rem;
   padding: 1em;
 }
 

@@ -5,8 +5,14 @@ include_once './layouts/__header.php';
 <main class='subjects module'>
    <div class="module__Header">
       <div></div>
-      <img src="drawables/icons/subjects.svg" alt="Subjects">
-      <a href='?add' class='module__Add button'>ADD</a>
+      <div class="module__Logo">
+         <img src="drawables/icons/subjects.svg" alt="Subjects">
+         <a href='?#' class="button">Subjects</a>
+      </div>
+      <div class="module__Links">
+         <a href='?add' class='module__Add button'>ADD</a>
+         <a href='?archive' class='module__Archive button'>Archive</a>
+      </div>
    </div>
    <div class='module__Container'>
       <ul class='module__List module__Title'>

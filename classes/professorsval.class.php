@@ -4,7 +4,7 @@ class ProfessorsVal
 {
    private $data;
    private $errors = [];
-   private static $fields = ['employeeID', 'lastName', 'firstName', 'middleInitial', 'suffix', 'deptID'];
+   private static $fields = ['empID', 'lastName', 'firstName', 'middleInitial', 'suffix', 'deptID'];
    public function __construct($post_data)
    {
       $this->data = $post_data;
@@ -29,12 +29,12 @@ class ProfessorsVal
    private function validateID()
    {
 
-      $val = trim($this->data['employeeID']);
-      $id = trim($this->data['id']);
+      $val = trim($this->data['empID']);
+      $id = trim($this->data['profID']);
       if (empty($val)) {
-         $this->addError('employeeID', 'Employee ID cannot be empty');
+         $this->addError('errorEmpID', 'Employee ID cannot be empty');
       } else if (!preg_match('/^[0-9]{8,}$/', $val)) {
-         $this->addError('employeeID', 'Employee ID must only be numbers and at least 8 numbers');
+         $this->addError('errorEmpID', 'Employee ID must only be numbers and at least 8 numbers');
       } else {
          $profView = new ProfessorsView();
          $result = $profView->FetchProfessorByEmpID($val);
@@ -47,7 +47,7 @@ class ProfessorsVal
                   return;
                }
             }
-            $this->addError('employeeID', 'Employee already exist');
+            $this->addError('errorEmpID', 'Employee already exist');
          }
       }
    }
@@ -56,10 +56,10 @@ class ProfessorsVal
 
       $val = trim($this->data['firstName']);
       if (empty($val)) {
-         $this->addError('name', 'First name cannot be empty');
+         $this->addError('errorFirstname', 'First name cannot be empty');
       } else {
          if (!preg_match('/^[a-zA-Z ]*$/', $val)) {
-            $this->addError('name', 'First name must only contain letters');
+            $this->addError('errorFirstname', 'First name must only contain letters');
          }
       }
    }
@@ -69,11 +69,11 @@ class ProfessorsVal
 
       $val = trim($this->data['lastName']);
       if (empty($val)) {
-         $this->addError('name', 'Last name cannot be empty');
+         $this->addError('errorLastname', 'Last name cannot be empty');
       } else {
          if (!preg_match('/^[a-zA-Z ]*$/', $val)) {
             echo $val . '</br>';
-            $this->addError('name', 'Last name must only contain letters');
+            $this->addError('errorLastname', 'Last name must only contain letters');
          }
       }
    }
@@ -83,7 +83,7 @@ class ProfessorsVal
 
       $val = trim($this->data['middleInitial']);
       if (!preg_match('/^[a-zA-Z ]{0,2}$/', $val)) {
-         $this->addError('name', 'Middle Initital must only contain letters and have 1-2 characters');
+         $this->addError('errorMiddlename', 'Middle Initital must only contain letters and have 1-2 characters');
       }
    }
 
@@ -92,7 +92,7 @@ class ProfessorsVal
 
       $val = trim($this->data['suffix']);
       if (!preg_match('/^[a-zA-Z ]{0,3}$/', $val)) {
-         $this->addError('suffix', 'Suffix must only contain letters and have 1-3 characters');
+         $this->addError('errorSuffix', 'Suffix must only contain letters and have 1-3 characters');
       }
    }
 

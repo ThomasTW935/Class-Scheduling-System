@@ -1,7 +1,7 @@
 <?php
-   include_once './layouts/__header.php';
+include_once './layouts/__header.php';
 ?>
-      
+
 <main class="dashboard">
    <div class="dashboard__Container">
       <a class="dashboard__Card card__Design" href="./professors.php">
@@ -38,7 +38,7 @@
       </a>
    </div>
 </main>
-      
+
 <?php
-   include_once './layouts/__footer.php';
+include_once './layouts/__footer.php';
 ?>

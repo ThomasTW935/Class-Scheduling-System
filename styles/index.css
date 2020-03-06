@@ -139,20 +139,67 @@ body main {
   margin: 0.5em 0;
 }
 
-.module__Header img {
+.module__Header .module__Logo img {
   width: 70px;
   height: 70px;
   border: 1px solid black;
   border-radius: 50%;
+  -webkit-transition: border-color 0.2s ease-out;
+  transition: border-color 0.2s ease-out;
 }
 
-.module__Header a {
+.module__Header .module__Logo img:hover {
+  border-color: #00aaff;
+}
+
+.module__Header .module__Logo a {
+  display: block;
+  text-align: center;
+}
+
+.module__Header .module__Links {
+  position: relative;
+  right: 4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Header .module__Links .module__Add {
   background: #00aaff;
   color: white;
   border-radius: 20px;
-  position: relative;
-  right: 4em;
   font-weight: bold;
+}
+
+.module__Header .module__Links .module__Archive {
+  font-size: 0.9rem;
+  position: relative;
+  color: black;
+  bottom: -1em;
+}
+
+.module__Header .liveSearch__Form {
+  background: red;
+}
+
+.module__Header .liveSearch__Form input {
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+
+.module__Header .liveSearch__Form input:focus {
+  border-color: #00aaff;
 }
 
 .module__Container {
@@ -202,12 +249,78 @@ body main {
   border-right: 1px solid black;
 }
 
-.module__Item:last-child button,
-.module__Item:last-child a {
+.module__Item:last-child {
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.module__Item:last-child div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.module__Item:last-child div form {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.module__Item:last-child div form button {
   background: none;
-  color: red;
-  width: 32px;
-  height: 32px;
+}
+
+.module__Item:last-child div form,
+.module__Item:last-child div a {
+  position: relative;
+  width: 50px;
+}
+
+.module__Item:last-child div form span,
+.module__Item:last-child div a span {
+  font-size: 1rem;
+  text-transform: capitalize;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.module__Item:last-child div form span::after,
+.module__Item:last-child div a span::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.module__Item:last-child div form:hover span,
+.module__Item:last-child div a:hover span {
+  opacity: 1;
+  visibility: visible;
 }
 
 .module__Form {

@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $error = $_GET['error'] ?? '';
 $errorMessage = '';
 if ($error == 'username') {
@@ -41,6 +39,23 @@ if ($error == 'username') {
       </div>
       <button class="form__Button" type="submit" name="submit">Submit</button>
    </form>
+   <a href='?test'>Test Link</a>
+   <?php
+
+   if (isset($_GET['test'])) {
+
+      echo "<div class='module'>
+      <form class='module__Form'>";
+
+      $values = ['Hush', 'Daryl', 'Christine'];
+      foreach ($values as $value) {
+         echo  "<input type='text' placeholder='" . $value . "'>";
+      }
+      echo "</form><div class='module__formBackground'></div>
+      </div>";
+   }
+
+   ?>
 </body>
 
 </html>

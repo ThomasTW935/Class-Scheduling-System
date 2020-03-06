@@ -19,41 +19,55 @@ class UsersVal
     }
 
     $this->validateName();
-    $this->validateDescription();
+    $this->validateEmail();
 
     return $this->errors;
   }
   private function validateName()
   {
 
-    $val = trim($this->data['name']);
-    $id = trim($this->data['id']);
+    $val = trim($this->data['username']);
     if (empty($val)) {
-      $this->addError('name', 'Name cannot be empty');
-    } else if (!preg_match('/^[a-zA-Z ]*$/', $val)) {
-      $this->addError('name', 'Name must only contain letters');
+      $this->addError('errorUsername', 'Username cannot be empty');
     } else {
-      $type = trim($this->data['department']);
-      $deptView = new DepartmentsView();
-      $results = $deptView->FetchDeptByNameAndType($val, $type);
+      $usersView = new UsersView();
+      $results = $usersView->FetchUserByUsername($val);
       if (!empty($results)) {
+        $id = trim($this->data['id']);
         $idResult = $results[0]['id'] ?? '';
         if (isset($this->data['update'])) {
-          $dept = $deptView->FetchDeptByID($id);
-          $idOrig = $dept[0]['id'] ?? '';
+          $user = $usersView->FetchUserByID($id);
+          $idOrig = $user[0]['id'] ?? '';
           if ($idOrig == $idResult) {
             return;
           }
         }
-        $this->addError('name', 'name already exist');
+        $this->addError('errorUsername', 'Username already exist');
       }
     }
   }
-  private function validateDescription()
+  private function validateEmail()
   {
-    $val = trim($this->data['desc']);
+    $val = trim($this->data['email']);
     if (empty($val)) {
-      $this->addError('desc', 'Description cannot be empty');
+      return;
+    } else if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+      $this->addError('errorEmail', 'Invalid Email');
+    } else {
+      $usersView = new UsersView();
+      $results = $usersView->FetchUserByUsername($this->data['username']);
+      if (!empty($results)) {
+        $id = trim($this->data['userID']);
+        $idResult = $results[0]['id'] ?? '';
+        if (isset($this->data['update'])) {
+          $user = $usersView->FetchUserByID($id);
+          $idOrig = $user[0]['id'] ?? '';
+          if ($idOrig == $idResult) {
+            return;
+          }
+        }
+        $this->addError('errorEmail', 'Email already exist');
+      }
     }
   }
 
