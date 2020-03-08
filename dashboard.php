@@ -16,15 +16,15 @@ include_once './layouts/__header.php';
          <h3>ROOMS</h3>
          <img src="./drawables/icons/rooms.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="./course.php">
+      <a class="dashboard__Card card__Design" href="./department.php?dept=course">
          <h3>COURSES</h3>
          <img src="./drawables/icons/tertiary.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="./strand.php">
+      <a class="dashboard__Card card__Design" href="./department.php?dept=strand">
          <h3>STRANDS</h3>
          <img src="./drawables/icons/shs.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="./faculty.php">
+      <a class="dashboard__Card card__Design" href="./department.php?dept=faculty">
          <h3>FACULTY</h3>
          <img src="./drawables/icons/faculty.svg" alt="Professors">
       </a>

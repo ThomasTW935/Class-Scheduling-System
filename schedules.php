@@ -2,13 +2,43 @@
 include_once './layouts/__header.php';
 
 $timeSlot = [
-   'startTime' => '10:00',
-   'endTime' => '13:00',
+   'startTime' => '7:00',
+   'endTime' => '10:00',
    'professor' => 'Insigne, John Rexon',
    'subject' => 'Mobile Development',
    'room' => 'rm507',
    'section' => 'BSIT-701',
+   'day' => 'Monday'
 ];
+$timeSlot2 = [
+   'startTime' => '8:00',
+   'endTime' => '10:00',
+   'professor' => 'Insigne, John Rexon',
+   'subject' => 'Mobile Development',
+   'room' => 'rm501',
+   'section' => 'BSIT-701',
+   'day' => 'Tuesday'
+];
+$timeSlot3 = [
+   'startTime' => '11:00',
+   'endTime' => '14:00',
+   'professor' => 'Insigne, John Rexon',
+   'subject' => 'Mobile Development',
+   'room' => 'rm502',
+   'section' => 'BSIT-701',
+   'day' => 'Tuesday'
+];
+$timeSlot4 = [
+   'startTime' => '15:00',
+   'endTime' => '16:30',
+   'professor' => 'Insigne, John Rexon',
+   'subject' => 'Mobile Development',
+   'room' => 'rm504',
+   'section' => 'BSIT-701',
+   'day' => 'Saturday'
+];
+$schedules = [$timeSlot, $timeSlot2, $timeSlot3, $timeSlot4];
+$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 ?>
 
 <main class='schedules'>
@@ -56,54 +86,50 @@ $timeSlot = [
       <section></section>
    </div>
    <div class='schedules__Table'>
-      <ul class="schedules__Days">
-         <li class="schedules__Day"></li>
-         <li class="schedules__Day">Monday</li>
-         <li class="schedules__Day">Tuesday</li>
-         <li class="schedules__Day">Wednesday</li>
-         <li class="schedules__Day">Thursday</li>
-         <li class="schedules__Day">Friday</li>
-         <li class="schedules__Day">Saturday</li>
-      </ul>
-      <div class="schedules__Items">
-         <ul class="schedules__Hours">
-            <?php
 
-            $fromTime = strtotime('7:00');
-            $toTime = strtotime('17:00');
-            for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
-               echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
-            }
+      <?php
 
-            ?>
-         </ul>
-
-         <?php
-
-         $startTime = strtotime($timeSlot['startTime']);
-         $endTime = strtotime($timeSlot['endTime']);
-         for ($days = 1; $days <= 6; $days++) {
-            echo '<ul>';
-            for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
-
-               if ($i >= $startTime && $i < $endTime) {
-                  echo '<li class="schedules__Timeslot"><span>s</span>';
+      $fromTime = strtotime('7:00');
+      $toTime = strtotime('17:00');
+      $time = [];
+      echo '<ul>';
+      echo "<li><span>s</span></li>";
+      for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
+         $time[] += $i;
+         echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
+      }
+      echo '</ul>';
+      $monday = [];
+      foreach ($days as $day) {
+         for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
+            foreach ($schedules as $schedule) {
+               $startTime = strtotime($schedule['startTime']);
+               $endTime = strtotime($schedule['endTime']);
+               $value;
+               if ($i >= $startTime && $i <= $endTime && $schedule['day'] == $day) {
                   if ($i == $startTime) {
-                     echo $timeSlot['subject'];
+                     $value = $schedule['subject'];
+                  }
+                  $middle = ($startTime + $endTime) / 2;
+                  if ($i == $middle) {
+                     $value = $schedule['professor'];
                   }
                   if ($i == $endTime) {
+                     $value = "" . $schedule['room'] . "";
                   }
-                  echo '</li>';
+                  echo $value;
                } else {
-                  echo "<li><span>s</span>" . date('g:i a', $i) . "</li>";
+                  $value = 's';
                }
             }
-            echo '</ul>';
+            if ($day == 'Monday') {
+               $monday =  [$i => $value];
+               var_dump($monday);
+            }
          }
-
-         ?>
-
-      </div>
+         echo '</ul>';
+      }
+      ?>
    </div>
 </main>
 

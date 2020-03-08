@@ -10,11 +10,15 @@ class Professors extends Dbh
    }
    protected function getProfessorsByState($state)
    {
-      $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE is_active = ?";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state]);
-      $result = $stmt->fetchAll();
-      return $result;
+      $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE prof_active = ?";
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$state]);
+         $result = $stmt->fetchAll();
+         return $result;
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
    }
    protected function getProfessor($empID)
    {
@@ -37,7 +41,7 @@ class Professors extends Dbh
       $search = "%{$search}%";
       $sql =   "SELECT * FROM professors INNER JOIN departments 
                ON professors.dept_id = departments.dept_id 
-               WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ?) AND professors.is_active = ?";
+               WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ?) AND prof_active = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $search, $search, $state]);
       $results = $stmt->fetchAll();
@@ -45,7 +49,7 @@ class Professors extends Dbh
    }
    protected function updateProfessorState($state, $id)
    {
-      $sql = "update professors set is_active=? where id = ?";
+      $sql = "update professors set prof_active = ? where id = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state, $id]);
    }

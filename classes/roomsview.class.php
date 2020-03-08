@@ -28,6 +28,7 @@ class RoomsView extends Rooms
         <li class='module__Item'>" . $result['rm_floor'] . "</li>
         <li class='module__Item'>
           <div>
+              <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
               <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
               <form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
                 <input name='id' type='hidden' value='" . $result['rm_id'] . "'>

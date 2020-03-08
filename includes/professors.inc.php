@@ -11,15 +11,15 @@ $profView = new ProfessorsView();
 $profContr = new ProfessorsContr();
 $profVal = new ProfessorsVal($_POST);
 
-$isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
-$password = (!isset($_POST['password'])) ? "{$_POST['lastName']}.{$_POST['empID']}" : $_POST['password'];
-$data = ['id' => $_POST['userID'], 'username' => $_POST['username'], 'email' => $_POST['email'], 'password' => $password, 'roleLevel' => 1, $isFrom => ''];
-$usersVal = new UsersVal($data);
 $usersContr = new UsersContr();
 $usersView = new UsersView();
 
 
 if (!isset($_POST['submitStatus'])) {
+   $isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
+   $password = (!isset($_POST['password'])) ? "{$_POST['lastName']}.{$_POST['empID']}" : $_POST['password'];
+   $data = ['id' => $_POST['userID'], 'username' => $_POST['username'], 'email' => $_POST['email'], 'password' => $password, 'roleLevel' => 1, $isFrom => ''];
+   $usersVal = new UsersVal($data);
    $middleInitial = explode('.', $_POST['middleInitial']);
    $_POST['middleInitial'] = strtoupper(implode('', $middleInitial));
    $errors = $profVal->validateForm();
@@ -33,10 +33,6 @@ if (!isset($_POST['submitStatus'])) {
       $imgNameArray = explode('.', $imgName);
       $imgExt = strtolower(end($imgNameArray));
       $imgFullName = $_POST['lastName'] . '.' . uniqid() . '.' . $imgExt;
-
-      var_dump($_FILES);
-      echo '<br>Result: ' . (!empty($imgFile));
-      exit();
    }
    $_POST += ['image' => $imgFullName];
 
@@ -64,7 +60,7 @@ if (isset($_POST['submit'])) {
    $usersContr->CreateUser($data);
    $result = $usersView->FetchUserByUsername($_POST['username']);
    $id = $result[0]['user_id'];
-   $_POST += ['userID' => $id];
+   $_POST['userID'] = $id;
    $profContr->CreateProfessors($_POST);
 } else if (isset($_POST['update'])) {
 
@@ -77,10 +73,12 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
    $status = ($_POST['status'] == 0) ? 1 : 0;
    $profContr->ModifyProfessorState($status, $_POST['id']);
+   $usersContr->ModifyUserState($status, $_POST['userID']);
+   var_dump($_POST);
 }
 
 
-if ($imgError != 4) {
+if ($imgError != 4 && !isset($_POST['submitStatus'])) {
    $imgDestination = "../drawables/images/" . $imgFullName;
    $imgTempname = $imgFile['tmp_name'];
    move_uploaded_file($imgTempname, $imgDestination);

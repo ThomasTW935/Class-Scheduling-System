@@ -66,7 +66,7 @@ $email = (!empty($_GET['email'])) ? $_GET['email'] : $prof['email'];
          <select name='deptID' id='formSelect'>
             <?php
             $deptView = new DepartmentsView();
-            $departments = $deptView->FetchDepts("Faculty");
+            $departments = $deptView->FetchDepts("Faculty", 1);
             foreach ($departments as $dept) {
                $selected = ($prof['dept_id'] == $dept['dept_id']) ? 'selected' : '';
                echo "<option class='form__Option' value='" . $dept['dept_id'] . "' " . $selected . ">" . $dept['dept_name'] . "</option>";

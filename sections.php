@@ -4,36 +4,21 @@ include_once './layouts/__header.php';
 
 <main class='subjects module'>
    <div class="module__Header">
-      <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="searchProf" placeholder="Search...">
-         <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
-      </form>
+      <div></div>
       <div class="module__Logo">
          <img src="drawables/icons/subjects.svg" alt="Subjects">
-         <a href='?#' class="button">Subjects</a>
+         <a href='?#' class="button">Sections</a>
       </div>
       <div class="module__Links">
-         <?php
-
-         if (!isset($_GET['archive'])) {
-            echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
-            <span>Add</span>
-            </a>";
-            echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
-            <span>Archive</span>
-            </a>";
-         } else {
-            echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
-         }
-
-         ?>
+         <a href='?add' class='module__Add button'>ADD</a>
+         <a href='?archive' class='module__Archive button'>Archive</a>
       </div>
    </div>
    <div class='module__Container'>
       <ul class='module__List module__Title'>
-         <li class='module__Item'>Subject Code</li>
-         <li class='module__Item'>Subject Description</li>
-         <li class='module__Item'>Unit/s</li>
+         <li class='module__Item'>Name</li>
+         <li class='module__Item'>Department</li>
+         <li class='module__Item'></li>
          <li class='module__Item'>Actions</li>
       </ul>
       <?php
@@ -47,7 +32,7 @@ include_once './layouts/__header.php';
                      <li class='module__Item'>
                         <div>
                            <a href=?id=" . $result['subj_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
-                           <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+                           <form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
                               <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
                               <button name='delete' type='submit'><img src='drawables/icons/delete.svg' alter='Delete'/></button>
                               <span>Delete</span>
@@ -60,7 +45,7 @@ include_once './layouts/__header.php';
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {
-      include_once './layouts/subjects.form.php';
+      include_once './layouts/sections.form.php';
    }
    ?>
 

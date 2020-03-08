@@ -7,38 +7,21 @@
     background: rgba(0, 0, 0, 0.05);
   }
   &__Table {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     height: 89vh;
     overflow: auto;
-  }
-  &__Days {
-    position: sticky;
-    top: 0;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    color: white;
-    background: rgba(0, 170, 255, 1);
     li {
-      background: blue;
-      text-align: center;
-    }
-  }
-  &__Items {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    ul {
-      border-right: 1px solid black;
-    }
-    li {
-      text-align: center;
       border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      text-align: center;
       span {
         visibility: hidden;
       }
     }
     .schedules__Timeslot {
-      background: red;
+      background: lightblue;
+      border-bottom: 1px solid transparent;
     }
   }
   &__Subjects {

@@ -34,6 +34,7 @@ body {
     padding: 0 2em;
   }
 }
+
 .nav {
   background: rgb(1, 72, 135);
   position: sticky;
@@ -51,20 +52,16 @@ body {
   }
   .back {
     position: relative;
-    left: 30px;
-    &::before {
-      content: "";
-      position: absolute;
-      top: calc(50% - 8px);
-      left: -5px;
-      height: 12px;
-      width: 12px;
-      border: 3px solid rgba(255, 255, 255, 0.8);
-      border-right: none;
-      border-top: none;
-      transform: rotate(45deg);
+    left: 15px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100px;
+    img {
+      margin-right: 10px;
     }
   }
+
   &__Button {
     position: absolute;
     top: 0;
@@ -91,7 +88,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5em 0;
+    margin: 1em 0 0.25em;
     .module__Logo {
       img {
         width: 70px;
@@ -106,25 +103,62 @@ body {
       a {
         display: block;
         text-align: center;
+        text-transform: capitalize;
       }
     }
     .module__Links {
-      position: relative;
-      right: 4em;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      .module__Add {
-        background: rgba(0, 170, 255, 1);
-        color: white;
-        border-radius: 20px;
-        font-weight: bold;
+      justify-content: space-evenly;
+      width: 100px;
+      a {
+        position: relative;
+        span {
+          font-size: 1rem;
+          text-transform: capitalize;
+          visibility: hidden;
+          width: 120px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+          position: absolute;
+          z-index: 2;
+          bottom: 125%;
+          left: 50%;
+          margin-left: -60px;
+          opacity: 0;
+          transition: opacity 0.3s;
+          &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+          }
+        }
+        &:hover span {
+          opacity: 1;
+          visibility: visible;
+        }
       }
-      .module__Archive {
-        font-size: 0.9rem;
+      .module__Return {
         position: relative;
         color: black;
-        bottom: -1em;
+        left: -15px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        width: 100px;
+        img {
+          margin-right: 10px;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     .liveSearch__Form {
@@ -142,7 +176,7 @@ body {
     }
   }
   &__Container {
-    height: 80vh;
+    height: 75vh;
     width: auto;
     display: flex;
     flex-direction: column;

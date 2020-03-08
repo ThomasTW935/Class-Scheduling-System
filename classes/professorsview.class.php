@@ -30,14 +30,13 @@ class ProfessorsView extends Professors
                <li class='module__Item'>Employee ID</li>
                <li class='module__Item'>Employee Name</li>
                <li class='module__Item'>Department</li>
-               <li class='module__Item'></li>
                <li class='module__Item'>Actions</li>
             </ul>";
       foreach ($results as $result) {
          $imgSrc = $result['prof_img'];
          if (empty($result['prof_img']))
             $imgSrc = "professor.png";
-         $iconName = ($result['is_active'] == 1) ? 'delete' : 'recover';
+         $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
          $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
          $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
          echo "<ul class='module__List'>
@@ -45,13 +44,14 @@ class ProfessorsView extends Professors
             <li class='module__Item'>" . $result['emp_no'] . "</li>
             <li class='module__Item'>" . $fullName . "</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li>
-            <li class='module__Item'><a href='#'>CheckSchedule</a></li>
             <li class='module__Item'>
                <div>
+                  <a href=?id=" . $result['id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
                   <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
                   <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
                      <input name='id' type='hidden' value='" . $result['id'] . "'>
-                     <input name='status' type='hidden' value='" . $result['is_active'] . "'>
+                     <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+                     <input name='status' type='hidden' value='" . $result['prof_active'] . "'>
                      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
                      <span>" . $iconName . "</span>
                   </form>

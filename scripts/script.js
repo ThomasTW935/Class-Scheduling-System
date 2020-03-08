@@ -1,5 +1,13 @@
-function submitForm() {
-   return confirm('Do you really want to delete this record?')
+function submitForm(e) {
+   let inputStatus = e.childNodes
+   let value = inputStatus[5].value;
+   let message;
+   if (value == 0) {
+      message = "Restore"
+   } else {
+      message = "Delete"
+   }
+   return confirm(message + ' this record?')
 }
 
 

@@ -18,3 +18,8 @@ if (isset($_GET['searchUsers'])) {
    $results = $usersView->FetchUsersBySearch($_GET['searchUsers'], $_GET['status']);
    $usersView->DisplayUsers($results);
 }
+if (isset($_GET['searchDepartments'])) {
+   $deptView = new DepartmentsView();
+   $results = $deptView->FetchDeptBySearch($_GET['searchDept'], $_GET['status'], $_GET['dept']);
+   $deptView->DisplayDept($results);
+}

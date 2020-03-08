@@ -25,7 +25,7 @@ if ($error == 'username') {
       </div>
       <div class="form__Groups">
          <div class="form__Group">
-            <input type="text" class="form__Field" placeholder="Username" id='username' name="username" autofocus>
+            <input type="text" class="form__Field" placeholder="Username" id='username' name="username" autofocus autocomplete='off'>
             <label for='username' class="form__Label--placeholder">Username</label>
          </div>
          <span class="form__Error"><?php echo $errorMessage ?></span>
@@ -42,18 +42,18 @@ if ($error == 'username') {
    <a href='?test'>Test Link</a>
    <?php
 
-   if (isset($_GET['test'])) {
+   // if (isset($_GET['test'])) {
 
-      echo "<div class='module'>
-      <form class='module__Form'>";
+   //    echo "<div class='module'>
+   //    <form class='module__Form'>";
 
-      $values = ['Hush', 'Daryl', 'Christine'];
-      foreach ($values as $value) {
-         echo  "<input type='text' placeholder='" . $value . "'>";
-      }
-      echo "</form><div class='module__formBackground'></div>
-      </div>";
-   }
+   //    $values = ['Hush', 'Daryl', 'Christine'];
+   //    foreach ($values as $value) {
+   //       echo  "<input type='text' placeholder='" . $value . "'>";
+   //    }
+   //    echo "</form><div class='module__formBackground'></div>
+   //    </div>";
+   // }
 
    ?>
 </body>

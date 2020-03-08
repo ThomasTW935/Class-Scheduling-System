@@ -155,6 +155,7 @@ body main {
 .module__Header .module__Logo a {
   display: block;
   text-align: center;
+  text-transform: capitalize;
 }
 
 .module__Header .module__Links {

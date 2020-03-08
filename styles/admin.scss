@@ -48,7 +48,7 @@
 }
 .professors {
   .module__List {
-    grid-template-columns: 70px 1fr 3fr repeat(3, 1fr);
+    grid-template-columns: 70px 1fr 3fr repeat(2, 1fr);
     li {
       display: flex;
       justify-content: center;

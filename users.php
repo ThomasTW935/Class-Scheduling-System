@@ -14,8 +14,20 @@ $state = isset($_GET['archive']) ? 0 : 1;
          <a href='?#' class="button">Users</a>
       </div>
       <div class="module__Links">
-         <a href='?add' class='module__Add button'>ADD</a>
-         <a href='?archive' class='module__Archive button'>Archive</a>
+         <?php
+
+         if (!isset($_GET['archive'])) {
+            echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
+            <span>Add</span>
+            </a>";
+            echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
+            <span>Archive</span>
+            </a>";
+         } else {
+            echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
+         }
+
+         ?>
       </div>
    </div>
    <div class='professors__Container module__Container'>

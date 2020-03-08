@@ -12,56 +12,27 @@
 }
 
 .schedules__Table {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
   height: 89vh;
   overflow: auto;
 }
 
-.schedules__Days {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[7];
-      grid-template-columns: repeat(7, 1fr);
-  color: white;
-  background: #00aaff;
-}
-
-.schedules__Days li {
-  background: blue;
-  text-align: center;
-}
-
-.schedules__Items {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[7];
-      grid-template-columns: repeat(7, 1fr);
-}
-
-.schedules__Items ul {
-  border-right: 1px solid black;
-}
-
-.schedules__Items li {
-  text-align: center;
+.schedules__Table li {
   border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
 }
 
-.schedules__Items li span {
+.schedules__Table li span {
   visibility: hidden;
 }
 
-.schedules__Items .schedules__Timeslot {
-  background: red;
+.schedules__Table .schedules__Timeslot {
+  background: lightblue;
+  border-bottom: 1px solid transparent;
 }
 
 .schedules__Subjects {

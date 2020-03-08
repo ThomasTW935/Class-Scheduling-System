@@ -24,7 +24,7 @@ include './includes/autoloader.inc.php';
       <?php
       $url = $_SERVER['REQUEST_URI'];
       if (!strpos($url, "dashboard")) {
-         echo "<a href='dashboard.php' class='button back'>BACK</a>";
+         echo "<a href='dashboard.php' class='button back'><img src='drawables/icons/home.svg' /><span>HOME</span></a>";
       }
 
       ?>
