@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2020 at 05:36 AM
+-- Generation Time: Mar 08, 2020 at 06:03 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -32,7 +32,7 @@ CREATE TABLE `departments` (
   `dept_id` int(11) NOT NULL,
   `dept_name` varchar(5) NOT NULL,
   `dept_desc` text NOT NULL,
-  `dept_type` enum('faculty','tertiary','strand') NOT NULL,
+  `dept_type` enum('faculty','course','strand') NOT NULL,
   `dept_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,31 +41,9 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`, `dept_type`, `dept_active`) VALUES
-(17, 'IT', 'Information Technology', 'faculty', 1),
-(18, 'GE', 'General Education', 'faculty', 0),
-(19, 'HUMMS', 'alkdmsaldkm', 'faculty', 0),
-(20, 'BSCS', 'Bachelor of Science in Computer Science', 'faculty', 1),
-(21, 'SHS', 'asldknlk', 'faculty', 0),
-(22, 'SHSHS', 'fdfd', 'faculty', 0),
-(23, 'BSI', 'laskdmlasd', 'faculty', 0),
-(24, 'DSDSD', 'ewew', 'faculty', 0),
-(25, 'TMMMM', 'ldksmdlskm', 'faculty', 0),
-(26, 'ewewe', 'sdsds', 'faculty', 0),
-(27, 'trtew', 'dsds', 'faculty', 0),
-(28, 'TMMMM', 'alskdmsld', 'faculty', 0),
-(29, 'BSITT', 'dasdsa', 'faculty', 0),
-(30, 'BSITT', 'dasdsa', 'faculty', 0),
-(31, 'BSITT', 'dasdsa', 'faculty', 0),
-(32, 'ASCT ', 'asldksmadlk', 'faculty', 0),
-(33, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(34, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(35, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(36, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(37, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(38, 'BSITT', 'lsakdmlaskd', 'faculty', 0),
-(39, 'ewew', 'dsdsd', 'faculty', 0),
-(40, 'ewewq', 'fdfdf', 'faculty', 0),
-(41, 'eqwew', 'sdsds', 'faculty', 0);
+(43, 'GE', 'General Education', 'faculty', 1),
+(47, 'BSTM', 'Bachelor of Science in Tourism Management', 'course', 1),
+(48, 'BSTM', 'Bachelor of Science in Tourism Management', 'faculty', 0);
 
 -- --------------------------------------------------------
 
@@ -91,7 +69,8 @@ CREATE TABLE `professors` (
 --
 
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `user_id`, `prof_active`, `prof_img`) VALUES
-(31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 0, '');
+(31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 1, ''),
+(32, 88888888, 'Thomas', 'Daryl', 'P', '', 43, 29, 1, 'Thomas.5e64b833c3a95.png');
 
 -- --------------------------------------------------------
 
@@ -158,7 +137,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `is_active`) VALUES
 (1, 'Admin', NULL, '$2y$10$jhbW3h7ezqK4KeJFG0UE/OXn2D4vlACDxdY718CqLxDwWbrFSWuQG', 4, 1),
-(28, '323253243', '', '$2y$10$6y7QLY6kkNDMUvnt3Uhmk.h8dfIUxaIKDkBFxDA9P1gQ7/OpnRMJe', 1, 0);
+(28, '323253243', '', '$2y$10$6y7QLY6kkNDMUvnt3Uhmk.h8dfIUxaIKDkBFxDA9P1gQ7/OpnRMJe', 1, 1),
+(29, '88888888', '', '$2y$10$HNFr/Uwf0NYTo.hsgH3ae.K5Hbjo8J4t4E.SbXttEew3bWjCGXMxW', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -202,13 +182,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -226,7 +206,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
