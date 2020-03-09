@@ -1,47 +1,46 @@
 <?php
 include_once './layouts/__header.php';
+$state = isset($_GET['archive']) ? 0 : 1;
+
 ?>
 
-<main class='subjects module'>
+<main class='sections module'>
    <div class="module__Header">
-      <div></div>
+   <form class="liveSearch__Form">
+         <input id="liveSearch" type="search" name="searchSect" placeholder="Search...">
+         <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
+      </form>
       <div class="module__Logo">
-         <img src="drawables/icons/subjects.svg" alt="Subjects">
+         <img src="drawables/icons/section.svg" alt="Sections">
          <a href='?#' class="button">Sections</a>
       </div>
       <div class="module__Links">
-         <a href='?add' class='module__Add button'>ADD</a>
-         <a href='?archive' class='module__Archive button'>Archive</a>
+      <?php
+
+      if (!isset($_GET['archive'])) {
+         echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
+         <span>Add</span>
+         </a>";
+         echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
+         <span>Archive</span>
+         </a>";
+      } else {
+         echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
+      }
+
+      ?>
+
       </div>
    </div>
    <div class='module__Container'>
-      <ul class='module__List module__Title'>
-         <li class='module__Item'>Name</li>
-         <li class='module__Item'>Department</li>
-         <li class='module__Item'></li>
-         <li class='module__Item'>Actions</li>
-      </ul>
       <?php
-      $subjView = new SubjectsView();
-      $results = $subjView->DisplaySubjects();
-      foreach ($results as $result) {
-         echo "<ul class='module__List'>
-                     <li class='module__Item'>" . $result['subj_code'] . "</li>
-                     <li class='module__Item'>" . $result['subj_desc'] . "</li>
-                     <li class='module__Item'>" . $result['units'] . "</li>
-                     <li class='module__Item'>
-                        <div>
-                           <a href=?id=" . $result['subj_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
-                           <form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
-                              <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
-                              <button name='delete' type='submit'><img src='drawables/icons/delete.svg' alter='Delete'/></button>
-                              <span>Delete</span>
-                           </form>
-                        </div>
-                     </li>
-                  </ul>";
-      }
+
+      $sectView = new SectionsView();
+      $results = $sectView->FetchSectionsByState($state);
+      $sectView->DisplaySections($results);
+
       ?>
+      
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {

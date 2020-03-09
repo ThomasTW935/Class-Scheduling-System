@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
 <form action='./includes/subjects.inc.php' class='module__Form' method='POST'>
    <a href="subjects.php" class='form__Close'>X</a>
    <label for='formSelect' class='form__Title'>Subject's Information</label>
-   <input class='form__Input' type='hidden' value='<?php echo $subj['subj_id'] ?? '' ?>' name='id'>
+   <input class='form__Input' type='hidden' value='<?php echo $subj['subj_id'] ?? '' ?>' name='subjID'>
    <div class="form__Container">
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">

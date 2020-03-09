@@ -22,9 +22,9 @@ class SubjectsVal{
    private function validateCode(){
 
       $val = trim($this->data['code']);
-      $id = trim($this->data['id']);
+      $id = trim($this->data['subjID']);
       if(empty($val)){
-         $this->addError('employeeID','Employee ID cannot be empty');
+         $this->addError('errorCode','Subject Code cannot be empty');
       }
       else{
          $subjView = new SubjectsView();
@@ -38,7 +38,7 @@ class SubjectsVal{
                   return;
                }
             }
-            $this->addError('subjectCode', 'Subject already exist');
+            $this->addError('errorCode', 'Subject Code already exist');
          }
       } 
 

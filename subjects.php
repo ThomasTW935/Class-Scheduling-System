@@ -1,12 +1,15 @@
 <?php
 include_once './layouts/__header.php';
+
+$state = isset($_GET['archive']) ? 0 : 1;
+
 ?>
 
 <main class='subjects module'>
    <div class="module__Header">
       <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="searchProf" placeholder="Search...">
-         <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
+         <input id="liveSearch" type="search" name="searchSubj" placeholder="Search...">
+         <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/subjects.svg" alt="Subjects">
@@ -30,32 +33,12 @@ include_once './layouts/__header.php';
       </div>
    </div>
    <div class='module__Container'>
-      <ul class='module__List module__Title'>
-         <li class='module__Item'>Subject Code</li>
-         <li class='module__Item'>Subject Description</li>
-         <li class='module__Item'>Unit/s</li>
-         <li class='module__Item'>Actions</li>
-      </ul>
       <?php
+      
       $subjView = new SubjectsView();
-      $results = $subjView->DisplaySubjects();
-      foreach ($results as $result) {
-         echo "<ul class='module__List'>
-                     <li class='module__Item'>" . $result['subj_code'] . "</li>
-                     <li class='module__Item'>" . $result['subj_desc'] . "</li>
-                     <li class='module__Item'>" . $result['units'] . "</li>
-                     <li class='module__Item'>
-                        <div>
-                           <a href=?id=" . $result['subj_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
-                           <form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
-                              <input name='id' type='hidden' value='" . $result['subj_id'] . "'>
-                              <button name='delete' type='submit'><img src='drawables/icons/delete.svg' alter='Delete'/></button>
-                              <span>Delete</span>
-                           </form>
-                        </div>
-                     </li>
-                  </ul>";
-      }
+      $results = $subjView->FetchSubjectsByState($state);
+      $subjView->DisplaySubjects($results);
+
       ?>
    </div>
    <?php

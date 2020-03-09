@@ -23,12 +23,12 @@ if (isset($_POST['submit'])) {
   $roomsContr->CreateRoom($_POST);
 } else if (isset($_POST['update'])) {
   if (!empty($errors)) {
-    header('Location: ../rooms.php?id=' . $_POST['id'] . $query);
+    header('Location: ../rooms.php?id=' . $_POST['rmID'] . $query);
     exit();
   }
   $roomsContr->ModifyRoom($_POST);
 } else if (isset($_POST['submitStatus'])) {
-  $status = ($_POST['status'] == 0) ? 1 : 0;
-  $roomsContr->ModifyRoomState($status, $_POST['id']);
+  $status = ($_POST['state'] == 0) ? 1 : 0;
+  $roomsContr->ModifyRoomState($status, $_POST['rmID']);
 }
 header('Location: ../rooms.php');

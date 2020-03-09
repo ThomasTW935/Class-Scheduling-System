@@ -71,9 +71,9 @@ if (isset($_POST['submit'])) {
    $usersContr->ModifyUser($data);
    $profContr->ModifyProfessor($_POST);
 } else if (isset($_POST['submitStatus'])) {
-   $status = ($_POST['status'] == 0) ? 1 : 0;
-   $profContr->ModifyProfessorState($status, $_POST['id']);
-   $usersContr->ModifyUserState($status, $_POST['userID']);
+   $state = ($_POST['state'] == 0) ? 1 : 0;
+   $profContr->ModifyProfessorState($state, $_POST['id']);
+   $usersContr->ModifyUserState($state, $_POST['userID']);
    var_dump($_POST);
 }
 

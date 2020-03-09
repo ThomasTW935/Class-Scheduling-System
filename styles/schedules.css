@@ -32,7 +32,10 @@
 
 .schedules__Table .schedules__Timeslot {
   background: lightblue;
-  border-bottom: 1px solid transparent;
+}
+
+.schedules__Table .schedules__Timeslot label {
+  font-size: .8rem;
 }
 
 .schedules__Subjects {

@@ -2,13 +2,13 @@
 include_once './layouts/__header.php';
 
 $timeSlot = [
-   'startTime' => '7:00',
-   'endTime' => '10:00',
+   'startTime' => '9:00',
+   'endTime' => '11:00',
    'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
+   'subject' => '',
    'room' => 'rm507',
    'section' => 'BSIT-701',
-   'day' => 'Monday'
+   'day' => 'Wednesday'
 ];
 $timeSlot2 = [
    'startTime' => '8:00',
@@ -36,6 +36,15 @@ $timeSlot4 = [
    'room' => 'rm504',
    'section' => 'BSIT-701',
    'day' => 'Saturday'
+];
+$timeSlot5 = [
+   'startTime' => '16:00',
+   'endTime' => '17:30',
+   'professor' => 'Insigne, John Rexon',
+   'subject' => 'Mobile Development',
+   'room' => 'rm504',
+   'section' => 'BSIT-701',
+   'day' => 'Friday'
 ];
 $schedules = [$timeSlot, $timeSlot2, $timeSlot3, $timeSlot4];
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -69,16 +78,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             <label for="results__List">Subject List</label>
             <ul id="results__List">
 
-               <?php
-
-               $subj = new SubjectsView();
-               $results = $subj->DisplaySubjects();
-               foreach ($results as $result) {
-                  echo '<li draggable="true">' . $result['subj_code'] . ' - ' . $result['subj_desc'] . '</li>';
-               }
-
-
-               ?>
+               
 
             </ul>
          </div>
@@ -99,32 +99,29 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
          echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
       }
       echo '</ul>';
-      $monday = [];
       foreach ($days as $day) {
-         for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
-            foreach ($schedules as $schedule) {
+         echo '<ul>';
+         echo "<li>{$day}</li>";
+         foreach ($schedules as $schedule) {
+               for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
                $startTime = strtotime($schedule['startTime']);
                $endTime = strtotime($schedule['endTime']);
-               $value;
                if ($i >= $startTime && $i <= $endTime && $schedule['day'] == $day) {
+                  echo "<li class='schedules__Timeslot'><label>";
                   if ($i == $startTime) {
-                     $value = $schedule['subject'];
+                     echo "{$schedule['subject']}";
                   }
                   $middle = ($startTime + $endTime) / 2;
                   if ($i == $middle) {
-                     $value = $schedule['professor'];
+                     echo "{$schedule['professor']}";
                   }
                   if ($i == $endTime) {
-                     $value = "" . $schedule['room'] . "";
+                     echo "{$schedule['room']}";
                   }
-                  echo $value;
+                  echo "<span>s</span></label></li>";
                } else {
-                  $value = 's';
+                  echo "<li><span>s</span></li>";
                }
-            }
-            if ($day == 'Monday') {
-               $monday =  [$i => $value];
-               var_dump($monday);
             }
          }
          echo '</ul>';

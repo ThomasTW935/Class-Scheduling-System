@@ -7,7 +7,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
    <div class="module__Header">
       <form class="liveSearch__Form">
          <input id="liveSearch" type="search" name="searchRooms" placeholder="Search...">
-         <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
+         <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/subjects.svg" alt="Subjects">

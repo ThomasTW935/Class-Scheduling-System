@@ -28,7 +28,7 @@ include_once './layouts/__header.php';
          <h3>FACULTY</h3>
          <img src="./drawables/icons/faculty.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="#">
+      <a class="dashboard__Card card__Design" href="./sections.php">
          <h3>SECTIONS</h3>
          <img src="./drawables/icons/section.svg" alt="SECTIONS">
       </a>

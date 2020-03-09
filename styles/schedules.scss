@@ -21,7 +21,9 @@
     }
     .schedules__Timeslot {
       background: lightblue;
-      border-bottom: 1px solid transparent;
+      label{
+        font-size: .8rem;
+      }
     }
   }
   &__Subjects {

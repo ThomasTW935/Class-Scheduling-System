@@ -1,6 +1,5 @@
 function submitForm(e) {
-   let inputStatus = e.childNodes
-   let value = inputStatus[5].value;
+   let value = document.querySelector('#state').value;
    let message;
    if (value == 0) {
       message = "Restore"
@@ -18,8 +17,8 @@ if (liveSearch != null) {
    liveSearch.addEventListener('keyup', () => {
       let val = liveSearch.value.trim()
       let name = liveSearch.name
-      let status = searchStatus.value
-      let query = name + '=' + val + '&status=' + status
+      let state = searchStatus.value
+      let query = name + '=' + val + '&state=' + state
       searchData(query)
    })
 }

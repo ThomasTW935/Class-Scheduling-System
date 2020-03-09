@@ -4,7 +4,7 @@ class Rooms extends Dbh
 {
   protected function getRoomsByState($state)
   {
-    $sql = 'SELECT * FROM rooms WHERE is_active = ?';
+    $sql = 'SELECT * FROM rooms WHERE rm_active = ?';
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$state]);
     $results = $stmt->fetchAll();
@@ -37,7 +37,7 @@ class Rooms extends Dbh
   protected function getRoomBySearch($search, $state)
   {
     $search = "%{$search}%";
-    $sql = 'SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ?) AND is_active = ? ';
+    $sql = 'SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ?) AND rm_active = ? ';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $state]);
@@ -69,7 +69,7 @@ class Rooms extends Dbh
   }
   protected function updateRoomState($state, $id)
   {
-    $sql = 'UPDATE rooms SET is_active = ? WHERE rm_id = ?';
+    $sql = 'UPDATE rooms SET rm_active = ? WHERE rm_id = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state, $id]);

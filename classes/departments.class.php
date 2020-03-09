@@ -39,13 +39,13 @@ class Departments extends Dbh
          trigger_error("Error: " . $e->getMessage());
       }
    }
-   protected function getDepartmentBySearch($search, $dept, $state)
+   protected function getDepartmentBySearch($search, $state, $type)
    {
       $search = "%{$search}%";
-      $sql = 'SELECT * FROM departments WHERE (dept_name = ? OR dept_desc = ?)';
+      $sql = 'SELECT * FROM departments WHERE (dept_name LIKE ? OR dept_desc LIKE ?) AND dept_active = ? AND dept_type = ?';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$name]);
+         $stmt->execute([$search,$search,$state,$type]);
          $result = $stmt->fetchAll();
          return $result;
       } catch (PDOException $e) {

@@ -565,7 +565,10 @@ body main {
 
 .schedules__Table .schedules__Timeslot {
   background: lightblue;
-  border-bottom: 1px solid transparent;
+}
+
+.schedules__Table .schedules__Timeslot label {
+  font-size: .8rem;
 }
 
 .schedules__Subjects {
@@ -668,6 +671,11 @@ body main {
 .users .module__List {
   -ms-grid-columns: 1fr 2fr (1fr)[2];
       grid-template-columns: 1fr 2fr repeat(2, 1fr);
+}
+
+.sections .module__List {
+  -ms-grid-columns: 1fr 2fr (1fr)[3];
+      grid-template-columns: 1fr 2fr repeat(3, 1fr);
 }
 
 .professors .module__List {

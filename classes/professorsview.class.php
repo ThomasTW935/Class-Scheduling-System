@@ -51,7 +51,7 @@ class ProfessorsView extends Professors
                   <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
                      <input name='id' type='hidden' value='" . $result['id'] . "'>
                      <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
-                     <input name='status' type='hidden' value='" . $result['prof_active'] . "'>
+                     <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
                      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
                      <span>" . $iconName . "</span>
                   </form>

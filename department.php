@@ -9,7 +9,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
    <div class="module__Header">
       <form class="liveSearch__Form">
          <input id="liveSearch" type="search" name="searchDept<?php echo $department ?>" placeholder="Search...">
-         <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
+         <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/faculty.svg" alt="faculty">
@@ -33,11 +33,6 @@ $state = isset($_GET['archive']) ? 0 : 1;
       </div>
    </div>
    <div class='module__Container'>
-      <ul class='module__List module__Title'>
-         <li class='module__Item'>Department Name</li>
-         <li class='module__Item'>Description</li>
-         <li class='module__Item'>Actions</li>
-      </ul>
       <?php
 
 

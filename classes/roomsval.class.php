@@ -26,7 +26,7 @@ class RoomsVal
   {
 
     $val = trim($this->data['name']);
-    $id = trim($this->data['id']);
+    $id = trim($this->data['rmID']);
     if (empty($val)) {
       $this->addError('name', 'Name cannot be empty');
     } else if (!preg_match('/^[a-zA-Z0-9. ]*$/', $val)) {

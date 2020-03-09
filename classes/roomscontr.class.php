@@ -8,7 +8,7 @@ class RoomsContr extends Rooms
   }
   public function ModifyRoom($data)
   {
-    $this->updateRoom($data['name'], $data['desc'], $data['floor'], $data['id']);
+    $this->updateRoom($data['name'], $data['desc'], $data['floor'], $data['rmID']);
   }
   public function ModifyRoomState($state, $id)
   {

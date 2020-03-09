@@ -33,7 +33,7 @@ class UsersVal
       $usersView = new UsersView();
       $results = $usersView->FetchUserByUsername($val);
       if (!empty($results)) {
-        $id = trim($this->data['id']);
+        $id = trim($this->data['userID']);
         $idResult = $results[0]['id'] ?? '';
         if (isset($this->data['update'])) {
           $user = $usersView->FetchUserByID($id);

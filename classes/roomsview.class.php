@@ -21,7 +21,7 @@ class RoomsView extends Rooms
             <li class='module__Item'>Actions</li>
           </ul>";
     foreach ($results as $result) {
-      $iconName = ($result['is_active'] == 1) ? 'delete' : 'recover';
+      $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
       echo " <ul class='module__List'>
         <li class='module__Item'>" . $result['rm_name'] . "</li>
         <li class='module__Item'>" . $result['rm_desc'] . "</li>
@@ -31,8 +31,8 @@ class RoomsView extends Rooms
               <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
               <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
               <form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
-                <input name='id' type='hidden' value='" . $result['rm_id'] . "'>
-                <input name='status' type='hidden' value='" . $result['is_active'] . "'>
+                <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
+                <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
                 <span>" . $iconName . "</span>
               </form>

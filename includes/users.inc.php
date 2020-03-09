@@ -40,8 +40,7 @@ if (isset($_POST['submit'])) {
   }
   $usersContr->ModifyUser($_POST);
 } else if (isset($_POST['submitStatus'])) {
-  $status = ($_POST['status'] == 0) ? 1 : 0;
-  $usersContr->ModifyUserState($status, $_POST['userID']);
+  $state = ($_POST['state'] == 0) ? 1 : 0;
+  $usersContr->ModifyUserState($state, $_POST['userID']);
 }
-
 header('Location: ../users.php');
