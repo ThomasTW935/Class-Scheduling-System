@@ -10,6 +10,32 @@ function submitForm(e) {
 }
 
 
+// let radioCon = document.querySelectorAll('.form__Radio')
+// if (radioCon != null) {
+//    for (let i = 0; i < radioCon.length; i++) {
+//       radioCon[i].addEventListener('change', () => {
+//          let val = radioCon[i].value
+//          console.log(val)
+//          let query = name + '=' + val
+//          displayDepartments(query)
+//       })
+//    }
+// }
+
+// function displayDepartments(query) {
+//    let xhr = new XMLHttpRequest()
+//    xhr.onreadystatechange = function () {
+//       if (this.readyState === 4 && this.status) {
+//          let response = this.responseText
+//          let con = document.querySelector('.module__Form')
+//          con.innerHTML = response
+//       }
+//    }
+//    xhr.open("GET", 'includes/ajax.inc.php?' + query, true)
+//    xhr.send()
+// }
+
+
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 console.log(searchStatus)
@@ -28,7 +54,6 @@ function searchData(query) {
    xhr.onreadystatechange = function () {
       if (this.readyState === 4 && this.status) {
          let response = this.responseText
-         console.log(response)
          let con = document.querySelector('.module__Container')
          con.innerHTML = response
       }

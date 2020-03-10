@@ -5,10 +5,14 @@ class Rooms extends Dbh
   protected function getRoomsByState($state)
   {
     $sql = 'SELECT * FROM rooms WHERE rm_active = ?';
-    $stmt = $this->connect()->prepare($sql);
-    $stmt->execute([$state]);
-    $results = $stmt->fetchAll();
-    return $results;
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$state]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
   }
   protected function getRoomByID($id)
   {

@@ -23,8 +23,8 @@ if (isset($_GET['searchSubj'])) {
    $results = $subjView->FetchSubjectsBySearch($_GET['searchSubj'], $_GET['state']);
    $subjView->DisplaySubjects($results);
 }
+$sectView = new SectionsView();
 if (isset($_GET['searchSect'])) {
-   $sectView = new SectionsView();
    $results = $sectView->FetchSubjectsBySearch($_GET['searchSect'], $_GET['state']);
    $sectView->DisplaySubjects($results);
 }
@@ -40,4 +40,7 @@ if (isset($_GET['searchDeptcourse'])) {
 if (isset($_GET['searchDeptstrand'])) {
    $results = $deptView->FetchDeptsBySearch($_GET['searchDeptstrand'], $_GET['state'], 'strand');
    $deptView->DisplayDepts($results);
+}
+if (isset($_GET['deptType'])) {
+   $sectView->DisplaySectionsForm($_GET['deptType']);
 }

@@ -6,7 +6,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
 
 <main class='sections module'>
    <div class="module__Header">
-   <form class="liveSearch__Form">
+      <form class="liveSearch__Form">
          <input id="liveSearch" type="search" name="searchSect" placeholder="Search...">
          <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
       </form>
@@ -15,20 +15,20 @@ $state = isset($_GET['archive']) ? 0 : 1;
          <a href='?#' class="button">Sections</a>
       </div>
       <div class="module__Links">
-      <?php
+         <?php
 
-      if (!isset($_GET['archive'])) {
-         echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
+         if (!isset($_GET['archive'])) {
+            echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
          <span>Add</span>
          </a>";
-         echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
+            echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
          <span>Archive</span>
          </a>";
-      } else {
-         echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
-      }
+         } else {
+            echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
+         }
 
-      ?>
+         ?>
 
       </div>
    </div>
@@ -40,7 +40,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
       $sectView->DisplaySections($results);
 
       ?>
-      
+
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {

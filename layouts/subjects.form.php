@@ -19,20 +19,20 @@ if (isset($_GET['id'])) {
    <div class="form__Container">
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $subj['subj_code'] ?? '' ?>' name='code' placeholder='Subject Code' required>
+         <input class='form__Input' type='text' value='<?php echo $subj['subj_code'] ?? '' ?>' name='code' required>
          <div class="form__Error"><?php echo $errors['subjectCode'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $subj['subj_desc'] ?? '' ?>' name='desc' placeholder='Subject Description' required>
+         <input class='form__Input' type='text' value='<?php echo $subj['subj_desc'] ?? '' ?>' name='desc' required>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Unit/s:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $subj['units'] ?? '' ?>' name='units' placeholder='Units' required>
+         <input class='form__Input' type='number' value='<?php echo $subj['units'] ?? '' ?>' name='units' required>
          <div class="form__Error"><?php echo $errors['units'] ?? '' ?></div>
       </div>
    </div>

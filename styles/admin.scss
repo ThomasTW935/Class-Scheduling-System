@@ -36,19 +36,11 @@
   }
 }
 .subjects,
-.rooms {
-  .module__List {
-    grid-template-columns: 1fr 3fr repeat(2, 1fr);
-  }
-}
+.rooms,
+.sections,
 .users {
   .module__List {
-    grid-template-columns: 1fr 2fr repeat(2, 1fr);
-  }
-}
-.sections {
-  .module__List {
-    grid-template-columns: 1fr 2fr repeat(3, 1fr);
+    grid-template-columns: 1fr 3fr repeat(2, 1fr);
   }
 }
 .professors {

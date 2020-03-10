@@ -42,5 +42,6 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
   $state = ($_POST['state'] == 0) ? 1 : 0;
   $usersContr->ModifyUserState($state, $_POST['userID']);
+  $destination = ($_POST['state'] == 0) ? '?archive' : '';
 }
-header('Location: ../users.php');
+header('Location: ../users.php' . $destination);

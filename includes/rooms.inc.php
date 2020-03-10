@@ -30,5 +30,6 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
   $status = ($_POST['state'] == 0) ? 1 : 0;
   $roomsContr->ModifyRoomState($status, $_POST['rmID']);
+  $destination = ($_POST['state'] == 0) ? '?archive' : '';
 }
-header('Location: ../rooms.php');
+header('Location: ../rooms.php' . $destination);

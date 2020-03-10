@@ -69,21 +69,6 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             <button type="submit" name="submit">Save</button>
          </form>
       </section>
-      <section class='schedules__Subjects'>
-         <form>
-            <label for="timeSubjects">Search Subjects</label>
-            <input type="search" name="searchSubjects" id="searchSubjects">
-         </form>
-         <div id='searchSubjects__Results'>
-            <label for="results__List">Subject List</label>
-            <ul id="results__List">
-
-               
-
-            </ul>
-         </div>
-      </section>
-      <section></section>
    </div>
    <div class='schedules__Table'>
 
@@ -91,19 +76,25 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       $fromTime = strtotime('7:00');
       $toTime = strtotime('17:00');
+      $timeIncrement = 30;
       $time = [];
       echo '<ul>';
       echo "<li><span>s</span></li>";
-      for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
-         $time[] += $i;
-         echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
+      $skipTime = $fromTime;
+      for ($i = $fromTime; $i <= $toTime; $i += 15 * 60) {
+         $lastValue = ($i - (15 * 60));
+         $currentValue = $lastValue + ($timeIncrement * 60);
+         echo 'Current Value: ' . $currentValue;
+
+         // echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
+         echo "<li class='schedules__Hour'>" . $i . "</li>";
       }
       echo '</ul>';
       foreach ($days as $day) {
          echo '<ul>';
          echo "<li>{$day}</li>";
          foreach ($schedules as $schedule) {
-               for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
+            for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
                $startTime = strtotime($schedule['startTime']);
                $endTime = strtotime($schedule['endTime']);
                if ($i >= $startTime && $i <= $endTime && $schedule['day'] == $day) {

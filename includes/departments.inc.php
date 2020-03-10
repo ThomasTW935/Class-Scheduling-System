@@ -32,5 +32,6 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
    $deptContr->ModifyDepartmentState($_POST['id'], $state);
+   $destination = ($_POST['state'] == 0) ? '&archive' : '';
 }
-header('Location: ../department.php?dept=' . $department);
+header('Location: ../department.php?dept=' . $department . $destination);

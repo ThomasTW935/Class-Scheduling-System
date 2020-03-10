@@ -15,7 +15,7 @@ class RoomsView extends Rooms
   public function DisplayRooms($results)
   {
     echo "<ul class='module__List module__Title'>
-            <li class='module__Item'>Name</li>
+            <li class='module__Item'>Room</li>
             <li class='module__Item'>Description</li>
             <li class='module__Item'>Floor</li>
             <li class='module__Item'>Actions</li>
@@ -27,10 +27,12 @@ class RoomsView extends Rooms
         <li class='module__Item'>" . $result['rm_desc'] . "</li>
         <li class='module__Item'>" . $result['rm_floor'] . "</li>
         <li class='module__Item'>
-          <div>
-              <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
-              <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
-              <form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
+          <div>";
+      if ($result['rm_active'] == 1) {
+        echo "<a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+        <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      echo "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
                 <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
                 <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>

@@ -20,16 +20,16 @@ if (isset($_GET['id'])) {
    <input class='form__Input' type='hidden' value='<?php echo $dept['dept_id'] ?? '' ?>' name='id'>
    <input class='form__Input' type='hidden' value='<?php echo $department ?>' name='department'>
    <div class="form__Container">
-      <label for='' class='form__Label'>Name:</label>
+      <label for='' class='form__Label'>Program:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $dept['dept_name'] ?? '' ?>' name='name' placeholder='Name' required>
+         <input class='form__Input' type='text' value='<?php echo $dept['dept_name'] ?? '' ?>' name='name' required>
          <div class="form__Error"><?php echo $errors['errorName'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for='' class='form__Label'>Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $dept['dept_desc'] ?? '' ?>' name='desc' placeholder='Description' required>
+         <input class='form__Input' type='text' value='<?php echo $dept['dept_desc'] ?? '' ?>' name='desc' required>
          <div class="form__Error"><?php echo $errors['errorDesc'] ?? '' ?></div>
       </div>
    </div>

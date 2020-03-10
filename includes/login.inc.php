@@ -14,6 +14,9 @@ if (isset($_POST['submit'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
 
+   // $passHash = password_hash('admin', PASSWORD_DEFAULT);
+   // echo $passHash;
+   // exit();
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {
       $query = '&' . http_build_query($errors);

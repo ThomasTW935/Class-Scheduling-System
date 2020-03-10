@@ -51,6 +51,8 @@ if (!isset($_POST['submitStatus'])) {
    }
 }
 
+$destination = '';
+
 if (isset($_POST['submit'])) {
 
    if (!empty($errors)) {
@@ -74,13 +76,12 @@ if (isset($_POST['submit'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
    $profContr->ModifyProfessorState($state, $_POST['id']);
    $usersContr->ModifyUserState($state, $_POST['userID']);
-   var_dump($_POST);
+   $destination = ($_POST['state'] == 0) ? '?archive' : '';
 }
-
 
 if ($imgError != 4 && !isset($_POST['submitStatus'])) {
    $imgDestination = "../drawables/images/" . $imgFullName;
    $imgTempname = $imgFile['tmp_name'];
    move_uploaded_file($imgTempname, $imgDestination);
 }
-header('Location: ../professors.php');
+header('Location: ../professors.php' . $destination);

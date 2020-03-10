@@ -4,7 +4,7 @@ class Sections extends Dbh
 {
   protected function getSectionsByState($state)
   {
-    $sql = 'SELECT * FROM section WHERE sect_active = ?';
+    $sql = 'SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE sect_active = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state]);
@@ -14,10 +14,10 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionsBySearch($search,$state)
+  protected function getSectionsBySearch($search, $state)
   {
     $search = "%{$search}%";
-    $sql = 'SELECT * FROM section WHERE sect_active = ?';
+    $sql = 'SELECT * FROM sections WHERE sect_active = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state]);
@@ -29,7 +29,7 @@ class Sections extends Dbh
   }
   protected function getSectionByID($id)
   {
-    $sql = 'SELECT * FROM section WHERE sect_id = ?';
+    $sql = 'SELECT * FROM sections WHERE sect_id = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
@@ -39,26 +39,45 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  
-  protected function updateSection()
+  protected function getSectionByName($name)
   {
-    $sql = 'SELECT * FROM section';
+    $sql = 'SELECT * FROM sections WHERE sect_name = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
+      $stmt->execute([$name]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }
   }
-  protected function updateSectionState($id,$state){
-    $sql = 'UPDATE sections SET WHERE sect_id = ?';
+
+  protected function setSection($name, $year, $sem, $deptID)
+  {
+    $sql = "INSERT INTO sections (sect_name,sect_year,sect_sem,dept_id) VALUES(?,?,?,?)";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
-      $results = $stmt->fetchAll();
-      return $results;
+      $stmt->execute([$name, $year, $sem, $deptID]);
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
+  protected function updateSection($name, $year, $sem, $deptID, $sectID)
+  {
+    $sql = 'UPDATE sections SET sect_name = ?, sect_year = ?, sect_sem = ? , dept_id = ? WHERE sect_id = ?';
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$name, $year, $sem, $deptID, $sectID]);
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
+  protected function updateSectionState($id, $state)
+  {
+    $sql = 'UPDATE sections SET sect_active = ? WHERE sect_id = ?';
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$state, $id]);
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }

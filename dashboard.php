@@ -18,11 +18,11 @@ include_once './layouts/__header.php';
       </a>
       <a class="dashboard__Card card__Design" href="./department.php?dept=course">
          <h3>COURSES</h3>
-         <img src="./drawables/icons/tertiary.svg" alt="Professors">
+         <img src="./drawables/icons/course.svg" alt="Professors">
       </a>
       <a class="dashboard__Card card__Design" href="./department.php?dept=strand">
          <h3>STRANDS</h3>
-         <img src="./drawables/icons/shs.svg" alt="Professors">
+         <img src="./drawables/icons/strand.svg" alt="Professors">
       </a>
       <a class="dashboard__Card card__Design" href="./department.php?dept=faculty">
          <h3>FACULTY</h3>
@@ -34,7 +34,7 @@ include_once './layouts/__header.php';
       </a>
       <a class="dashboard__Card card__Design" href="./subjects.php">
          <h3>SUBJECTS</h3>
-         <img src="./drawables/icons/section.svg" alt="SUBJECTS">
+         <img src="./drawables/icons/subjects.svg" alt="SUBJECTS">
       </a>
    </div>
 </main>

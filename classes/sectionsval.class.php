@@ -4,7 +4,7 @@ class SectionsVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['code', 'desc'];
+  private static $fields = ['sectID', 'name', 'year', 'sem'];
   public function __construct($post_data)
   {
     $this->data = $post_data;
@@ -18,30 +18,30 @@ class SectionsVal
       }
     }
 
-    $this->validateCode();
+    $this->validateName();
 
     return $this->errors;
   }
-  private function validateCode()
+  private function validateName()
   {
 
-    $val = trim($this->data['code']);
-    $id = trim($this->data['id']);
+    $val = trim($this->data['name']);
+    $id = trim($this->data['sectID']);
     if (empty($val)) {
-      $this->addError('employeeID', 'Employee ID cannot be empty');
+      $this->addError('errorName', 'Section cannot be empty');
     } else {
-      $subjView = new SubjectsView();
-      $result = $subjView->FetchSubjectByCode($val);
+      $sectView = new SectionsView();
+      $result = $sectView->FetchSectionByName($val);
       if (!empty($result)) {
         if (isset($this->data['update'])) {
-          $subj = $subjView->FetchSubjectByID($id);
-          $idOrig = $subj[0]['id'] ?? '';
-          $idGet = $result[0]['id'] ?? '';
+          $sect = $sectView->FetchSectionByID($id);
+          $idOrig = $sect[0]['sect_id'] ?? '';
+          $idGet = $result[0]['sect_id'] ?? '';
           if ($idOrig == $idGet) {
             return;
           }
         }
-        $this->addError('subjectCode', 'Subject already exist');
+        $this->addError('errorName', 'Section already exist');
       }
     }
   }

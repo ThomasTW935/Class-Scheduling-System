@@ -45,10 +45,12 @@ class ProfessorsView extends Professors
             <li class='module__Item'>" . $fullName . "</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li>
             <li class='module__Item'>
-               <div>
-                  <a href=?id=" . $result['id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
-                  <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
-                  <form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
+               <div>";
+         if ($result['prof_active'] == 1) {
+            echo "<a href=?id=" . $result['id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+                  <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+         }
+         echo "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
                      <input name='id' type='hidden' value='" . $result['id'] . "'>
                      <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
                      <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>

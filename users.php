@@ -10,7 +10,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
          <input id="liveSearch--Status" type="hidden" name="status" value="<?php echo $state ?>">
       </form>
       <div class="module__Logo">
-         <img src=" drawables/icons/professor.svg">
+         <img src=" drawables/icons/student.svg">
          <a href='?#' class="button">Users</a>
       </div>
       <div class="module__Links">

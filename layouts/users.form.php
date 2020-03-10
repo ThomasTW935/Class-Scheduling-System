@@ -19,28 +19,28 @@ if (isset($_GET['id'])) {
    <div class="form__Container">
       <label for='' class='form__Label'>Username:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $user['username'] ?? '' ?>' name='username' placeholder='Username' required>
+         <input class='form__Input' type='text' value='<?php echo $user['username'] ?? '' ?>' name='username' required>
          <div class="form__Error"><?php echo $errors['errorUsername'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for='' class='form__Label'>Email:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $user['email'] ?? '' ?>' name='email' placeholder='Email'>
+         <input class='form__Input' type='text' value='<?php echo $user['email'] ?? '' ?>' name='email'>
          <div class="form__Error"><?php echo $errors['errorEmail'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Password:</label>
       <div class="form__Input">
-         <input class='form__Input' type='password' value='<?php echo $user['password'] ?? '' ?>' name='password' placeholder='Password'>
+         <input class='form__Input' type='password' value='<?php echo $user['password'] ?? '' ?>' name='password'>
          <div class="form__Error"><?php echo $errors['errorPassword'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Role Level:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $user['role_level'] ?? '' ?>' name='roleLevel' placeholder='Role Level'>
+         <input class='form__Input' type='number' value='<?php echo $user['role_level'] ?? '' ?>' name='roleLevel'>
          <div class="form__Error"><?php echo $errors['errorRolelevel'] ?? '' ?></div>
       </div>
    </div>

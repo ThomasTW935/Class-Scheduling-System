@@ -153,9 +153,11 @@ body main {
 }
 
 .module__Header .module__Logo a {
-  display: block;
-  text-align: center;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
   text-transform: capitalize;
+  width: 100%;
 }
 
 .module__Header .module__Links {
@@ -419,6 +421,17 @@ body main {
   font-weight: bold;
 }
 
+.module__Form .form__RadioContainer {
+  padding: 1em;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
 .module__Form .form__Container {
   display: -ms-grid;
   display: grid;
@@ -568,7 +581,7 @@ body main {
 }
 
 .schedules__Table .schedules__Timeslot label {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .schedules__Subjects {
@@ -663,19 +676,11 @@ body main {
 }
 
 .subjects .module__List,
-.rooms .module__List {
+.rooms .module__List,
+.sections .module__List,
+.users .module__List {
   -ms-grid-columns: 1fr 3fr (1fr)[2];
       grid-template-columns: 1fr 3fr repeat(2, 1fr);
-}
-
-.users .module__List {
-  -ms-grid-columns: 1fr 2fr (1fr)[2];
-      grid-template-columns: 1fr 2fr repeat(2, 1fr);
-}
-
-.sections .module__List {
-  -ms-grid-columns: 1fr 2fr (1fr)[3];
-      grid-template-columns: 1fr 2fr repeat(3, 1fr);
 }
 
 .professors .module__List {

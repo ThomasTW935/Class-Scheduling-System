@@ -28,7 +28,7 @@ $email = (!empty($_GET['email'])) ? $_GET['email'] : $prof['email'];
    <div class="form__Container">
       <label for='' class='form__Label'>Employee ID:</label>
       <div class="form__Input">
-         <input id="empID" type='text' value='<?php echo $empID ?? '' ?>' name='empID' placeholder='Employee ID' required>
+         <input id="empID" type='text' value='<?php echo $empID ?? '' ?>' name='empID' required>
          <div class="form__Error"><?php echo $errors['errorEmpID'] ?? '' ?></div>
       </div>
    </div>
@@ -49,14 +49,14 @@ $email = (!empty($_GET['email'])) ? $_GET['email'] : $prof['email'];
    <div class="form__Container">
       <label for='' class='form__Label'>Username:</label>
       <div class="form__Input">
-         <input id="userName" type='text' value='<?php echo $username ?? '' ?>' name='username' placeholder='Username' required>
+         <input id="userName" type='text' value='<?php echo $username ?? '' ?>' name='username' required>
          <div class="form__Error"><?php echo $errors['errorUserame'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label class='form__Label'>Email:</label>
       <div class="form__Input">
-         <input type='text' value='<?php echo $email ?? '' ?>' name='email' placeholder='Email'>
+         <input type='text' value='<?php echo $email ?? '' ?>' name='email'>
          <div class="form__Error"><?php echo $errors['errorEmail'] ?? '' ?></div>
       </div>
    </div>

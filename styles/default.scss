@@ -101,9 +101,10 @@ body {
         }
       }
       a {
-        display: block;
-        text-align: center;
+        display: grid;
+        place-content: center;
         text-transform: capitalize;
+        width: 100%;
       }
     }
     .module__Links {
@@ -297,11 +298,18 @@ body {
       text-transform: uppercase;
       font-weight: bold;
     }
+    .form__RadioContainer {
+      padding: 1em;
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+    }
     .form__Container {
       display: grid;
       grid-template-columns: 1fr 2fr;
       width: 100%;
       margin: 1em 0;
+
       * {
         font-size: 1rem;
       }

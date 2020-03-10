@@ -17,22 +17,22 @@ if (isset($_GET['id'])) {
    <label for='formSelect' class='form__Title'>Room's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $room['rm_id'] ?? '' ?>' name='rmID'>
    <div class="form__Container">
-      <label for='' class='form__Label'>Name:</label>
+      <label for='' class='form__Label'>Room Name:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['rm_name'] ?? '' ?>' name='name' placeholder='Room Name' required>
+         <input class='form__Input' type='text' value='<?php echo $room['rm_name'] ?? '' ?>' name='name' required>
          <div class="form__Error"><?php echo $errors['name'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['rm_desc'] ?? '' ?>' name='desc' placeholder='Room Description' required>
+         <input class='form__Input' type='text' value='<?php echo $room['rm_desc'] ?? '' ?>' name='desc' required>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Floor:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $room['rm_floor'] ?? '' ?>' name='floor' placeholder='Floor' required>
+         <input class='form__Input' type='number' value='<?php echo $room['rm_floor'] ?? '' ?>' name='floor' required>
          <div class="form__Error"><?php echo $errors['floor'] ?? '' ?></div>
       </div>
    </div>
