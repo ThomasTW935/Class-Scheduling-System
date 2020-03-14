@@ -3,6 +3,7 @@ include_once './layouts/__header.php';
 
 $department = $_GET['dept'];
 $state = isset($_GET['archive']) ? 0 : 1;
+$subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 ?>
 
 <main class='departments module'>
@@ -12,9 +13,8 @@ $state = isset($_GET['archive']) ? 0 : 1;
          <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
       </form>
       <div class="module__Logo">
-
          <img src="drawables/icons/<?php echo $department ?>.svg" alt="<?php echo $department ?>">
-         <a href='?dept=<?php echo $department ?>' class="button"><?php echo $department ?></a>
+         <a href='?dept=<?php echo $department ?>' class="button"><?php echo $department . $subTitle ?></a>
       </div>
       <div class="module__Links">
          <?php

@@ -16,11 +16,11 @@ class Sections extends Dbh
   }
   protected function getSectionsBySearch($search, $state)
   {
-    $search = "%{$search}%";
-    $sql = 'SELECT * FROM sections WHERE sect_active = ?';
+    $search = "%$search%";
+    $sql = 'SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state]);
+      $stmt->execute([$search, $search, $search, $search, $state]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
@@ -29,7 +29,7 @@ class Sections extends Dbh
   }
   protected function getSectionByID($id)
   {
-    $sql = 'SELECT * FROM sections WHERE sect_id = ?';
+    $sql = 'SELECT * FROM sections WHERE sect_id = ? LIMIT 1';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
@@ -41,7 +41,7 @@ class Sections extends Dbh
   }
   protected function getSectionByName($name)
   {
-    $sql = 'SELECT * FROM sections WHERE sect_name = ?';
+    $sql = 'SELECT * FROM sections WHERE sect_name = ? LIMIT 1';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$name]);

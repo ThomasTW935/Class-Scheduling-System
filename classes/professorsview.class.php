@@ -23,6 +23,16 @@ class ProfessorsView extends Professors
       $results = $this->getProfessorsByState($state);
       return $results;
    }
+   public function DisplayProfessorsInSearch($results)
+   {
+      foreach ($results as $result) {
+         $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
+         $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
+         echo "<option data-value='" . $result['id'] . "'><ul class='module__List'>
+            <li class='module__Item'>" . $fullName . "</li>
+            <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";
+      }
+   }
    public function DisplayProfessors($results)
    {
       echo "<ul class='module__List module__Title'>

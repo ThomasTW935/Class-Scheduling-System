@@ -1,72 +1,72 @@
 <?php
 include_once './layouts/__header.php';
 
-$timeSlot = [
-   'startTime' => '9:00',
-   'endTime' => '11:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => '',
-   'room' => 'rm507',
-   'section' => 'BSIT-701',
-   'day' => 'Wednesday'
-];
-$timeSlot2 = [
-   'startTime' => '8:00',
-   'endTime' => '10:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm501',
-   'section' => 'BSIT-701',
-   'day' => 'Tuesday'
-];
-$timeSlot3 = [
-   'startTime' => '11:00',
-   'endTime' => '14:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm502',
-   'section' => 'BSIT-701',
-   'day' => 'Tuesday'
-];
-$timeSlot4 = [
-   'startTime' => '15:00',
-   'endTime' => '16:30',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm504',
-   'section' => 'BSIT-701',
-   'day' => 'Saturday'
-];
-$timeSlot5 = [
-   'startTime' => '16:00',
-   'endTime' => '17:30',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm504',
-   'section' => 'BSIT-701',
-   'day' => 'Friday'
-];
-$schedules = [$timeSlot, $timeSlot2, $timeSlot3, $timeSlot4];
-$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+$fromTime = $_GET['from'] ?? '07:00';
+$toTime = $_GET['to'] ?? '17:00';
+$view = $_GET['view'] ?? '15';
+
+
+$deptView = new DepartmentsView();
+$sectView = new SectionsView();
+$roomView = new RoomsView();
+$profView = new ProfessorsView();
+$subjView = new SubjectsView();
+
+$load = $_GET['load'];
+
 ?>
 
 <main class='schedules'>
    <div class='schedules__Details'>
+      <section class='schedules__LoadSched'>
+
+
+         <a href='?load'>Load</a>
+
+
+
+      </section>
+      <section class="schedules__Information">
+         <div>
+            <?php
+
+            if ($load == 'sect') {
+               $sectID = $_GET['id'];
+               $sect = $sectView->FetchSectionByID($sectID)[0];
+               $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
+               echo "<h1>" . $sect['sect_name'] . "</h1>";
+               echo "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
+               echo "<h4>" . $dept['dept_desc'] . "</h4>";
+            }
+
+            ?>
+         </div>
+         <a href="?add&load=<?php echo $load ?>&id=<?php echo $_GET['id'] ?>">Add Schedules</a>
+      </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
-            <label for="startTime">Start:</label>
-            <input id='startTime' type="time" name='startTime' value='07:00'>
-            <label for="endTime">End:</label>
-            <input id='endTime' type="time" name='endTime' value='07:00'>
-            <label for="incrementTime">Increment:</label>
-            <select id='incrementTime' name='endTime' value='07:00'>
-               <option value="15">15 minutes</option>
-               <option value="30">30 minutes</option>
-               <option value="45">45 minutes</option>
-               <option value="60">60 minutes</option>
-            </select>
+            <div>
+               <label for="fromTime">Start:</label>
+               <input id='fromTime' type="time" name='fromTime' value='<?php echo $fromTime ?>'>
+            </div>
+            <div>
+               <label for="toTime">End:</label>
+               <input id='toTime' type="time" name='toTime' value='<?php echo $toTime ?>'>
+            </div>
+            <div>
+               <label for="viewBy">View By:</label>
+               <select id='viewBy' name='viewBy'>
+                  <?php
+                  for ($i = 15; $i <= 60; $i += 15) {
+                     $selected = ($view == $i) ? 'selected' : '';
+                     echo "<option value='$i' $selected>$i minutes</option>";
+                  }
 
-            <button type="submit" name="submit">Save</button>
+                  ?>
+               </select>
+            </div>
+
+            <button class='button' type="submit" name="submit">Save</button>
          </form>
       </section>
    </div>
@@ -74,51 +74,20 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       <?php
 
-      $fromTime = strtotime('7:00');
-      $toTime = strtotime('17:00');
-      $timeIncrement = 30;
-      $time = [];
-      echo '<ul>';
-      echo "<li><span>s</span></li>";
-      $skipTime = $fromTime;
-      for ($i = $fromTime; $i <= $toTime; $i += 15 * 60) {
-         $lastValue = ($i - (15 * 60));
-         $currentValue = $lastValue + ($timeIncrement * 60);
-         echo 'Current Value: ' . $currentValue;
 
-         // echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
-         echo "<li class='schedules__Hour'>" . $i . "</li>";
-      }
-      echo '</ul>';
-      foreach ($days as $day) {
-         echo '<ul>';
-         echo "<li>{$day}</li>";
-         foreach ($schedules as $schedule) {
-            for ($i = $fromTime; $i <= $toTime; $i += 30 * 60) {
-               $startTime = strtotime($schedule['startTime']);
-               $endTime = strtotime($schedule['endTime']);
-               if ($i >= $startTime && $i <= $endTime && $schedule['day'] == $day) {
-                  echo "<li class='schedules__Timeslot'><label>";
-                  if ($i == $startTime) {
-                     echo "{$schedule['subject']}";
-                  }
-                  $middle = ($startTime + $endTime) / 2;
-                  if ($i == $middle) {
-                     echo "{$schedule['professor']}";
-                  }
-                  if ($i == $endTime) {
-                     echo "{$schedule['room']}";
-                  }
-                  echo "<span>s</span></label></li>";
-               } else {
-                  echo "<li><span>s</span></li>";
-               }
-            }
-         }
-         echo '</ul>';
-      }
+
       ?>
    </div>
+   <?php
+
+   if (isset($_GET['add']) || isset($_GET['sched'])) {
+      include_once './layouts/schedules.form.php';
+   }
+   // if (isset($_GET['load']) || isset($_GET['sched'])) {
+   //    include_once './layouts/schedulesload.form.php';
+   // }
+
+   ?>
 </main>
 
 <?php

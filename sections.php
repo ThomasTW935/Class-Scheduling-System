@@ -1,7 +1,7 @@
 <?php
 include_once './layouts/__header.php';
 $state = isset($_GET['archive']) ? 0 : 1;
-
+$subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 ?>
 
 <main class='sections module'>
@@ -12,7 +12,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/section.svg" alt="Sections">
-         <a href='?#' class="button">Sections</a>
+         <a href='?#' class="button">Sections<?php echo $subTitle ?></a>
       </div>
       <div class="module__Links">
          <?php

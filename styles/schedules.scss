@@ -1,10 +1,79 @@
+@import "default.scss";
+
 .schedules {
   display: grid;
   grid-template-columns: 1fr 4fr;
   position: relative;
   padding: 0;
+  font-size: 0.8rem;
+  .module__Form {
+    width: 50vw;
+    font-size: 1rem;
+    .form__TimeContainer {
+      display: flex;
+      margin: 0.5em;
+    }
+    .form__DayContainer {
+      display: flex;
+      input {
+        visibility: hidden;
+        &:checked + label {
+          background: rgba(0, 170, 255, 1);
+          color: white;
+        }
+      }
+      label {
+        user-select: none;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+        text-transform: capitalize;
+        height: 28px;
+        width: 28px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        margin: 0.4em;
+      }
+    }
+  }
   &__Details {
     background: rgba(0, 0, 0, 0.05);
+
+    .schedules__Information {
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .schedules__Settings {
+      background: pink;
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        div {
+          background: red;
+          width: 75%;
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+        }
+        button {
+          width: 100px;
+          box-shadow: none;
+          text-transform: uppercase;
+          background: rgba(0, 170, 255, 1);
+          color: white;
+          font-weight: bold;
+          border-radius: 10px;
+          font-size: 1rem;
+          margin-top: 1em;
+          &:hover {
+            background: rgba(0, 170, 255, 0.6);
+          }
+        }
+      }
+    }
   }
   &__Table {
     display: grid;

@@ -22,6 +22,15 @@ class SubjectsView extends Subjects
       $results = $this->getSubjectByID($id);
       return $results;
    }
+   public function DisplaySubjectsInSearch($results)
+   {
+      foreach ($results as $result) {
+         echo "<option data-value='" . $result['subj_id'] . "' value='" . $result['subj_code'] . "'><ul class='module__List'>
+            <li class='module__Item'>" . $result['subj_code'] . "</li>
+            <li class='module__Item'>" . $result['subj_desc'] . "</li>
+            <li class='module__Item'>" . $result['units'] . "</li></ul></option>";
+      }
+   }
    public function DisplaySubjects($results)
    {
       echo "<ul class='module__List module__Title'>

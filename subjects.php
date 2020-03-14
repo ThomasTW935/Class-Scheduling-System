@@ -2,7 +2,7 @@
 include_once './layouts/__header.php';
 
 $state = isset($_GET['archive']) ? 0 : 1;
-
+$subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 ?>
 
 <main class='subjects module'>
@@ -13,7 +13,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/subjects.svg" alt="Subjects">
-         <a href='?#' class="button">Subjects</a>
+         <a href='?#' class="button">Subjects<?php echo $subTitle ?></a>
       </div>
       <div class="module__Links">
          <?php
@@ -34,7 +34,7 @@ $state = isset($_GET['archive']) ? 0 : 1;
    </div>
    <div class='module__Container'>
       <?php
-      
+
       $subjView = new SubjectsView();
       $results = $subjView->FetchSubjectsByState($state);
       $subjView->DisplaySubjects($results);

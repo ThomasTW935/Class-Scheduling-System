@@ -17,7 +17,7 @@ class Departments extends Dbh
    }
    protected function getDepartmentByNameAndType($name, $type)
    {
-      $sql = 'SELECT * FROM departments WHERE dept_name = ? AND dept_type = ?';
+      $sql = 'SELECT * FROM departments WHERE dept_name = ? AND dept_type = ? LIMIT 1';
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$name, $type]);
@@ -29,7 +29,7 @@ class Departments extends Dbh
    }
    protected function getDepartmentByID($id)
    {
-      $sql = 'SELECT * FROM departments WHERE dept_id = ?';
+      $sql = 'SELECT * FROM departments WHERE dept_id = ? LIMIT 1';
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$id]);
@@ -45,7 +45,7 @@ class Departments extends Dbh
       $sql = 'SELECT * FROM departments WHERE (dept_name LIKE ? OR dept_desc LIKE ?) AND dept_active = ? AND dept_type = ?';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$search,$search,$state,$type]);
+         $stmt->execute([$search, $search, $state, $type]);
          $result = $stmt->fetchAll();
          return $result;
       } catch (PDOException $e) {

@@ -12,6 +12,25 @@ class RoomsView extends Rooms
     $results = $this->getRoomBySearch($search, $state);
     return $results;
   }
+  public function FetchRoomByID($id)
+  {
+    $result = $this->getRoomByID($id);
+    return $result;
+  }
+  public function FetchRoomByName($name)
+  {
+    $result = $this->getRoomByName($name);
+    return $result;
+  }
+  public function DisplayRoomsInSearch($results)
+  {
+    foreach ($results as $result) {
+      echo "<option data-value='" . $result['rm_id'] . "' value='rm " . $result['rm_name'] . "'><ul class='module__List'>
+        <li class='module__Item'>" . $result['rm_name'] . "</li>
+        <li class='module__Item'>" . $result['rm_desc'] . "</li>
+        <li class='module__Item'>" . $result['rm_floor'] . "</li></ul></option>";
+    }
+  }
   public function DisplayRooms($results)
   {
     echo "<ul class='module__List module__Title'>
@@ -42,15 +61,5 @@ class RoomsView extends Rooms
         </li>
       </ul>";
     }
-  }
-  public function FetchRoomByID($id)
-  {
-    $result = $this->getRoomByID($id);
-    return $result;
-  }
-  public function FetchRoomByName($name)
-  {
-    $result = $this->getRoomByName($name);
-    return $result;
   }
 }

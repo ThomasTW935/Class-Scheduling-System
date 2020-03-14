@@ -35,7 +35,6 @@ function submitForm(e) {
 //    xhr.send()
 // }
 
-
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 console.log(searchStatus)
@@ -54,6 +53,7 @@ function searchData(query) {
    xhr.onreadystatechange = function () {
       if (this.readyState === 4 && this.status) {
          let response = this.responseText
+         console.log(response)
          let con = document.querySelector('.module__Container')
          con.innerHTML = response
       }

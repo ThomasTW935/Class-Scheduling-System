@@ -25,8 +25,8 @@ if (isset($_GET['searchSubj'])) {
 }
 $sectView = new SectionsView();
 if (isset($_GET['searchSect'])) {
-   $results = $sectView->FetchSubjectsBySearch($_GET['searchSect'], $_GET['state']);
-   $sectView->DisplaySubjects($results);
+   $results = $sectView->FetchSectionsBySearch($_GET['searchSect'], $_GET['state']);
+   $sectView->DisplaySections($results);
 }
 $deptView = new DepartmentsView();
 if (isset($_GET['searchDeptfaculty'])) {
@@ -41,6 +41,7 @@ if (isset($_GET['searchDeptstrand'])) {
    $results = $deptView->FetchDeptsBySearch($_GET['searchDeptstrand'], $_GET['state'], 'strand');
    $deptView->DisplayDepts($results);
 }
-if (isset($_GET['deptType'])) {
-   $sectView->DisplaySectionsForm($_GET['deptType']);
+if (isset($_GET['loadSearch'])) {
+   $results = $sectView->FetchSectionsBySearch($_GET['loadSearch'], 1);
+   $sectView->DisplayInSchedLoad($results);
 }

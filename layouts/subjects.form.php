@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">
          <input class='form__Input' type='text' value='<?php echo $subj['subj_code'] ?? '' ?>' name='code' required>
-         <div class="form__Error"><?php echo $errors['subjectCode'] ?? '' ?></div>
+         <div class="form__Error"><?php echo $errors['errorCode'] ?? '' ?></div>
       </div>
    </div>
    <div class="form__Container">
@@ -32,8 +32,7 @@ if (isset($_GET['id'])) {
    <div class="form__Container">
       <label for="" class="form__Label">Unit/s:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $subj['units'] ?? '' ?>' name='units' required>
-         <div class="form__Error"><?php echo $errors['units'] ?? '' ?></div>
+         <input class='form__Input' type='number' value='<?php echo $subj['units'] ?? '' ?>' value='1' min='1' name='units' required>
       </div>
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>

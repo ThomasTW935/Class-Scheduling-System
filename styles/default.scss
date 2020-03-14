@@ -90,6 +90,9 @@ body {
     align-items: center;
     margin: 1em 0 0.25em;
     .module__Logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       img {
         width: 70px;
         height: 70px;
@@ -196,6 +199,7 @@ body {
   &__Title {
     position: sticky;
     top: 0;
+    z-index: 1;
     background: white;
     li {
       font-family: "Times New Roman", Times, serif;
@@ -360,6 +364,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100%;
+    z-index: 3;
     background: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(1px);
     cursor: default;
