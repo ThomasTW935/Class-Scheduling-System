@@ -18,14 +18,6 @@ $load = $_GET['load'];
 
 <main class='schedules'>
    <div class='schedules__Details'>
-      <section class='schedules__LoadSched'>
-
-
-         <a href='?load'>Load</a>
-
-
-
-      </section>
       <section class="schedules__Information">
          <div>
             <?php
@@ -36,6 +28,33 @@ $load = $_GET['load'];
                $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
                echo "<h1>" . $sect['sect_name'] . "</h1>";
                echo "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
+               echo "<h4>" . $dept['dept_desc'] . "</h4>";
+            }
+            if ($load == 'room') {
+               $roomID = $_GET['id'];
+               $room = $roomView->FetchRoomByID($roomID)[0];
+               $floor = $roomView->FloorConvert($room['rm_floor']);
+               echo "<h1>" . $room['rm_name'] . "</h1>";
+               echo "<h3>" . $room['rm_desc'] . "</h3>";
+               echo "<h4>" . $floor . "</h4>";
+            }
+            if ($load == 'subj') {
+               $subjID = $_GET['id'];
+               $subj = $subjView->FetchSubjectByID($subjID)[0];
+               echo "<h1>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h1>";
+               echo "<h3>" . $subj['units'] . " Unit/s</h3>";
+            }
+            if ($load == 'prof') {
+               $profID = $_GET['id'];
+               $prof = $profView->FetchProfessorByID($profID)[0];
+               $dept = $deptView->FetchDeptByID($prof['dept_id'])[0];
+               $imgSrc = $prof['prof_img'];
+               if (empty($prof['prof_img']))
+                  $imgSrc = "professor.png";
+               $middleInitial = (!empty($prof['middle_initial'])) ? $prof['middle_initial'] . '.' : '';
+               $fullName = "{$prof['last_name']}, {$prof['first_name']} {$middleInitial} {$prof['suffix']}";
+               echo "<img src='./drawables/images/" . $imgSrc . "'>";
+               echo "<h1>" . $fullName . "</h1>";
                echo "<h4>" . $dept['dept_desc'] . "</h4>";
             }
 

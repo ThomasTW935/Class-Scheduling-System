@@ -25,10 +25,10 @@ class SubjectsView extends Subjects
    public function DisplaySubjectsInSearch($results)
    {
       foreach ($results as $result) {
-         echo "<option data-value='" . $result['subj_id'] . "' value='" . $result['subj_code'] . "'><ul class='module__List'>
-            <li class='module__Item'>" . $result['subj_code'] . "</li>
-            <li class='module__Item'>" . $result['subj_desc'] . "</li>
-            <li class='module__Item'>" . $result['units'] . "</li></ul></option>";
+         echo "<option data-value='" . $result['subj_id'] . "' value='" . $result['subj_code'] . ' | ' . $result['subj_desc'] . ' | ' . $result['units'] . " Unit/s'><ul class='module__List'>
+            <li class='module__Item'>" . $result['subj_code'] . " |</li>
+            <li class='module__Item'>" . $result['subj_desc'] . " |</li>
+            <li class='module__Item'>" . $result['units'] . "Unit/s</li></ul></option>";
       }
    }
    public function DisplaySubjects($results)
@@ -48,7 +48,7 @@ class SubjectsView extends Subjects
             <li class='module__Item'>
                <div>";
          if ($result['subj_active'] == 1) {
-            echo "<a href='?id=" . $result['subj_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+            echo "<a href='schedules.php?load=subj&id=" . $result['subj_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
                   <a href='?id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>

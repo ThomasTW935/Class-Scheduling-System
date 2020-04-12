@@ -11,15 +11,28 @@
 </head>
 
 <body>
-   <form action="includes/demo.inc.php" method='POST'>
-      <input name='datalist' list='brow'>
-      <datalist id='brow'>
-         <option value="Firefox">Firefox</option>
-         <option value="Chrome">Chrome</option>
-         <option value="Safari">Safari</option>
-      </datalist>
-      <button type="submit">Submit</button>
-   </form>
+   <?php
+
+
+   $timeSlots = ["07:00", "08:00", "08:30", "10:00"];
+   $data = [];
+   foreach ($timeSlots as $timeSlot) {
+      if ($timeSlot == "10:00") {
+         $data[$timeSlot] = "<li>Daryl</li>";
+      } else {
+         $data[$timeSlot] = "<li>Thomas</li>";
+      }
+   }
+
+   var_dump($data);
+
+   $data['07:00'] = "<li>Christine</li>";
+
+   foreach ($data as $key => $value) {
+      echo $value;
+   }
+
+   ?>
 
 </body>
 

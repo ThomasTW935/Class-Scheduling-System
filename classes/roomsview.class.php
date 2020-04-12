@@ -22,13 +22,32 @@ class RoomsView extends Rooms
     $result = $this->getRoomByName($name);
     return $result;
   }
+  public function FloorConvert($floor)
+  {
+    switch ($floor % 10) {
+      case 1:
+        $floor .= 'st';
+        break;
+      case 2:
+        $floor .= 'nd';
+        break;
+      case 3:
+        $floor .= 'rd';
+        break;
+      default:
+        $floor .= 'th';
+        break;
+    }
+    return $floor;
+  }
   public function DisplayRoomsInSearch($results)
   {
     foreach ($results as $result) {
-      echo "<option data-value='" . $result['rm_id'] . "' value='rm " . $result['rm_name'] . "'><ul class='module__List'>
-        <li class='module__Item'>" . $result['rm_name'] . "</li>
-        <li class='module__Item'>" . $result['rm_desc'] . "</li>
-        <li class='module__Item'>" . $result['rm_floor'] . "</li></ul></option>";
+      $floor = $this->FloorConvert($result['rm_floor']);
+      echo "<option data-value='" . $result['rm_id'] . "' value='Rm " . $result['rm_name'] . ' | ' . $result['rm_desc'] . ' | ' . $floor . " floor'><ul class='module__List'>
+        <li class='module__Item'>" . $result['rm_name'] . " |</li>
+        <li class='module__Item'>" . $result['rm_desc'] . " |</li>
+        <li class='module__Item'>" . $floor . " floor</li></ul></option>";
     }
   }
   public function DisplayRooms($results)
@@ -48,7 +67,7 @@ class RoomsView extends Rooms
         <li class='module__Item'>
           <div>";
       if ($result['rm_active'] == 1) {
-        echo "<a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+        echo "<a href='schedules.php?load=room&id=" . $result['rm_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
         <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       echo "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>

@@ -12,7 +12,8 @@ $schedContr = new SchedulesContr();
 $schedVal = new SchedulesVal($_POST);
 
 var_dump($_POST);
-$fromTime = $_POST['fromTime'];
-$toTime = $_POST['toTime'];
-$viewBy = $_POST['viewBy'];
-header("Location: ../schedules.php?from=$fromTime&to=$toTime&view=$viewBy");
+$errors = $schedVal->validateForm($_POST);
+echo '<br>';
+var_dump($errors);
+
+exit();

@@ -28,8 +28,8 @@ class ProfessorsView extends Professors
       foreach ($results as $result) {
          $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
          $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
-         echo "<option data-value='" . $result['id'] . "'><ul class='module__List'>
-            <li class='module__Item'>" . $fullName . "</li>
+         echo "<option data-value='" . $result['id'] . "' value='" . $fullName . '| ' . $result['dept_name'] . "'><ul class='module__List'>
+            <li class='module__Item'>" . $fullName . " |</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";
       }
    }
@@ -57,7 +57,7 @@ class ProfessorsView extends Professors
             <li class='module__Item'>
                <div>";
          if ($result['prof_active'] == 1) {
-            echo "<a href=?id=" . $result['id'] . "><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+            echo "<a href='schedules.php?load=prof&id=" . $result['id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
                   <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
