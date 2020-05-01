@@ -1,10 +1,6 @@
 <?php
 include_once './layouts/__header.php';
 
-$fromTime = $_GET['from'] ?? '07:00';
-$toTime = $_GET['to'] ?? '17:00';
-$view = $_GET['view'] ?? '15';
-
 
 $deptView = new DepartmentsView();
 $sectView = new SectionsView();
@@ -14,6 +10,10 @@ $subjView = new SubjectsView();
 
 $load = $_GET['load'];
 
+$startTime;
+$endTime;
+$jumpTime;
+
 ?>
 
 <main class='schedules'>
@@ -22,7 +22,7 @@ $load = $_GET['load'];
          <div>
             <?php
 
-            if ($load == 'sect') {
+            if ($load == 'sect' || empty($load) || $load == null) {
                $sectID = $_GET['id'];
                $sect = $sectView->FetchSectionByID($sectID)[0];
                $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
@@ -34,9 +34,12 @@ $load = $_GET['load'];
                $roomID = $_GET['id'];
                $room = $roomView->FetchRoomByID($roomID)[0];
                $floor = $roomView->FloorConvert($room['rm_floor']);
+               $startTime = $room['rm_starttime'];
+               $endTime = $room['rm_endtime'];
+               $jumpTime = $room['rm_jumptime'];
                echo "<h1>" . $room['rm_name'] . "</h1>";
                echo "<h3>" . $room['rm_desc'] . "</h3>";
-               echo "<h4>" . $floor . "</h4>";
+               echo "<h4>" . $floor . " Floor</h4>";
             }
             if ($load == 'subj') {
                $subjID = $_GET['id'];
@@ -66,11 +69,43 @@ $load = $_GET['load'];
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
             <div>
                <label for="fromTime">Start:</label>
-               <input id='fromTime' type="time" name='fromTime' value='<?php echo $fromTime ?>'>
+               <select>
+                  <?php
+                  $newStartTime = strtotime($startTime);
+                  for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += $jumpTime * 60) {
+                     if ($i == $newStartTime) {
+                        echo "<option selected>" . date('g:i A', $i) . "</option>";
+                     } else {
+                        echo "<option>" . date('g:i A', $i) . "</option>";
+                     }
+                  }
+                  ?>
+               </select>
             </div>
             <div>
                <label for="toTime">End:</label>
-               <input id='toTime' type="time" name='toTime' value='<?php echo $toTime ?>'>
+               <select>
+                  <?php
+                  $newEndTime = strtotime($endTime);
+                  $loopStart = $newStartTime + ($jumpTime * 60);
+                  $loopEnd = $newStartTime - ($jumpTime * 60);
+                  echo '<option>' . $newStartTime + ($jumpTime * 60) . '</option>';
+                  for ($i = $newStartTime; $i <= $newEndTime; $i += $jumpTime * 60) {
+                     if ($i == $newStartTime) {
+                        continue;
+                     }
+                     if ($i == strtotime('11:00')) {
+                        break;
+                     }
+                     if ($i == $newEndTime) {
+                        echo "<option selected>" . date('g:i A', $i) . "</option>";
+                     } else {
+                        echo "<option>" . date('g:i A', $i) . "</option>";
+                     }
+                  }
+
+                  ?>
+               </select>
             </div>
             <div>
                <label for="viewBy">View By:</label>

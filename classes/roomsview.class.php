@@ -24,20 +24,23 @@ class RoomsView extends Rooms
   }
   public function FloorConvert($floor)
   {
+    $place = '<span>';
     switch ($floor % 10) {
       case 1:
-        $floor .= 'st';
+        $place .= 'st';
         break;
       case 2:
-        $floor .= 'nd';
+        $place .= 'nd';
         break;
       case 3:
-        $floor .= 'rd';
+        $place .= 'rd';
         break;
       default:
-        $floor .= 'th';
+        $place .= 'th';
         break;
     }
+    $place .= "</span>";
+    $floor .= $place;
     return $floor;
   }
   public function DisplayRoomsInSearch($results)

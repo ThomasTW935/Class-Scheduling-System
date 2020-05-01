@@ -596,6 +596,10 @@ body main {
           align-items: center;
 }
 
+.schedules__Details .schedules__Information div span {
+  vertical-align: super;
+}
+
 .schedules__Details .schedules__Settings {
   background: pink;
 }
