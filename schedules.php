@@ -87,20 +87,11 @@ $jumpTime;
                <select>
                   <?php
                   $newEndTime = strtotime($endTime);
-                  $loopStart = $newStartTime + ($jumpTime * 60);
-                  $loopEnd = $newStartTime - ($jumpTime * 60);
-                  echo '<option>' . $newStartTime + ($jumpTime * 60) . '</option>';
-                  for ($i = $newStartTime; $i <= $newEndTime; $i += $jumpTime * 60) {
-                     if ($i == $newStartTime) {
-                        continue;
-                     }
-                     if ($i == strtotime('11:00')) {
-                        break;
-                     }
+                  for ($i = $newStartTime + (30 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += $jumpTime * 60) {
                      if ($i == $newEndTime) {
-                        echo "<option selected>" . date('g:i A', $i) . "</option>";
+                        echo "<option selected>" . date('g:i A', $i) . " </option>";
                      } else {
-                        echo "<option>" . date('g:i A', $i) . "</option>";
+                        echo "<option>" . date('g:i A', $i) . " </option>";
                      }
                   }
 
