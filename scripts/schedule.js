@@ -1,3 +1,15 @@
+let timeStart = document.querySelector('#startTime')
+
+console.log(timeStart)
+
+timeStart.addEventListener('change', () => {
+  console.log('changed')
+})
+
+
+
+// Adding Schedules
+
 let timeFrom = document.querySelector('#timeFrom')
 let timeTo = document.querySelector('#timeTo')
 let timeToInput = document.querySelector('#timeToInput')
@@ -29,5 +41,7 @@ function FetchDatalistValue(e) {
     }
   }
 }
+
+
 
 

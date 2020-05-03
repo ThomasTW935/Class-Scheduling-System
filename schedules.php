@@ -68,8 +68,8 @@ $jumpTime;
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
             <div>
-               <label for="fromTime">Start:</label>
-               <select>
+               <label for="startTime">Start:</label>
+               <select id='startTime'>
                   <?php
                   $newStartTime = strtotime($startTime);
                   for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += $jumpTime * 60) {
@@ -119,9 +119,21 @@ $jumpTime;
 
       <?php
 
+      $birthDay = strtotime('June 16 2000');
+      $newBirthDay = date('F j, Y', $birthDay);
 
+      echo 'Birthday in secs: ' . $birthDay;
+      echo '<br>';
+      echo 'Birthday in date: ' . $newBirthDay;
 
       ?>
+      <script>
+         let d = new Date('June 16 2000')
+         let x = Date.parse('June 16 2000')
+         let n = new Date(x)
+         document.write('JS with String Birthday in millisecs: ' + n)
+         document.write('JS with parse Birthday in millisecs: ' + x)
+      </script>
    </div>
    <?php
 
