@@ -72,7 +72,7 @@ $jumpTime;
                <select id='startTime'>
                   <?php
                   $newStartTime = strtotime($startTime);
-                  for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += $jumpTime * 60) {
+                  for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += 60 * 60) {
                      if ($i == $newStartTime) {
                         echo "<option selected>" . date('g:i A', $i) . "</option>";
                      } else {
@@ -83,15 +83,13 @@ $jumpTime;
                </select>
             </div>
             <div>
-               <label for="toTime">End:</label>
-               <select>
+               <label for="endTime">End:</label>
+               <select id="endTime">
                   <?php
                   $newEndTime = strtotime($endTime);
-                  for ($i = $newStartTime + (30 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += $jumpTime * 60) {
+                  for ($i = $newStartTime + (60 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += 60 * 60) {
                      if ($i == $newEndTime) {
                         echo "<option selected>" . date('g:i A', $i) . " </option>";
-                     } else {
-                        echo "<option>" . date('g:i A', $i) . " </option>";
                      }
                   }
 
@@ -99,8 +97,8 @@ $jumpTime;
                </select>
             </div>
             <div>
-               <label for="viewBy">View By:</label>
-               <select id='viewBy' name='viewBy'>
+               <label for="jumpTime">View By:</label>
+               <select id='jumpTime' name='jumpTime'>
                   <?php
                   for ($i = 15; $i <= 60; $i += 15) {
                      $selected = ($view == $i) ? 'selected' : '';
@@ -110,7 +108,6 @@ $jumpTime;
                   ?>
                </select>
             </div>
-
             <button class='button' type="submit" name="submit">Save</button>
          </form>
       </section>
