@@ -4,8 +4,6 @@ let timeStart = document.querySelector('#startTime')
 let timeEnd = document.querySelector('#endTime')
 let timeJump = document.querySelector('#jumpTime')
 
-console.log(timeStart)
-
 timeStart.addEventListener('change', () => {
   let startDate = new Date('January 1 2000 ' + timeStart.value)
   let startDate_Hour = startDate.getHours()
@@ -35,6 +33,19 @@ timeStart.addEventListener('change', () => {
     timeEnd.value = endValue
   }
 })
+
+//Printing Time Table 
+
+// timeEnd.addEventListener('change', () => {
+//   console.log(timeStart.value)
+//   console.log(timeEnd.value)
+//   console.log(timeJump.value)
+//   let endDate = new Date('January 1 2000 ' + timeEnd.value)
+//   endDate_Minutes = endDate.getMinutes() + 120
+//   endDate.setMinutes(endDate_Minutes)
+//   console.log(endDate_Minutes)
+//   console.log(endDate)
+// })
 
 // Adding Schedules
 

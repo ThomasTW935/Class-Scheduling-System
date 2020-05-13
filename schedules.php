@@ -90,6 +90,8 @@ $jumpTime;
                   for ($i = $newStartTime + (60 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += 60 * 60) {
                      if ($i == $newEndTime) {
                         echo "<option selected>" . date('g:i A', $i) . " </option>";
+                     } else {
+                        echo "<option>" . date('g:i A', $i) . "</option>";
                      }
                   }
 
@@ -101,7 +103,7 @@ $jumpTime;
                <select id='jumpTime' name='jumpTime'>
                   <?php
                   for ($i = 15; $i <= 60; $i += 15) {
-                     $selected = ($view == $i) ? 'selected' : '';
+                     $selected = ($jumpTime == $i) ? 'selected' : '';
                      echo "<option value='$i' $selected>$i minutes</option>";
                   }
 
@@ -113,24 +115,54 @@ $jumpTime;
       </section>
    </div>
    <div class='schedules__Table'>
+      <ul class="schedules__Day">
+         <li>Mon</li>
+         <li>Tue</li>
+         <li>Wed</li>
+         <li>Thu</li>
+         <li>Fri</li>
+         <li>Sat</li>
+      </ul>
+      <ul class="schedules__Time">
 
+         <?php
+
+         $timeView = [];
+         for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
+            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+            if ($timeDisplay % $jumpTime == 0) {
+               echo "<li>" . date('g:i A', $i) . "</li>";
+            } else {
+               echo "<li>s</li>";
+            }
+         }
+         ?>
+      </ul>
       <?php
 
-      $birthDay = strtotime('June 16 2000');
-      $newBirthDay = date('F j, Y', $birthDay);
 
-      echo 'Birthday in secs: ' . $birthDay;
-      echo '<br>';
-      echo 'Birthday in date: ' . $newBirthDay;
+      $monday = [];
+      $tuesday = [];
+      $days = [$monday, $tuesday];
+
+      for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
+         $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+         if ($timeDisplay % $jumpTime == 0) {
+            array_push($monday, date('g:i A', $i));
+         } else {
+            array_push($monday, 's');
+         }
+      }
+      echo 'Increment Value: ' . $jumpTime;
+      echo "<ul class='schedules__Time'>";
+      for ($i = 0; $i < sizeOf($monday); $i++) {
+         echo "<li>" . $monday[$i] . "</li>";
+      }
+      echo "</ul>";
 
       ?>
-      <script>
-         let d = new Date('June 16 2000')
-         let x = Date.parse('June 16 2000')
-         let n = new Date(x)
-         document.write('JS with String Birthday in millisecs: ' + n)
-         document.write('JS with parse Birthday in millisecs: ' + x)
-      </script>
+      </ul>
+
    </div>
    <?php
 
