@@ -1207,28 +1207,42 @@ body main {
 .schedules__Table {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[7];
-      grid-template-columns: repeat(7, 1fr);
+  -ms-grid-columns: 12% 1fr;
+      grid-template-columns: 12% 1fr;
+  -ms-grid-rows: 5% 1fr;
+      grid-template-rows: 5% 1fr;
   height: 89vh;
   overflow: auto;
 }
 
-.schedules__Table li {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+.schedules__Table .schedules__Day {
+  color: white;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-column-gap: 0.3rem;
+          column-gap: 0.3rem;
   text-align: center;
 }
 
-.schedules__Table li span {
-  visibility: hidden;
-}
-
-.schedules__Table .schedules__Timeslot {
-  background: lightblue;
-}
-
-.schedules__Table .schedules__Timeslot label {
-  font-size: 0.8rem;
+.schedules__Table .schedules__Day li {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  background: #00aaff;
+  font-weight: 350;
+  text-transform: uppercase;
+  font-size: 1.2rem;
 }
 
 .schedules__Subjects {

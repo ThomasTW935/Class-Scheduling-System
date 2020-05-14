@@ -80,21 +80,26 @@
   }
   &__Table {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: 12% 1fr;
+    grid-template-rows: 5% 1fr;
     height: 89vh;
     overflow: auto;
-    li {
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
+    .schedules__Day {
+      color: white;
+      grid-column: 2/3;
+      grid-row: 1/2;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      justify-content: space-between;
+      column-gap: 0.3rem;
       text-align: center;
-      span {
-        visibility: hidden;
-      }
-    }
-    .schedules__Timeslot {
-      background: lightblue;
-      label {
-        font-size: 0.8rem;
+      li {
+        display: grid;
+        place-content: center;
+        background: rgba(0, 170, 255, 1);
+        font-weight: 350;
+        text-transform: uppercase;
+        font-size: 1.2rem;
       }
     }
   }

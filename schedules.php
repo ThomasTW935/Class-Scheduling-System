@@ -116,49 +116,37 @@ $jumpTime;
    </div>
    <div class='schedules__Table'>
       <ul class="schedules__Day">
-         <li>Mon</li>
-         <li>Tue</li>
-         <li>Wed</li>
-         <li>Thu</li>
-         <li>Fri</li>
-         <li>Sat</li>
+         <li>Monday</li>
+         <li>Tuesday</li>
+         <li>Wednesday</li>
+         <li>Thursday</li>
+         <li>Friday</li>
+         <li>Saturday</li>
       </ul>
       <ul class="schedules__Time">
 
          <?php
 
-         $timeView = [];
+         $days = array();
+         for ($i = 0; $i < 6; $i++) {
+            $days[$i] = array();
+         }
          for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
             $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            if ($timeDisplay % $jumpTime == 0) {
-               echo "<li>" . date('g:i A', $i) . "</li>";
-            } else {
-               echo "<li>s</li>";
-            }
+            $days[0][date('g:i A', $i)] = "";
          }
+
+         for ($i = 1; $i < sizeof($days); $i++) {
+            $days[$i] = $days[0];
+         }
+
+         echo sizeof($days)
+
          ?>
       </ul>
       <?php
 
 
-      $monday = [];
-      $tuesday = [];
-      $days = [$monday, $tuesday];
-
-      for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
-         $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-         if ($timeDisplay % $jumpTime == 0) {
-            array_push($monday, date('g:i A', $i));
-         } else {
-            array_push($monday, 's');
-         }
-      }
-      echo 'Increment Value: ' . $jumpTime;
-      echo "<ul class='schedules__Time'>";
-      for ($i = 0; $i < sizeOf($monday); $i++) {
-         echo "<li>" . $monday[$i] . "</li>";
-      }
-      echo "</ul>";
 
       ?>
       </ul>
