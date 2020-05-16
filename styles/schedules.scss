@@ -82,6 +82,7 @@
     display: grid;
     grid-template-columns: 12% 1fr;
     grid-template-rows: 5% 1fr;
+    margin: 0.25rem 0.5rem;
     height: 89vh;
     overflow: auto;
     .schedules__Day {

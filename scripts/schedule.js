@@ -16,12 +16,16 @@ timeStart.addEventListener('change', () => {
     let option = document.createElement('option')
     let timeValue = i
     let timePeriod = 'AM'
-    if (timeValue >= 12) {
+    if (timeValue > 12) {
       timeValue = i - 12
       timePeriod = 'PM'
     }
-    optionValue = timeValue + ':00 ' + timePeriod
-    option.innerHTML = optionValue
+    if (timeValue == 12) {
+      timePeriod = 'PM'
+    }
+    let m = ":00 "
+    option.value = i + m
+    option.innerHTML = timeValue + m + timePeriod
     timeEnd.add(option)
   }
 

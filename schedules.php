@@ -21,9 +21,9 @@ $jumpTime;
       <section class="schedules__Information">
          <div>
             <?php
-
+            $ID = $_GET['id'];
             if ($load == 'sect' || empty($load) || $load == null) {
-               $sectID = $_GET['id'];
+               $sectID = $ID;
                $sect = $sectView->FetchSectionByID($sectID)[0];
                $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
                echo "<h1>" . $sect['sect_name'] . "</h1>";
@@ -31,7 +31,7 @@ $jumpTime;
                echo "<h4>" . $dept['dept_desc'] . "</h4>";
             }
             if ($load == 'room') {
-               $roomID = $_GET['id'];
+               $roomID = $ID;
                $room = $roomView->FetchRoomByID($roomID)[0];
                $floor = $roomView->FloorConvert($room['rm_floor']);
                $startTime = $room['rm_starttime'];
@@ -42,13 +42,13 @@ $jumpTime;
                echo "<h4>" . $floor . " Floor</h4>";
             }
             if ($load == 'subj') {
-               $subjID = $_GET['id'];
+               $subjID = $ID;
                $subj = $subjView->FetchSubjectByID($subjID)[0];
                echo "<h1>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h1>";
                echo "<h3>" . $subj['units'] . " Unit/s</h3>";
             }
             if ($load == 'prof') {
-               $profID = $_GET['id'];
+               $profID = $ID;
                $prof = $profView->FetchProfessorByID($profID)[0];
                $dept = $deptView->FetchDeptByID($prof['dept_id'])[0];
                $imgSrc = $prof['prof_img'];
@@ -63,36 +63,42 @@ $jumpTime;
 
             ?>
          </div>
-         <a href="?add&load=<?php echo $load ?>&id=<?php echo $_GET['id'] ?>">Add Schedules</a>
+         <a href="?add&load=<?php echo $load ?>&id=<?php echo $ID ?>">Add Schedules</a>
       </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
+            <input type="hidden" name="id" value=<?php echo $ID ?>>
+            <input type="hidden" name="type" value=<?php echo $load ?>>
             <div>
                <label for="startTime">Start:</label>
-               <select id='startTime'>
+               <select id='startTime' name="startTime">
                   <?php
                   $newStartTime = strtotime($startTime);
                   for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += 60 * 60) {
+                     echo "<option value = '" . date('H:i', $i) . "' ";
                      if ($i == $newStartTime) {
-                        echo "<option selected>" . date('g:i A', $i) . "</option>";
+                        echo "selected >" . date('g:i A', $i);
                      } else {
-                        echo "<option>" . date('g:i A', $i) . "</option>";
+                        echo " >" . date('g:i A', $i);
                      }
+                     echo "</option>";
                   }
                   ?>
                </select>
             </div>
             <div>
                <label for="endTime">End:</label>
-               <select id="endTime">
+               <select id="endTime" name="endTime">
                   <?php
                   $newEndTime = strtotime($endTime);
                   for ($i = $newStartTime + (60 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += 60 * 60) {
+                     echo "<option value = '" . date('H:i', $i) . "' ";
                      if ($i == $newEndTime) {
-                        echo "<option selected>" . date('g:i A', $i) . " </option>";
+                        echo "selected >" . date('g:i A', $i);
                      } else {
-                        echo "<option>" . date('g:i A', $i) . "</option>";
+                        echo " >" . date('g:i A', $i);
                      }
+                     echo "</option>";
                   }
 
                   ?>
@@ -110,7 +116,7 @@ $jumpTime;
                   ?>
                </select>
             </div>
-            <button class='button' type="submit" name="submit">Save</button>
+            <button class='button' type="submit" name="scheduleSave">Save</button>
          </form>
       </section>
    </div>

@@ -11,9 +11,11 @@ $schedView = new SchedulesView();
 $schedContr = new SchedulesContr();
 $schedVal = new SchedulesVal($_POST);
 
-var_dump($_POST);
 $errors = $schedVal->validateForm($_POST);
 echo '<br>';
-var_dump($errors);
 
-exit();
+if (isset($_POST['scheduleSave'])) {
+  var_dump($_POST);
+  $schedContr->ModifyDisplayTime($_POST);
+}
+header("Location: ../schedules.php?load=" . $_POST["type"] . "&id=" . $_POST["id"]);
