@@ -82,25 +82,41 @@
     display: grid;
     grid-template-columns: 12% 1fr;
     grid-template-rows: 5% 1fr;
+    grid-template-areas:
+      " . day"
+      "time slot";
+    row-gap: 0.5rem;
     margin: 0.25rem 0.5rem;
     height: 89vh;
     overflow: auto;
     .schedules__Day {
-      color: white;
-      grid-column: 2/3;
-      grid-row: 1/2;
+      grid-area: day;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       justify-content: space-between;
+      color: white;
       column-gap: 0.3rem;
-      text-align: center;
+      li {
+        display: grid;
+        place-content: center;
+        background: rgb(0, 125, 220);
+        font-weight: 350;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+      }
+    }
+    .schedules__Time {
+      grid-area: time;
+      color: white;
       li {
         display: grid;
         place-content: center;
         background: rgba(0, 170, 255, 1);
-        font-weight: 350;
-        text-transform: uppercase;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        span {
+          color: transparent;
+          font-size: 0.8rem;
+        }
       }
     }
   }

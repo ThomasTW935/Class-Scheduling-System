@@ -650,19 +650,17 @@ body main {
       grid-template-columns: 12% 1fr;
   -ms-grid-rows: 5% 1fr;
       grid-template-rows: 5% 1fr;
+      grid-template-areas: " . day" "time slot";
+  row-gap: 0.5rem;
   margin: 0.25rem 0.5rem;
   height: 89vh;
   overflow: auto;
 }
 
 .schedules__Table .schedules__Day {
-  color: white;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-column: 2/3;
   -ms-grid-row: 1;
-  -ms-grid-row-span: 1;
-  grid-row: 1/2;
+  -ms-grid-column: 2;
+  grid-area: day;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[6];
@@ -670,19 +668,39 @@ body main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  color: white;
   -webkit-column-gap: 0.3rem;
           column-gap: 0.3rem;
-  text-align: center;
 }
 
 .schedules__Table .schedules__Day li {
   display: -ms-grid;
   display: grid;
   place-content: center;
-  background: #00aaff;
+  background: #007ddc;
   font-weight: 350;
   text-transform: uppercase;
   font-size: 1.2rem;
+}
+
+.schedules__Table .schedules__Time {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: time;
+  color: white;
+}
+
+.schedules__Table .schedules__Time li {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  background: #00aaff;
+  font-size: 1rem;
+}
+
+.schedules__Table .schedules__Time li span {
+  color: transparent;
+  font-size: 0.8rem;
 }
 
 .schedules__Subjects {

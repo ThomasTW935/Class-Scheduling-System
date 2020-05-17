@@ -130,6 +130,22 @@ $jumpTime;
          <li>Saturday</li>
       </ul>
       <ul class="schedules__Time">
+         <?php
+
+         for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
+            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+            echo "<li>";
+            if ($timeDisplay % $jumpTime == 0) {
+               echo date('g:i A', $i);
+            } else {
+               echo "<span>s</span>";
+            }
+            echo "</li>";
+         }
+
+         ?>
+      </ul>
+      <ul class="schedules__TimeSlot">
 
          <?php
 
@@ -146,7 +162,6 @@ $jumpTime;
             $days[$i] = $days[0];
          }
 
-         echo sizeof($days)
 
          ?>
       </ul>
