@@ -17,4 +17,15 @@ class SchedulesView extends Schedules
     $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $days);
     return $results;
   }
+  public function GenerateTimeOptions($startTime,$endTime,$selected, $jump = 60){
+    for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
+      echo "<option value = '" . date('H:i', $i) . "' ";
+      if ($i == $selected) {
+         echo "selected >" . date('g:i A', $i);
+      } else {
+         echo " >" . date('g:i A', $i);
+      }
+      echo "</option>";
+   }
+  }
 }

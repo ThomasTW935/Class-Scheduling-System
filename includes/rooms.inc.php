@@ -20,7 +20,12 @@ if (isset($_POST['submit'])) {
     header('Location: ../rooms.php?add' . $query);
     exit();
   }
+  var_dump($_POST);
   $roomsContr->CreateRoom($_POST);
+  $room = $roomsView->FetchRoomByLatest();
+  $rmID = $room[0]["rm_id"];
+  $schedContr = new SchedulesContr();
+  $schedContr->CreateDisplayTime("room", $rmID);
 } else if (isset($_POST['update'])) {
   if (!empty($errors)) {
     header('Location: ../rooms.php?id=' . $_POST['rmID'] . $query);

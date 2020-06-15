@@ -26,6 +26,18 @@ class Rooms extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function getRoomByLatest()
+  {
+    $sql = 'SELECT rm_id FROM rooms ORDER BY rm_id DESC LIMIT 1';
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll();
+      return $result;
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
   protected function getRoomByName($name)
   {
     $sql = 'SELECT * FROM rooms WHERE rm_name = ? LIMIT 1';

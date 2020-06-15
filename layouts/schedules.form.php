@@ -12,26 +12,36 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
   $button = "update";
 }
 
-$fromTime = $_GET['from'] ?? '07:00';
-$toTime = $_GET['to'] ?? '17:00';
-
-$returnID = $_GET['id'];
-
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST'>
-  <a href="schedules.php?load=<?php echo $load . '&id=' . $returnID ?>" class='form__Close'>X</a>
+  <?php echo $newStartTime ?>
+  <div class='form__TitleBar'></div>
+  <button type='button' class='form__Toggle form__Close'>X</button>
   <label class='form__Title'>Schedules's Information</label>
-  <input type="hidden" name="load" value='<?php echo $load ?>'>
-  <input type="hidden" name="id" value='<?php echo $returnID ?>'>
+  <input type="hidden" name="type" value='<?php echo $type ?>'>
+  <input type="hidden" name="id" value='<?php echo $ID ?>'>
   <div class="form__TimeContainer">
     <div class="form__Input">
       <label for='timeFrom' class='form__Label'>From:</label>
-      <input type="time" name="timeFrom" id="timeFrom">
+      <select name="timeFrom">
+        <?php
+        
+        $schedView->GenerateTimeOptions($newStartTime,$newEndTime - (60*60),$selected, $jump = $jumpTime)         
+
+        ?>
+
+      </select>
     </div>
     <div class="form__Input">
       <label for='timeTo' class='form__Label'>To:</label>
-      <input type="time" name="timeTo" id="timeTo">
+      <select name="timeTo">
+        <?php
+        
+        $schedView->GenerateTimeOptions($newStartTime + (60*60),$newEndTime,$selected, $jump = $jumpTime)         
+        
+        ?>
+      </select>
     </div>
   </div>
   <div class="form__DayContainer">
@@ -52,7 +62,7 @@ $returnID = $_GET['id'];
   </div>
   <?php
 
-  if ($load != 'prof') {
+  if ($type != 'prof') {
     echo "<div class='form__Container'>
       <label for=''>Select Professor</label>
       <div class='form__Input'>
@@ -70,7 +80,7 @@ $returnID = $_GET['id'];
   ?>
   <?php
 
-  if ($load != 'subj') {
+  if ($type != 'subj') {
     echo "<div class='form__Container'>
     <label for=''>Select Subject</label>
     <div class='form__Input'>
@@ -88,7 +98,7 @@ $returnID = $_GET['id'];
   ?>
   <?php
 
-  if ($load != 'room') {
+  if ($type != 'room') {
     echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
@@ -106,7 +116,7 @@ $returnID = $_GET['id'];
 
   ?>
   <?php
-  if ($load != 'sect') {
+  if ($type != 'sect') {
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>
       <div class='form__Input'>
@@ -125,4 +135,4 @@ $returnID = $_GET['id'];
 
   <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="schedules.php?load=<?php echo $load . '&id=' . $returnID ?>" class='module__formBackground'></a>
+<button type='button' class='module__formBackground form__Toggle'></button>

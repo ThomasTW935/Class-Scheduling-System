@@ -2,6 +2,7 @@
 
 class RoomsView extends Rooms
 {
+
   public function FetchRoomsByState($state)
   {
     $results = $this->getRoomsByState($state);
@@ -11,6 +12,11 @@ class RoomsView extends Rooms
   {
     $results = $this->getRoomBySearch($search, $state);
     return $results;
+  }
+  public function FetchRoomByLatest()
+  {
+    $result = $this->getRoomByLatest();
+    return $result;
   }
   public function FetchRoomByID($id)
   {
@@ -70,7 +76,11 @@ class RoomsView extends Rooms
         <li class='module__Item'>
           <div>";
       if ($result['rm_active'] == 1) {
-        echo "<a href='schedules.php?load=room&id=" . $result['rm_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+        echo "<form method='POST' action='./schedules.php'>
+        <input type='hidden' name='type' value='room'>
+        <input type='hidden' name='id' value='" . $result['rm_id'] . "'>
+        <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+        <span>Schedule</span></form>
         <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       echo "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>

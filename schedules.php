@@ -7,8 +7,13 @@ $sectView = new SectionsView();
 $roomView = new RoomsView();
 $profView = new ProfessorsView();
 $subjView = new SubjectsView();
-
-$load = $_GET['load'];
+$schedView = new SchedulesView();
+$type = $_POST['type'] ?? $_GET['type'];
+$ID = $_POST['id'] ?? $_GET['id'];
+if (!isset($type) XOR empty($type)) {
+   header('Location: ./dashboard.php');
+   exit();
+}
 
 $startTime;
 $endTime;
@@ -21,8 +26,7 @@ $jumpTime;
       <section class="schedules__Information">
          <div>
             <?php
-            $ID = $_GET['id'];
-            if ($load == 'sect' || empty($load) || $load == null) {
+            if ($type == 'sect' || empty($type) || $type == null) {
                $sectID = $ID;
                $sect = $sectView->FetchSectionByID($sectID)[0];
                $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
@@ -30,7 +34,7 @@ $jumpTime;
                echo "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
                echo "<h4>" . $dept['dept_desc'] . "</h4>";
             }
-            if ($load == 'room') {
+            if ($type == 'room') {
                $roomID = $ID;
                $room = $roomView->FetchRoomByID($roomID)[0];
                $floor = $roomView->FloorConvert($room['rm_floor']);
@@ -41,13 +45,13 @@ $jumpTime;
                echo "<h3>" . $room['rm_desc'] . "</h3>";
                echo "<h4>" . $floor . " Floor</h4>";
             }
-            if ($load == 'subj') {
+            if ($type == 'subj') {
                $subjID = $ID;
                $subj = $subjView->FetchSubjectByID($subjID)[0];
                echo "<h1>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h1>";
                echo "<h3>" . $subj['units'] . " Unit/s</h3>";
             }
-            if ($load == 'prof') {
+            if ($type == 'prof') {
                $profID = $ID;
                $prof = $profView->FetchProfessorByID($profID)[0];
                $dept = $deptView->FetchDeptByID($prof['dept_id'])[0];
@@ -63,26 +67,20 @@ $jumpTime;
 
             ?>
          </div>
-         <a href="?add&load=<?php echo $load ?>&id=<?php echo $ID ?>">Add Schedules</a>
+         <button type='button' class='form__Toggle'>Add Schedules</button>
       </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
             <input type="hidden" name="id" value=<?php echo $ID ?>>
-            <input type="hidden" name="type" value=<?php echo $load ?>>
+            <input type="hidden" name="type" value=<?php echo $type ?>>
             <div>
                <label for="startTime">Start:</label>
                <select id='startTime' name="startTime">
                   <?php
+
                   $newStartTime = strtotime($startTime);
-                  for ($i = strtotime('0:00'); $i <= strtotime('23:00'); $i += 60 * 60) {
-                     echo "<option value = '" . date('H:i', $i) . "' ";
-                     if ($i == $newStartTime) {
-                        echo "selected >" . date('g:i A', $i);
-                     } else {
-                        echo " >" . date('g:i A', $i);
-                     }
-                     echo "</option>";
-                  }
+                  $schedView->GenerateTimeOptions(strtotime('0:00'), strtotime('23:00'), $newStartTime);
+                  
                   ?>
                </select>
             </div>
@@ -90,17 +88,10 @@ $jumpTime;
                <label for="endTime">End:</label>
                <select id="endTime" name="endTime">
                   <?php
-                  $newEndTime = strtotime($endTime);
-                  for ($i = $newStartTime + (60 * 60); $i <= $newStartTime + (60 * 60 * 23); $i += 60 * 60) {
-                     echo "<option value = '" . date('H:i', $i) . "' ";
-                     if ($i == $newEndTime) {
-                        echo "selected >" . date('g:i A', $i);
-                     } else {
-                        echo " >" . date('g:i A', $i);
-                     }
-                     echo "</option>";
-                  }
 
+                  $newEndTime = strtotime($endTime);
+                  $schedView->GenerateTimeOptions($newStartTime + (60 * 60),  $newStartTime + (60 * 60 * 23), $newEndTime);
+                  
                   ?>
                </select>
             </div>
@@ -174,12 +165,9 @@ $jumpTime;
 
    </div>
    <?php
-
-   if (isset($_GET['add']) || isset($_GET['sched'])) {
       include_once './layouts/schedules.form.php';
-   }
-   // if (isset($_GET['load']) || isset($_GET['sched'])) {
-   //    include_once './layouts/schedulesload.form.php';
+   // if (isset($_GET['type']) || isset($_GET['sched'])) {
+   //    include_once './layouts/schedulestype.form.php';
    // }
 
    ?>

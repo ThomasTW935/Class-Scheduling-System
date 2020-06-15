@@ -392,10 +392,9 @@ body main {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding: 1em 0;
+  padding-bottom: 1.5em;
   max-height: 90vh;
   max-width: 70vw;
-  padding: 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -412,21 +411,32 @@ body main {
           box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
 }
 
+.module__Form .form__TitleBar {
+  height: 2.5em;
+  width: 100%;
+  background: #00aaff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 .module__Form .form__Close {
   position: absolute;
   display: -ms-grid;
   display: grid;
   place-content: center;
-  top: 0.5em;
+  top: 0.25em;
   right: 1em;
-  width: 30px;
-  height: 30px;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
+  background: none;
+  color: white;
+  font-size: 1rem;
 }
 
-.module__Form .form__Close:active {
-  background: rgba(0, 0, 0, 0.25);
-  color: black;
+.module__Form .form__Close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
 }
 
 .module__Form .form__Title {
@@ -453,6 +463,7 @@ body main {
       grid-template-columns: 1fr 2fr;
   width: 100%;
   margin: 1em 0;
+  padding: 0 1.5em;
 }
 
 .module__Form .form__Container * {

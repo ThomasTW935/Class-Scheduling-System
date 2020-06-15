@@ -2,20 +2,19 @@
 
 class Schedules extends Dbh
 {
-  protected function updateDisplayTime($timeStart, $timeEnd, $timeJump, $type, $ID)
+  protected function setDisplayTime($type, $ID)
   {
-    if ($type == "prof") {
-      $sql = "UPDATE professors SET prof_starttime = ? , prof_endtime = ?, prof_jumptime = ? WHERE id = ?";
+    $sql = "INSERT INTO schedules_operation (op_type, op_typeid) VALUES(?,?)";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$type, $ID]);
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
     }
-    if ($type == "subj") {
-      $sql = "UPDATE subjects SET subj_starttime = ? , subj_endtime = ?, subj_jumptime = ? WHERE subj_id = ?";
-    }
-    if ($type == "room") {
-      $sql = "UPDATE rooms SET rm_starttime = ? , rm_endtime = ?, rm_jumptime = ? WHERE rm_id = ?";
-    }
-    if ($type == "sect") {
-      $sql = "UPDATE sections SET sect_starttime = ? , sect_endtime = ?, sect_jumptime = ? WHERE sect_id = ?";
-    }
+  }
+  protected function updateDisplayTime($timeStart, $timeEnd, $timeJump, $ID)
+  {
+    $sql = "UPDATE schedules_operation SET op_start = ? , op_end = ?, op_jump = ? WHERE op_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$timeStart, $timeEnd, $timeJump, $ID]);

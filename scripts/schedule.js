@@ -51,6 +51,30 @@ timeStart.addEventListener('change', () => {
 //   console.log(endDate)
 // })
 
+
+// Open/Close Modal
+
+let toggles = document.querySelectorAll(".form__Toggle")
+let form = document.querySelector(".module__Form")
+let formBg = document.querySelector(".module__formBackground")
+let arrForm = [form, formBg]
+
+arrForm.forEach(x => {
+  x.style.display = 'none'
+})
+toggles.forEach(toggle => {
+  console.log(toggle)
+  toggle.addEventListener('click', FormToggle)
+})
+function FormToggle() {
+  arrForm.forEach(x => {
+    x.style.display = (x.style.display == 'none') ? 'flex' : 'none'
+  })
+}
+
+
+
+
 // Adding Schedules
 
 let timeFrom = document.querySelector('#timeFrom')
