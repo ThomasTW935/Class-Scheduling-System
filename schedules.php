@@ -14,10 +14,10 @@ if (!isset($type) XOR empty($type)) {
    header('Location: ./dashboard.php');
    exit();
 }
-
-$startTime;
-$endTime;
-$jumpTime;
+$dTime = $schedView->FetchDisplayTime($type,$ID)[0];
+$startTime = $dTime['op_start'];
+$endTime   = $dTime['op_end'];
+$jumpTime  = $dTime['op_jump'];
 
 ?>
 
@@ -38,9 +38,6 @@ $jumpTime;
                $roomID = $ID;
                $room = $roomView->FetchRoomByID($roomID)[0];
                $floor = $roomView->FloorConvert($room['rm_floor']);
-               $startTime = $room['rm_starttime'];
-               $endTime = $room['rm_endtime'];
-               $jumpTime = $room['rm_jumptime'];
                echo "<h1>" . $room['rm_name'] . "</h1>";
                echo "<h3>" . $room['rm_desc'] . "</h3>";
                echo "<h4>" . $floor . " Floor</h4>";
@@ -146,14 +143,14 @@ $jumpTime;
          }
          for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
             $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            $days[0][date('g:i A', $i)] = "";
+            $days[0][$i] = "";
          }
 
          for ($i = 1; $i < sizeof($days); $i++) {
             $days[$i] = $days[0];
          }
-
-
+         $timeSlot = $schedView->FetchScheduleByTypeID($type,$ID);
+         var_dump($timeSlot);
          ?>
       </ul>
       <?php

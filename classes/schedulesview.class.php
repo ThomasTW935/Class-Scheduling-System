@@ -2,30 +2,33 @@
 
 class SchedulesView extends Schedules
 {
-  public function FetchSchedules()
-  {
-    $results = $this->getSchedules();
-    return $results;
+  public function FetchDisplayTime($type,$id){
+    $result = $this->getDisplayTime($type,$id);
+    return $result;
   }
   public function FetchScheduleByID($schedID)
   {
     $result = $this->getScheduleByID($schedID);
     return $result;
   }
-  public function FetchScheduleByTimeAndDay($timeFrom, $timeTo, $days)
+  public function FetchScheduleByTypeID($type,$id)
   {
-    $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $days);
+    $results = $this->getScheduleByTypeID($type, $id);
     return $results;
   }
-  public function GenerateTimeOptions($startTime,$endTime,$selected, $jump = 60){
+  public function GenerateTimeOptions($startTime,$endTime,$selected, $jump = 60, $showTimeDiff = false){
     for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
       echo "<option value = '" . date('H:i', $i) . "' ";
       if ($i == $selected) {
-         echo "selected >" . date('g:i A', $i);
+         echo "selected >" . date('g:i A', $i) . "</option>";
       } else {
-         echo " >" . date('g:i A', $i);
+        echo " >" . date('g:i A', $i);
+        if($showTimeDiff){
+          $timeDiff = $i - $startTime;
+          echo " (" . date('g:i',$timeDiff) . " hrs)";
+        }
+        "</option>";
       }
-      echo "</option>";
    }
   }
 }

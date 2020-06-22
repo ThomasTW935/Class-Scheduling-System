@@ -560,6 +560,10 @@ body main {
       justify-content: space-around;
 }
 
+.schedules .module__Form .form__TimeContainer select span {
+  display: none;
+}
+
 .schedules .module__Form .form__DayContainer {
   display: -webkit-box;
   display: -ms-flexbox;

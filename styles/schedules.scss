@@ -13,7 +13,10 @@
       display: flex;
       width: 50%;
       justify-content: space-around;
-      div {
+      select {
+        span {
+          display: none;
+        }
       }
     }
     .form__DayContainer {

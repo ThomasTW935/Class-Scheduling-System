@@ -15,7 +15,6 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST'>
-  <?php echo $newStartTime ?>
   <div class='form__TitleBar'></div>
   <button type='button' class='form__Toggle form__Close'>X</button>
   <label class='form__Title'>Schedules's Information</label>
@@ -38,7 +37,7 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       <select name="timeTo">
         <?php
         
-        $schedView->GenerateTimeOptions($newStartTime + (60*60),$newEndTime,$selected, $jump = $jumpTime)         
+        $schedView->GenerateTimeOptions($newStartTime + (60*60),$newEndTime,$selected, $jump = $jumpTime , true)         
         
         ?>
       </select>
@@ -112,6 +111,8 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
     echo "</datalist>
       </div>
     </div>";
+  } else {
+    echo "<input type='hidden' name='inputRoom' value='". $ID ."'>";
   }
 
   ?>
