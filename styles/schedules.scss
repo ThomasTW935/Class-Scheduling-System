@@ -117,11 +117,33 @@
       li {
         display: grid;
         place-content: center;
+        row-gap: 2px;
         background: rgba(0, 170, 255, 1);
-        font-size: 1rem;
+        font-size: 0.8rem;
+        height: 1.5em;
         span {
           color: transparent;
           font-size: 0.8rem;
+        }
+      }
+    }
+    .schedules__TimeSlot {
+      grid-area: slot;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      justify-content: space-between;
+      column-gap: 0.3rem;
+      .slot {
+        background: pink;
+      }
+      li {
+        display: grid;
+        place-content: center;
+        font-size: 0.8rem;
+        row-gap: 2px;
+        height: 1.5em;
+        span {
+          color: transparent;
         }
       }
     }

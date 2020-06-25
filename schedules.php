@@ -134,7 +134,7 @@ $jumpTime  = $dTime['op_jump'];
          ?>
       </ul>
       <ul class="schedules__TimeSlot">
-
+         
          <?php
 
          $days = array();
@@ -143,14 +143,43 @@ $jumpTime  = $dTime['op_jump'];
          }
          for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
             $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            $days[0][$i] = "";
+            $days[0][$i] = '<li><span></span></li>';
          }
 
          for ($i = 1; $i < sizeof($days); $i++) {
             $days[$i] = $days[0];
          }
-         $timeSlot = $schedView->FetchScheduleByTypeID($type,$ID);
-         var_dump($timeSlot);
+         $timeSlots = $schedView->FetchScheduleByTypeID($type,$ID);
+         for ($i = 0; $i < sizeof($days); $i++) {
+            echo '<ul>';
+            foreach($days[$i] as $x => $xValue){
+               $dayOfWeek ='';
+               switch($i){
+                  case 0: $dayOfWeek = 'Monday';break;
+                  case 1: $dayOfWeek = 'Tuesday';break;
+                  case 2: $dayOfWeek = 'Wednesday';break;
+                  case 3: $dayOfWeek = 'Thursday';break;
+                  case 4: $dayOfWeek = 'Friday';break;
+                  case 5: $dayOfWeek = 'Saturday';break;
+               }
+               foreach($timeSlots as $timeSlot){
+                  if($dayOfWeek == $timeSlot['sched_day']){
+                     if($x >= strtotime($timeSlot['sched_from']) && $x <= strtotime($timeSlot['sched_to']) ){
+                        if($x == strtotime($timeSlot['sched_from'])){
+                           $xValue = '<li class="slot">Hello</li>';
+                        }else if($x == strtotime($timeSlot['sched_to'])){
+                           $xValue = '<li class="slot">Hello</li>';
+                        } else{
+                           $xValue = '<li class="slot">ss</li>';
+                        }
+                     } 
+                  }
+               }
+               echo $xValue;
+            }
+            echo '</ul>';
+         }
+         //$day = $timeSlot[0][0];
          ?>
       </ul>
       <?php

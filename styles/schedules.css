@@ -711,13 +711,47 @@ body main {
   display: -ms-grid;
   display: grid;
   place-content: center;
+  row-gap: 2px;
   background: #00aaff;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  height: 1.5em;
 }
 
 .schedules__Table .schedules__Time li span {
   color: transparent;
   font-size: 0.8rem;
+}
+
+.schedules__Table .schedules__TimeSlot {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: slot;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-column-gap: 0.3rem;
+          column-gap: 0.3rem;
+}
+
+.schedules__Table .schedules__TimeSlot .slot {
+  background: pink;
+}
+
+.schedules__Table .schedules__TimeSlot li {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  font-size: 0.8rem;
+  row-gap: 2px;
+  height: 1.5em;
+}
+
+.schedules__Table .schedules__TimeSlot li span {
+  color: transparent;
 }
 
 .schedules__Subjects {
