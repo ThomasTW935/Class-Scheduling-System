@@ -163,14 +163,18 @@ $jumpTime  = $dTime['op_jump'];
                   case 5: $dayOfWeek = 'Saturday';break;
                }
                foreach($timeSlots as $timeSlot){
+                  $prof = $profView->FetchProfessorByID($timeSlot['prof_id'])[0];
+                  $sect = $sectView->FetchSectionByID($timeSlot['sect_id'])[0];
+                  $subj = $subjView->FetchSubjectByID($timeSlot['subj_id'])[0];
+                  //$room = $roomView->FetchRoomByID($timeSlot['room_id'])[0];
                   if($dayOfWeek == $timeSlot['sched_day']){
                      if($x >= strtotime($timeSlot['sched_from']) && $x <= strtotime($timeSlot['sched_to']) ){
                         if($x == strtotime($timeSlot['sched_from'])){
-                           $xValue = '<li class="slot">Hello</li>';
+                           $xValue = '<li class="slot">'. $subj['subj_code'] .'</li>';
                         }else if($x == strtotime($timeSlot['sched_to'])){
-                           $xValue = '<li class="slot">Hello</li>';
+                           $xValue = '<li class="slot">'. $prof['last_name'] .'</li>';
                         } else{
-                           $xValue = '<li class="slot">ss</li>';
+                           $xValue = '<li class="slot">s</li>';
                         }
                      } 
                   }
