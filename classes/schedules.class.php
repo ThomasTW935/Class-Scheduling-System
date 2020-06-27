@@ -63,6 +63,21 @@ class Schedules extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function getTimeSlotValue($type,$id){
+    $sql = "SELECT sched_id,sched_from,sched_to,sched_day,last_name,rm_name,sect_name,subj_desc FROM schedules sc
+    LEFT JOIN professors pr ON sc.prof_id = pr.id
+    LEFT JOIN rooms ro ON sc.room_id = ro.rm_id 
+    LEFT JOIN sections se ON sc.sect_id = se.sect_id
+    LEFT JOIN subjects su ON sc.subj_id = su.subj_id WHERE sc.{$type}_id = ? ";
+    try{
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$id]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch(PDOException $e){
+      trigger_error('Error: '.$e);
+    }
+  }
   protected function getScheduleByID($schedID)
   {
     $sql = "SELECT * FROM schedules WHERE sched_id = ? LIMIT 1";

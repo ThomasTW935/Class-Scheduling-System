@@ -143,13 +143,13 @@ $jumpTime  = $dTime['op_jump'];
          }
          for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
             $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            $days[0][$i] = '<li><span></span></li>';
+            $days[0][$i] = '<li></li>';
          }
 
          for ($i = 1; $i < sizeof($days); $i++) {
             $days[$i] = $days[0];
          }
-         $timeSlots = $schedView->FetchScheduleByTypeID($type,$ID);
+         $timeSlots = $schedView->FetchTimeSlotValue($type,$ID);
          for ($i = 0; $i < sizeof($days); $i++) {
             echo '<ul>';
             foreach($days[$i] as $x => $xValue){
@@ -163,18 +163,18 @@ $jumpTime  = $dTime['op_jump'];
                   case 5: $dayOfWeek = 'Saturday';break;
                }
                foreach($timeSlots as $timeSlot){
-                  $prof = $profView->FetchProfessorByID($timeSlot['prof_id'])[0];
-                  $sect = $sectView->FetchSectionByID($timeSlot['sect_id'])[0];
-                  $subj = $subjView->FetchSubjectByID($timeSlot['subj_id'])[0];
-                  //$room = $roomView->FetchRoomByID($timeSlot['room_id'])[0];
+                 $prof = $timeSlot['last_name'];
+                 //$sect = $timeSlot['subj_code'];
+                 $subj = $timeSlot['subj_desc'];
+                  //$room = $timeSlot['subj_code'];
                   if($dayOfWeek == $timeSlot['sched_day']){
                      if($x >= strtotime($timeSlot['sched_from']) && $x <= strtotime($timeSlot['sched_to']) ){
                         if($x == strtotime($timeSlot['sched_from'])){
-                           $xValue = '<li class="slot">'. $subj['subj_code'] .'</li>';
+                           $xValue = '<li class="slot">'. $subj .'</li>';
                         }else if($x == strtotime($timeSlot['sched_to'])){
-                           $xValue = '<li class="slot">'. $prof['last_name'] .'</li>';
+                           $xValue = '<li class="slot">'. $prof .'</li>';
                         } else{
-                           $xValue = '<li class="slot">s</li>';
+                           $xValue = '<li class="slot"></li>';
                         }
                      } 
                   }

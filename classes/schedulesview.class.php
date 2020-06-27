@@ -16,6 +16,10 @@ class SchedulesView extends Schedules
     $results = $this->getScheduleByTypeID($type, $id);
     return $results;
   }
+  public function FetchTimeSlotValue($type,$id){
+    $results = $this->getTimeSlotValue($type,$id);
+    return $results;
+  }
   public function GenerateTimeOptions($startTime,$endTime,$selected, $jump = 60, $showTimeDiff = false){
     for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
       echo "<option value = '" . date('H:i', $i) . "' ";
