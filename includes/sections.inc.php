@@ -23,6 +23,10 @@ if (isset($_POST['submit'])) {
     exit();
   }
   $sectContr->CreateSection($_POST);
+  $sect = $roomsView->FetchRoomByLatest();
+  $sectID = $sect[0]["sect_id"];
+  $schedContr = new SchedulesContr();
+  $schedContr->CreateDisplayTime("sect", $sectID);
 } else if (isset($_POST['update'])) {
 
   if (!empty($errors)) {

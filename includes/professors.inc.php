@@ -64,6 +64,10 @@ if (isset($_POST['submit'])) {
    $id = $result[0]['user_id'];
    $_POST['userID'] = $id;
    $profContr->CreateProfessors($_POST);
+   $prof = $profView->FetchProfessorByLatest();
+  $profID = $prof[0]["id"];
+  $schedContr = new SchedulesContr();
+  $schedContr->CreateDisplayTime("prof", $profID);
 } else if (isset($_POST['update'])) {
 
    if (!empty($errors)) {

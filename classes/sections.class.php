@@ -51,6 +51,17 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function getSectionByLatest(){
+    $sql = 'SELECT sect_id FROM sections ORDER BY sect_id DESC LIMIT 1';
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
 
   protected function setSection($name, $year, $sem, $deptID)
   {

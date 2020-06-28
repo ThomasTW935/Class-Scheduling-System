@@ -23,6 +23,10 @@ if (isset($_POST['submit'])) {
       exit();
    }
    $subjContr->CreateSubject($_POST);
+   $subj = $subjView->FetchRoomByLatest();
+   $subjID = $subj[0]["subj_id"];
+   $schedContr = new SchedulesContr();
+   $schedContr->CreateDisplayTime("subj", $subjID);
 } else if (isset($_POST['update'])) {
 
    if (!empty($errors)) {

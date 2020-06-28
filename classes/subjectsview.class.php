@@ -12,6 +12,11 @@ class SubjectsView extends Subjects
       $results = $this->getSubjectsBySearch($search, $state);
       return $results;
    }
+   public function FetchSubjectsByLatest()
+   {
+      $results = $this->getSubjectsByLatest();
+      return $results;
+   }
    public function FetchSubjectByCode($code)
    {
       $results = $this->getSubjectByCode($code);
@@ -48,7 +53,11 @@ class SubjectsView extends Subjects
             <li class='module__Item'>
                <div>";
          if ($result['subj_active'] == 1) {
-            echo "<a href='schedules.php?load=subj&id=" . $result['subj_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+            echo "<form method='POST' action='./schedules.php'>
+            <input type='hidden' name='type' value='subj'>
+            <input type='hidden' name='id' value='" . $result['subj_id'] . "'>
+            <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+            <span>Schedule</span></form>
                   <a href='?id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>

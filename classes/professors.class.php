@@ -36,6 +36,19 @@ class Professors extends Dbh
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorByLatest()
+   {
+      $sql = "SELECT id FROM professors ORDER BY id DESC LIMIT 1";
+      try{
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute();
+         $result = $stmt->fetchAll();
+         return $result;
+      }catch(PDOException $e){
+         trigger_error('Error: '. $e);
+      }
+      
+   }
    protected function getProfessorsBySearch($search, $state)
    {
       $search = "%{$search}%";

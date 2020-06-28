@@ -13,6 +13,11 @@ class ProfessorsView extends Professors
       $result = $this->getProfessorByID($id);
       return $result;
    }
+   public function FetchProfessorByLatest()
+   {
+      $result = $this->getProfessorByLatest();
+      return $result;
+   }
    public function FetchProfessorsBySearch($search, $state)
    {
       $results = $this->getProfessorsBySearch($search, $state);
@@ -57,7 +62,11 @@ class ProfessorsView extends Professors
             <li class='module__Item'>
                <div>";
          if ($result['prof_active'] == 1) {
-            echo "<a href='schedules.php?load=prof&id=" . $result['id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+            echo "<form method='POST' action='./schedules.php'>
+            <input type='hidden' name='type' value='prof'>
+            <input type='hidden' name='id' value='" . $result['id'] . "'>
+            <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+            <span>Schedule</span></form>
                   <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>

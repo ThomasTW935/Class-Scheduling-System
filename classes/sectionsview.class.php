@@ -17,6 +17,11 @@ class SectionsView extends Sections
         $results = $this->getSectionByName($name);
         return $results;
     }
+    public function FetchSectionByLatest()
+    {
+        $results = $this->getSectionByLatest();
+        return $results;
+    }
     public function FetchSectionsBySearch($search, $state)
     {
         $results = $this->getSectionsBySearch($search, $state);
@@ -50,7 +55,11 @@ class SectionsView extends Sections
             <div>";
             if ($result['sect_active'] == 1) {
 
-                echo "<a href='schedules.php?load=sect&id=" . $result['sect_id'] . "'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/><span>Schedule</span></a>
+                echo "<form method='POST' action='./schedules.php'>
+                <input type='hidden' name='type' value='sect'>
+                <input type='hidden' name='id' value='" . $result['sect_id'] . "'>
+                <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+                <span>Schedule</span></form>
                     <a href=?id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
             }
             echo "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
