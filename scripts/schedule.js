@@ -63,7 +63,6 @@ arrForm.forEach(x => {
   x.style.display = 'none'
 })
 toggles.forEach(toggle => {
-  console.log(toggle)
   toggle.addEventListener('click', FormToggle)
 })
 function FormToggle() {
@@ -72,8 +71,15 @@ function FormToggle() {
   })
 }
 
+//
 
-
+let slots = document.querySelectorAll('.slot')
+slots.forEach(slot => {
+  if (slot.classList[1] == 'toSlot') {
+    slot.remove()
+  }
+});
+console.log(book)
 
 // Adding Schedules
 

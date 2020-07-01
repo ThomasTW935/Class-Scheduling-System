@@ -11,33 +11,23 @@
 </head>
 
 <body>
-   <?php
-
-
-   $timeSlots = ["07:00", "08:00", "08:30", "10:00"];
-   $data = [];
-   foreach ($timeSlots as $timeSlot) {
-      if ($timeSlot == "10:00") {
-         $data[$timeSlot] = "<li>Daryl</li>";
-      } else {
-         $data[$timeSlot] = "<li>Thomas</li>";
-      }
-   }
-
-   var_dump($data);
-
-   $data['07:00'] = "<li>Christine</li>";
-
-   foreach ($data as $key => $value) {
-      echo $value;
-   }
-
-   ?>
-
-   <br>
-   <br>
-
-
+<h1>asdsad</h1>
+<?php
+$book = array(
+    "title" => "JavaScript: The Definitive Guide",
+    "author" => "David Flanagan",
+    "edition" => 6
+);
+?>
+<script type="text/javascript">
+var book = <?php echo json_encode($book, JSON_PRETTY_PRINT) ?>;
+/* var book = {
+    "title": "JavaScript: The Definitive Guide",
+    "author": "David Flanagan",
+    "edition": 6
+}; */
+alert(book.title);
+</script>
 
 
 </body>

@@ -26,7 +26,6 @@ $jumpTime  = $dTime['op_jump'];
       <section class="schedules__Information">
          <div>
             <?php
-            echo "type: {$type} ID: {$ID}";
             if ($type == 'sect' || empty($type) || $type == null) {
                $sectID = $ID;
                $sect = $sectView->FetchSectionByID($sectID)[0];
@@ -164,18 +163,15 @@ $jumpTime  = $dTime['op_jump'];
                   case 5: $dayOfWeek = 'Saturday';break;
                }
                foreach($timeSlots as $timeSlot){
+
                  $firstLine = ($type != 'subj' ) ? $timeSlot['subj_desc'] : $timeSlot['last_name'];
                  $secondLine = ($type != 'room') ? $timeSlot['last_name'] : $timeSlot['rm_name'];
                   $thirdLine = ($type != 'sect') ? $timeSlot['last_name'] : $timeSlot['sect_name'];
+                  echo "<script type='text/javascript'>
+                  var book = ". json_encode($firstLine, JSON_PRETTY_PRINT)."</script>";
                   if($dayOfWeek == $timeSlot['sched_day']){
                      if($x >= strtotime($timeSlot['sched_from']) && $x <= strtotime($timeSlot['sched_to']) ){
-                        if($x == strtotime($timeSlot['sched_from'])){
-                           $xValue = '<li class="slot">'. $firstLine .'</li>';
-                        }else if($x == strtotime($timeSlot['sched_to'])){
-                           $xValue = '<li class="slot">'. $thirdLine .'</li>';
-                        } else{
-                           $xValue = '<li class="slot"></li>';
-                        }
+                        $xValue = '<li class="slot slot'. $timeSlot['sched_id'] .'"></li>';
                      } 
                   }
                }
