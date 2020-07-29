@@ -25,8 +25,8 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       <label for='timeFrom' class='form__Label'>From:</label>
       <select name="timeFrom">
         <?php
-        
-        $schedView->GenerateTimeOptions($newStartTime,$newEndTime - (60*60),$selected, $jump = $jumpTime)         
+
+        $schedView->GenerateTimeOptions($newStartTime, $newEndTime - (60 * 60), $selected, $jump = $jumpTime)
 
         ?>
 
@@ -36,9 +36,9 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       <label for='timeTo' class='form__Label'>To:</label>
       <select name="timeTo">
         <?php
-        
-        $schedView->GenerateTimeOptions($newStartTime + (60*60),$newEndTime,$selected, $jump = $jumpTime , true)         
-        
+
+        $schedView->GenerateTimeOptions($newStartTime + (60 * 60), $newEndTime, $selected, $jump = $jumpTime, true)
+
         ?>
       </select>
     </div>
@@ -75,6 +75,8 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
     echo "</datalist>
       </div>
     </div>";
+  } else {
+    echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
   ?>
   <?php
@@ -93,6 +95,8 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
     echo "</datalist>
     </div>
   </div>";
+  } else {
+    echo "<input type='hidden' name='inputSubj' value='" . $ID . "'>";
   }
   ?>
   <?php
@@ -112,7 +116,7 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       </div>
     </div>";
   } else {
-    echo "<input type='hidden' name='inputRoom' value='". $ID ."'>";
+    echo "<input type='hidden' name='inputRoom' value='" . $ID . "'>";
   }
 
   ?>
@@ -131,6 +135,8 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
     echo "</datalist>
       </div>
     </div>";
+  } else {
+    echo "<input type='hidden' name='inputSect' value='" . $ID . "'>";
   }
   ?>
 

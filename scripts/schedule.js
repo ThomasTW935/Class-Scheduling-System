@@ -75,11 +75,11 @@ function FormToggle() {
 
 let slots = document.querySelectorAll('.slot')
 slots.forEach(slot => {
+  console.log(slot.classList)
+
   if (slot.classList[1] == 'toSlot') {
-    slot.remove()
   }
 });
-console.log(book)
 
 // Adding Schedules
 

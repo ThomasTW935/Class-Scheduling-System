@@ -39,7 +39,7 @@ if ($error == 'username') {
       </div>
       <button class="form__Button" type="submit" name="submit">Submit</button>
    </form>
-   <a href='?test'>Test Link</a>
+   <a href='?test'>Test </a>
    <?php
 
    // if (isset($_GET['test'])) {

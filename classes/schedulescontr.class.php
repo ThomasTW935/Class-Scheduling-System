@@ -10,9 +10,11 @@ class SchedulesContr extends Schedules
   {
     $this->updateDisplayTime($data["startTime"], $data["endTime"], $data["jumpTime"], $data["id"]);
   }
+
+
   public function CreateSchedule($data)
   {
-    $this->setSchedule($data['timeFrom'],$data['timeTo'],$data['days'],$data['inputProf'], $data['inputSubj'], $data['inputRoom'], $data['inputSect']);
+    $this->setSchedule($data['timeFrom'], $data['timeTo'], $data['inputProf'], $data['inputSubj'], $data['inputRoom'], $data['inputSect']);
   }
   public function ModifySchedule($data)
   {
@@ -21,5 +23,18 @@ class SchedulesContr extends Schedules
   public function RemoveSchedule($id)
   {
     $this->deleteSchedule($id);
+  }
+
+  public function CreateDay($schedID, $day)
+  {
+    $this->setDay($schedID, $day);
+  }
+  public function ModifyDay($day, $id)
+  {
+    $this->updateDay($day, $id);
+  }
+  public function RemoveDay($id)
+  {
+    $this->deleteDay($id);
   }
 }

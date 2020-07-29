@@ -105,7 +105,7 @@
       li {
         display: grid;
         place-content: center;
-        background: rgb(0, 125, 220);
+        background: var(--color-background-dark);
         font-weight: 350;
         text-transform: uppercase;
         font-size: 1.2rem;
@@ -118,11 +118,10 @@
         display: grid;
         place-content: center;
         row-gap: 2px;
-        background: rgba(0, 170, 255, 1);
+        background: var(--color-background-light);
         font-size: 0.8rem;
         height: 1.5em;
         span {
-          color: transparent;
           font-size: 0.8rem;
         }
       }
@@ -143,7 +142,6 @@
         row-gap: 2px;
         height: 1.5em;
         span {
-          color: transparent;
         }
       }
     }

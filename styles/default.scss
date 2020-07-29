@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -25,13 +27,15 @@ body {
     outline: none;
     display: grid;
     place-content: center;
+    padding: 0.3rem 0;
+    color: var(--color-text-light);
     &:hover {
-      text-decoration: underline;
+      color: white;
     }
   }
   main {
     flex-grow: 1;
-    padding: 0 2em;
+    padding: 0 2rem;
   }
 }
 
@@ -41,14 +45,26 @@ body {
   top: 0;
   height: 7%;
   padding: 0.7em;
+
   z-index: 100;
   display: flex;
   align-items: center;
   button,
   a {
-    color: white;
     background: none;
     font-size: 0.9rem;
+    &::before {
+      content: "";
+      width: 24px;
+      height: 100%;
+      mask: url("../drawables/icons/home.svg");
+      mask-repeat: no-repeat;
+      background: var(--color-text-light);
+      margin-right: 0.2rem;
+    }
+    &:hover::before {
+      background: white;
+    }
   }
   .back {
     position: relative;

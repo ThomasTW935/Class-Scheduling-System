@@ -31,7 +31,16 @@ class SchedulesVal
     $timeFrom = trim($this->data['timeFrom']);
     $timeTo = trim($this->data['timeTo']);
     $days = $this->data['days'];
-    $results = $schedView->FetchScheduleByTimeAndDay($timeFrom, $timeTo, $days);
+    // $results = $schedView->FetchScheduleByTimeAndDay($timeFrom, $timeTo, $days);
+    $results = $schedView->FetchScheduleByTimeAndDay('07:00', '08:00', $days);
+
+    foreach ($results as $result) {
+      var_dump($result);
+      echo '<br>';
+      echo '<br>';
+    }
+    echo 'Data: ';
+    var_dump($this->data);
     if (!empty($results)) {
       $this->validateSection($results['sect_id']);
       $this->validateRoom($results['room_id']);

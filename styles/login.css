@@ -1,3 +1,9 @@
+:root {
+  --color-background-dark: hsl(206, 100%, 43%);
+  --color-background-light: hsl(206, 100%, 53%);
+  --color-text-light: hsl(206, 100%, 87%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -37,18 +43,20 @@ body .button {
   display: -ms-grid;
   display: grid;
   place-content: center;
+  padding: 0.3rem 0;
+  color: var(--color-text-light);
 }
 
 body button:hover,
 body .button:hover {
-  text-decoration: underline;
+  color: white;
 }
 
 body main {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  padding: 0 2em;
+  padding: 0 2rem;
 }
 
 .nav {
@@ -69,9 +77,26 @@ body main {
 
 .nav button,
 .nav a {
-  color: white;
   background: none;
   font-size: 0.9rem;
+}
+
+.nav button::before,
+.nav a::before {
+  content: "";
+  width: 24px;
+  height: 100%;
+  -webkit-mask: url("../drawables/icons/home.svg");
+          mask: url("../drawables/icons/home.svg");
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  background: var(--color-text-light);
+  margin-right: 0.2rem;
+}
+
+.nav button:hover::before,
+.nav a:hover::before {
+  background: white;
 }
 
 .nav .back {
