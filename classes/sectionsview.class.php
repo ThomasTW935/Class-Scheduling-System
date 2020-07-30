@@ -29,9 +29,10 @@ class SectionsView extends Sections
     }
     public function DisplaySectionsInSearch($results)
     {
+        $schedView = new SchedulesView();
         foreach ($results as $result) {
-            $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
-            echo "<option data-value='" . $result['sect_id'] . "' value='" . $result['sect_name'] . "'> <ul class='module__List'>
+            $optionData = $schedView->GenerateOptionDataValue($result['sect_id'], [$result['sect_name']]);
+            echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'> <ul class='module__List'>
             <li class='module__Item'>" . $result['sect_name'] . "</li>
             <li class='module__Item'>{$result['sect_year']}YR {$result['sect_sem']}SEM</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";

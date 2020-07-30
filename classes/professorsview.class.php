@@ -30,14 +30,23 @@ class ProfessorsView extends Professors
    }
    public function DisplayProfessorsInSearch($results)
    {
+      $schedView = new SchedulesView();
       foreach ($results as $result) {
-         $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
-         $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
-         echo "<option data-value='" . $result['id'] . "' value='" . $fullName . '| ' . $result['dept_name'] . "'><ul class='module__List'>
+         // $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
+         $fullName = $this->GenerateFullName($result['last_name'], $result['first_name'], $result['middle_initial'], $result['suffix']);
+         $optionData = $schedView->GenerateOptionDataValue($result['id'], [$fullName, $result['dept_name']]);
+         echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'><ul class='module__List'>
             <li class='module__Item'>" . $fullName . " |</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";
       }
    }
+   public function GenerateFullName($lastName, $firstName, $MI = '', $suffix = '')
+   {
+      $middleInitial = (!empty($MI)) ? " $MI. " : '';
+      $fullName = "$lastName, $firstName$middleInitial$suffix";
+      return $fullName;
+   }
+
    public function DisplayProfessors($results)
    {
       echo "<ul class='module__List module__Title'>

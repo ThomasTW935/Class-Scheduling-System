@@ -14,7 +14,7 @@ class SubjectsView extends Subjects
    }
    public function FetchSubjectsByLatest()
    {
-      $results = $this->getSubjectsByLatest();
+      $results = $this->getSubjectByLatest();
       return $results;
    }
    public function FetchSubjectByCode($code)
@@ -29,8 +29,11 @@ class SubjectsView extends Subjects
    }
    public function DisplaySubjectsInSearch($results)
    {
+      $schedView = new SchedulesView();
       foreach ($results as $result) {
-         echo "<option data-value='" . $result['subj_id'] . "' value='" . $result['subj_code'] . ' | ' . $result['subj_desc'] . ' | ' . $result['units'] . " Unit/s'><ul class='module__List'>
+         $unit = $result['units'] . " Unit/s";
+         $optionData = $schedView->GenerateOptionDataValue($result['subj_id'], [$result['subj_code'], $result['subj_desc'], $unit]);
+         echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'><ul class='module__List'>
             <li class='module__Item'>" . $result['subj_code'] . " |</li>
             <li class='module__Item'>" . $result['subj_desc'] . " |</li>
             <li class='module__Item'>" . $result['units'] . "Unit/s</li></ul></option>";

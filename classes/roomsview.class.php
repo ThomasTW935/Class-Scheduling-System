@@ -30,7 +30,7 @@ class RoomsView extends Rooms
   }
   public function FloorConvert($floor)
   {
-    $place = '<span>';
+    $place = '';
     switch ($floor % 10) {
       case 1:
         $place .= 'st';
@@ -45,15 +45,17 @@ class RoomsView extends Rooms
         $place .= 'th';
         break;
     }
-    $place .= "</span>";
     $floor .= $place;
     return $floor;
   }
   public function DisplayRoomsInSearch($results)
   {
+    $schedView = new SchedulesView();
     foreach ($results as $result) {
-      $floor = $this->FloorConvert($result['rm_floor']);
-      echo "<option data-value='" . $result['rm_id'] . "' value='Rm " . $result['rm_name'] . ' | ' . $result['rm_desc'] . ' | ' . $floor . " floor'><ul class='module__List'>
+      $floor = $this->FloorConvert($result['rm_floor']) . ' floor';
+      $name = "Rm {$result['rm_name']}";
+      $optionData = $schedView->GenerateOptionDataValue($result['rm_id'], [$name, $result['rm_desc'], $floor]);
+      echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'><ul class='module__List'>
         <li class='module__Item'>" . $result['rm_name'] . " |</li>
         <li class='module__Item'>" . $result['rm_desc'] . " |</li>
         <li class='module__Item'>" . $floor . " floor</li></ul></option>";

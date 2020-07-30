@@ -4,11 +4,10 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
-if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
-  $id = $_GET['schedID'];
-  $profView = new ProfessorsView();
-  $result = $profView->FetchProfessorByID($id);
-  $prof = $result[0];
+if (isset($_GET['schedid']) && !empty($_GET['schedid'])) {
+  $id = $_GET['schedid'];
+  $result = $schedView->FetchScheduleByID($id)[0];
+  $schedDays = $schedView->FetchDayBySchedID($id);
   $button = "update";
 }
 
@@ -16,7 +15,7 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST'>
   <div class='form__TitleBar'></div>
-  <button type='button' class='form__Toggle form__Close'>X</button>
+  <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle form__Close'>X</a>
   <label class='form__Title'>Schedules's Information</label>
   <input type="hidden" name="type" value='<?php echo $type ?>'>
   <input type="hidden" name="id" value='<?php echo $ID ?>'>
@@ -26,6 +25,7 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       <select name="timeFrom">
         <?php
 
+        $selected = $result['sched_from'] ?? "";
         $schedView->GenerateTimeOptions($newStartTime, $newEndTime - (60 * 60), $selected, $jump = $jumpTime)
 
         ?>
@@ -37,6 +37,7 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
       <select name="timeTo">
         <?php
 
+        $selected = $result['sched_to'] ?? "";
         $schedView->GenerateTimeOptions($newStartTime + (60 * 60), $newEndTime, $selected, $jump = $jumpTime, true)
 
         ?>
@@ -45,28 +46,48 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
   </div>
   <div class="form__DayContainer">
 
-    <input type="checkbox" name="days[]" id="monday" value='1'>
-    <label for="monday">m</label>
-    <input type="checkbox" name="days[]" id="tuesday" value='2'>
-    <label for="tuesday">t</label>
-    <input type="checkbox" name="days[]" id="wednesday" value='3'>
-    <label for="wednesday">w</label>
-    <input type="checkbox" name="days[]" id="thursday" value='4'>
-    <label for="thursday">th</label>
-    <input type="checkbox" name="days[]" id="friday" value='5'>
-    <label for="friday">f</label>
-    <input type="checkbox" name="days[]" id="saturday" value='6'>
-    <label for="saturday">s</label>
+    <?php
 
+    $days = array(
+      'm' => 'Monday',
+      't' => 'Tuesday',
+      'w' => 'Wednesday',
+      'th' => 'Thursday',
+      'f' => 'Friday',
+      's' => 'Saturday'
+    );
+    foreach ($days as $key => $value) {
+      $checked = '';
+      if (!empty($schedDays)) {
+        foreach ($schedDays as $schedDay) {
+          if ($schedDay['sched_day'] === $value) {
+            $checked = true;
+          }
+        }
+      }
+      $schedView->GenerateDayChoices($key, $value, $checked);
+    }
+
+    ?>
   </div>
   <?php
-
+  $optionValue = '';
+  $optionID = '';
   if ($type != 'prof') {
+    if (!empty($result)) {
+      $selProf = $profView->FetchProfessorByID($result['prof_id'])[0];
+      $fullName = $profView->GenerateFullName($selProf['last_name'], $selProf['first_name'], $selProf['middle_initial'], $selProf['suffix']);
+      $optionData = $schedView->GenerateOptionDataValue($selProf['id'], [$fullName, $selProf['dept_name']]);
+      $optionValue = $optionData['value'];
+      $optionID = $optionData['id'];
+    }
+
+
     echo "<div class='form__Container'>
       <label for=''>Select Professor</label>
       <div class='form__Input'>
-        <input class='input__Prof search__Input' list='profList'>
-        <input class='input__Prof--Hidden' name='inputProf' type='hidden'>
+        <input class='input__Prof search__Input' list='profList' value='$optionValue'>
+        <input class='input__Prof--Hidden' name='inputProf' type='hidden' value='$optionID'>
         <datalist class='input__Prof--List' id='profList'>";
 
     $profs = $profView->FetchProfessorsByState(1);
@@ -82,11 +103,18 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
   <?php
 
   if ($type != 'subj') {
+    if (!empty($result)) {
+      $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
+      $unit = $selSubj['units'] . " Unit/s";
+      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc'], $unit]);
+      $optionValue = $optionData['value'];
+      $optionID = $optionData['id'];
+    }
     echo "<div class='form__Container'>
     <label for=''>Select Subject</label>
     <div class='form__Input'>
-      <input class='input__Subject search__Input' list='subjList' autocomplete='off'>
-      <input class='input__Subject--Hidden' name='inputSubj' type='hidden'>
+      <input class='input__Subject search__Input' list='subjList' value='$optionValue'>
+      <input class='input__Subject--Hidden' name='inputSubj' type='hidden' value='$optionID'>
       <datalist class='input__Subject--List' id='subjList'>";
 
     $subjs = $subjView->FetchSubjectsByState(1);
@@ -102,11 +130,19 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
   <?php
 
   if ($type != 'room') {
+    if (!empty($result)) {
+      $selSect = $roomView->FetchRoomByID($result['room_id'])[0];
+      $floor = $roomView->FloorConvert($selSect['rm_floor']) . ' floor';
+      $name = "Rm {$selSect['rm_name']}";
+      $optionData = $schedView->GenerateOptionDataValue($selSect['rm_id'], [$name, $selSect['rm_desc'], $floor]);
+      $optionValue = $optionData['value'];
+      $optionID = $optionData['id'];
+    }
     echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
-        <input class='input__Room search__Input' list='roomList' value='' autocomplete='off'>
-        <input class='input__Room--Hidden' name='inputRoom' type='hidden'  >
+        <input class='input__Room search__Input' list='roomList' value='$optionValue' >
+        <input class='input__Room--Hidden' name='inputRoom' type='hidden' value='$optionID' >
         <datalist class='input__Room--List' id='roomList'>";
 
     $rooms = $roomView->FetchRoomsByState(1);
@@ -122,11 +158,17 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
   ?>
   <?php
   if ($type != 'sect') {
+    if (!empty($result)) {
+      $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];
+      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name']]);
+      $optionValue = $optionData['value'];
+      $optionID = $optionData['id'];
+    }
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>
       <div class='form__Input'>
-        <input class='input__Sect search__Input' list='sectList'  autocomplete='off'>
-        <input class='input__Sect--Hidden' name='inputSect' type='hidden'>
+        <input class='input__Sect search__Input' list='sectList'  value='$optionValue'>
+        <input class='input__Sect--Hidden' name='inputSect' type='hidden' value='$optionID'>
         <datalist class='input__Sect--List' id='sectList'>";
 
     $sects = $sectView->FetchSectionsByState(1);
@@ -142,4 +184,4 @@ if (isset($_GET['schedID']) && !empty($_GET['schedID'])) {
 
   <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<button type='button' class='module__formBackground form__Toggle'></button>
+<a href='<?php echo "?type=$type&id=$ID" ?>' class='module__formBackground form__Toggle'></a>

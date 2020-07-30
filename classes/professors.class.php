@@ -30,7 +30,9 @@ class Professors extends Dbh
    }
    protected function getProfessorByID($id)
    {
-      $sql = "SELECT * FROM professors INNER JOIN users ON professors.user_id = users.user_id WHERE id = ?";
+      $sql = "SELECT * FROM professors 
+      INNER JOIN departments ON professors.dept_id = departments.dept_id
+      INNER JOIN users ON professors.user_id = users.user_id WHERE id = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
       $result = $stmt->fetchAll();
@@ -39,15 +41,14 @@ class Professors extends Dbh
    protected function getProfessorByLatest()
    {
       $sql = "SELECT id FROM professors ORDER BY id DESC LIMIT 1";
-      try{
+      try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute();
          $result = $stmt->fetchAll();
          return $result;
-      }catch(PDOException $e){
-         trigger_error('Error: '. $e);
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
       }
-      
    }
    protected function getProfessorsBySearch($search, $state)
    {

@@ -64,7 +64,7 @@ $jumpTime  = $dTime['op_jump'];
 
             ?>
          </div>
-         <button type='button' class='form__Toggle'>Add Schedules</button>
+         <a href='<?php echo "?type=$type&id=$ID&action" ?>' class='form__Toggle'>Add Schedules</a>
       </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
@@ -218,12 +218,12 @@ $jumpTime  = $dTime['op_jump'];
                      if ($x >= strtotime($timeSlot['sched_from']) && $x < strtotime($timeSlot['sched_to'])) {
                         echo "<script type='text/javascript'>
                   var slotsLabel = " . json_encode($slotLabels, JSON_PRETTY_PRINT) . "</script>";
-                        $xValue = "<li class='slot slot{$timeSlot['sched_id']}'>";
+                        $xValue = "<li class='slot slot{$timeSlot['sched_id']}'><a class='form__Toggle' href='?type=$type&id=$ID&schedid={$timeSlot['sched_id']}'>";
                         if ($x == strtotime($timeSlot['sched_from'])) {
                            $xValue .= $timeSlot['subj_desc'];
                            $xValue .= $timeSlot['last_name'];
                         }
-                        $xValue .= "</li>";
+                        $xValue .= "</a></li>";
                      }
                   }
                }
@@ -243,10 +243,9 @@ $jumpTime  = $dTime['op_jump'];
 
    </div>
    <?php
-   include_once './layouts/schedules.form.php';
-   // if (isset($_GET['type']) || isset($_GET['sched'])) {
-   //    include_once './layouts/schedulestype.form.php';
-   // }
+   if (isset($_GET['action']) || isset($_GET['schedid'])) {
+      include_once './layouts/schedules.form.php';
+   }
 
    ?>
 </main>

@@ -32,6 +32,15 @@ class SchedulesView extends Schedules
     $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $day);
     return $results;
   }
+
+  //Day
+
+  public function FetchDayBySchedID($schedID)
+  {
+    $results = $this->getDayBySchedID($schedID);
+    return $results;
+  }
+
   public function GenerateTimeOptions($startTime, $endTime, $selected, $jump = 60, $showTimeDiff = false)
   {
     for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
@@ -47,5 +56,28 @@ class SchedulesView extends Schedules
         "</option>";
       }
     }
+  }
+  public function GenerateDayChoices($display, $value, $isChecked = false)
+  {
+    $checked = ($isChecked) ? 'checked' : '';
+    $result = "<input type='checkbox' name='days[]' id='value' value='$value' $checked>";
+    $result .= "<label for='$value'>$display</label>";
+    echo $result;
+  }
+  public function GenerateOptionDataValue($id, $data)
+  {
+    $value = '';
+    $seperator = ' | ';
+    for ($x = 0; $x < sizeof($data); $x++) {
+      if ($x == sizeof($data) - 1) {
+        $seperator = "";
+      }
+      $value .= $data[$x] . $seperator;
+    }
+    $newArray = array(
+      'id' => $id,
+      'value' => $value
+    );
+    return $newArray;
   }
 }

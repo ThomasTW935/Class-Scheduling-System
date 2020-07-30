@@ -183,7 +183,7 @@ class Schedules extends Dbh
   }
   protected function getDayBySchedID($schedID)
   {
-    $sql = "SELECT * FROM schedules_day WHERE sched_id = ?";
+    $sql = "SELECT * FROM schedules_day WHERE sched_id = ? ORDER BY sched_day";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$schedID]);

@@ -54,22 +54,22 @@ timeStart.addEventListener('change', () => {
 
 // Open/Close Modal
 
-let toggles = document.querySelectorAll(".form__Toggle")
-let form = document.querySelector(".module__Form")
-let formBg = document.querySelector(".module__formBackground")
-let arrForm = [form, formBg]
+// let toggles = document.querySelectorAll(".form__Toggle")
+// let form = document.querySelector(".module__Form")
+// let formBg = document.querySelector(".module__formBackground")
+// let arrForm = [form, formBg]
 
-arrForm.forEach(x => {
-  x.style.display = 'none'
-})
-toggles.forEach(toggle => {
-  toggle.addEventListener('click', FormToggle)
-})
-function FormToggle() {
-  arrForm.forEach(x => {
-    x.style.display = (x.style.display == 'none') ? 'flex' : 'none'
-  })
-}
+// arrForm.forEach(x => {
+//   x.style.display = 'none'
+// })
+// toggles.forEach(toggle => {
+//   toggle.addEventListener('click', FormToggle)
+// })
+// function FormToggle() {
+//   arrForm.forEach(x => {
+//     x.style.display = (x.style.display == 'none') ? 'flex' : 'none'
+//   })
+// }
 
 //
 
