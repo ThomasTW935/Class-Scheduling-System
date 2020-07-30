@@ -5,9 +5,9 @@ $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
 if (isset($_GET['schedid']) && !empty($_GET['schedid'])) {
-  $id = $_GET['schedid'];
-  $result = $schedView->FetchScheduleByID($id)[0];
-  $schedDays = $schedView->FetchDayBySchedID($id);
+  $schedID = $_GET['schedid'];
+  $result = $schedView->FetchScheduleByID($schedID)[0];
+  $schedDays = $schedView->FetchDayBySchedID($schedID);
   $button = "update";
 }
 
@@ -19,6 +19,7 @@ if (isset($_GET['schedid']) && !empty($_GET['schedid'])) {
   <label class='form__Title'>Schedules's Information</label>
   <input type="hidden" name="type" value='<?php echo $type ?>'>
   <input type="hidden" name="id" value='<?php echo $ID ?>'>
+  <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>
   <div class="form__TimeContainer">
     <div class="form__Input">
       <label for='timeFrom' class='form__Label'>From:</label>

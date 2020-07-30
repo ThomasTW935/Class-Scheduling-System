@@ -23,5 +23,30 @@ if (isset($_POST['submit'])) {
     $schedContr->CreateDay($schedID, $day);
   }
 }
+if (isset($_POST['update'])) {
+
+  //Updating Schedule
+
+  var_dump($_POST);
+  $schedContr->ModifySchedule($_POST);
+  // Updating Days
+
+  $schedID = $_POST['schedID'];
+  $newDays = $_POST['days'];
+  $FetchDays = $schedView->FetchDayBySchedID($schedID);
+  $existDays = array();
+  foreach ($FetchDays as $value) {
+    $existDays[$value['id']] = $value['sched_day'];
+  }
+  $mergeDays = array_unique(array_merge($newDays, $existDays));
+  $actualDays = array_intersect($newDays, $mergeDays);
+  $removedDays = array_diff($existDays, $newDays);
+  foreach ($actualDays as $actualDay) {
+    $schedContr->CreateDay($schedID, $actualDay);
+  }
+  foreach ($removedDays as $key => $value) {
+    $schedContr->RemoveDay($key);
+  }
+}
 
 header("Location: ../schedules.php?type={$_POST['type']}&id=" . $_POST['id']);

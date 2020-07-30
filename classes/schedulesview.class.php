@@ -60,9 +60,8 @@ class SchedulesView extends Schedules
   public function GenerateDayChoices($display, $value, $isChecked = false)
   {
     $checked = ($isChecked) ? 'checked' : '';
-    $result = "<input type='checkbox' name='days[]' id='value' value='$value' $checked>";
-    $result .= "<label for='$value'>$display</label>";
-    echo $result;
+    echo "<input type='checkbox' name='days[]' id='$display' value='$value' $checked>";
+    echo "<label for='$display'>$display</label>";
   }
   public function GenerateOptionDataValue($id, $data)
   {

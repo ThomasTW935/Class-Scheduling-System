@@ -54,7 +54,7 @@ class Schedules extends Dbh
   }
   protected function updateSchedule($timeFrom, $timeTo, $profID, $subjID, $rmID, $sectID, $id)
   {
-    $sql = "UPDATE schedules SET sched_from = ?, sched_to = ?, prof_id = ?,subj_id = ?,rm_id = ?,sect_id = ? WHERE sched_id = ?";
+    $sql = "UPDATE schedules SET sched_from = ?, sched_to = ?, prof_id = ?,subj_id = ?,room_id = ?,sect_id = ? WHERE sched_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$timeFrom, $timeTo, $profID, $subjID, $rmID, $sectID, $id]);
