@@ -91,7 +91,6 @@
     grid-template-areas:
       " . day"
       "time slot";
-    gap: 0.5rem;
     margin: 0.25rem 0.5rem;
     height: 89vh;
     overflow: auto;
@@ -99,9 +98,7 @@
       grid-area: day;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      justify-content: space-between;
       color: white;
-      column-gap: 0.3rem;
       li {
         display: grid;
         place-content: center;
@@ -109,38 +106,37 @@
         font-weight: 350;
         text-transform: uppercase;
         font-size: 1.2rem;
+        border-right: 1px solid var(--color-background-light);
       }
     }
     .schedules__Time {
       grid-area: time;
       color: white;
       li {
-        display: grid;
-        place-content: center;
-        row-gap: 2px;
         background: var(--color-background-light);
-        font-size: 0.8rem;
-        height: 1.5em;
-        span {
-          font-size: 0.8rem;
-        }
       }
     }
     .schedules__TimeSlot {
       grid-area: slot;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      justify-content: space-between;
-      column-gap: 0.3rem;
       .slot {
         background: pink;
+        border-color: transparent;
       }
+    }
+    .schedules__Time,
+    .schedules__TimeSlot {
       li {
         display: grid;
         place-content: center;
         font-size: 0.8rem;
-        row-gap: 2px;
         height: 1.5em;
+        border-bottom: 1px solid rgba(200, 200, 200, 1);
+        border-right: 1px solid var(--color-background-light);
+        span {
+          font-size: 0.8rem;
+        }
       }
     }
   }

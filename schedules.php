@@ -144,7 +144,7 @@ $jumpTime  = $dTime['op_jump'];
          for ($i = 0; $i < 6; $i++) {
             $days[$i] = array();
          }
-         for ($i = $newStartTime; $i <= $newEndTime; $i += 15 * 60) {
+         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
             $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
             $days[0][$i] = '<li></li>';
          }

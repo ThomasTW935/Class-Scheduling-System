@@ -23,6 +23,7 @@ class SchedulesContr extends Schedules
   public function RemoveSchedule($id)
   {
     $this->deleteSchedule($id);
+    $this->deleteDayBySchedID($id);
   }
 
   public function CreateDay($schedID, $day)

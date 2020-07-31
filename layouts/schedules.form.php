@@ -4,11 +4,14 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
-if (isset($_GET['schedid']) && !empty($_GET['schedid'])) {
+
+$schedIDExist = isset($_GET['schedid']) && !empty($_GET['schedid']);
+if ($schedIDExist) {
   $schedID = $_GET['schedid'];
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $button = "update";
+  $deleteButton = "<button class='form__Button btn__Delete' type='submit' name='delete'>delete</button>";
 }
 
 ?>
@@ -181,8 +184,13 @@ if (isset($_GET['schedid']) && !empty($_GET['schedid'])) {
   } else {
     echo "<input type='hidden' name='inputSect' value='" . $ID . "'>";
   }
+
+  echo "<div class='btn__Container'>";
+  echo "<button class='form__Button' type='submit' name='$button'>$button</button>";
+  echo $deleteButton ?? "";
+  echo "</div>";
+
   ?>
 
-  <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href='<?php echo "?type=$type&id=$ID" ?>' class='module__formBackground form__Toggle'></a>

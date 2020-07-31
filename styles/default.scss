@@ -1,5 +1,3 @@
-@import "variables.scss";
-
 * {
   margin: 0;
   padding: 0;
@@ -368,18 +366,30 @@ body {
         }
       }
     }
-
-    .form__Button {
-      width: 100px;
-      box-shadow: none;
-      text-transform: uppercase;
-      background: rgba(0, 170, 255, 1);
-      color: white;
-      font-weight: bold;
-      border-radius: 10px;
-      font-size: 1rem;
-      &:hover {
-        background: rgba(0, 170, 255, 0.6);
+    .btn__Container {
+      display: flex;
+      gap: 2rem;
+      .form__Button {
+        width: 100px;
+        box-shadow: none;
+        text-transform: capitalize;
+        background: var(--color-background-light);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        font-size: 1rem;
+        &:not(.btn__Delete):hover {
+          background: var(--color-background-dark);
+        }
+      }
+      .btn__Delete {
+        background: white;
+        color: var(--color-background-light);
+        border: 1px solid var(--color-background-light);
+        &:hover {
+          color: var(--color-background-dark);
+          border: 1px solid var(--color-background-dark);
+        }
       }
     }
   }

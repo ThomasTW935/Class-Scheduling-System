@@ -169,6 +169,17 @@ class Schedules extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function deleteDayBySchedID($schedID)
+  {
+    $sql = "DELETE FROM schedules_day WHERE sched_id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$schedID]);
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
+
   protected function getDayByID($id)
   {
     $sql = "SELECT * FROM schedules_day WHERE id = ?";

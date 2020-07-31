@@ -29,6 +29,7 @@ if (isset($_POST['update'])) {
 
   var_dump($_POST);
   $schedContr->ModifySchedule($_POST);
+
   // Updating Days
 
   $schedID = $_POST['schedID'];
@@ -49,4 +50,9 @@ if (isset($_POST['update'])) {
   }
 }
 
+if (isset($_POST['delete'])) {
+
+  $schedContr->RemoveSchedule($_POST['schedID']);
+  var_dump($_POST);
+}
 header("Location: ../schedules.php?type={$_POST['type']}&id=" . $_POST['id']);
