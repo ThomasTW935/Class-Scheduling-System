@@ -125,13 +125,23 @@ class Schedules extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getScheduleByTimeAndDay($timeFrom, $timeTo, $day)
+  protected function getScheduleByTimeAndDay($timeFrom, $timeTo, $days, $schedID)
   {
-    $sql = "SELECT * FROM schedules WHERE (sched_from BETWEEN ? AND ?) OR (sched_to BETWEEN ? AND ?)";
+    $newDays = '';
+    for ($x = 0; $x < sizeof($days); $x++) {
+      $comma = ',';
+      if ($x == sizeof($days) - 1) {
+        $comma = '';
+      }
+      $newDays .= "'$days[$x]'$comma";
+    }
+    $ifUpdate = (!empty($schedID)) ? "AND s.sched_id != $schedID" : '';
+    $sql = "SELECT * FROM schedules s INNER JOIN schedules_day sd ON s.sched_id = sd.sched_id WHERE ((sched_from BETWEEN '$timeFrom' AND '$timeTo') OR (sched_to BETWEEN '$timeFrom' AND '$timeTo')) AND sched_day IN($newDays) $ifUpdate";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$timeFrom, $timeTo, $timeFrom, $timeTo]);
+      $stmt->execute();
       $result = $stmt->fetchAll();
+      var_dump($result);
       return $result;
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);

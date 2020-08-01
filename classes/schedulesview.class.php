@@ -27,9 +27,9 @@ class SchedulesView extends Schedules
     $results = $this->getTimeSlotValue($type, $id);
     return $results;
   }
-  public function FetchScheduleByTimeAndDay($timeFrom, $timeTo, $day)
+  public function FetchScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID)
   {
-    $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $day);
+    $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID);
     return $results;
   }
 

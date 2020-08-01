@@ -4,7 +4,7 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
-
+$schedID = '';
 $schedIDExist = isset($_GET['schedid']) && !empty($_GET['schedid']);
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
