@@ -1,137 +1,256 @@
 <?php
 include_once './layouts/__header.php';
 
-$timeSlot = [
-   'startTime' => '9:15',
-   'endTime' => '11:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => '',
-   'room' => 'rm507',
-   'section' => 'BSIT-701',
-   'day' => 'Wednesday'
-];
-$timeSlot2 = [
-   'startTime' => '8:00',
-   'endTime' => '10:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm501',
-   'section' => 'BSIT-701',
-   'day' => 'Tuesday'
-];
-$timeSlot3 = [
-   'startTime' => '11:00',
-   'endTime' => '14:00',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm502',
-   'section' => 'BSIT-701',
-   'day' => 'Tuesday'
-];
-$timeSlot4 = [
-   'startTime' => '15:00',
-   'endTime' => '16:30',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm504',
-   'section' => 'BSIT-701',
-   'day' => 'Saturday'
-];
-$timeSlot5 = [
-   'startTime' => '16:00',
-   'endTime' => '17:30',
-   'professor' => 'Insigne, John Rexon',
-   'subject' => 'Mobile Development',
-   'room' => 'rm504',
-   'section' => 'BSIT-701',
-   'day' => 'Friday'
-];
-$schedules = [$timeSlot, $timeSlot2, $timeSlot3, $timeSlot4];
-$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-$fromTime = $_GET['from'] ?? '07:00';
-$toTime = $_GET['to'] ?? '17:00';
-$view = $_GET['view'] ?? '15';
+$deptView = new DepartmentsView();
+$sectView = new SectionsView();
+$roomView = new RoomsView();
+$profView = new ProfessorsView();
+$subjView = new SubjectsView();
+$schedView = new SchedulesView();
+$type = $_POST['type'] ?? $_GET['type'];
+$ID = $_POST['id'] ?? $_GET['id'];
+if (!isset($type) xor empty($type)) {
+   header('Location: ./dashboard.php');
+   exit();
+}
+$dTime = $schedView->FetchDisplayTime($type, $ID)[0];
+$startTime = $dTime['op_start'];
+$endTime   = $dTime['op_end'];
+$jumpTime  = $dTime['op_jump'];
 
 ?>
 
 <main class='schedules'>
    <div class='schedules__Details'>
+      <section class="schedules__Information">
+         <div>
+            <?php
+            if ($type == 'sect' || empty($type) || $type == null) {
+               $sectID = $ID;
+               $sect = $sectView->FetchSectionByID($sectID)[0];
+               $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
+               echo "<h1>" . $sect['sect_name'] . "</h1>";
+               echo "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
+               echo "<h4>" . $dept['dept_desc'] . "</h4>";
+            }
+            if ($type == 'room') {
+               $roomID = $ID;
+               $room = $roomView->FetchRoomByID($roomID)[0];
+               $floor = $roomView->FloorConvert($room['rm_floor']);
+               echo "<h1>" . $room['rm_name'] . "</h1>";
+               echo "<h3>" . $room['rm_desc'] . "</h3>";
+               echo "<h4>" . $floor . " Floor</h4>";
+            }
+            if ($type == 'subj') {
+               $subjID = $ID;
+               $subj = $subjView->FetchSubjectByID($subjID)[0];
+               echo "<h1>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h1>";
+               echo "<h3>" . $subj['units'] . " Unit/s</h3>";
+            }
+            if ($type == 'prof') {
+               $profID = $ID;
+               $prof = $profView->FetchProfessorByID($profID)[0];
+               $dept = $deptView->FetchDeptByID($prof['dept_id'])[0];
+               $imgSrc = $prof['prof_img'];
+               if (empty($prof['prof_img']))
+                  $imgSrc = "professor.png";
+               $middleInitial = (!empty($prof['middle_initial'])) ? $prof['middle_initial'] . '.' : '';
+               $fullName = "{$prof['last_name']}, {$prof['first_name']} {$middleInitial} {$prof['suffix']}";
+               echo "<img src='./drawables/images/" . $imgSrc . "'>";
+               echo "<h1>" . $fullName . "</h1>";
+               echo "<h4>" . $dept['dept_desc'] . "</h4>";
+            }
+
+            ?>
+         </div>
+         <a href='<?php echo "?type=$type&id=$ID&action" ?>' class='form__Toggle'>Add Schedules</a>
+      </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
+            <input type="hidden" name="id" value=<?php echo $dTime['op_id'] ?>>
+            <input type="hidden" name="typeID" value=<?php echo $ID ?>>
+            <input type="hidden" name="type" value=<?php echo $type ?>>
             <div>
-               <label for="fromTime">Start:</label>
-               <input id='fromTime' type="time" name='fromTime' value='<?php echo $fromTime ?>'>
+               <label for="startTime">Start:</label>
+               <select id='startTime' name="startTime">
+                  <?php
+
+                  $newStartTime = strtotime($startTime);
+                  $schedView->GenerateTimeOptions(strtotime('0:00'), strtotime('23:00'), $newStartTime);
+
+                  ?>
+               </select>
             </div>
             <div>
-               <label for="toTime">End:</label>
-               <input id='toTime' type="time" name='toTime' value='<?php echo $toTime ?>'>
+               <label for="endTime">End:</label>
+               <select id="endTime" name="endTime">
+                  <?php
+
+                  $newEndTime = strtotime($endTime);
+                  $schedView->GenerateTimeOptions($newStartTime + (60 * 60),  $newStartTime + (60 * 60 * 23), $newEndTime);
+
+
+                  ?>
+               </select>
             </div>
             <div>
-               <label for="viewBy">View By:</label>
-               <select id='viewBy' name='viewBy'>
+               <label for="jumpTime">View By:</label>
+               <select id='jumpTime' name='jumpTime'>
                   <?php
                   for ($i = 15; $i <= 60; $i += 15) {
-                     $selected = ($view == $i) ? 'selected' : '';
+                     $selected = ($jumpTime == $i) ? 'selected' : '';
                      echo "<option value='$i' $selected>$i minutes</option>";
                   }
 
                   ?>
                </select>
             </div>
-
-            <button class='button' type="submit" name="submit">Save</button>
+            <button class='button' type="submit" name="scheduleSave">Save</button>
          </form>
       </section>
    </div>
    <div class='schedules__Table'>
+      <ul class="schedules__Day">
+         <li>Monday</li>
+         <li>Tuesday</li>
+         <li>Wednesday</li>
+         <li>Thursday</li>
+         <li>Friday</li>
+         <li>Saturday</li>
+      </ul>
+      <ul class="schedules__Time">
+         <?php
 
+         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
+            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+            echo "<li>";
+            if ($timeDisplay % $jumpTime == 0) {
+               $toTime = $i + $jumpTime * 60;
+               echo date('g:i A', $i) . " - " . date('g:i A', $toTime);
+            } else {
+               echo "<span>-</span>";
+            }
+            echo "</li>";
+         }
+
+         ?>
+      </ul>
+      <ul class="schedules__TimeSlot">
+
+         <?php
+
+         $days = array();
+         for ($i = 0; $i < 6; $i++) {
+            $days[$i] = array();
+         }
+         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
+            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+            $days[0][$i] = '<li></li>';
+         }
+
+         for ($i = 1; $i < sizeof($days); $i++) {
+            $days[$i] = $days[0];
+         }
+         $timeSlots = $schedView->FetchTimeSlotValue($type, $ID);
+         for ($i = 0; $i < sizeof($days); $i++) {
+            echo '<ul>';
+            foreach ($days[$i] as $x => $xValue) {
+               $dayOfWeek = '';
+               switch ($i) {
+                  case 0:
+                     $dayOfWeek = 'Monday';
+                     break;
+                  case 1:
+                     $dayOfWeek = 'Tuesday';
+                     break;
+                  case 2:
+                     $dayOfWeek = 'Wednesday';
+                     break;
+                  case 3:
+                     $dayOfWeek = 'Thursday';
+                     break;
+                  case 4:
+                     $dayOfWeek = 'Friday';
+                     break;
+                  case 5:
+                     $dayOfWeek = 'Saturday';
+                     break;
+               }
+               $top = "";
+               $mid = "";
+               $bot = "";
+               foreach ($timeSlots as $timeSlot) {
+                  switch ($type) {
+                     case 'prof':
+                        $top = $timeSlot['subj_desc'] ?? "";
+                        $mid = $timeSlot['rm_name'] ?? "";
+                        $bot = $timeSlot['sect_name'] ?? "";
+                        break;
+                     case 'subj':
+                        $top = $timeSlot['sect_name'] ?? "";
+                        $mid = $timeSlot['rm_name'] ?? "";
+                        $bot = $timeSlot['last_name'] ?? "";
+                        break;
+                     case 'room':
+                        $top = $timeSlot['subj_desc'] ?? "";
+                        $mid = $timeSlot['sect_name'] ?? "";
+                        $bot = $timeSlot['last_name'] ?? "";
+                        break;
+                     case 'sect':
+                        break;
+                        $top = $timeSlot['subj_desc'] ?? "";
+                        $mid = $timeSlot['rm_name'] ?? "";
+                        $bot = $timeSlot['last_name'] ?? "";
+                        break;
+                     default:
+                        $top = $timeSlot['subj_desc'] ?? "";
+                        $mid = $timeSlot['rm_name'] ?? "";
+                        $bot = $timeSlot['last_name'] ?? "";
+                  }
+                  $slotLabels = array(
+                     'top' => $top,
+                     'mid' => $mid,
+                     'bot' => $bot
+                  );
+
+                  if ($dayOfWeek == $timeSlot['sched_day']) {
+
+                     if ($x >= strtotime($timeSlot['sched_from']) && $x < strtotime($timeSlot['sched_to'])) {
+                        echo "<script type='text/javascript'>
+                        var slotsLabel;
+                        slotsLabel = " . json_encode($slotLabels, JSON_PRETTY_PRINT) . "
+                        </script>";
+                        $xValue = "<li class='slot slot{$timeSlot['sched_id']}' style=' --display-text: blue '><a class='form__Toggle' href='?type=$type&id=$ID&schedid={$timeSlot['sched_id']}'>";
+                        if ($x == strtotime($timeSlot['sched_from'])) {
+                           $xValue .= $timeSlot['subj_desc'];
+                           $xValue .= $timeSlot['last_name'];
+                        }
+                        $xValue .= "</a></li>";
+                     }
+                  }
+               }
+               echo $xValue;
+            }
+            echo '</ul>';
+         }
+         //$day = $timeSlot[0][0];
+         ?>
+      </ul>
       <?php
 
-      $fromTime = strtotime($fromTime);
-      $toTime = strtotime($toTime);
-      echo '<ul>';
-      echo "<li><span>s</span></li>";
-      $skipTime = $fromTime;
-      for ($i = $fromTime; $i <= $toTime; $i += 15 * 60) {
-         $baseValue = ($view * 60);
-         $diff  = $i - $fromTime;
-         if ($diff % $baseValue == 0) {
-            echo "<li class='schedules__Hour'>" . date('g:i a', $i) . "</li>";
-         } else {
-            echo "<li class='schedules__Hour'><span>s</span></li>";
-         }
-      }
-      echo '</ul>';
-      foreach ($days as $day) {
-         echo '<ul>';
-         echo "<li>{$day}</li>";
-         foreach ($schedules as $schedule) {
-            for ($i = $fromTime; $i <= $toTime; $i += 15 * 60) {
-               $startTime = strtotime($schedule['startTime']);
-               $endTime = strtotime($schedule['endTime']);
-               if ($i >= $startTime && $i <= $endTime && $schedule['day'] == $day) {
-                  echo "<li class='schedules__Timeslot'><label>";
-                  if ($i == $startTime) {
-                     echo "{$schedule['subject']}";
-                  }
-                  $middle = ($startTime + $endTime) / 2;
-                  if ($i == $middle) {
-                     echo "{$schedule['professor']}";
-                  }
-                  if ($i == $endTime) {
-                     echo "{$schedule['room']}";
-                  }
-                  echo "<span>s</span></label></li>";
-               } else {
-                  echo "<li><span>s</span></li>";
-               }
-            }
-         }
-         echo '</ul>';
-      }
+
+
       ?>
+      </ul>
+
    </div>
+   <?php
+   if (isset($_GET['action']) || isset($_GET['schedid'])) {
+      include_once './layouts/schedules.form.php';
+   }
+
+   ?>
 </main>
 
 <?php

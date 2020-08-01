@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2020 at 02:41 AM
+-- Generation Time: Aug 01, 2020 at 12:11 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -109,7 +109,8 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 (37, 963852741, 'Abalos', 'Romabel ', 'S', '', 43, 36, 1, ''),
 (38, 852147963, 'Pacleb', 'Roland', 'P', '', 51, 37, 1, ''),
 (39, 195375465, 'Gajasan', 'Jonathan', 'F', '', 43, 38, 1, ''),
-(40, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 43, 39, 1, '');
+(40, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 43, 39, 0, ''),
+(41, 14562487, 'Thomas', 'Isabel', 'P', '', 43, 40, 1, '');
 
 -- --------------------------------------------------------
 
@@ -173,7 +174,6 @@ CREATE TABLE `schedules` (
   `sched_id` int(11) NOT NULL,
   `sched_from` time NOT NULL,
   `sched_to` time NOT NULL,
-  `sched_day` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') NOT NULL,
   `sched_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `prof_id` int(11) NOT NULL,
   `subj_id` int(11) NOT NULL,
@@ -185,24 +185,31 @@ CREATE TABLE `schedules` (
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_day`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
-(1, '06:00:00', '10:00:00', 'Tuesday', '2020-03-15 03:22:23', 1, 1, 1, 1),
-(2, '08:30:00', '10:00:00', 'Monday', '2020-03-15 03:27:30', 2, 2, 2, 2),
-(3, '09:00:00', '10:30:00', 'Wednesday', '2020-03-15 03:27:30', 3, 3, 3, 3),
-(4, '07:00:00', '08:00:00', 'Tuesday', '2020-06-22 08:43:54', 0, 0, 10, 0),
-(5, '07:00:00', '08:00:00', 'Wednesday', '2020-06-22 08:43:54', 0, 0, 10, 0),
-(8, '07:00:00', '08:00:00', 'Thursday', '2020-06-24 05:44:43', 33, 7, 9, 6),
-(9, '09:00:00', '11:00:00', 'Monday', '2020-06-25 05:27:00', 32, 9, 9, 9),
-(10, '09:00:00', '10:00:00', 'Thursday', '2020-06-25 15:09:40', 33, 7, 9, 3),
-(11, '11:00:00', '13:00:00', 'Tuesday', '2020-06-25 20:29:25', 34, 10, 9, 7),
-(12, '11:00:00', '13:00:00', 'Friday', '2020-06-25 20:29:25', 34, 10, 9, 7),
-(13, '10:00:00', '13:00:00', 'Monday', '2020-06-25 20:46:28', 34, 7, 6, 8),
-(14, '10:00:00', '13:00:00', 'Thursday', '2020-06-25 20:46:29', 34, 7, 6, 8),
-(15, '07:00:00', '13:00:00', 'Wednesday', '2020-06-26 08:45:55', 35, 9, 9, 6),
-(16, '07:00:00', '08:00:00', 'Saturday', '2020-06-27 09:09:40', 32, 8, 9, 4),
-(17, '09:00:00', '11:00:00', 'Monday', '2020-06-30 14:11:49', 32, 8, 7, 4),
-(18, '09:00:00', '11:00:00', 'Wednesday', '2020-06-30 14:11:49', 32, 8, 7, 4),
-(19, '14:00:00', '17:00:00', 'Saturday', '2020-07-01 22:10:08', 34, 7, 9, 5);
+INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
+(33, '07:00:00', '10:00:00', '2020-08-01 08:20:29', 35, 8, 9, 3),
+(36, '07:00:00', '08:00:00', '2020-08-01 01:07:24', 34, 7, 9, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedules_day`
+--
+
+CREATE TABLE `schedules_day` (
+  `id` int(11) NOT NULL,
+  `sched_id` int(11) NOT NULL,
+  `sched_day` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `schedules_day`
+--
+
+INSERT INTO `schedules_day` (`id`, `sched_id`, `sched_day`) VALUES
+(69, 33, 'Monday'),
+(80, 36, 'Saturday'),
+(81, 36, 'Tuesday'),
+(82, 33, 'Wednesday');
 
 -- --------------------------------------------------------
 
@@ -232,7 +239,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (6, '07:00:00', '17:00:00', '15', 'room', 6),
 (7, '09:00:00', '20:00:00', '15', 'room', 7),
 (8, '07:00:00', '17:00:00', '15', 'room', 8),
-(9, '07:00:00', '17:00:00', '15', 'room', 9),
+(9, '07:00:00', '16:00:00', '15', 'room', 9),
 (10, '07:00:00', '17:00:00', '15', 'room', 10),
 (11, '07:00:00', '17:00:00', '15', 'room', 11),
 (12, '07:00:00', '17:00:00', '15', 'room', 12),
@@ -256,7 +263,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (30, '07:00:00', '17:00:00', '15', 'room', 30),
 (31, '07:00:00', '17:00:00', '15', 'room', 31),
 (32, '07:00:00', '17:00:00', '15', 'room', 32),
-(33, '07:00:00', '17:00:00', '15', 'room', 33),
+(33, '07:00:00', '17:00:00', '30', 'room', 33),
 (34, '07:00:00', '17:00:00', '15', 'room', 34),
 (35, '07:00:00', '17:00:00', '15', 'room', 35),
 (36, '07:00:00', '17:00:00', '15', 'room', 36),
@@ -446,14 +453,25 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (226, '07:00:00', '17:00:00', '15', 'subj', 173),
 (313, '07:00:00', '17:00:00', '15', 'prof', 31),
 (314, '07:00:00', '17:00:00', '15', 'prof', 32),
-(315, '07:00:00', '17:00:00', '15', 'prof', 33),
+(315, '07:00:00', '18:00:00', '15', 'prof', 33),
 (316, '07:00:00', '17:00:00', '15', 'prof', 34),
 (317, '07:00:00', '17:00:00', '15', 'prof', 35),
 (318, '07:00:00', '17:00:00', '15', 'prof', 36),
 (319, '07:00:00', '17:00:00', '15', 'prof', 37),
 (320, '07:00:00', '17:00:00', '15', 'prof', 38),
 (321, '07:00:00', '17:00:00', '15', 'prof', 39),
-(322, '07:00:00', '17:00:00', '15', 'prof', 40);
+(322, '07:00:00', '17:00:00', '15', 'prof', 40),
+(323, '07:00:00', '17:00:00', '15', 'prof', 31),
+(324, '07:00:00', '17:00:00', '15', 'prof', 32),
+(325, '07:00:00', '17:00:00', '15', 'prof', 33),
+(326, '07:00:00', '17:00:00', '15', 'prof', 34),
+(327, '07:00:00', '17:00:00', '15', 'prof', 35),
+(328, '07:00:00', '17:00:00', '15', 'prof', 36),
+(329, '07:00:00', '17:00:00', '15', 'prof', 37),
+(330, '07:00:00', '17:00:00', '15', 'prof', 38),
+(331, '07:00:00', '17:00:00', '15', 'prof', 39),
+(332, '07:00:00', '17:00:00', '15', 'prof', 40),
+(333, '07:00:00', '17:00:00', '15', 'prof', 41);
 
 -- --------------------------------------------------------
 
@@ -475,7 +493,7 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`sect_id`, `sect_name`, `sect_year`, `sect_sem`, `dept_id`, `sect_active`) VALUES
-(2, 'BSIT602', 3, 1, 47, 0),
+(2, 'BSIT602', 3, 1, 47, 1),
 (3, 'BSIT701', 4, 1, 49, 1),
 (4, 'BSIT101', 1, 1, 49, 1),
 (5, 'BSIT201', 1, 2, 49, 1),
@@ -707,7 +725,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `
 (36, '963852741', '', '$2y$10$jjFqbgPloHcZcVLHsoFDFOcmOjOL.SlXLJzQ4xeT83ora8yXXF/XO', 1, 1),
 (37, '852147963', '', '$2y$10$1CMi8YGI1QtcEhP01JT/q.iyVdmUFqU/zubjB8AyeF.fy.YPSv/w.', 1, 1),
 (38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 1, 1),
-(39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 1);
+(39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 0),
+(40, '14562487', 'Isabelthomas@yahoo.com', '$2y$10$YzgiZxLwKunt167jX9GNAeq448m/hCvZvrOT9ovPHJn0O1rvd/1mO', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -736,6 +755,12 @@ ALTER TABLE `rooms`
 --
 ALTER TABLE `schedules`
   ADD PRIMARY KEY (`sched_id`);
+
+--
+-- Indexes for table `schedules_day`
+--
+ALTER TABLE `schedules_day`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `schedules_operation`
@@ -775,7 +800,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -787,13 +812,19 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `schedules_day`
+--
+ALTER TABLE `schedules_day`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `schedules_operation`
 --
 ALTER TABLE `schedules_operation`
-  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
+  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -811,7 +842,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

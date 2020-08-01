@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+tr,
+td,
+th {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0.2rem;
+  margin: 0;
+  text-align: center;
+}
+td,
+th {
+  width: 10rem;
+  font-size: 0.8rem;
+  height: 1rem;
+}
+.slot {
+  position: relative;
+  div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: pink;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.15rem;
+  }
+}

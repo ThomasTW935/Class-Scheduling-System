@@ -1,1 +1,51 @@
-/* No CSS *//*# sourceMappingURL=demo.css.map */
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+tr,
+td,
+th {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0.2rem;
+  margin: 0;
+  text-align: center;
+}
+
+td,
+th {
+  width: 10rem;
+  font-size: 0.8rem;
+  height: 1rem;
+}
+
+.slot {
+  position: relative;
+}
+
+.slot div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: pink;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.15rem;
+}
+/*# sourceMappingURL=demo.css.map */

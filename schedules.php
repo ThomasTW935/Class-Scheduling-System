@@ -110,138 +110,60 @@ $jumpTime  = $dTime['op_jump'];
          </form>
       </section>
    </div>
-   <div class='schedules__Table'>
-      <ul class="schedules__Day">
-         <li>Monday</li>
-         <li>Tuesday</li>
-         <li>Wednesday</li>
-         <li>Thursday</li>
-         <li>Friday</li>
-         <li>Saturday</li>
-      </ul>
-      <ul class="schedules__Time">
+   <table class='schedules__Table'>
+      <tr>
+         <td></td>
          <?php
+         $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 
-         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
-            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            echo "<li>";
-            if ($timeDisplay % $jumpTime == 0) {
-               $toTime = $i + $jumpTime * 60;
-               echo date('g:i A', $i) . " - " . date('g:i A', $toTime);
-            } else {
-               echo "<span>-</span>";
-            }
-            echo "</li>";
+         foreach ($daysWeek as  $dayWeek) {
+            echo "<th>$dayWeek</th>";
          }
-
          ?>
-      </ul>
-      <ul class="schedules__TimeSlot">
+      </tr>
+      <?php
+      $values = array();
+      $results = $schedView->FetchTimeSlotValue($type, $ID);
+      for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
+         $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+         if ($timeDisplay % $jumpTime == 0) {
+            $toTime = date('g:i A', ($i + $jumpTime * 60));
 
-         <?php
-
-         $days = array();
-         for ($i = 0; $i < 6; $i++) {
-            $days[$i] = array();
-         }
-         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
-            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            $days[0][$i] = '<li></li>';
-         }
-
-         for ($i = 1; $i < sizeof($days); $i++) {
-            $days[$i] = $days[0];
-         }
-         $timeSlots = $schedView->FetchTimeSlotValue($type, $ID);
-         for ($i = 0; $i < sizeof($days); $i++) {
-            echo '<ul>';
-            foreach ($days[$i] as $x => $xValue) {
-               $dayOfWeek = '';
-               switch ($i) {
-                  case 0:
-                     $dayOfWeek = 'Monday';
-                     break;
-                  case 1:
-                     $dayOfWeek = 'Tuesday';
-                     break;
-                  case 2:
-                     $dayOfWeek = 'Wednesday';
-                     break;
-                  case 3:
-                     $dayOfWeek = 'Thursday';
-                     break;
-                  case 4:
-                     $dayOfWeek = 'Friday';
-                     break;
-                  case 5:
-                     $dayOfWeek = 'Saturday';
-                     break;
-               }
-               $top = "";
-               $mid = "";
-               $bot = "";
-               foreach ($timeSlots as $timeSlot) {
-                  switch ($type) {
-                     case 'prof':
-                        $top = $timeSlot['subj_desc'] ?? "";
-                        $mid = $timeSlot['rm_name'] ?? "";
-                        $bot = $timeSlot['sect_name'] ?? "";
-                        break;
-                     case 'subj':
-                        $top = $timeSlot['sect_name'] ?? "";
-                        $mid = $timeSlot['rm_name'] ?? "";
-                        $bot = $timeSlot['last_name'] ?? "";
-                        break;
-                     case 'room':
-                        $top = $timeSlot['subj_desc'] ?? "";
-                        $mid = $timeSlot['sect_name'] ?? "";
-                        $bot = $timeSlot['last_name'] ?? "";
-                        break;
-                     case 'sect':
-                        break;
-                        $top = $timeSlot['subj_desc'] ?? "";
-                        $mid = $timeSlot['rm_name'] ?? "";
-                        $bot = $timeSlot['last_name'] ?? "";
-                        break;
-                     default:
-                        $top = $timeSlot['subj_desc'] ?? "";
-                        $mid = $timeSlot['rm_name'] ?? "";
-                        $bot = $timeSlot['last_name'] ?? "";
-                  }
-                  $slotLabels = array(
-                     'top' => $top,
-                     'mid' => $mid,
-                     'bot' => $bot
-                  );
-
-                  if ($dayOfWeek == $timeSlot['sched_day']) {
-                     if ($x >= strtotime($timeSlot['sched_from']) && $x < strtotime($timeSlot['sched_to'])) {
-                        echo "<script type='text/javascript'>
-                  var slotsLabel = " . json_encode($slotLabels, JSON_PRETTY_PRINT) . "</script>";
-                        $xValue = "<li class='slot slot{$timeSlot['sched_id']}'><a class='form__Toggle' href='?type=$type&id=$ID&schedid={$timeSlot['sched_id']}'>";
-                        if ($x == strtotime($timeSlot['sched_from'])) {
-                           $xValue .= $timeSlot['subj_desc'];
-                           $xValue .= $timeSlot['last_name'];
-                        }
-                        $xValue .= "</a></li>";
+            $time = date('g:i A', $i);
+            $values[$time] = array();
+            $cellValue =  "<span class='table__Time'>$time - $toTime</span>";
+            array_push($values[$time], $cellValue);
+            foreach ($daysWeek as $days) {
+               $cellValue = '';
+               foreach ($results as $result) {
+                  if ($days == $result['sched_day']) {
+                     if ($i >= strtotime($result['sched_from']) && $i < strtotime($result['sched_to'])) {
+                        $cellValue = "<div>
+                                <span>{$result['subj_desc']}</span>
+                                <span>{$result['sect_name']}</span> 
+                                <span>{$result['last_name']}</span>
+                                </div>";
                      }
                   }
                }
-               echo $xValue;
+               array_push($values[$time], $cellValue);
             }
-            echo '</ul>';
          }
-         //$day = $timeSlot[0][0];
-         ?>
-      </ul>
-      <?php
-
-
+      }
+      foreach ($values as $key => $value) {
+         echo "<tr>";
+         foreach ($value as $x) {
+            if (!empty($x)) {
+               echo "<td class='slot'><a>$x</a></td>";
+            } else {
+               echo "<td>$x</td>";
+            }
+         }
+         echo "</tr>";
+      }
 
       ?>
-      </ul>
-
-   </div>
+   </table>
    <?php
    if (isset($_GET['action']) || isset($_GET['schedid'])) {
       include_once './layouts/schedules.form.php';
