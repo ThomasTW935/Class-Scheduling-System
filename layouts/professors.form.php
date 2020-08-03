@@ -14,7 +14,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 $empID = (!empty($_GET['empID'])) ? $_GET['empID'] : $prof['emp_no'];
 $firstName = (!empty($_GET['firstName'])) ? $_GET['firstName'] : $prof['first_name'];
 $lastName = (!empty($_GET['lastName'])) ? $_GET['lastName'] : $prof['last_name'];
-$middleName = (!empty($_GET['middleInitial'])) ? $_GET['middleInitial'] : $prof['middle_name'];
+$middleName = (!empty($_GET['middleInitial'])) ? $_GET['middleInitial'] : '';
 $suffix = (!empty($_GET['suffix'])) ? $_GET['suffix'] : $prof['suffix'];
 $username = (!empty($_GET['username'])) ? $_GET['username'] : $prof['username'];
 $email = (!empty($_GET['email'])) ? $_GET['email'] : $prof['email'];

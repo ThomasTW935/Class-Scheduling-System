@@ -41,6 +41,7 @@ $jumpTime  = $dTime['op_jump'];
                echo "<h1>" . $room['rm_name'] . "</h1>";
                echo "<h3>" . $room['rm_desc'] . "</h3>";
                echo "<h4>" . $floor . " Floor</h4>";
+               $caption = "Rm.{$room['rm_name']}";
             }
             if ($type == 'subj') {
                $subjID = $ID;
@@ -68,8 +69,8 @@ $jumpTime  = $dTime['op_jump'];
       </section>
       <section class='schedules__Settings'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
-            <input type="hidden" name="id" value=<?php echo $dTime['op_id'] ?>>
-            <input type="hidden" name="typeID" value=<?php echo $ID ?>>
+            <input type="hidden" name="opID" value=<?php echo $dTime['op_id'] ?>>
+            <input type="hidden" name="id" value=<?php echo $ID ?>>
             <input type="hidden" name="type" value=<?php echo $type ?>>
             <div>
                <label for="startTime">Start:</label>
@@ -110,60 +111,63 @@ $jumpTime  = $dTime['op_jump'];
          </form>
       </section>
    </div>
-   <table class='schedules__Table'>
-      <tr>
-         <td></td>
+   <div class='schedules__Table'>
+      <table>
+         <caption><?php echo $caption ?> </caption>
+         <tr>
+            <td></td>
+            <?php
+            $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+
+            foreach ($daysWeek as  $dayWeek) {
+               echo "<th>$dayWeek</th>";
+            }
+            ?>
+         </tr>
          <?php
-         $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+         $values = array();
+         $schedSlots = $schedView->FetchTimeSlotValue($type, $ID);
+         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
+            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
+            if ($timeDisplay % $jumpTime == 0) {
+               $toTime = date('g:i A', ($i + $jumpTime * 60));
 
-         foreach ($daysWeek as  $dayWeek) {
-            echo "<th>$dayWeek</th>";
-         }
-         ?>
-      </tr>
-      <?php
-      $values = array();
-      $results = $schedView->FetchTimeSlotValue($type, $ID);
-      for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
-         $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-         if ($timeDisplay % $jumpTime == 0) {
-            $toTime = date('g:i A', ($i + $jumpTime * 60));
-
-            $time = date('g:i A', $i);
-            $values[$time] = array();
-            $cellValue =  "<span class='table__Time'>$time - $toTime</span>";
-            array_push($values[$time], $cellValue);
-            foreach ($daysWeek as $days) {
-               $cellValue = '';
-               foreach ($results as $result) {
-                  if ($days == $result['sched_day']) {
-                     if ($i >= strtotime($result['sched_from']) && $i < strtotime($result['sched_to'])) {
-                        $cellValue = "<div>
-                                <span>{$result['subj_desc']}</span>
-                                <span>{$result['sect_name']}</span> 
-                                <span>{$result['last_name']}</span>
-                                </div>";
+               $time = date('g:i A', $i);
+               $values[$time] = array();
+               $cellValue =  "<span class='table__Time'>$time - $toTime</span>";
+               array_push($values[$time], $cellValue);
+               foreach ($daysWeek as $days) {
+                  $cellValue = '';
+                  foreach ($schedSlots as $schedSlot) {
+                     if ($days == $schedSlot['sched_day']) {
+                        if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
+                           $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
+                                <span>{$schedSlot['subj_desc']}</span>
+                                <span>{$schedSlot['sect_name']}</span> 
+                                <span>{$schedSlot['last_name']}</span>
+                                </a>";
+                        }
                      }
                   }
+                  array_push($values[$time], $cellValue);
                }
-               array_push($values[$time], $cellValue);
             }
          }
-      }
-      foreach ($values as $key => $value) {
-         echo "<tr>";
-         foreach ($value as $x) {
-            if (!empty($x)) {
-               echo "<td class='slot'><a>$x</a></td>";
-            } else {
-               echo "<td>$x</td>";
+         foreach ($values as $key => $value) {
+            echo "<tr>";
+            foreach ($value as $x) {
+               if (!empty($x)) {
+                  echo "<td class='slot'>$x</td>";
+               } else {
+                  echo "<td>$x</td>";
+               }
             }
+            echo "</tr>";
          }
-         echo "</tr>";
-      }
 
-      ?>
-   </table>
+         ?>
+      </table>
+   </div>
    <?php
    if (isset($_GET['action']) || isset($_GET['schedid'])) {
       include_once './layouts/schedules.form.php';

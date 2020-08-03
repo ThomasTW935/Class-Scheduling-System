@@ -1,11 +1,7 @@
 @import "default.scss";
 
 .schedules {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
   position: relative;
-  padding: 0;
-  font-size: 0.8rem;
   .module__Form {
     width: 50vw;
     font-size: 1rem;
@@ -43,8 +39,8 @@
     }
   }
   &__Details {
+    padding: 0 0.5rem;
     background: rgba(0, 0, 0, 0.05);
-
     .schedules__Information {
       div {
         display: flex;
@@ -85,38 +81,45 @@
     }
   }
   &__Table {
-    border-spacing: 0;
+    min-height: 323px;
+    table {
+      width: 100%;
+    }
     td,
     th {
-      width: 8rem;
-      font-size: 0.75rem;
-      height: 1rem;
+      min-width: 5rem;
       border-right: 1px solid black;
       border-bottom: 1px solid black;
       text-align: center;
     }
+    tr {
+      height: 1.5rem;
+    }
+    caption {
+      height: 3rem;
+    }
     .slot {
       position: relative;
-      div {
+      a {
         position: absolute;
         left: 0;
         top: 0;
-        background: pink;
         height: 100%;
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-decoration: none;
+        color: black;
+        background: rgba(yellow, 0.4);
+        &:hover {
+          background: rgba(black, 0.2);
+        }
         span {
           text-transform: capitalize;
         }
       }
-    }
-    th,
-    .table__Time {
-      background: var(--color-background-dark);
-      color: #fff;
     }
     .table__Time {
       position: absolute;

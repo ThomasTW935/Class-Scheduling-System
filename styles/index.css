@@ -8,18 +8,17 @@
 
 html {
   height: 100vh;
+  font-size: 16px;
 }
 
 body {
   height: 100%;
   line-height: 1.5;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+  -ms-grid-columns: 1fr;
+      grid-template: auto 1fr auto / 1fr;
 }
 
 body ul {
@@ -58,15 +57,18 @@ body main {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 7%;
-  padding: 0.7em;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 1rem 2rem;
+  height: 2.5rem;
 }
 
 .nav button,
@@ -94,8 +96,6 @@ body main {
 }
 
 .nav .back {
-  position: relative;
-  left: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -105,17 +105,13 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
 }
 
 .nav .back img {
-  margin-right: 10px;
+  margin-right: 0.5rem;
 }
 
 .nav__Button {
-  position: absolute;
-  top: 0;
-  right: 2em;
   height: 100%;
   display: -ms-grid;
   display: grid;
@@ -496,8 +492,8 @@ body main {
   width: 100%;
 }
 
-.module__Form .form__Container .form__Input *:not(div):focus {
-  border-color: #00aaff;
+.module__Form .form__Container .form__Input *:not(div):focus, .module__Form .form__Container .form__Input *:not(div):hover {
+  border-color: var(--color-background-light);
 }
 
 .module__Form .form__Container .form__Input input[type="number"] {

@@ -1,5 +1,10 @@
 <?php
 include_once './layouts/__header.php';
+if ($sessionType == 1) {
+   header("Location: ./scheduleview.php");
+   exit();
+}
+
 ?>
 
 <main class="dashboard">

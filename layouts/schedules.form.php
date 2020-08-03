@@ -29,7 +29,7 @@ if ($schedIDExist) {
       <select name="timeFrom">
         <?php
 
-        $selected = $result['sched_from'] ?? "";
+        $selected = strtotime($result['sched_from']) ?? "";
         $schedView->GenerateTimeOptions($newStartTime, $newEndTime - (60 * 60), $selected, $jump = $jumpTime)
 
         ?>
@@ -38,10 +38,11 @@ if ($schedIDExist) {
     </div>
     <div class="form__Input">
       <label for='timeTo' class='form__Label'>To:</label>
-      <select name="timeTo">
+      <select name="timeTo" class='select__To'>
         <?php
 
-        $selected = $result['sched_to'] ?? "";
+        $selected = strtotime($result['sched_to']) ?? "";
+
         $schedView->GenerateTimeOptions($newStartTime + (60 * 60), $newEndTime, $selected, $jump = $jumpTime, true)
 
         ?>
@@ -51,7 +52,6 @@ if ($schedIDExist) {
   <div class="form__DayContainer">
 
     <?php
-
     $days = array(
       'm' => 'Monday',
       't' => 'Tuesday',

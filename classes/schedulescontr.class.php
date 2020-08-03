@@ -8,7 +8,7 @@ class SchedulesContr extends Schedules
   }
   public function ModifyDisplayTime($data)
   {
-    $this->updateDisplayTime($data["startTime"], $data["endTime"], $data["jumpTime"], $data["id"]);
+    $this->updateDisplayTime($data["startTime"], $data["endTime"], $data["jumpTime"], $data["opID"]);
   }
 
 

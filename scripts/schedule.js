@@ -75,7 +75,7 @@ timeStart.addEventListener('change', () => {
 
 let TableFixLabel = () => {
 
-  const table = document.querySelector('.schedules__Table');
+  const table = document.querySelector('.schedules__Table table');
   let rows = table.rows
   let colLength = rows[0].cells.length
 
@@ -104,6 +104,17 @@ let TableFixLabel = () => {
       } else {
         mergeNum = 1
       }
+    }
+  }
+  const slots = document.querySelectorAll('.slot');
+
+  for (let slot of slots) {
+    if (slot.rowSpan == 2) {
+      console.log(slot.rowSpan)
+      console.log(slot)
+      let newSize = 0.75 * .9
+      slot.style.fontSize = newSize + "rem"
+      console.log(slot.style.fontSize)
     }
   }
 }
@@ -143,17 +154,7 @@ function FetchDatalistValue(e) {
 // Actions 
 TableFixLabel()
 
-const slots = document.querySelectorAll('.slot');
 
-for (let slot of slots) {
-  if (slot.rowSpan == 2) {
-    console.log(slot.rowSpan)
-    console.log(slot)
-    let newSize = 0.75 * .9
-    slot.style.fontSize = newSize + "rem"
-    console.log(slot.style.fontSize)
-  }
-}
 
 
 

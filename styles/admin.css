@@ -8,18 +8,17 @@
 
 html {
   height: 100vh;
+  font-size: 16px;
 }
 
 body {
   height: 100%;
   line-height: 1.5;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+  -ms-grid-columns: 1fr;
+      grid-template: auto 1fr auto / 1fr;
 }
 
 body ul {
@@ -58,15 +57,18 @@ body main {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 7%;
-  padding: 0.7em;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 1rem 2rem;
+  height: 2.5rem;
 }
 
 .nav button,
@@ -94,8 +96,6 @@ body main {
 }
 
 .nav .back {
-  position: relative;
-  left: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -105,17 +105,13 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
 }
 
 .nav .back img {
-  margin-right: 10px;
+  margin-right: 0.5rem;
 }
 
 .nav__Button {
-  position: absolute;
-  top: 0;
-  right: 2em;
   height: 100%;
   display: -ms-grid;
   display: grid;
@@ -496,8 +492,8 @@ body main {
   width: 100%;
 }
 
-.module__Form .form__Container .form__Input *:not(div):focus {
-  border-color: #00aaff;
+.module__Form .form__Container .form__Input *:not(div):focus, .module__Form .form__Container .form__Input *:not(div):hover {
+  border-color: var(--color-background-light);
 }
 
 .module__Form .form__Container .form__Input input[type="number"] {
@@ -567,7 +563,32 @@ body main {
   cursor: default;
 }
 
+@media screen and (min-width: 1441px) {
+  .schedules {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: minmax(150px, 1fr) 4fr;
+        grid-template-columns: minmax(150px, 1fr) 4fr;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 12px;
+  }
+  .schedules {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+  }
+  .schedules__Details {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
   .nav__List {
     width: 100%;
   }
@@ -617,18 +638,17 @@ body main {
 
 html {
   height: 100vh;
+  font-size: 16px;
 }
 
 body {
   height: 100%;
   line-height: 1.5;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+  -ms-grid-columns: 1fr;
+      grid-template: auto 1fr auto / 1fr;
 }
 
 body ul {
@@ -667,15 +687,18 @@ body main {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 7%;
-  padding: 0.7em;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 1rem 2rem;
+  height: 2.5rem;
 }
 
 .nav button,
@@ -703,8 +726,6 @@ body main {
 }
 
 .nav .back {
-  position: relative;
-  left: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -714,17 +735,13 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
 }
 
 .nav .back img {
-  margin-right: 10px;
+  margin-right: 0.5rem;
 }
 
 .nav__Button {
-  position: absolute;
-  top: 0;
-  right: 2em;
   height: 100%;
   display: -ms-grid;
   display: grid;
@@ -1105,8 +1122,8 @@ body main {
   width: 100%;
 }
 
-.module__Form .form__Container .form__Input *:not(div):focus {
-  border-color: #00aaff;
+.module__Form .form__Container .form__Input *:not(div):focus, .module__Form .form__Container .form__Input *:not(div):hover {
+  border-color: var(--color-background-light);
 }
 
 .module__Form .form__Container .form__Input input[type="number"] {
@@ -1176,20 +1193,39 @@ body main {
   cursor: default;
 }
 
+@media screen and (min-width: 1441px) {
+  .schedules {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: minmax(150px, 1fr) 4fr;
+        grid-template-columns: minmax(150px, 1fr) 4fr;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 12px;
+  }
+  .schedules {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+  }
+  .schedules__Details {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
   .nav__List {
     width: 100%;
   }
 }
 
 .schedules {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 4fr;
-      grid-template-columns: 1fr 4fr;
   position: relative;
-  padding: 0;
-  font-size: 0.8rem;
 }
 
 .schedules .module__Form {
@@ -1243,6 +1279,7 @@ body main {
 }
 
 .schedules__Details {
+  padding: 0 0.5rem;
   background: rgba(0, 0, 0, 0.05);
 }
 
@@ -1307,28 +1344,37 @@ body main {
 }
 
 .schedules__Table {
-  border-spacing: 0;
+  min-height: 323px;
+}
+
+.schedules__Table table {
+  width: 100%;
 }
 
 .schedules__Table td,
 .schedules__Table th {
-  width: 8rem;
-  font-size: 0.75rem;
-  height: 1rem;
+  min-width: 5rem;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   text-align: center;
+}
+
+.schedules__Table tr {
+  height: 1.5rem;
+}
+
+.schedules__Table caption {
+  height: 3rem;
 }
 
 .schedules__Table .slot {
   position: relative;
 }
 
-.schedules__Table .slot div {
+.schedules__Table .slot a {
   position: absolute;
   left: 0;
   top: 0;
-  background: pink;
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -1344,16 +1390,17 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-decoration: none;
+  color: black;
+  background: rgba(255, 255, 0, 0.4);
 }
 
-.schedules__Table .slot div span {
+.schedules__Table .slot a:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.schedules__Table .slot a span {
   text-transform: capitalize;
-}
-
-.schedules__Table th,
-.schedules__Table .table__Time {
-  background: var(--color-background-dark);
-  color: #fff;
 }
 
 .schedules__Table .table__Time {

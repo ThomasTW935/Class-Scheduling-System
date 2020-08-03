@@ -1,6 +1,8 @@
 <?php
 session_start();
-if (empty($_SESSION) xor $_SESSION['type'] == 1) {
+$sessionType = $_SESSION['type'];
+$sessionID = $_SESSION['id'];
+if (empty($_SESSION)) {
    header("Location: ./index.php");
    exit();
 }
@@ -13,7 +15,9 @@ include './includes/autoloader.inc.php';
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="./styles/reset.css" />
    <link rel="stylesheet" href="./styles/admin.css" />
+   <link rel="stylesheet" media='print' href="./styles/print.css" />
    <script defer src="scripts/script.js"></script>
    <script defer src="scripts/schedule.js"></script>
    <title>Class Scheduling System</title>
@@ -23,8 +27,10 @@ include './includes/autoloader.inc.php';
    <nav class="nav">
       <?php
       $url = $_SERVER['REQUEST_URI'];
-      if (!strpos($url, "dashboard")) {
+      if (!strpos($url, "dashboard") && !strpos($url, "scheduleview")) {
          echo "<a href='dashboard.php' class='button back'>HOME</span></a>";
+      } else {
+         echo '<div></div>';
       }
 
       ?>
