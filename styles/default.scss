@@ -291,6 +291,7 @@ body {
     background: white;
     border-radius: 10px;
     box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+    font-size: 1rem;
     .form__TitleBar {
       height: 2.5em;
       width: 100%;
@@ -299,20 +300,19 @@ body {
       border-top-right-radius: 10px;
     }
     .form__Close {
-      position: absolute;
-      display: grid;
-      place-content: center;
-      top: 0.25em;
-      right: 1em;
-      width: 2em;
-      height: 2em;
-      border-radius: 50%;
-      background: none;
-      color: white;
-      font-size: 1rem;
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        text-decoration: none;
+      background: red;
+      height: 2rem;
+      padding: 0 1rem;
+      background: var(--color-background-dark);
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      a {
+        color: var(--color-text-light);
+        &:hover {
+          color: white;
+        }
       }
     }
     .form__Title {
@@ -359,7 +359,6 @@ body {
         .form__Error {
           color: red;
           font-size: 0.8rem;
-          margin-left: 0.75em;
         }
       }
     }
