@@ -563,7 +563,32 @@ body main {
   cursor: default;
 }
 
+@media screen and (min-width: 1441px) {
+  .schedules {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: minmax(150px, 1fr) 4fr;
+        grid-template-columns: minmax(150px, 1fr) 4fr;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 12px;
+  }
+  .schedules {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+  }
+  .schedules__Details {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
   .nav__List {
     width: 100%;
   }

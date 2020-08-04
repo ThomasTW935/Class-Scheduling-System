@@ -20,41 +20,17 @@ if ($error == 'username') {
 
 <body>
    <form class="form" action="includes/login.inc.php" method="POST">
-      <div class="form__Message">
-         <label class="form__Label">Sign in</label>
-      </div>
-      <div class="form__Groups">
-         <div class="form__Group">
-            <input type="text" class="form__Field" placeholder="Username" id='username' name="username" autofocus autocomplete='off'>
-            <label for='username' class="form__Label--placeholder">Username</label>
-         </div>
-         <span class="form__Error"><?php echo $errorMessage ?></span>
-      </div>
-      <div class="form__Groups">
-         <div class="form__Group">
-            <input type="password" class="form__Field form__Signin--display" placeholder="Password" id='password' name="password">
-            <label for="password" class="form__Label--placeholder form__Signin--display">Password</label>
-         </div>
-         <span class="form__Error"><?php echo $errorMessage ?></span>
-      </div>
-      <button class="form__Button" type="submit" name="submit">Submit</button>
+      <label class="form__Title">Sign in</label>
+      <section>
+         <label for='usename'>Username:</label>
+         <input type="text" name="username" id="username" autofocus autocomplete="username" required>
+      </section>
+      <section>
+         <label for='password'>Password:</label>
+         <input type="password" name="current-password" id="password" autocomplete="off" required>
+      </section>
+      <button class="form__Button" type="submit" name="submit">Sign in</button>
    </form>
-   <?php
-
-   // if (isset($_GET['test'])) {
-
-   //    echo "<div class='module'>
-   //    <form class='module__Form'>";
-
-   //    $values = ['Hush', 'Daryl', 'Christine'];
-   //    foreach ($values as $value) {
-   //       echo  "<input type='text' placeholder='" . $value . "'>";
-   //    }
-   //    echo "</form><div class='module__formBackground'></div>
-   //    </div>";
-   // }
-
-   ?>
 </body>
 
 </html>
