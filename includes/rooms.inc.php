@@ -13,7 +13,14 @@ $roomsVal = new RoomsVal($_POST);
 
 if (!isset($_POST['submitStatus'])) {
   $errors = $roomsVal->validateForm();
-  $query = '&' . http_build_query($errors);
+
+  if (!empty($errors)) {
+    include_once './functions.inc.php';
+    $query = BuildQuery($errors, $_POST);
+    $destination = (isset($_POST['submit'])) ? 'add' : "id={$_POST['rmID']}";
+    header("Location: ../rooms.php?$destination" . $query);
+    exit();
+  }
 }
 if (isset($_POST['submit'])) {
   if (!empty($errors)) {
@@ -27,10 +34,6 @@ if (isset($_POST['submit'])) {
   $schedContr = new SchedulesContr();
   $schedContr->CreateDisplayTime("room", $rmID);
 } else if (isset($_POST['update'])) {
-  if (!empty($errors)) {
-    header('Location: ../rooms.php?id=' . $_POST['rmID'] . $query);
-    exit();
-  }
   $roomsContr->ModifyRoom($_POST);
 } else if (isset($_POST['submitStatus'])) {
   $status = ($_POST['state'] == 0) ? 1 : 0;

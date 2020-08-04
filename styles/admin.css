@@ -407,7 +407,7 @@ body main {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding-bottom: 1.5em;
+  padding-bottom: 1rem;
   max-height: 90vh;
   max-width: 70vw;
   display: -webkit-box;
@@ -421,24 +421,17 @@ body main {
       -ms-flex-align: center;
           align-items: center;
   background: white;
-  border-radius: 10px;
+  border-radius: 0.8rem;
   -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
           box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
   font-size: 1rem;
 }
 
-.module__Form .form__TitleBar {
-  height: 2.5em;
-  width: 100%;
-  background: #00aaff;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 .module__Form .form__Close {
-  background: red;
   height: 2rem;
   padding: 0 1rem;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
   background: var(--color-background-dark);
   width: 100%;
   display: -webkit-box;

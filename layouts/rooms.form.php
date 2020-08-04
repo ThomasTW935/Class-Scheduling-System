@@ -4,11 +4,22 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
+$errorName = $errors['errorName'] ?? '';
+
+$rmID = '';
+$name = '';
+$desc = $errors['desc'] ?? '';
+$floor = $errors['floor'] ?? '';
+var_dump($name);
 if (isset($_GET['id'])) {
    $id = $_GET['id'];
    $result = $roomsView->FetchRoomByID($id);
    $room = $result[0];
    $button = "update";
+   $rmID = $room['rm_id'];
+   $name = $room['rm_name'];
+   $desc = $room['rm_desc'];
+   $floor = $room['rm_floor'];
 }
 ?>
 
@@ -17,25 +28,24 @@ if (isset($_GET['id'])) {
       <a href="rooms.php">X</a>
    </section>
    <label for='formSelect' class='form__Title'>Room's Information</label>
-   <input class='form__Input' type='hidden' value='<?php echo $room['rm_id'] ?? '' ?>' name='rmID'>
+   <input class='form__Input' type='hidden' value='<?php echo $rmID ?>' name='rmID'>
    <div class="form__Container">
       <label for='' class='form__Label'>Room Name:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['rm_name'] ?? '' ?>' name='name' required>
-         <div class="form__Error"><?php echo $errors['name'] ?? '' ?></div>
+         <input class='form__Input' type='text' value='<?php echo $name ?>' name='name' required>
+         <div class="form__Error"><?php echo $errorName ?></div>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $room['rm_desc'] ?? '' ?>' name='desc' required>
+         <input class='form__Input' type='text' value='<?php echo $desc ?>' name='desc' required>
       </div>
    </div>
    <div class="form__Container">
       <label for="" class="form__Label">Floor:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $room['rm_floor'] ?? '' ?>' name='floor' required>
-         <div class="form__Error"><?php echo $errors['floor'] ?? '' ?></div>
+         <input class='form__Input' type='number' value='<?php echo $floor ?>' name='floor' required>
       </div>
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>

@@ -282,20 +282,21 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding-bottom: 1.5em;
+    padding-bottom: 1rem;
     max-height: 90vh;
     max-width: 70vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: white;
-    border-radius: 10px;
+    border-radius: 0.8rem;
     box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
     font-size: 1rem;
     .form__Close {
-      background: red;
       height: 2rem;
       padding: 0 1rem;
+      border-top-left-radius: 0.8rem;
+      border-top-right-radius: 0.8rem;
       background: var(--color-background-dark);
       width: 100%;
       display: flex;

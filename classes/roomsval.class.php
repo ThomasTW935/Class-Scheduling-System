@@ -28,9 +28,9 @@ class RoomsVal
     $val = trim($this->data['name']);
     $id = trim($this->data['rmID']);
     if (empty($val)) {
-      $this->addError('name', 'Name cannot be empty');
+      $this->addError('errorName', '*Name cannot be empty');
     } else if (!preg_match('/^[a-zA-Z0-9. ]*$/', $val)) {
-      $this->addError('name', 'Name must only contain letters');
+      $this->addError('errorName', '*Name must only contain letters');
     } else {
       $roomsView = new RoomsView();
       $results = $roomsView->FetchRoomByName($val);
@@ -43,7 +43,7 @@ class RoomsVal
             return;
           }
         }
-        $this->addError('name', 'name already exist');
+        $this->addError('errorName', '*Name already exist');
       }
     }
   }

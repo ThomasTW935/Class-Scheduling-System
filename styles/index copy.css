@@ -407,7 +407,7 @@ body main {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding-bottom: 1.5em;
+  padding-bottom: 1rem;
   max-height: 90vh;
   max-width: 70vw;
   display: -webkit-box;
@@ -421,24 +421,17 @@ body main {
       -ms-flex-align: center;
           align-items: center;
   background: white;
-  border-radius: 10px;
+  border-radius: 0.8rem;
   -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
           box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
   font-size: 1rem;
 }
 
-.module__Form .form__TitleBar {
-  height: 2.5em;
-  width: 100%;
-  background: #00aaff;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 .module__Form .form__Close {
-  background: red;
   height: 2rem;
   padding: 0 1rem;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
   background: var(--color-background-dark);
   width: 100%;
   display: -webkit-box;
@@ -521,38 +514,20 @@ body main {
   font-size: 0.8rem;
 }
 
-.module__Form .btn__Container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 2rem;
-}
-
-.module__Form .btn__Container .form__Button {
+.module__Form .form__Button {
   width: 100px;
   -webkit-box-shadow: none;
           box-shadow: none;
   text-transform: capitalize;
-  background: var(--color-background-light);
-  color: white;
+  background: var(--color-background-dark);
+  color: #fff;
   font-weight: bold;
   border-radius: 10px;
   font-size: 1rem;
 }
 
-.module__Form .btn__Container .form__Button:not(.btn__Delete):hover {
-  background: var(--color-background-dark);
-}
-
-.module__Form .btn__Container .btn__Delete {
-  background: white;
-  color: var(--color-background-light);
-  border: 1px solid var(--color-background-light);
-}
-
-.module__Form .btn__Container .btn__Delete:hover {
-  color: var(--color-background-dark);
-  border: 1px solid var(--color-background-dark);
+.module__Form .form__Button:hover {
+  color: var(--color-text-light);
 }
 
 .module__formBackground {
