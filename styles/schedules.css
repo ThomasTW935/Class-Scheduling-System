@@ -123,6 +123,7 @@
 
 .schedules__Table table {
   width: 100%;
+  border-spacing: 0;
 }
 
 .schedules__Table td,
@@ -131,6 +132,7 @@
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   text-align: center;
+  padding: 0.25rem 0;
 }
 
 .schedules__Table tr {
@@ -139,6 +141,14 @@
 
 .schedules__Table caption {
   height: 3rem;
+  background: var(--color-background-light);
+  color: white;
+}
+
+.schedules__Table th,
+.schedules__Table .table__Time {
+  background: var(--color-background-dark);
+  color: white;
 }
 
 .schedules__Table .slot {

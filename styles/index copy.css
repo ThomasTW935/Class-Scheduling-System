@@ -579,13 +579,14 @@ body main {
   .schedules {
     -ms-grid-columns: 90%;
         grid-template-columns: 90%;
+    padding: 0;
   }
   .schedules__Details {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 816px) {
   html {
     font-size: 10px;
   }
@@ -594,11 +595,20 @@ body main {
   }
 }
 
+@media screen and (max-width: 729px) {
+  html {
+    font-size: 8px;
+  }
+}
+
 .form {
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 3em;
+  width: 400px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 4em 2em 2em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -606,9 +616,6 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -652,17 +659,13 @@ body main {
 }
 
 .form__Groups {
-  width: 60%;
+  width: 100%;
 }
 
 .form__Groups .form__Group {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-}
-
-.form__Groups .form__Signin--display {
-  display: none;
 }
 
 .form__Groups .form__Field {
@@ -745,7 +748,7 @@ body main {
   color: white;
   border: none;
   border-radius: 1000000px;
-  margin: 0 auto;
+  margin: 2em auto 0;
   padding: 0.5em 0.2em;
 }
 
@@ -757,4 +760,4 @@ body main {
     height: 100vh;
   }
 }
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=index copy.css.map */

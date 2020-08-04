@@ -579,18 +579,25 @@ body main {
   .schedules {
     -ms-grid-columns: 90%;
         grid-template-columns: 90%;
+    padding: 0;
   }
   .schedules__Details {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 816px) {
   html {
     font-size: 10px;
   }
   .nav__List {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 729px) {
+  html {
+    font-size: 8px;
   }
 }
 /*# sourceMappingURL=default.css.map */

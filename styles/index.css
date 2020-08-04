@@ -61,6 +61,11 @@ html {
   color: red;
 }
 
+.form section .error {
+  font-size: 0.7rem;
+  color: red;
+}
+
 .form button {
   background: var(--color-background-dark);
   color: white;

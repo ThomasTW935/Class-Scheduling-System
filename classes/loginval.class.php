@@ -5,7 +5,7 @@ class LoginVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['username', 'password'];
+  private static $fields = ['username', 'current-password'];
   public function __construct($post_data)
   {
     $this->data = $post_data;
@@ -28,7 +28,7 @@ class LoginVal
 
     $val = trim($this->data['username']);
     if (empty($val)) {
-      $this->addError('username', 'Username is empty.');
+      $this->addError('errorUsername', 'Username is empty.');
     } else {
       $usersView = new UsersView();
       $result = $usersView->FetchUserByUsername($val);
@@ -36,20 +36,20 @@ class LoginVal
         $user = $result[0];
         $this->validatePassword($user['password']);
       } else {
-        $this->addError('username', 'Username does not exist!');
+        $this->addError('errorUsername', 'Username does not exist!');
       }
     }
   }
   private function validatePassword($password)
   {
 
-    $val = trim($this->data['password']);
+    $val = trim($this->data['current-password']);
     if (empty($val)) {
-      $this->addError('password', 'Password is empty.');
+      $this->addError('errorPassword', 'Password is empty.');
     } else {
       $passCheck = password_verify($val, $password);
       if (!$passCheck) {
-        $this->addError('password', 'Password is incorrect.');
+        $this->addError('errorPassword', 'Password is incorrect.');
       }
     }
   }

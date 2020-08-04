@@ -414,6 +414,7 @@ body {
   }
   .schedules {
     grid-template-columns: 90%;
+    padding: 0;
   }
   .schedules {
     &__Details {
@@ -421,7 +422,7 @@ body {
     }
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 816px) {
   html {
     font-size: 10px;
   }
@@ -429,5 +430,10 @@ body {
     &__List {
       width: 100%;
     }
+  }
+}
+@media screen and (max-width: 729px) {
+  html {
+    font-size: 8px;
   }
 }

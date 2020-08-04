@@ -11,16 +11,19 @@ if (isset($_POST['submit'])) {
 
    $usersView = new UsersView();
    $loginVal = new loginVal($_POST);
-   $username = $_POST['username'];
-   $password = $_POST['password'];
-
-   // $passHash = password_hash('admin', PASSWORD_DEFAULT);
-   // echo $passHash;
-   // exit();
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {
-      $query = '&' . http_build_query($errors);
-      header("Location: ../index.php?error$query");
+      foreach ($errors as $errorKey => $errorValue) {
+         foreach ($_POST as $key => $value) {
+            $needle = strtolower($key);
+            $haystack = strtolower($errorKey);
+            if ((strpos($haystack, $needle) !== false) || $key === 'current-password') {
+               unset($_POST[$key]);
+            }
+         }
+      }
+      $query = '&' . http_build_query($errors) . '&' . http_build_query($_POST);
+      header("Location: ../index.php?$query");
       exit();
    }
    $result = $usersView->FetchUserByUsername($username);

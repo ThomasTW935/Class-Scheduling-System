@@ -115,7 +115,7 @@ $jumpTime  = $dTime['op_jump'];
       <table>
          <caption><?php echo $caption ?> </caption>
          <tr>
-            <td></td>
+            <th></th>
             <?php
             $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 

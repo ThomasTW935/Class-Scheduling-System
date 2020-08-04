@@ -579,18 +579,25 @@ body main {
   .schedules {
     -ms-grid-columns: 90%;
         grid-template-columns: 90%;
+    padding: 0;
   }
   .schedules__Details {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 816px) {
   html {
     font-size: 10px;
   }
   .nav__List {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 729px) {
+  html {
+    font-size: 8px;
   }
 }
 
@@ -753,6 +760,7 @@ body main {
 
 .schedules__Table table {
   width: 100%;
+  border-spacing: 0;
 }
 
 .schedules__Table td,
@@ -761,6 +769,7 @@ body main {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   text-align: center;
+  padding: 0.25rem 0;
 }
 
 .schedules__Table tr {
@@ -769,6 +778,14 @@ body main {
 
 .schedules__Table caption {
   height: 3rem;
+  background: var(--color-background-light);
+  color: white;
+}
+
+.schedules__Table th,
+.schedules__Table .table__Time {
+  background: var(--color-background-dark);
+  color: white;
 }
 
 .schedules__Table .slot {

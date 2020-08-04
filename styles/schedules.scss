@@ -82,6 +82,7 @@
     min-height: 323px;
     table {
       width: 100%;
+      border-spacing: 0;
     }
     td,
     th {
@@ -89,12 +90,20 @@
       border-right: 1px solid black;
       border-bottom: 1px solid black;
       text-align: center;
+      padding: 0.25rem 0;
     }
     tr {
       height: 1.5rem;
     }
     caption {
       height: 3rem;
+      background: var(--color-background-light);
+      color: white;
+    }
+    th,
+    .table__Time {
+      background: var(--color-background-dark);
+      color: white;
     }
     .slot {
       position: relative;
