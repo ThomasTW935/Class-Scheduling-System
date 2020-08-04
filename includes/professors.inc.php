@@ -38,16 +38,8 @@ if (!isset($_POST['submitStatus'])) {
 
 
    if (!empty($errors)) {
-      foreach ($errors as $errorKey => $errorValue) {
-         foreach ($_POST as $key => $value) {
-            $needle = strtolower($key);
-            $haystack = strtolower($errorKey);
-            if ((strpos($haystack, $needle) !== false)) {
-               unset($_POST[$key]);
-            }
-         }
-      }
-      $query = '&' . http_build_query($errors) . '&' . http_build_query($_POST);
+      include_once './functions.inc.php';
+      $query = BuildQuery($errors, $_POST);
    }
 }
 
@@ -65,9 +57,9 @@ if (isset($_POST['submit'])) {
    $_POST['userID'] = $id;
    $profContr->CreateProfessors($_POST);
    $prof = $profView->FetchProfessorByLatest();
-  $profID = $prof[0]["id"];
-  $schedContr = new SchedulesContr();
-  $schedContr->CreateDisplayTime("prof", $profID);
+   $profID = $prof[0]["id"];
+   $schedContr = new SchedulesContr();
+   $schedContr->CreateDisplayTime("prof", $profID);
 } else if (isset($_POST['update'])) {
 
    if (!empty($errors)) {

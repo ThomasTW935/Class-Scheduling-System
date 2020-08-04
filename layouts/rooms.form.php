@@ -13,7 +13,9 @@ if (isset($_GET['id'])) {
 ?>
 
 <form action='./includes/rooms.inc.php' class='module__Form' method='POST'>
-   <a href="rooms.php" class='form__Close'>X</a>
+   <section class="form__Close">
+      <a href="rooms.php">X</a>
+   </section>
    <label for='formSelect' class='form__Title'>Room's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $room['rm_id'] ?? '' ?>' name='rmID'>
    <div class="form__Container">

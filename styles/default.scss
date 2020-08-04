@@ -292,13 +292,6 @@ body {
     border-radius: 10px;
     box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
     font-size: 1rem;
-    .form__TitleBar {
-      height: 2.5em;
-      width: 100%;
-      background: rgba(0, 170, 255, 1);
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
     .form__Close {
       background: red;
       height: 2rem;
@@ -362,30 +355,18 @@ body {
         }
       }
     }
-    .btn__Container {
-      display: flex;
-      gap: 2rem;
-      .form__Button {
-        width: 100px;
-        box-shadow: none;
-        text-transform: capitalize;
-        background: var(--color-background-light);
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-        font-size: 1rem;
-        &:not(.btn__Delete):hover {
-          background: var(--color-background-dark);
-        }
-      }
-      .btn__Delete {
-        background: white;
-        color: var(--color-background-light);
-        border: 1px solid var(--color-background-light);
-        &:hover {
-          color: var(--color-background-dark);
-          border: 1px solid var(--color-background-dark);
-        }
+
+    .form__Button {
+      width: 100px;
+      box-shadow: none;
+      text-transform: capitalize;
+      background: var(--color-background-dark);
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1rem;
+      &:hover {
+        color: var(--color-text-light);
       }
     }
   }

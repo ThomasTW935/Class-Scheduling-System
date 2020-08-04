@@ -17,8 +17,9 @@ if ($schedIDExist) {
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST'>
-  <div class='form__TitleBar'></div>
-  <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle form__Close'>X</a>
+  <section class="form__Close">
+    <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle'>X</a>
+  </section>
   <label class='form__Title'>Schedules's Information</label>
   <input type="hidden" name="type" value='<?php echo $type ?>'>
   <input type="hidden" name="id" value='<?php echo $ID ?>'>

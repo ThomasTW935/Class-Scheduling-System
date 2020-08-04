@@ -24,7 +24,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    $profView = new ProfessorsView();
    $result = $profView->FetchProfessorByID($id);
    $prof = $result[0];
-   $prodID = $prof['id'];
+   $profID = $prof['id'];
    $userID = $prof['user_id'];
    $button = "update";
    $empID =  $prof['emp_no'];

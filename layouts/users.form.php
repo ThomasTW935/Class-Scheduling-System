@@ -13,7 +13,9 @@ if (isset($_GET['id'])) {
 ?>
 
 <form action='./includes/users.inc.php' class='module__Form' method='POST'>
-   <a href="users.php" class='form__Close'>X</a>
+   <section class="form__Close">
+      <a href="users.php">X</a>
+   </section>
    <label for='formSelect' class='form__Title'>User's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $user['user_id'] ?? '' ?>' name='userID'>
    <div class="form__Container">

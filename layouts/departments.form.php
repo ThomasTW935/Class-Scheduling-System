@@ -15,7 +15,9 @@ if (isset($_GET['id'])) {
 ?>
 
 <form action='./includes/departments.inc.php' class='module__Form' method='POST'>
-   <a href="?dept=<?php echo $department ?>" class='form__Close'>X</a>
+   <section class="form__Close">
+      <a href="?dept=<?php echo $department ?>">X</a>
+   </section>
    <label for='formSelect' class='form__Title'>Department's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $dept['dept_id'] ?? '' ?>' name='id'>
    <input class='form__Input' type='hidden' value='<?php echo $department ?>' name='department'>
