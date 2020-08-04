@@ -28,7 +28,7 @@ class UsersVal
 
     $val = trim($this->data['username']);
     if (empty($val)) {
-      $this->addError('errorUsername', 'Username cannot be empty');
+      $this->addError('errorUsername', '*Username cannot be empty');
     } else {
       $usersView = new UsersView();
       $results = $usersView->FetchUserByUsername($val);
@@ -42,7 +42,7 @@ class UsersVal
             return;
           }
         }
-        $this->addError('errorUsername', 'Username already exist');
+        $this->addError('errorUsername', '*Username already exist');
       }
     }
   }
@@ -52,7 +52,7 @@ class UsersVal
     if (empty($val)) {
       return;
     } else if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
-      $this->addError('errorEmail', 'Invalid Email');
+      $this->addError('errorEmail', '*Invalid Email');
     } else {
       $usersView = new UsersView();
       $results = $usersView->FetchUserByUsername($this->data['username']);
@@ -66,7 +66,7 @@ class UsersVal
             return;
           }
         }
-        $this->addError('errorEmail', 'Email already exist');
+        $this->addError('errorEmail', '*Email already exist');
       }
     }
   }

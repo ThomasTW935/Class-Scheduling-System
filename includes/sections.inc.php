@@ -13,26 +13,22 @@ $sectVal = new SectionsVal($_POST);
 
 if (!isset($_POST['submitStatus'])) {
   $errors = $sectVal->validateForm();
-  $query = '&' . http_build_query($errors);
+  if (!empty($errors)) {
+    include_once './functions.inc.php';
+    $query = BuildQuery($errors, $_POST);
+    $destination = (isset($_POST['submit'])) ? 'add' : "id={$_POST['sectID']}";
+    header("Location: ../sections.php?$destination" . $query);
+    exit();
+  }
 }
 
 if (isset($_POST['submit'])) {
-
-  if (!empty($errors)) {
-    header('Location: ../sections.php?add' . $query);
-    exit();
-  }
   $sectContr->CreateSection($_POST);
   $sect = $roomsView->FetchRoomByLatest();
   $sectID = $sect[0]["sect_id"];
   $schedContr = new SchedulesContr();
   $schedContr->CreateDisplayTime("sect", $sectID);
 } else if (isset($_POST['update'])) {
-
-  if (!empty($errors)) {
-    header('Location: ../sections.php?id=' . $_POST['sectID'] . $query);
-    exit();
-  }
   $sectContr->ModifySection($_POST);
 } else if (isset($_POST['submitStatus'])) {
   $state = ($_POST['state'] == 0) ? 1 : 0;

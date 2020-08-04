@@ -14,25 +14,23 @@ $subjVal = new SubjectsVal($_POST);
 if (!isset($_POST['submitStatus'])) {
    $errors = $subjVal->validateForm();
    $query = '&' . http_build_query($errors);
+   if (!empty($errors)) {
+      include_once './functions.inc.php';
+      $query = BuildQuery($errors, $_POST);
+      $destination = (isset($_POST['submit'])) ? 'add' : "id={$_POST['subjID']}";
+      header("Location: ../subjects.php?$destination" . $query);
+      exit();
+   }
 }
 
 if (isset($_POST['submit'])) {
 
-   if (!empty($errors)) {
-      header('Location: ../subjects.php?add' . $query);
-      exit();
-   }
    $subjContr->CreateSubject($_POST);
-   $subj = $subjView->FetchRoomByLatest();
+   $subj = $subjView->FetchSubjectByLatest();
    $subjID = $subj[0]["subj_id"];
    $schedContr = new SchedulesContr();
    $schedContr->CreateDisplayTime("subj", $subjID);
 } else if (isset($_POST['update'])) {
-
-   if (!empty($errors)) {
-      header('Location: ../subjessors.php?id=' . $_POST['subjID'] . $query);
-      exit();
-   }
    $subjContr->ModifySubject($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
