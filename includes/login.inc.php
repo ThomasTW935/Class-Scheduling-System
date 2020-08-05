@@ -6,6 +6,7 @@ include './autoloader.inc.php';
 if (!isset($_POST)) {
    header('Location: ../index.php');
 }
+var_dump($_POST);
 
 if (isset($_POST['submit'])) {
 
