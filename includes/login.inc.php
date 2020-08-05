@@ -28,9 +28,14 @@ if (isset($_POST['submit'])) {
    }
    $result = $usersView->FetchUserByUsername($username);
    $user = $result[0];
+   foreach ($user as $key => $value) {
+      echo "<h2>$key: $value</h2>";
+   }
    session_start();
    $_SESSION['id'] = $user['user_id'];
    $_SESSION['type'] = $user['role_level'];
-   var_dump($_SESSION);
    header("Location: ../dashboard.php?signin=success");
 }
+
+
+echo "<h1>Hello</h1>";
