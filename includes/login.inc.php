@@ -6,12 +6,13 @@ include './autoloader.inc.php';
 if (!isset($_POST)) {
    header('Location: ../index.php');
 }
-var_dump($_POST);
 
 if (isset($_POST['submit'])) {
+   var_dump($_POST);
 
    $usersView = new UsersView();
-   $loginVal = new loginVal($_POST);
+   $loginVal = new LoginVal($_POST);
+   var_dump($usersView);
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {
       foreach ($errors as $errorKey => $errorValue) {
