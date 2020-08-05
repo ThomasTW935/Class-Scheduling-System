@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2020 at 12:11 PM
+-- Generation Time: Aug 05, 2020 at 03:03 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -102,7 +102,7 @@ CREATE TABLE `professors` (
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `user_id`, `prof_active`, `prof_img`) VALUES
 (31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 1, ''),
 (32, 123456789, 'Thomas', 'Daryl', '', '', 43, 29, 1, ''),
-(33, 2000066525, 'Aparato', 'Christine', '', '', 43, 30, 1, 'Aparato.5e6e101a0794f.png'),
+(33, 2000066525, 'Aparato', 'Christine', '', '', 43, 30, 1, ''),
 (34, 89896565, 'mendoza', 'setty', '', '', 51, 32, 1, ''),
 (35, 987654321, 'De peralta', 'hush', '', '', 51, 34, 1, ''),
 (36, 147258369, 'Legarde', 'Dianne', '', '', 43, 35, 1, ''),
@@ -175,10 +175,10 @@ CREATE TABLE `schedules` (
   `sched_from` time NOT NULL,
   `sched_to` time NOT NULL,
   `sched_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `prof_id` int(11) NOT NULL,
-  `subj_id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `sect_id` int(11) NOT NULL
+  `prof_id` int(11) DEFAULT NULL,
+  `subj_id` int(11) DEFAULT NULL,
+  `room_id` int(11) DEFAULT NULL,
+  `sect_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -186,8 +186,12 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
-(33, '07:00:00', '10:00:00', '2020-08-01 08:20:29', 35, 8, 9, 3),
-(36, '07:00:00', '08:00:00', '2020-08-01 01:07:24', 34, 7, 9, 3);
+(33, '07:00:00', '10:00:00', '2020-08-02 00:42:27', 35, 8, 9, 3),
+(36, '07:00:00', '09:00:00', '2020-08-02 00:52:18', 34, 7, 9, 3),
+(37, '13:00:00', '15:00:00', '2020-08-01 20:38:31', 32, 5, 9, 4),
+(38, '08:00:00', '10:00:00', '2020-08-03 14:31:34', 33, 5, 6, 3),
+(39, '10:30:00', '12:00:00', '2020-08-03 14:32:06', 33, 8, 6, 4),
+(44, '11:00:00', '13:00:00', '2020-08-05 11:55:34', 0, 0, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -207,9 +211,15 @@ CREATE TABLE `schedules_day` (
 
 INSERT INTO `schedules_day` (`id`, `sched_id`, `sched_day`) VALUES
 (69, 33, 'Monday'),
-(80, 36, 'Saturday'),
 (81, 36, 'Tuesday'),
-(82, 33, 'Wednesday');
+(82, 33, 'Wednesday'),
+(83, 37, 'Tuesday'),
+(84, 37, 'Thursday'),
+(85, 33, 'Friday'),
+(86, 36, 'Thursday'),
+(87, 39, 'Tuesday'),
+(88, 39, 'Thursday'),
+(91, 44, 'Monday');
 
 -- --------------------------------------------------------
 
@@ -235,11 +245,11 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (2, '07:00:00', '17:00:00', '15', 'room', 2),
 (3, '07:00:00', '15:00:00', '30', 'room', 3),
 (4, '07:00:00', '17:00:00', '15', 'room', 4),
-(5, '07:00:00', '17:00:00', '15', 'room', 5),
+(5, '07:00:00', '10:00:00', '60', 'room', 5),
 (6, '07:00:00', '17:00:00', '15', 'room', 6),
 (7, '09:00:00', '20:00:00', '15', 'room', 7),
 (8, '07:00:00', '17:00:00', '15', 'room', 8),
-(9, '07:00:00', '16:00:00', '15', 'room', 9),
+(9, '07:00:00', '17:00:00', '30', 'room', 9),
 (10, '07:00:00', '17:00:00', '15', 'room', 10),
 (11, '07:00:00', '17:00:00', '15', 'room', 11),
 (12, '07:00:00', '17:00:00', '15', 'room', 12),
@@ -273,10 +283,10 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (40, '07:00:00', '17:00:00', '15', 'room', 40),
 (41, '07:00:00', '17:00:00', '15', 'room', 41),
 (42, '07:00:00', '17:00:00', '15', 'room', 42),
-(43, '07:00:00', '17:00:00', '15', 'sect', 2),
-(44, '07:00:00', '17:00:00', '15', 'sect', 3),
+(43, '07:00:00', '10:00:00', '60', 'sect', 2),
+(44, '07:00:00', '17:00:00', '30', 'sect', 3),
 (45, '07:00:00', '17:00:00', '15', 'sect', 4),
-(46, '07:00:00', '17:00:00', '15', 'sect', 5),
+(46, '07:00:00', '18:00:00', '60', 'sect', 5),
 (47, '07:00:00', '17:00:00', '15', 'sect', 6),
 (48, '07:00:00', '17:00:00', '15', 'sect', 7),
 (49, '07:00:00', '17:00:00', '15', 'sect', 8),
@@ -452,7 +462,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (225, '07:00:00', '17:00:00', '15', 'subj', 172),
 (226, '07:00:00', '17:00:00', '15', 'subj', 173),
 (313, '07:00:00', '17:00:00', '15', 'prof', 31),
-(314, '07:00:00', '17:00:00', '15', 'prof', 32),
+(314, '07:00:00', '17:00:00', '30', 'prof', 32),
 (315, '07:00:00', '18:00:00', '15', 'prof', 33),
 (316, '07:00:00', '17:00:00', '15', 'prof', 34),
 (317, '07:00:00', '17:00:00', '15', 'prof', 35),
@@ -726,7 +736,7 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `
 (37, '852147963', '', '$2y$10$1CMi8YGI1QtcEhP01JT/q.iyVdmUFqU/zubjB8AyeF.fy.YPSv/w.', 1, 1),
 (38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 1, 1),
 (39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 0),
-(40, '14562487', 'Isabelthomas@yahoo.com', '$2y$10$YzgiZxLwKunt167jX9GNAeq448m/hCvZvrOT9ovPHJn0O1rvd/1mO', 1, 1);
+(40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$R7HKYxFVZdQRGtxYFwDkVee87.MRFFnqxrPRvE1N4TLwL5rbVOZEe', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -812,13 +822,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `schedules_day`
 --
 ALTER TABLE `schedules_day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `schedules_operation`
