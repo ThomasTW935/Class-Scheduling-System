@@ -79,7 +79,7 @@ if ($schedIDExist) {
   $optionValue = '';
   $optionID = '';
   if ($type != 'prof') {
-    if (!empty($result)) {
+    if (!empty($result) && !empty($result['prof_id'])) {
       $selProf = $profView->FetchProfessorByID($result['prof_id'])[0];
       $fullName = $profView->GenerateFullName($selProf['last_name'], $selProf['first_name'], $selProf['middle_initial'], $selProf['suffix']);
       $optionData = $schedView->GenerateOptionDataValue($selProf['id'], [$fullName, $selProf['dept_name']]);
@@ -108,7 +108,7 @@ if ($schedIDExist) {
   <?php
 
   if ($type != 'subj') {
-    if (!empty($result)) {
+    if (!empty($result) && !empty($result['subj_id'])) {
       $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
       $unit = $selSubj['units'] . " Unit/s";
       $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc'], $unit]);
@@ -135,7 +135,7 @@ if ($schedIDExist) {
   <?php
 
   if ($type != 'room') {
-    if (!empty($result)) {
+    if (!empty($result) && !empty($result['room_id'])) {
       $selSect = $roomView->FetchRoomByID($result['room_id'])[0];
       $floor = $roomView->FloorConvert($selSect['rm_floor']) . ' floor';
       $name = "Rm {$selSect['rm_name']}";
@@ -163,7 +163,7 @@ if ($schedIDExist) {
   ?>
   <?php
   if ($type != 'sect') {
-    if (!empty($result)) {
+    if (!empty($result) && !empty($result['sect_id'])) {
       $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];
       $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name']]);
       $optionValue = $optionData['value'];

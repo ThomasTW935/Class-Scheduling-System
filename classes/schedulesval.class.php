@@ -20,6 +20,7 @@ class SchedulesVal
 
 
 
+    var_dump($this->data);
     $datas = $this->validateTime();
 
     if (!empty($datas)) {

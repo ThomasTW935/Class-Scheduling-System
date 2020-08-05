@@ -141,10 +141,13 @@ $jumpTime  = $dTime['op_jump'];
                   foreach ($schedSlots as $schedSlot) {
                      if ($days == $schedSlot['sched_day']) {
                         if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
+                           $subjDesc = $schedSlot['subj_desc'] ?? $schedSlot['sched_from'];
+                           $sectName = $schedSlot['sect_name'] ?? $schedSlot['sched_to'];
+                           $lastName = $schedSlot['last_name'] ?? ' ';
                            $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
-                                <span>{$schedSlot['subj_desc']}</span>
-                                <span>{$schedSlot['sect_name']}</span> 
-                                <span>{$schedSlot['last_name']}</span>
+                                <span>$subjDesc</span>
+                                <span>$sectName</span> 
+                                <span>$lastName</span>
                                 </a>";
                         }
                      }
