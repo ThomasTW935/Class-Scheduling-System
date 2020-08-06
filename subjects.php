@@ -37,7 +37,21 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 
       $subjView = new SubjectsView();
       $results = $subjView->FetchSubjectsByState($state);
-      $subjView->DisplaySubjects($results);
+      $limit = 11;
+      $pages = ceil(sizeof($results) / $limit);
+      $page = $_GET['page'];
+      $paginatedResults = $subjView->FetchSubjectsByStateAndPage($state, $page, $limit);
+      $subjView->DisplaySubjects($paginatedResults);
+
+      ?>
+   </div>
+   <div class='module__Pages'>
+      <?php
+
+      for ($i = 1; $i <= $pages; $i++) {
+         $activePage = ($_GET['page'] != $i) ? "" : "class='active'";
+         echo "<a href='?page=$i' $activePage>$i</a>";
+      }
 
       ?>
    </div>

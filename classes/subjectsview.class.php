@@ -7,6 +7,11 @@ class SubjectsView extends Subjects
       $results = $this->getSubjectsByState($state);
       return $results;
    }
+   public function FetchSubjectsByStateAndPage($state, $page, $limit)
+   {
+      $results = $this->getSubjectsByStateAndPage($state, $page, $limit);
+      return $results;
+   }
    public function FetchSubjectsBySearch($search, $state)
    {
       $results = $this->getSubjectsBySearch($search, $state);

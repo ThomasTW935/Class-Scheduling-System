@@ -88,8 +88,8 @@ body {
   text-decoration: none;
 }
 .module {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template: auto 1fr 10% / 1fr;
   a {
     text-decoration: none;
   }
@@ -97,7 +97,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1em 0 0.25em;
+    margin: 0.5rem 0 0.25rem;
     .module__Logo {
       display: flex;
       flex-direction: column;
@@ -189,14 +189,11 @@ body {
     }
   }
   &__Container {
-    height: 75vh;
-    width: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    box-shadow: inset 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-    overflow: auto;
+    overflow: hidden;
   }
 
   &__List {
@@ -204,12 +201,12 @@ body {
     display: grid;
     justify-content: space-evenly;
     border-bottom: 1px solid rgba(0, 0, 0, 1);
+    &:not(:first-child):hover {
+      background: rgb(220, 220, 220);
+    }
   }
   &__Title {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background: white;
+    border-top: 1px solid black;
     li {
       font-family: "Times New Roman", Times, serif;
       font-weight: bold;
@@ -218,13 +215,18 @@ body {
   &__Item {
     display: grid;
     place-content: center;
-    padding: 0.3em 0;
+    padding: 0.3rem 0;
     border-right: 1px solid rgba(0, 0, 0, 1);
+    color: #111;
+    &:first-child {
+      border-left: 1px solid black;
+    }
     &:last-child {
       display: block;
       text-align: center;
       width: 100%;
       height: 100%;
+
       div {
         display: flex;
         justify-content: space-evenly;
@@ -273,6 +275,28 @@ body {
             visibility: visible;
           }
         }
+      }
+    }
+  }
+  &__Pages {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 1.1rem;
+    width: 85%;
+    height: 3rem;
+    margin: 0 auto;
+    a {
+      padding: 0.5rem 1rem;
+      color: #111;
+      border-radius: 5px;
+      transition: background 0.3s;
+      &:hover:not(.active) {
+        background: #ddd;
+      }
+      &.active {
+        background: #4caf50;
+        color: white;
       }
     }
   }

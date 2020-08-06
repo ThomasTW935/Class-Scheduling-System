@@ -8,11 +8,9 @@ if (!isset($_POST)) {
 }
 
 if (isset($_POST['submit'])) {
-   var_dump($_POST);
 
    $usersView = new UsersView();
    $loginVal = new LoginVal($_POST);
-   var_dump($usersView);
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {
       foreach ($errors as $errorKey => $errorValue) {
