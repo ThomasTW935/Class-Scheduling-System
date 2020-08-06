@@ -20,21 +20,19 @@ if (!isset($_POST['submitStatus'])) {
    if (!empty($errors)) {
       include_once './functions.inc.php';
       $query = BuildQuery($errors, $_POST);
-      $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['id']}";
+      $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['deptID']}";
       header("Location: ../department.php?dept=$department&$destination" . $query);
       exit();
    }
 }
 if (isset($_POST['submit'])) {
-
-
    $deptContr->CreateDepartment($_POST);
 } else if (isset($_POST['update'])) {
 
    $deptContr->ModifyDepartment($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
-   $deptContr->ModifyDepartmentState($_POST['id'], $state);
+   $deptContr->ModifyDepartmentState($_POST['deptID'], $state);
    $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
    $destination = $isArchived . $destination;
 }

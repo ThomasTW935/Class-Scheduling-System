@@ -32,7 +32,7 @@ class DepartmentsView extends Departments
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/departments.inc.php' method='POST'>
             <input name='page' type='hidden' value='$page'>
-            <input name='id' type='hidden' value='" . $result['dept_id'] . "'>
+            <input name='deptID' type='hidden' value='" . $result['dept_id'] . "'>
             <input name='department' type='hidden' value='" . $result['dept_type'] . "'>
             <input id='state' name='state' type='hidden' value='" . $result['dept_active'] . "'>
             <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>

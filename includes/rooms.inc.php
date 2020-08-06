@@ -25,10 +25,6 @@ if (!isset($_POST['submitStatus'])) {
   }
 }
 if (isset($_POST['submit'])) {
-  if (!empty($errors)) {
-    header('Location: ../rooms.php?add' . $query);
-    exit();
-  }
   var_dump($_POST);
   $roomsContr->CreateRoom($_POST);
   $room = $roomsView->FetchRoomByLatest();

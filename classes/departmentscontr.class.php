@@ -8,7 +8,7 @@ class DepartmentsContr extends Departments
    }
    public function ModifyDepartment($data)
    {
-      $this->updateDepartment($data['name'], $data['desc'], $data['id']);
+      $this->updateDepartment($data['name'], $data['desc'], $data['deptID']);
    }
    public function ModifyDepartmentState($id, $state)
    {
