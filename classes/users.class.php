@@ -29,9 +29,11 @@ class Users extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state, $id]);
    }
-   protected function getUsersByState($state)
+   protected function getUsersByState($state, $page, $limit)
    {
-      $sql = 'SELECT * FROM users WHERE is_active = ?';
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $sql = "SELECT * FROM users WHERE is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$state]);

@@ -18,14 +18,14 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
          <?php
 
          if (!isset($_GET['archive'])) {
-            echo "   <a href='?add'><img src='drawables/icons/add.svg' alter='Add' />
+            echo "   <a href='?page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
             <span>Add</span>
             </a>";
-            echo "<a href='?archive'><img src='drawables/icons/archive.svg' alter='Archive' />
+            echo "<a href='?archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
             <span>Archive</span>
             </a>";
          } else {
-            echo "<a class= 'module__Return' href='?'><img src='drawables/icons/return.svg'/>BACK</a>";
+            echo "<a class= 'module__Return' href='?page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
          }
 
          ?>
@@ -36,7 +36,23 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 
       $usersView = new UsersView();
       $results = $usersView->FetchUsersByState($state);
-      $usersView->DisplayUsers($results);
+      $limit = 11;
+      $pages = ceil(sizeof($results) / $limit);
+
+      $paginatedResults = $usersView->FetchUsersByState($state, $page, $limit);
+      $usersView->DisplayUsers($paginatedResults, $page);
+
+      ?>
+   </div>
+   <div class='module__Pages'>
+      <?php
+
+      if ($pages != 1) {
+         for ($i = 1; $i <= $pages; $i++) {
+            $activePage = ($_GET['page'] != $i) ? "" : "class='active'";
+            echo "<a href='?page=$i' $activePage>$i</a>";
+         }
+      }
 
       ?>
    </div>

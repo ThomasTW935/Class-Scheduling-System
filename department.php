@@ -20,14 +20,14 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
          <?php
 
          if (!isset($_GET['archive'])) {
-            echo "   <a href='?dept=" . $department . "&add'><img src='drawables/icons/add.svg' alter='Add' />
+            echo "   <a href='?dept=" . $department . "&page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
             <span>Add</span>
             </a>";
-            echo "<a href='?dept=" . $department . "&archive'><img src='drawables/icons/archive.svg' alter='Archive' />
+            echo "<a href='?dept=" . $department . "&archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
             <span>Archive</span>
             </a>";
          } else {
-            echo "<a class= 'module__Return' href='?dept=" . $department . "'><img src='drawables/icons/return.svg'/>BACK</a>";
+            echo "<a class= 'module__Return' href='?dept=" . $department . "&page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
          }
 
          ?>
@@ -36,10 +36,25 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='module__Container'>
       <?php
 
-
       $deptView = new DepartmentsView();
       $results = $deptView->FetchDepts($department, $state);
-      $deptView->DisplayDepts($results);
+      $limit = 11;
+      $pages = ceil(sizeof($results) / $limit);
+      $paginatedResults = $deptView->FetchDepts($department, $state, $page, $limit);
+      $deptView->DisplayDepts($paginatedResults, $page);
+
+      ?>
+   </div>
+   <div class='module__Pages'>
+      <?php
+
+      if ($pages != 1) {
+         for ($i = 1; $i <= $pages; $i++) {
+            $activePage = ($page != $i) ? "" : "class='active'";
+            echo "<a href='?dept=$department&page=$i' $activePage>$i</a>";
+         }
+      }
+
       ?>
    </div>
    <?php

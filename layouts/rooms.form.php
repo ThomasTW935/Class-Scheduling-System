@@ -25,9 +25,10 @@ if (isset($_GET['id'])) {
 
 <form action='./includes/rooms.inc.php' class='module__Form' method='POST'>
    <section class="form__Close">
-      <a href="rooms.php">X</a>
+      <a href="rooms.php?page=<?php echo $page ?>">X</a>
    </section>
    <label for='formSelect' class='form__Title'>Room's Information</label>
+   <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $rmID ?>' name='rmID'>
    <div class="form__Container">
       <label for='' class='form__Label'>Room Name:</label>
@@ -50,4 +51,4 @@ if (isset($_GET['id'])) {
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="rooms.php" class='module__formBackground'></a>
+<a href="rooms.php?page=<?php echo $page ?>" class='module__formBackground'></a>

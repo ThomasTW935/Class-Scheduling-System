@@ -9,14 +9,15 @@ if (!isset($_POST)) {
 $usersView = new UsersView();
 $usersContr = new UsersContr();
 $usersVal = new UsersVal($_POST);
-
+$page = $_POST['page'];
+$destination = "page=$page";
 if (!isset($_POST['submitStatus'])) {
   $errors = $usersVal->validateForm();
 
   if (!empty($errors)) {
     include_once './functions.inc.php';
     $query = BuildQuery($errors, $_POST);
-    $destination = (isset($_POST['submit'])) ? 'add' : "id={$_POST['userID']}";
+    $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['userID']}";
     header("Location: ../users.php?$destination" . $query);
     exit();
   }
@@ -37,6 +38,7 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
   $state = ($_POST['state'] == 0) ? 1 : 0;
   $usersContr->ModifyUserState($state, $_POST['userID']);
-  $destination = ($_POST['state'] == 0) ? '?archive' : '';
+  $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
+  $destination = $isArchived . $destination;
 }
-header('Location: ../users.php' . $destination);
+header('Location: ../users.php?' . $destination);

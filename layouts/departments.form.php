@@ -16,9 +16,10 @@ if (isset($_GET['id'])) {
 
 <form action='./includes/departments.inc.php' class='module__Form' method='POST'>
    <section class="form__Close">
-      <a href="?dept=<?php echo $department ?>">X</a>
+      <a href="?dept=<?php echo "$department&page=$page" ?>">X</a>
    </section>
    <label for='formSelect' class='form__Title'>Department's Information</label>
+   <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $dept['dept_id'] ?? '' ?>' name='id'>
    <input class='form__Input' type='hidden' value='<?php echo $department ?>' name='department'>
    <div class="form__Container">
@@ -37,4 +38,4 @@ if (isset($_GET['id'])) {
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="?dept=<?php echo $department ?>" class='module__formBackground'></a>
+<a href="?dept=<?php echo "$department&page=$page" ?>" class='module__formBackground'></a>

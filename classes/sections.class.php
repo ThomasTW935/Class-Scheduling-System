@@ -2,9 +2,11 @@
 
 class Sections extends Dbh
 {
-  protected function getSectionsByState($state)
+  protected function getSectionsByState($state, $page, $limit)
   {
-    $sql = 'SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE sect_active = ?';
+    $jump = $limit * ($page - 1);
+    $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+    $sql = "SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE sect_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state]);
@@ -51,7 +53,8 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionByLatest(){
+  protected function getSectionByLatest()
+  {
     $sql = 'SELECT sect_id FROM sections ORDER BY sect_id DESC LIMIT 1';
     try {
       $stmt = $this->connect()->prepare($sql);

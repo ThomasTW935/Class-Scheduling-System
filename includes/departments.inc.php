@@ -12,26 +12,30 @@ $deptContr = new DepartmentsContr();
 $deptVal = new DepartmentsVal($_POST);
 
 $department = $_POST['department'];
+$page = $_POST['page'];
+$destination = "page=$page";
+
 if (!isset($_POST['submitStatus'])) {
    $errors = $deptVal->validateForm();
-   $query = '&' . http_build_query($errors);
-}
-if (isset($_POST['submit'])) {
    if (!empty($errors)) {
-      header('Location: ../department.php?dept=' . $department . '&add' . $query);
+      include_once './functions.inc.php';
+      $query = BuildQuery($errors, $_POST);
+      $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['id']}";
+      header("Location: ../department.php?dept=$department&$destination" . $query);
       exit();
    }
+}
+if (isset($_POST['submit'])) {
+
 
    $deptContr->CreateDepartment($_POST);
 } else if (isset($_POST['update'])) {
-   if (!empty($errors)) {
-      header('Location: ../department.php?dept=' . $department . '&id=' . $_POST['id'] . $query);
-      exit();
-   }
+
    $deptContr->ModifyDepartment($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
    $deptContr->ModifyDepartmentState($_POST['id'], $state);
-   $destination = ($_POST['state'] == 0) ? '&archive' : '';
+   $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
+   $destination = $isArchived . $destination;
 }
-header('Location: ../department.php?dept=' . $department . $destination);
+header("Location: ../department.php?dept=$department&$destination");

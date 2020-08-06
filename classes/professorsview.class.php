@@ -23,9 +23,9 @@ class ProfessorsView extends Professors
       $results = $this->getProfessorsBySearch($search, $state);
       return $results;
    }
-   public function FetchProfessorsByState($state)
+   public function FetchProfessorsByState($state, $page = 0, $limit = 0)
    {
-      $results = $this->getProfessorsByState($state);
+      $results = $this->getProfessorsByState($state, $page, $limit);
       return $results;
    }
    public function DisplayProfessorsInSearch($results)
@@ -47,7 +47,7 @@ class ProfessorsView extends Professors
       return $fullName;
    }
 
-   public function DisplayProfessors($results)
+   public function DisplayProfessors($results, $page)
    {
       echo "<ul class='module__List module__Title'>
                <li class='module__Item'></li>
@@ -76,9 +76,10 @@ class ProfessorsView extends Professors
             <input type='hidden' name='id' value='" . $result['id'] . "'>
             <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
             <span>Schedule</span></form>
-                  <a href=?id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+                  <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
+                     <input name='page' type='hidden' value='$page'>
                      <input name='id' type='hidden' value='" . $result['id'] . "'>
                      <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
                      <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>

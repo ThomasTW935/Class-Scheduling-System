@@ -202,7 +202,7 @@ body {
     justify-content: space-evenly;
     border-bottom: 1px solid rgba(0, 0, 0, 1);
     &:not(:first-child):hover {
-      background: rgb(220, 220, 220);
+      background: var(--color-background-dark-grey);
     }
   }
   &__Title {
@@ -280,10 +280,9 @@ body {
   }
   &__Pages {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
     font-size: 1.1rem;
-    width: 85%;
     height: 3rem;
     margin: 0 auto;
     a {
@@ -292,10 +291,10 @@ body {
       border-radius: 5px;
       transition: background 0.3s;
       &:hover:not(.active) {
-        background: #ddd;
+        background: var(--color-background-dark-grey);
       }
       &.active {
-        background: #4caf50;
+        background: var(--color-background-dark);
         color: white;
       }
     }

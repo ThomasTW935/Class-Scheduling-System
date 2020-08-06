@@ -10,6 +10,8 @@ if (!isset($_POST)) {
 $roomsView = new RoomsView();
 $roomsContr = new RoomsContr();
 $roomsVal = new RoomsVal($_POST);
+$page = $_POST['page'];
+$destination = "page=$page";
 
 if (!isset($_POST['submitStatus'])) {
   $errors = $roomsVal->validateForm();
@@ -17,7 +19,7 @@ if (!isset($_POST['submitStatus'])) {
   if (!empty($errors)) {
     include_once './functions.inc.php';
     $query = BuildQuery($errors, $_POST);
-    $destination = (isset($_POST['submit'])) ? 'add' : "id={$_POST['rmID']}";
+    $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['rmID']}";
     header("Location: ../rooms.php?$destination" . $query);
     exit();
   }
@@ -38,6 +40,7 @@ if (isset($_POST['submit'])) {
 } else if (isset($_POST['submitStatus'])) {
   $status = ($_POST['state'] == 0) ? 1 : 0;
   $roomsContr->ModifyRoomState($status, $_POST['rmID']);
-  $destination = ($_POST['state'] == 0) ? '?archive' : '';
+  $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
+  $destination = $isArchived . $destination;
 }
-header('Location: ../rooms.php' . $destination);
+header('Location: ../rooms.php?' . $destination);

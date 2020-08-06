@@ -14,6 +14,8 @@ $profVal = new ProfessorsVal($_POST);
 $usersContr = new UsersContr();
 $usersView = new UsersView();
 
+$page = $_POST['page'];
+$destination = "page=$page";
 
 if (!isset($_POST['submitStatus'])) {
    $isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
@@ -36,21 +38,18 @@ if (!isset($_POST['submitStatus'])) {
    }
    $_POST += ['image' => $imgFullName];
 
-
    if (!empty($errors)) {
       include_once './functions.inc.php';
       $query = BuildQuery($errors, $_POST);
+      $destination .= (isset($_POST['submit'])) ? "&add" : "&id={$_POST['profID']}";
+      header('Location: ../professors.php?' . $destination . $query);
+      exit();
    }
 }
 
-$destination = '';
 
 if (isset($_POST['submit'])) {
 
-   if (!empty($errors)) {
-      header('Location: ../professors.php?add' . $query);
-      exit();
-   }
    $usersContr->CreateUser($data);
    $result = $usersView->FetchUserByUsername($_POST['username']);
    $id = $result[0]['user_id'];
@@ -62,17 +61,14 @@ if (isset($_POST['submit'])) {
    $schedContr->CreateDisplayTime("prof", $profID);
 } else if (isset($_POST['update'])) {
 
-   if (!empty($errors)) {
-      header('Location: ../professors.php?id=' . $_POST['profID'] . $query);
-      exit();
-   }
    $usersContr->ModifyUser($data);
    $profContr->ModifyProfessor($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
    $profContr->ModifyProfessorState($state, $_POST['id']);
    $usersContr->ModifyUserState($state, $_POST['userID']);
-   $destination = ($_POST['state'] == 0) ? '?archive' : '';
+   $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
+   $destination = $isArchived . $destination;
 }
 
 if ($imgError != 4 && !isset($_POST['submitStatus'])) {
@@ -80,4 +76,4 @@ if ($imgError != 4 && !isset($_POST['submitStatus'])) {
    $imgTempname = $imgFile['tmp_name'];
    move_uploaded_file($imgTempname, $imgDestination);
 }
-header('Location: ../professors.php' . $destination);
+header('Location: ../professors.php?' . $destination);

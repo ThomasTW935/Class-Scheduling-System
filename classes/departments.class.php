@@ -3,9 +3,11 @@
 class Departments extends Dbh
 {
 
-   protected function getDepartments($type, $state)
+   protected function getDepartments($type, $state, $page, $limit)
    {
-      $sql = 'SELECT * FROM departments WHERE dept_type = ? AND dept_active = ?';
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $sql = "SELECT * FROM departments WHERE dept_type = ? AND dept_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$type, $state]);

@@ -7,6 +7,7 @@ if (empty($_SESSION)) {
    exit();
 }
 include './includes/autoloader.inc.php';
+$page = $_GET['page'] ?? '1';
 ?>
 <!DOCTYPE html>
 <html lang="en">

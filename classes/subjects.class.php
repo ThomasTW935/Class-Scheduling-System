@@ -2,22 +2,12 @@
 
 class Subjects extends Dbh
 {
-   protected function getSubjectsByState($state)
-   {
-      $sql = "SELECT * FROM subjects WHERE subj_active = ?";
-      try {
-         $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$state]);
-         $results = $stmt->fetchAll();
-         return $results;
-      } catch (PDOException $e) {
-         trigger_error('Error: ' . $e);
-      }
-   }
-   protected function getSubjectsByStateAndPage($state, $page, $limit)
+
+   protected function getSubjectsByState($state, $page = 0, $limit = 0)
    {
       $jump = $limit * ($page - 1);
-      $sql = "SELECT * FROM subjects WHERE subj_active = ? LIMIT $jump,$limit";
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $sql = "SELECT * FROM subjects WHERE subj_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$state]);

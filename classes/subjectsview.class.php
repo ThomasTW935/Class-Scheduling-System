@@ -2,14 +2,9 @@
 
 class SubjectsView extends Subjects
 {
-   public function FetchSubjectsByState($state)
+   public function FetchSubjectsByState($state, $page = 0, $limit = 0)
    {
-      $results = $this->getSubjectsByState($state);
-      return $results;
-   }
-   public function FetchSubjectsByStateAndPage($state, $page, $limit)
-   {
-      $results = $this->getSubjectsByStateAndPage($state, $page, $limit);
+      $results = $this->getSubjectsByState($state, $page, $limit);
       return $results;
    }
    public function FetchSubjectsBySearch($search, $state)
@@ -44,7 +39,7 @@ class SubjectsView extends Subjects
             <li class='module__Item'>" . $result['units'] . "Unit/s</li></ul></option>";
       }
    }
-   public function DisplaySubjects($results)
+   public function DisplaySubjects($results, $page)
    {
       echo "<ul class='module__List module__Title'>
          <li class='module__Item'>Subject Code</li>
@@ -66,9 +61,10 @@ class SubjectsView extends Subjects
             <input type='hidden' name='id' value='" . $result['subj_id'] . "'>
             <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
             <span>Schedule</span></form>
-                  <a href='?id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+                  <a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+                     <input type='hidden' name='page' value='$page'>
                      <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
                      <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
                      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>

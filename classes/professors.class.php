@@ -8,9 +8,11 @@ class Professors extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$employeeID, $lastName, $firstName, $middleInitial, $suffix, $deptID, $userID, $imgName]);
    }
-   protected function getProfessorsByState($state)
+   protected function getProfessorsByState($state, $page, $limit)
    {
-      $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE prof_active = ?";
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $sql = "SELECT * FROM professors INNER JOIN departments ON professors.dept_id = departments.dept_id WHERE prof_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$state]);

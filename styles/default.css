@@ -300,7 +300,7 @@ body main {
 }
 
 .module__List:not(:first-child):hover {
-  background: gainsboro;
+  background: var(--color-background-dark-grey);
 }
 
 .module__Title {
@@ -403,14 +403,13 @@ body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   font-size: 1.1rem;
-  width: 85%;
   height: 3rem;
   margin: 0 auto;
 }
@@ -424,11 +423,11 @@ body main {
 }
 
 .module__Pages a:hover:not(.active) {
-  background: #ddd;
+  background: var(--color-background-dark-grey);
 }
 
 .module__Pages a.active {
-  background: #4caf50;
+  background: var(--color-background-dark);
   color: white;
 }
 

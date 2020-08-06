@@ -3,9 +3,9 @@
 class RoomsView extends Rooms
 {
 
-  public function FetchRoomsByState($state)
+  public function FetchRoomsByState($state, $page = 0, $limit = 0)
   {
-    $results = $this->getRoomsByState($state);
+    $results = $this->getRoomsByState($state, $page, $limit);
     return $results;
   }
   public function FetchRoomsBySearch($search, $state)
@@ -61,7 +61,7 @@ class RoomsView extends Rooms
         <li class='module__Item'>" . $floor . " floor</li></ul></option>";
     }
   }
-  public function DisplayRooms($results)
+  public function DisplayRooms($results, $page)
   {
     echo "<ul class='module__List module__Title'>
             <li class='module__Item'>Room</li>
@@ -83,9 +83,10 @@ class RoomsView extends Rooms
         <input type='hidden' name='id' value='" . $result['rm_id'] . "'>
         <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
         <span>Schedule</span></form>
-        <a href=?id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+        <a href=?page=$page&id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       echo "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
+                <input name='page' type='hidden' value='$page'>
                 <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
                 <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>

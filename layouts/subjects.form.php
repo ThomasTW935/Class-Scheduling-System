@@ -24,9 +24,10 @@ if (isset($_GET['id'])) {
 
 <form action='./includes/subjects.inc.php' class='module__Form' method='POST'>
    <section class="form__Close">
-      <a href="subjects.php">X</a>
+      <a href="subjects.php?page=<?php echo $page ?>">X</a>
    </section>
    <label for='formSelect' class='form__Title'>Subject's Information</label>
+   <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $subjID ?>' name='subjID'>
    <div class="form__Container">
       <label for='' class='form__Label'>Code:</label>
@@ -49,4 +50,4 @@ if (isset($_GET['id'])) {
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="subjects.php" class='module__formBackground'></a>
+<a href="subjects.php?page=<?php echo $page ?>" class='module__formBackground'></a>

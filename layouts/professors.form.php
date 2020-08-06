@@ -30,7 +30,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    $empID =  $prof['emp_no'];
    $firstName =  $prof['first_name'];
    $lastName =  $prof['last_name'];
-   $middleName = $prof['middleInitial'];
+   $middleName = $prof['middle_initial'];
    $suffix =  $prof['suffix'];
    $username =  $prof['username'];
    $email =  $prof['email'];
@@ -39,9 +39,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 <form action='./includes/professors.inc.php' class='module__Form' method='POST' enctype="multipart/form-data">
    <section class='form__Close'>
-      <a href="professors.php">X</a>
+      <a href="professors.php?page=<?php echo $page ?>">X</a>
    </section>
    <label class='form__Title'>Professor's Information</label>
+   <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
    <input type='hidden' value='<?php echo $profID ?? '' ?>' name='profID'>
    <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>
    <div class="form__Container">
@@ -103,4 +104,4 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    </div>
    <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
-<a href="professors.php" class='module__formBackground'></a>
+<a href="professors.php?page=<?php echo $page ?>" class='module__formBackground'></a>

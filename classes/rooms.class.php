@@ -2,9 +2,11 @@
 
 class Rooms extends Dbh
 {
-  protected function getRoomsByState($state)
+  protected function getRoomsByState($state, $page, $limit)
   {
-    $sql = 'SELECT * FROM rooms WHERE rm_active = ?';
+    $jump = $limit * ($page - 1);
+    $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+    $sql = "SELECT * FROM rooms WHERE rm_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state]);

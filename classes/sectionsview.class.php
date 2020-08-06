@@ -2,9 +2,9 @@
 
 class SectionsView extends Sections
 {
-    public function FetchSectionsByState($state)
+    public function FetchSectionsByState($state, $page = 0, $limit = 0)
     {
-        $results = $this->getSectionsByState($state);
+        $results = $this->getSectionsByState($state, $page, $limit);
         return $results;
     }
     public function FetchSectionByID($id)
@@ -38,7 +38,7 @@ class SectionsView extends Sections
             <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";
         }
     }
-    public function DisplaySections($results)
+    public function DisplaySections($results, $page)
     {
         echo "<ul class='module__List module__Title'>
             <li class='module__Item'>Section</li>
@@ -61,9 +61,10 @@ class SectionsView extends Sections
                 <input type='hidden' name='id' value='" . $result['sect_id'] . "'>
                 <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
                 <span>Schedule</span></form>
-                    <a href=?id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+                    <a href=?page=$page&id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
             }
             echo "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
+                    <input name='page' type='hidden' value='$page'>
                     <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
                     <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
                     <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
