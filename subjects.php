@@ -48,12 +48,60 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='module__Pages'>
       <?php
 
-      if ($pages != 1) {
-         for ($i = 1; $i <= $pages; $i++) {
-            $activePage = ($_GET['page'] != $i) ? "" : "class='active'";
-            echo "<a href='?page=$i' $activePage>$i</a>";
-         }
-      }
+      include_once './includes/functions.inc.php';
+
+      $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
+
+      BuildPagination($page, $pages, $destination);
+
+      // if ($pages > 1) {
+      //    $previous = $page - 1;
+      //    $checkPrevious = ($page > 1) ? "" : " class='disabled'";
+      //    echo "<a href='?page=$previous' $checkPrevious>Previous</a>";
+      // }
+      // if ($pages <= 10) {
+
+      //    for ($i = 1; $i <= $pages; $i++) {
+      //       $activePage = ($page != $i) ? "href='?page=$i'" : "class='active'";
+      //       echo "<a $activePage>$i</a>";
+      //    }
+      // } else if ($pages > 10) {
+      //    $secondLast = $pages - 1;
+
+      //    if ($page <= 4) {
+      //       for ($i = 1; $i < 8; $i++) {
+      //          $activePage = ($page != $i) ? "href='?page=$i'" : "class='active'";
+      //          echo "<a $activePage>$i</a>";
+      //       }
+      //       echo "<a>...</a>";
+      //       echo "<a href='?page=$secondLast'>$secondLast</a>";
+      //       echo "<a href='?page=$pages'>$pages</a>";
+      //    } else if ($page > 4 && $page < $pages - 4) {
+      //       echo "<a href='?page=1'>1</a>";
+      //       echo "<a href='?page=2'>2</a>";
+      //       echo "<a>...</a>";
+      //       for ($i = $page - 2; $i <= $page + 2; $i++) {
+      //          $activePage = ($page != $i) ? "href='?page=$i'" : "class='active'";
+      //          echo "<a $activePage>$i</a>";
+      //       }
+      //       echo "<a>...</a>";
+      //       echo "<a href='?page=$secondLast'>$secondLast</a>";
+      //       echo "<a href='?page=$pages'>$pages</a>";
+      //    } else {
+      //       echo "<a href='?page=1'>1</a>";
+      //       echo "<a href='?page=2'>2</a>";
+      //       echo "<a>...</a>";
+      //       for ($i = $pages - 6; $i <= $pages; $i++) {
+      //          $activePage = ($page != $i) ? "href='?page=$i'" : "class='active'";
+      //          echo "<a $activePage>$i</a>";
+      //       }
+      //    }
+      // }
+      // if ($pages > 1) {
+      //    $next = $page + 1;
+      //    $checkNext = ($page < $pages) ? "" : " class='disabled'";
+      //    echo "<a href='?page=$next' $checkNext>Next</a>";
+      // }
 
       ?>
    </div>

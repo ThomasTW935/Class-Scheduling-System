@@ -48,12 +48,11 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='module__Pages'>
       <?php
 
-      if ($pages != 1) {
-         for ($i = 1; $i <= $pages; $i++) {
-            $activePage = ($page != $i) ? "" : "class='active'";
-            echo "<a href='?dept=$department&page=$i' $activePage>$i</a>";
-         }
-      }
+      include_once './includes/functions.inc.php';
+
+      $destination = (!isset($_GET['archive'])) ? "?dept=$department&page=" : "?dept=$department&archive&page=";
+
+      BuildPagination($page, $pages, $destination);
 
       ?>
    </div>

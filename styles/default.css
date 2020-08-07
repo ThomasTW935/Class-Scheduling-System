@@ -409,7 +409,7 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   height: 3rem;
   margin: 0 auto;
 }
@@ -417,7 +417,7 @@ body main {
 .module__Pages a {
   padding: 0.5rem 1rem;
   color: #111;
-  border-radius: 5px;
+  border: 1px solid var(--color-background-dark);
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
 }
@@ -429,6 +429,10 @@ body main {
 .module__Pages a.active {
   background: var(--color-background-dark);
   color: white;
+}
+
+.module__Pages a.disabled {
+  visibility: hidden;
 }
 
 .module__Form {

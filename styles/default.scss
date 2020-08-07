@@ -282,13 +282,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     height: 3rem;
     margin: 0 auto;
     a {
       padding: 0.5rem 1rem;
       color: #111;
-      border-radius: 5px;
+      border: 1px solid var(--color-background-dark);
       transition: background 0.3s;
       &:hover:not(.active) {
         background: var(--color-background-dark-grey);
@@ -296,6 +296,9 @@ body {
       &.active {
         background: var(--color-background-dark);
         color: white;
+      }
+      &.disabled {
+        visibility: hidden;
       }
     }
   }

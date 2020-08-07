@@ -44,9 +44,11 @@ class LoginVal
   {
 
     $val = trim($this->data['current-password']);
+
     if (empty($val)) {
       $this->addError('errorPassword', 'Password is empty.');
     } else {
+      $passHash = password_hash($val, PASSWORD_DEFAULT);
       $passCheck = password_verify($val, $password);
       if (!$passCheck) {
         $this->addError('errorPassword', 'Password is incorrect.');
