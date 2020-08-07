@@ -59,10 +59,12 @@ class Users extends Dbh
       $results = $stmt->fetchAll();
       return $results;
    }
-   protected function getUsersBySearch($search, $state)
+   protected function getUsersBySearch($search, $state, $page, $limit)
    {
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = 'SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ?';
+      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$search, $search, $search, $state]);

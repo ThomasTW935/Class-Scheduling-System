@@ -41,10 +41,12 @@ class Departments extends Dbh
          trigger_error("Error: " . $e->getMessage());
       }
    }
-   protected function getDepartmentBySearch($search, $state, $type)
+   protected function getDepartmentBySearch($search, $state, $type, $page, $limit)
    {
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = 'SELECT * FROM departments WHERE (dept_name LIKE ? OR dept_desc LIKE ?) AND dept_active = ? AND dept_type = ?';
+      $sql = "SELECT * FROM departments WHERE (dept_name LIKE ? OR dept_desc LIKE ?) AND dept_active = ? AND dept_type = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$search, $search, $state, $type]);

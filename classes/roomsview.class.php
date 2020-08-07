@@ -8,9 +8,9 @@ class RoomsView extends Rooms
     $results = $this->getRoomsByState($state, $page, $limit);
     return $results;
   }
-  public function FetchRoomsBySearch($search, $state)
+  public function FetchRoomsBySearch($search, $state, $page = 0, $limit = 0)
   {
-    $results = $this->getRoomBySearch($search, $state);
+    $results = $this->getRoomBySearch($search, $state, $page, $limit);
     return $results;
   }
   public function FetchRoomByLatest()

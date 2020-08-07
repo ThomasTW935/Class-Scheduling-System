@@ -3,7 +3,7 @@
 class Subjects extends Dbh
 {
 
-   protected function getSubjectsByState($state, $page = 0, $limit = 0)
+   protected function getSubjectsByState($state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
@@ -29,10 +29,12 @@ class Subjects extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getSubjectsBySearch($search, $state)
+   protected function getSubjectsBySearch($search, $state, $page, $limit)
    {
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = "SELECT * FROM subjects WHERE (subj_code LIKE ? OR subj_desc LIKE ?) AND subj_active = ?";
+      $sql = "SELECT * FROM subjects WHERE (subj_code LIKE ? OR subj_desc LIKE ?) AND subj_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$search, $search, $state]);

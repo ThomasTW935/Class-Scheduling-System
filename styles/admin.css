@@ -130,9 +130,9 @@ body main {
 .module {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: auto 1fr 10%;
+  -ms-grid-rows: auto 1fr;
   -ms-grid-columns: 1fr;
-      grid-template: auto 1fr 10% / 1fr;
+      grid-template: auto 1fr / 1fr;
 }
 
 .module a {
@@ -411,7 +411,7 @@ body main {
           align-items: center;
   font-size: 0.8rem;
   height: 3rem;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .module__Pages a {

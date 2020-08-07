@@ -22,9 +22,9 @@ class SectionsView extends Sections
         $results = $this->getSectionByLatest();
         return $results;
     }
-    public function FetchSectionsBySearch($search, $state)
+    public function FetchSectionsBySearch($search, $state, $page = 0, $limit = 0)
     {
-        $results = $this->getSectionsBySearch($search, $state);
+        $results = $this->getSectionsBySearch($search, $state, $page, $limit);
         return $results;
     }
     public function DisplaySectionsInSearch($results)

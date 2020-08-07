@@ -16,10 +16,12 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionsBySearch($search, $state)
+  protected function getSectionsBySearch($search, $state, $page, $limit)
   {
+    $jump = $limit * ($page - 1);
+    $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%$search%";
-    $sql = 'SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ?';
+    $sql = "SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $search, $state]);

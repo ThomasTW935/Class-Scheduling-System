@@ -37,17 +37,23 @@ function submitForm(e) {
 
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
+let searchPage = document.querySelector('#liveSearch--Page')
 console.log(searchStatus)
 if (liveSearch != null) {
+   SearchQuery(searchPage.value)
    liveSearch.addEventListener('keyup', () => {
-      let val = liveSearch.value.trim()
-      let name = liveSearch.name
-      let state = searchStatus.value
-      let query = name + '=' + val + '&state=' + state
-      searchData(query)
+      SearchQuery(1)
    })
 }
 
+function SearchQuery(pageNum) {
+   let val = liveSearch.value.trim()
+   let name = liveSearch.name
+   let state = searchStatus.value
+   let page = pageNum
+   let query = name + '=' + val + '&state=' + state + `&page=${page}`
+   searchData(query)
+}
 function searchData(query) {
    let xhr = new XMLHttpRequest()
    xhr.onreadystatechange = function () {

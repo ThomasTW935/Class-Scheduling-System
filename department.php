@@ -4,13 +4,15 @@ include_once './layouts/__header.php';
 $department = $_GET['dept'];
 $state = isset($_GET['archive']) ? 0 : 1;
 $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
+$searchValue = $_GET['q'] ?? '';
 ?>
 
 <main class='departments module'>
    <div class="module__Header">
       <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="searchDept<?php echo $department ?>" placeholder="Search...">
+         <input id="liveSearch" type="search" name="searchDept<?php echo $department ?>" placeholder="Search..." value='<?php echo $searchValue ?>'>
          <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
+         <input id="liveSearch--Page" type="hidden" name="searchPage" value="<?php echo $page ?>">
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/<?php echo $department ?>.svg" alt="<?php echo $department ?>">
@@ -36,23 +38,22 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='module__Container'>
       <?php
 
-      $deptView = new DepartmentsView();
-      $results = $deptView->FetchDepts($department, $state);
-      $limit = 11;
-      $pages = ceil(sizeof($results) / $limit);
-      $paginatedResults = $deptView->FetchDepts($department, $state, $page, $limit);
-      $deptView->DisplayDepts($paginatedResults, $page);
+      if (empty($searchValue)) {
+         $deptView = new DepartmentsView();
+         $results = $deptView->FetchDepts($department, $state);
+         $limit = 11;
+         $pages = ceil(sizeof($results) / $limit);
+         $paginatedResults = $deptView->FetchDepts($department, $state, $page, $limit);
+         $deptView->DisplayDepts($paginatedResults, $page);
 
-      ?>
-   </div>
-   <div class='module__Pages'>
-      <?php
+         echo "<div class='module__Pages'>";
 
-      include_once './includes/functions.inc.php';
+         include_once './includes/functions.inc.php';
+         $destination = (!isset($_GET['archive'])) ? "?dept=$department&page=" : "?dept=$department&archive&page=";
+         BuildPagination($page, $pages, $destination);
 
-      $destination = (!isset($_GET['archive'])) ? "?dept=$department&page=" : "?dept=$department&archive&page=";
-
-      BuildPagination($page, $pages, $destination);
+         echo "</div>";
+      }
 
       ?>
    </div>

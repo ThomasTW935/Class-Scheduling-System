@@ -7,9 +7,9 @@ class UsersView extends Users
       $results = $this->getUsersByState($state, $page, $limit);
       return $results;
    }
-   public function FetchUsersBySearch($search, $state)
+   public function FetchUsersBySearch($search, $state, $page = 0, $limit = 0)
    {
-      $results = $this->getUsersBySearch($search, $state);
+      $results = $this->getUsersBySearch($search, $state, $page, $limit);
       return $results;
    }
    public function FetchUserByUsername($username)

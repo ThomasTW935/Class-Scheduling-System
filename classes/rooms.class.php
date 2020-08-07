@@ -52,10 +52,12 @@ class Rooms extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getRoomBySearch($search, $state)
+  protected function getRoomBySearch($search, $state, $page, $limit)
   {
+    $jump = $limit * ($page - 1);
+    $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%{$search}%";
-    $sql = 'SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ?) AND rm_active = ? ';
+    $sql = "SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ?) AND rm_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $state]);

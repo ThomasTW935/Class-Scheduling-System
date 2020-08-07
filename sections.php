@@ -2,13 +2,15 @@
 include_once './layouts/__header.php';
 $state = isset($_GET['archive']) ? 0 : 1;
 $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
+$searchValue = $_GET['q'] ?? '';
 ?>
 
 <main class='sections module'>
    <div class="module__Header">
       <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="searchSect" placeholder="Search...">
+         <input id="liveSearch" type="search" name="searchSect" placeholder="Search..." value='<?php echo $searchValue ?>'>
          <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
+         <input id="liveSearch--Page" type="hidden" name="searchPage" value="<?php echo $page ?>">
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/section.svg" alt="Sections">
@@ -35,26 +37,27 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='module__Container'>
       <?php
 
-      $sectView = new SectionsView();
-      $results = $sectView->FetchSectionsByState($state);
-      $limit = 11;
-      $pages = ceil(sizeof($results) / $limit);
-      $paginatedResults = $sectView->FetchSectionsByState($state, $page, $limit);
-      $sectView->DisplaySections($paginatedResults, $page);
+      if (empty($searchValue)) {
+         $sectView = new SectionsView();
+         $results = $sectView->FetchSectionsByState($state);
+         $limit = 11;
+         $pages = ceil(sizeof($results) / $limit);
+         $paginatedResults = $sectView->FetchSectionsByState($state, $page, $limit);
+         $sectView->DisplaySections($paginatedResults, $page);
+
+         echo "<div class='module__Pages'>";
+
+         include_once './includes/functions.inc.php';
+
+         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
+
+         BuildPagination($page, $pages, $destination);
+
+         echo "</div>";
+      }
 
       ?>
 
-   </div>
-   <div class='module__Pages'>
-      <?php
-
-      include_once './includes/functions.inc.php';
-
-      $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-
-      BuildPagination($page, $pages, $destination);
-
-      ?>
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {

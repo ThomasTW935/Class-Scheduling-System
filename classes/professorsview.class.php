@@ -18,9 +18,9 @@ class ProfessorsView extends Professors
       $result = $this->getProfessorByLatest();
       return $result;
    }
-   public function FetchProfessorsBySearch($search, $state)
+   public function FetchProfessorsBySearch($search, $state, $page = 0, $limit = 0)
    {
-      $results = $this->getProfessorsBySearch($search, $state);
+      $results = $this->getProfessorsBySearch($search, $state, $page, $limit);
       return $results;
    }
    public function FetchProfessorsByState($state, $page = 0, $limit = 0)

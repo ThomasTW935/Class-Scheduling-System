@@ -2,12 +2,14 @@
 include_once './layouts/__header.php';
 $state = isset($_GET['archive']) ? 0 : 1;
 $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
+$searchValue = $_GET['q'] ?? '';
 ?>
 <main class='professors module'>
    <div class="module__Header">
       <form class="liveSearch__Form">
-         <input id="liveSearch" type="search" name="searchProf" placeholder="Search...">
+         <input id="liveSearch" type="search" name="searchProf" placeholder="Search..." value='<?php echo $searchValue ?>'>
          <input id="liveSearch--Status" type="hidden" name="searchState" value="<?php echo $state ?>">
+         <input id="liveSearch--Page" type="hidden" name="searchPage" value="<?php echo $page ?>">
       </form>
       <div class="module__Logo">
          <img src=" drawables/icons/professor.svg">
@@ -33,25 +35,23 @@ $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
    <div class='professors__Container module__Container'>
       <?php
 
-      $profView = new ProfessorsView();
-      $results = $profView->FetchProfessorsByState($state);
-      $limit = 6;
-      $pages = ceil(sizeof($results) / $limit);
+      if (empty($searchValue)) {
+         $profView = new ProfessorsView();
+         $results = $profView->FetchProfessorsByState($state);
+         $limit = 6;
+         $pages = ceil(sizeof($results) / $limit);
 
-      $paginatedResults = $profView->FetchProfessorsByState($state, $page, $limit);
-      $profView->DisplayProfessors($paginatedResults, $page);
+         $paginatedResults = $profView->FetchProfessorsByState($state, $page, $limit);
+         $profView->DisplayProfessors($paginatedResults, $page);
 
-      ?>
-   </div>
-   <div class='module__Pages'>
-      <?php
+         echo "<div class='module__Pages'>";
 
-      include_once './includes/functions.inc.php';
+         include_once './includes/functions.inc.php';
+         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
+         BuildPagination($page, $pages, $destination);
 
-      $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-
-      BuildPagination($page, $pages, $destination);
-
+         echo "</div>";
+      }
       ?>
    </div>
    <?php

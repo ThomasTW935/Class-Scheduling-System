@@ -8,9 +8,9 @@ class DepartmentsView extends Departments
       $results = $this->getDepartments($type, $state, $page, $limit);
       return $results;
    }
-   public function FetchDeptsBySearch($search, $state, $type)
+   public function FetchDeptsBySearch($search, $state, $type, $page = 0, $limit = 0)
    {
-      $results = $this->getDepartmentBySearch($search, $state, $type);
+      $results = $this->getDepartmentBySearch($search, $state, $type, $page, $limit);
       return $results;
    }
    public function DisplayDepts($results, $page)
