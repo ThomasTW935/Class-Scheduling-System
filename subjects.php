@@ -36,7 +36,6 @@ $searchValue = $_GET['q'] ?? '';
    </div>
    <div class='module__Container'>
       <?php
-
       $subjView = new SubjectsView();
       if (empty($searchValue)) {
          $results = $subjView->FetchSubjectsByState($state);

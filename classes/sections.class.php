@@ -88,7 +88,7 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function updateSectionState($id, $state)
+  protected function updateSectionState($state, $id)
   {
     $sql = 'UPDATE sections SET sect_active = ? WHERE sect_id = ?';
     try {

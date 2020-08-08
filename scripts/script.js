@@ -38,9 +38,9 @@ function submitForm(e) {
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
-console.log(searchStatus)
+console.log(liveSearch)
 if (liveSearch != null) {
-   SearchQuery(searchPage.value)
+   if (liveSearch.value != '') SearchQuery(searchPage.value)
    liveSearch.addEventListener('keyup', () => {
       SearchQuery(1)
    })

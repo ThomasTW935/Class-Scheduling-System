@@ -144,9 +144,10 @@ $jumpTime  = $dTime['op_jump'];
                            $subjDesc = $schedSlot['subj_desc'] ?? $schedSlot['sched_from'];
                            $sectName = $schedSlot['sect_name'] ?? $schedSlot['sched_to'];
                            $lastName = $schedSlot['last_name'] ?? ' ';
+                           $roomName = $schedSlot['rm_name'] ?? '';
                            $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
                                 <span>$subjDesc</span>
-                                <span>$sectName</span> 
+                                <span>$roomName</span> 
                                 <span>$lastName</span>
                                 </a>";
                         }

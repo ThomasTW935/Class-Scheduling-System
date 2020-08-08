@@ -12,6 +12,8 @@ class SectionsContr extends Sections
   }
   public function ModifySectionState($state, $id)
   {
+    $schedContr = new SchedulesContr();
+    if ($state == 0) $schedContr->ModifyScheduleByTypeID('sect', $id);
     $this->updateSectionState($state, $id);
   }
 }

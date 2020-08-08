@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
   $sectContr->ModifySection($_POST);
 } else if (isset($_POST['submitStatus'])) {
   $state = ($_POST['state'] == 0) ? 1 : 0;
-  $sectContr->ModifySectionState($_POST['sectID'], $state);
+  $sectContr->ModifySectionState($state, $_POST['sectID']);
   $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
   $destination = $isArchived . $destination;
 }

@@ -5,6 +5,7 @@ include 'autoloader.inc.php';
 $value = '';
 $state = $_GET['state'];
 $page = $_GET['page'];
+include_once './functions.inc.php';
 if (isset($_GET['searchProf'])) {
    $profView = new ProfessorsView();
    $value = $_GET['searchProf'];
@@ -16,7 +17,6 @@ if (isset($_GET['searchProf'])) {
    $profView->DisplayProfessors($paginatedResults, $page);
 
    echo "<div class='module__Pages'>";
-   include_once './functions.inc.php';
    $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
    BuildPagination($page, $pages, $destination);
    echo "</div>";
@@ -32,7 +32,6 @@ if (isset($_GET['searchRooms'])) {
 
    echo "<div class='module__Pages'>";
 
-   include_once './functions.inc.php';
    $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
    BuildPagination($page, $pages, $destination);
 
@@ -49,7 +48,6 @@ if (isset($_GET['searchUsers'])) {
    $usersView->DisplayUsers($paginatedResults, $page);
 
    echo "<div class='module__Pages'>";
-   include_once './functions.inc.php';
    $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
    BuildPagination($page, $pages, $destination);
    echo "</div>";
@@ -64,7 +62,6 @@ if (isset($_GET['searchSubj'])) {
    $subjView->DisplaySubjects($paginatedResults, $page);
 
    echo "<div class='module__Pages'>";
-   include_once './functions.inc.php';
    $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
    BuildPagination($page, $pages, $destination);
    echo "</div>";
@@ -80,7 +77,6 @@ if (isset($_GET['searchSect'])) {
 
    echo "<div class='module__Pages'>";
 
-   include_once './functions.inc.php';
 
    $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
 
@@ -107,7 +103,6 @@ if (isset($_GET['searchDeptfaculty']) || isset($_GET['searchDeptcourse']) || iss
    $deptView->DisplayDepts($paginatedResults, $page);
 
    echo "<div class='module__Pages'>";
-   include_once './functions.inc.php';
    $destination = ($state == 1) ? "?dept=$department&q=$value&page=" : "?dept=$department&archive&q=$value&page=";
    BuildPagination($page, $pages, $destination);
    echo "</div>";

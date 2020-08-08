@@ -72,7 +72,7 @@ class Subjects extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$code, $desc, $units, $id]);
    }
-   protected function updateSubjectState($id, $state)
+   protected function updateSubjectState($state, $id)
    {
       try {
          $sql = "UPDATE subjects SET subj_active = ? WHERE subj_id = ?";

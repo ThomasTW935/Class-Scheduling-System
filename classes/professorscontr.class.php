@@ -10,6 +10,8 @@ class ProfessorsContr extends Professors
 
    public function ModifyProfessorState($state, $id)
    {
+      $schedContr = new SchedulesContr();
+      if ($state == 0) $schedContr->ModifyScheduleByTypeID('prof', $id);
       $this->updateProfessorState($state, $id);
    }
 

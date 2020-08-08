@@ -86,7 +86,10 @@ if ($schedIDExist) {
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }
-
+    if (empty($result['prof_id'])) {
+      $optionValue = '';
+      $optionID = '';
+    }
 
     echo "<div class='form__Container'>
       <label for=''>Select Professor</label>
@@ -114,6 +117,10 @@ if ($schedIDExist) {
       $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc'], $unit]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
+    }
+    if (empty($result['subj_id'])) {
+      $optionValue = '';
+      $optionID = '';
     }
     echo "<div class='form__Container'>
     <label for=''>Select Subject</label>
@@ -143,6 +150,10 @@ if ($schedIDExist) {
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }
+    if (empty($result['room_id'])) {
+      $optionValue = '';
+      $optionID = '';
+    }
     echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
@@ -168,6 +179,10 @@ if ($schedIDExist) {
       $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name']]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
+    }
+    if (empty($result['sect_id'])) {
+      $optionValue = '';
+      $optionID = '';
     }
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>

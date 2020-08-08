@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
    $subjContr->ModifySubject($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
-   $subjContr->ModifySubjectState($_POST['subjID'], $state);
+   $subjContr->ModifySubjectState($state, $_POST['subjID']);
    $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
    $destination = $isArchived . $destination;
 }

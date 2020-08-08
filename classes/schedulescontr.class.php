@@ -20,6 +20,10 @@ class SchedulesContr extends Schedules
   {
     $this->updateSchedule($data['timeFrom'], $data['timeTo'], $data['inputProf'], $data['inputSubj'], $data['inputRoom'], $data['inputSect'], $data['schedID']);
   }
+  public function ModifyScheduleByTypeID($type, $id)
+  {
+    $this->updateScheduleByTypeID($type, $id);
+  }
   public function RemoveSchedule($id)
   {
     $this->deleteSchedule($id);

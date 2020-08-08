@@ -12,6 +12,8 @@ class RoomsContr extends Rooms
   }
   public function ModifyRoomState($state, $id)
   {
+    $schedContr = new SchedulesContr();
+    if ($state == 0) $schedContr->ModifyScheduleByTypeID('room', $id);
     $this->updateRoomState($state, $id);
   }
 }

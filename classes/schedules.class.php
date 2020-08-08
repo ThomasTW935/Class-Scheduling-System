@@ -62,6 +62,16 @@ class Schedules extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function updateScheduleByTypeID($type, $id)
+  {
+    $sql = "UPDATE schedules SET {$type}_id = 0 WHERE {$type}_id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$id]);
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
   protected function deleteSchedule($id)
   {
     $sql = "DELETE FROM schedules WHERE sched_id = ?";
