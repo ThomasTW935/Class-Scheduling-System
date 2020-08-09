@@ -65,3 +65,30 @@ function BuildPagination($currentPage, $pagesCount, $destination)
     echo "<a href='$destination$next' $checkNext>Next</a>";
   }
 }
+
+function GenerateCellValue($type, $data)
+{
+  $subjDesc = $data['subj_desc'] ?? '';
+  $sectName = $data['sect_name'] ?? '';
+  $lastName = $data['last_name'] ?? '';
+  $roomName = $data['rm_name'] ?? '';
+  $newArray = [];
+  if ($type == 'sect') {
+    array_push($newArray, $subjDesc);
+    array_push($newArray, $roomName);
+    array_push($newArray, $lastName);
+  } else if ($type == 'prof') {
+    array_push($newArray, $subjDesc);
+    array_push($newArray, $roomName);
+    array_push($newArray, $sectName);
+  } else if ($type == 'subj') {
+    array_push($newArray, $lastName);
+    array_push($newArray, $roomName);
+    array_push($newArray, $sectName);
+  } else if ($type == 'room') {
+    array_push($newArray, $subjDesc);
+    array_push($newArray, $lastName);
+    array_push($newArray, $sectName);
+  }
+  return $newArray;
+}

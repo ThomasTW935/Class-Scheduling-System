@@ -171,6 +171,7 @@
 
 .schedules__Table .slot {
   position: relative;
+  font-size: 0.8rem;
 }
 
 .schedules__Table .slot a {

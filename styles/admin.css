@@ -179,11 +179,31 @@ body main {
 }
 
 .module__Header .module__Logo a {
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
   text-transform: capitalize;
   width: 100%;
+  color: #111;
+  position: relative;
+  overflow: hidden;
+}
+
+.module__Header .module__Logo a::before {
+  content: "";
+  position: absolute;
+  height: 90%;
+  width: 100%;
+  left: 0;
+  border-bottom: 2px solid var(--color-background-dark);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: -webkit-transform 0.3s ease-in;
+  transition: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+  transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+}
+
+.module__Header .module__Logo a:hover::before {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
 }
 
 .module__Header .module__Links {
@@ -317,12 +337,7 @@ body main {
   display: grid;
   place-content: center;
   padding: 0.3rem 0;
-  border-right: 1px solid black;
   color: #111;
-}
-
-.module__Item:first-child {
-  border-left: 1px solid black;
 }
 
 .module__Item:last-child {
@@ -409,7 +424,6 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 0.8rem;
   height: 3rem;
   margin: auto;
 }
@@ -579,6 +593,9 @@ body main {
 }
 
 @media screen and (min-width: 1441px) {
+  html {
+    font-size: 16px;
+  }
   .schedules {
     display: -ms-grid;
     display: grid;
@@ -591,14 +608,6 @@ body main {
   html {
     font-size: 12px;
   }
-  .schedules {
-    -ms-grid-columns: 90%;
-        grid-template-columns: 90%;
-    padding: 0;
-  }
-  .schedules__Details {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 816px) {
@@ -607,6 +616,14 @@ body main {
   }
   .nav__List {
     width: 100%;
+  }
+  .schedules {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+    padding: 0;
+  }
+  .schedules__Details {
+    display: none;
   }
 }
 
@@ -823,6 +840,7 @@ body main {
 
 .schedules__Table .slot {
   position: relative;
+  font-size: 0.8rem;
 }
 
 .schedules__Table .slot a {
@@ -955,6 +973,8 @@ body main {
   width: 50%;
   border: 2px solid rgba(0, 0, 0, 0.25);
   border-radius: 50%;
+  -webkit-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
 }
 
 .dashboard__Card h3 {

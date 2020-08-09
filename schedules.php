@@ -33,6 +33,7 @@ $jumpTime  = $dTime['op_jump'];
                echo "<h1>" . $sect['sect_name'] . "</h1>";
                echo "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
                echo "<h4>" . $dept['dept_desc'] . "</h4>";
+               $caption = "{$sect['sect_name']}";
             }
             if ($type == 'room') {
                $roomID = $ID;
@@ -48,6 +49,7 @@ $jumpTime  = $dTime['op_jump'];
                $subj = $subjView->FetchSubjectByID($subjID)[0];
                echo "<h1>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h1>";
                echo "<h3>" . $subj['units'] . " Unit/s</h3>";
+               $caption = "{$subj['subj_code']}";
             }
             if ($type == 'prof') {
                $profID = $ID;
@@ -61,6 +63,7 @@ $jumpTime  = $dTime['op_jump'];
                echo "<img src='./drawables/images/" . $imgSrc . "'>";
                echo "<h1>" . $fullName . "</h1>";
                echo "<h4>" . $dept['dept_desc'] . "</h4>";
+               $caption = "{$fullName}";
             }
 
             ?>
@@ -141,14 +144,13 @@ $jumpTime  = $dTime['op_jump'];
                   foreach ($schedSlots as $schedSlot) {
                      if ($days == $schedSlot['sched_day']) {
                         if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
-                           $subjDesc = $schedSlot['subj_desc'] ?? $schedSlot['sched_from'];
-                           $sectName = $schedSlot['sect_name'] ?? $schedSlot['sched_to'];
-                           $lastName = $schedSlot['last_name'] ?? ' ';
-                           $roomName = $schedSlot['rm_name'] ?? '';
+                           include_once './includes/functions.inc.php';
+
+                           $cellValues = GenerateCellValue($type, $schedSlot);
                            $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
-                                <span>$subjDesc</span>
-                                <span>$roomName</span> 
-                                <span>$lastName</span>
+                                <span>{$cellValues[0]}</span>
+                                <span>{$cellValues[1]}</span> 
+                                <span>{$cellValues[2]}</span>
                                 </a>";
                         }
                      }

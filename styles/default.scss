@@ -113,10 +113,24 @@ body {
         }
       }
       a {
-        display: grid;
-        place-content: center;
         text-transform: capitalize;
         width: 100%;
+        color: #111;
+        position: relative;
+        overflow: hidden;
+        &::before {
+          content: "";
+          position: absolute;
+          height: 90%;
+          width: 100%;
+          left: 0;
+          border-bottom: 2px solid var(--color-background-dark);
+          transform: translateX(-100%);
+          transition: transform 0.3s ease-in;
+        }
+        &:hover::before {
+          transform: translateX(0%);
+        }
       }
     }
     .module__Links {
@@ -216,11 +230,8 @@ body {
     display: grid;
     place-content: center;
     padding: 0.3rem 0;
-    border-right: 1px solid rgba(0, 0, 0, 1);
     color: #111;
-    &:first-child {
-      border-left: 1px solid black;
-    }
+
     &:last-child {
       display: block;
       text-align: center;
@@ -282,7 +293,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
     height: 3rem;
     margin: auto;
     a {
@@ -410,6 +420,9 @@ body {
   }
 }
 @media screen and (min-width: 1441px) {
+  html {
+    font-size: 16px;
+  }
   .schedules {
     display: grid;
     grid-template-columns: minmax(150px, 1fr) 4fr;
@@ -419,15 +432,6 @@ body {
   html {
     font-size: 12px;
   }
-  .schedules {
-    grid-template-columns: 90%;
-    padding: 0;
-  }
-  .schedules {
-    &__Details {
-      display: none;
-    }
-  }
 }
 @media screen and (max-width: 816px) {
   html {
@@ -436,6 +440,13 @@ body {
   .nav {
     &__List {
       width: 100%;
+    }
+  }
+  .schedules {
+    grid-template-columns: 90%;
+    padding: 0;
+    &__Details {
+      display: none;
     }
   }
 }
