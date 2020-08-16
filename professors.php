@@ -32,29 +32,22 @@ $searchValue = $_GET['q'] ?? '';
          ?>
       </div>
    </div>
-   <div class='professors__Container module__Container'>
+   <div class='module__Content'>
       <?php
 
       if (empty($searchValue)) {
          $profView = new ProfessorsView();
          $results = $profView->FetchProfessorsByState($state);
-         $limit = 6;
-         $pages = ceil(sizeof($results) / $limit);
 
-         $paginatedResults = $profView->FetchProfessorsByState($state, $page, $limit);
-         $profView->DisplayProfessors($paginatedResults, $page);
-
-         echo "<div class='module__Pages'>";
-
-         include_once './includes/functions.inc.php';
-         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-         BuildPagination($page, $pages, $destination);
-
-         echo "</div>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties('prof', $results, $isArchived);
+         $paginatedResults = $profView->FetchProfessorsByState($state, $page, $table['limit']);
+         $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
       ?>
    </div>
    <?php
+
    if (isset($_GET['add']) || isset($_GET['id'])) {
       include_once './layouts/professors.form.php';
    }

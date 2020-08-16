@@ -5,84 +5,60 @@ include 'autoloader.inc.php';
 $value = '';
 $state = $_GET['state'];
 $page = $_GET['page'];
-include_once './functions.inc.php';
+
+$func = new Functions();
+
 if (isset($_GET['searchProf'])) {
    $profView = new ProfessorsView();
    $value = $_GET['searchProf'];
 
    $results = $profView->FetchProfessorsBySearch($value, $state);
-   $limit = 6;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $profView->FetchProfessorsBySearch($value, $state, $page, $limit);
-   $profView->DisplayProfessors($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-   $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
-   BuildPagination($page, $pages, $destination);
-   echo "</div>";
+   $isArchived = ($state == 0);
+   $table = $func->TableProperties('prof', $results, !$state, $value);
+   $paginatedResults = $profView->FetchProfessorsBySearch($value, $state, $page, $table['limit']);
+   $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
 if (isset($_GET['searchRooms'])) {
    $value = $_GET['searchRooms'];
    $roomsView = new RoomsView();
    $results = $roomsView->FetchRoomsBySearch($value, $state);
-   $limit = 11;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $roomsView->FetchRoomsBySearch($value, $state, $page, $limit);
-   $roomsView->DisplayRooms($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-
-   $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
-   BuildPagination($page, $pages, $destination);
-
-   echo "</div>";
+   $isArchived = ($state == 0);
+   $table = $func->TableProperties('room', $results, !$state, $value);
+   $paginatedResults = $roomsView->FetchRoomsBySearch($value, $state, $page, $table['limit']);
+   $roomsView->DisplayRooms($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
 if (isset($_GET['searchUsers'])) {
    $value = $_GET['searchUsers'];
    $usersView = new UsersView();
 
    $results = $usersView->FetchUsersBySearch($value, $state);
-   $limit = 11;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $usersView->FetchUsersBySearch($value, $state, $page, $limit);
-   $usersView->DisplayUsers($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-   $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
-   BuildPagination($page, $pages, $destination);
-   echo "</div>";
+   $isArchived = ($state == 0);
+   $table = $func->TableProperties('user', $results, !$state, $value);
+   $paginatedResults = $usersView->FetchUsersBySearch($value, $state, $page, $table['limit']);
+   $usersView->DisplayUsers($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
 if (isset($_GET['searchSubj'])) {
    $value = $_GET['searchSubj'];
    $subjView = new SubjectsView();
    $results = $subjView->FetchSubjectsBySearch($value, $state);
-   $limit = 11;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $subjView->FetchSubjectsBySearch($value, $state, $page, $limit);
-   $subjView->DisplaySubjects($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-   $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
-   BuildPagination($page, $pages, $destination);
-   echo "</div>";
+   $isArchived = ($state == 0);
+   $table = $func->TableProperties('subj', $results, !$state, $value);
+   $paginatedResults = $subjView->FetchSubjectsBySearch($value, $state, $page, $table['limit']);
+   $subjView->DisplaySubjects($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
 if (isset($_GET['searchSect'])) {
    $value = $_GET['searchSect'];
    $sectView = new SectionsView();
    $results = $sectView->FetchSectionsBySearch($value, $state);
-   $limit = 11;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $sectView->FetchSectionsBySearch($value, $state, $page, $limit);
-   $sectView->DisplaySections($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-
-
-   $destination = ($state == 1) ? "?q=$value&page=" : "?archive&q=$value&page=";
-
-   BuildPagination($page, $pages, $destination);
-
-   echo "</div>";
+   $isArchived = ($state == 0);
+   $table = $func->TableProperties('sect', $results, !$state, $value);
+   $paginatedResults = $sectView->FetchSectionsBySearch($value, $state, $page, $table['limit']);
+   $sectView->DisplaySections($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
 if (isset($_GET['searchDeptfaculty']) || isset($_GET['searchDeptcourse']) || isset($_GET['searchDeptstrand'])) {
    $deptView = new DepartmentsView();
@@ -97,25 +73,8 @@ if (isset($_GET['searchDeptfaculty']) || isset($_GET['searchDeptcourse']) || iss
       $department = 'strand';
    }
    $results = $deptView->FetchDeptsBySearch($value, $state, $department);
-   $limit = 11;
-   $pages = ceil(sizeof($results) / $limit);
-   $paginatedResults = $deptView->FetchDeptsBySearch($value, $state, $department, $page, $limit);
-   $deptView->DisplayDepts($paginatedResults, $page);
 
-   echo "<div class='module__Pages'>";
-   $destination = ($state == 1) ? "?dept=$department&q=$value&page=" : "?dept=$department&archive&q=$value&page=";
-   BuildPagination($page, $pages, $destination);
-   echo "</div>";
+   $table = $func->TableProperties($department, $results, !$state, $value);
+   $paginatedResults = $deptView->FetchDeptsBySearch($value, $state, $department, $page, $table['limit']);
+   $deptView->DisplayDepts($paginatedResults, $page, $table['totalpages'], $table['destination']);
 }
-// if (isset($_GET['searchDeptcourse'])) {
-//    $results = $deptView->FetchDeptsBySearch($_GET['searchDeptcourse'], $_GET['state'], 'course');
-//    $deptView->DisplayDepts($results, 1);
-// }
-// if (isset($_GET['searchDeptstrand'])) {
-//    $results = $deptView->FetchDeptsBySearch($_GET['searchDeptstrand'], $_GET['state'], 'strand');
-//    $deptView->DisplayDepts($results, 1);
-// }
-// if (isset($_GET['loadSearch'])) {
-//    $results = $sectView->FetchSectionsBySearch($_GET['loadSearch'], 1);
-//    $sectView->DisplayInSchedLoad($results);
-// }

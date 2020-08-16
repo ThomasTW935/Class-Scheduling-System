@@ -22,22 +22,26 @@ class UsersView extends Users
       $result = $this->getUserByID($id);
       return $result;
    }
-   public function DisplayUsers($results, $page)
+   public function DisplayUsers($results, $page, $totalPages, $destination)
    {
-      echo "<ul class='module__List module__Title'>
-               <li class='module__Item'>Username</li>
-               <li class='module__Item'>Email</li>
-               <li class='module__Item'>Role Level</li>
-               <li class='module__Item'>Actions</li>
-            </ul>";
+      echo "<table class='module__Table'>";
+      echo "<thead>";
+      echo "<tr class=' '>
+               <th class=''>Username</th>
+               <th class=''>Email</th>
+               <th class=''>Role Level</th>
+               <th class=''>Actions</th>
+            </tr>";
+      echo "</thead>";
+      echo "<tbody>";
       foreach ($results as $result) {
          $iconName = ($result['is_active'] == 1) ? 'delete' : 'restore';
-         echo "<ul class='module__List'>
-            <li class='module__Item'>" . $result['username'] . "</li>
-            <li class='module__Item'>" . $result['email'] . "</li>
-            <li class='module__Item'>" . $result['role_level'] . "</li>
-            <li class='module__Item'>
-               <div>";
+         echo "<tr class=''>
+            <td class=''>" . $result['username'] . "</td>
+            <td class=''>" . $result['email'] . "</td>
+            <td class=''>" . $result['role_level'] . "</td>
+            <td class=''>
+               <div class='table-actions'>";
          if ($result['is_active'] == 1) {
             echo "<a href=?page=$page&id=" . $result['user_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
@@ -49,8 +53,13 @@ class UsersView extends Users
                      <span>" . $iconName . "</span>
                   </form>
                </div>
-            </li>
-         </ul>";
+            </td>
+         </tr>";
       }
+      echo "</tbody>";
+      echo "</table>";
+
+      $func = new Functions();
+      $func->BuildPagination($page, $totalPages, $destination);
    }
 }

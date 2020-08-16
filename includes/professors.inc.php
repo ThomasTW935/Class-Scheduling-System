@@ -39,8 +39,8 @@ if (!isset($_POST['submitStatus'])) {
    $_POST += ['image' => $imgFullName];
 
    if (!empty($errors)) {
-      include_once './functions.inc.php';
-      $query = BuildQuery($errors, $_POST);
+      $func = new Functions();
+      $query = $func->BuildQuery($errors, $_POST);
       $destination .= (isset($_POST['submit'])) ? "&add" : "&id={$_POST['profID']}";
       header('Location: ../professors.php?' . $destination . $query);
       exit();

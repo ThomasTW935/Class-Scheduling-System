@@ -37,6 +37,9 @@ body {
     padding: 0 2rem;
   }
 }
+a {
+  text-decoration: none;
+}
 
 .nav {
   background: rgb(1, 72, 135);
@@ -74,6 +77,41 @@ body {
     }
   }
 
+  &__Profile {
+    display: grid;
+    place-content: center;
+    position: relative;
+    color: white;
+    padding: 0.25rem 1rem;
+    a {
+      color: var(--color-background-dark-grey);
+    }
+    .nav__User {
+      padding: 0 0.3rem;
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: calc(50% - 0.5rem);
+        border: solid var(--color-background-dark-grey);
+        border-width: 0 0 2px 2px;
+        transform: rotate(-45deg);
+        padding: 0.3rem;
+      }
+    }
+    ul {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      height: auto;
+      width: 100%;
+      padding: 1rem 0.5rem 0.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: var(--color-background-dark);
+    }
+  }
   &__Button {
     height: 100%;
     display: grid;
@@ -89,7 +127,7 @@ body {
 }
 .module {
   display: grid;
-  grid-template: auto 1fr / 1fr;
+  grid-template: auto 1fr/ 1fr;
   a {
     text-decoration: none;
   }
@@ -202,101 +240,99 @@ body {
       }
     }
   }
-  &__Container {
+  &__Content {
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
     border-radius: 5px;
     overflow: hidden;
   }
-
-  &__List {
+  &__Table {
     width: 100%;
-    display: grid;
-    justify-content: space-evenly;
-    border-bottom: 1px solid rgba(0, 0, 0, 1);
-    &:not(:first-child):hover {
-      background: var(--color-background-dark-grey);
+    border-spacing: 0;
+    tbody tr {
+      &:nth-child(2n + 2) {
+        background: rgb(240, 240, 240);
+      }
+      &:hover {
+        background: var(--color-background-dark);
+        color: white;
+      }
     }
-  }
-  &__Title {
-    border-top: 1px solid black;
-    li {
-      font-family: "Times New Roman", Times, serif;
-      font-weight: bold;
+    td,
+    th {
+      border-bottom: 1px solid black;
     }
-  }
-  &__Item {
-    display: grid;
-    place-content: center;
-    padding: 0.3rem 0;
-    color: #111;
-
-    &:last-child {
-      display: block;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-
-      div {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        form {
-          display: grid;
-          place-content: center;
-          button {
-            background: none;
-          }
+    .prof-image {
+      img {
+        height: 2rem;
+      }
+    }
+    .table-actions {
+      display: flex;
+      justify-content: space-between;
+      min-width: 88px;
+      width: 50%;
+      max-width: 200px;
+      margin: 0 auto;
+      form,
+      a {
+        position: relative;
+        margin: 0.5rem;
+        &:hover span {
+          visibility: visible;
+          opacity: 1;
         }
-        form,
-        a {
-          position: relative;
-          width: 50px;
-          span {
-            font-size: 1rem;
-            text-transform: capitalize;
-            visibility: hidden;
-            width: 120px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 2;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            &::after {
-              content: "";
-              position: absolute;
-              top: 100%;
-              left: 50%;
-              margin-left: -5px;
-              border-width: 5px;
-              border-style: solid;
-              border-color: #555 transparent transparent transparent;
-            }
-          }
-          &:hover span {
-            opacity: 1;
-            visibility: visible;
-          }
+      }
+      form button,
+      a {
+        background: none;
+        height: 24px;
+        width: 24px;
+      }
+
+      span {
+        width: 100px;
+        color: #fff;
+        background-color: #555;
+        z-index: 99;
+        visibility: hidden;
+        text-align: center;
+        text-transform: capitalize;
+        padding: 5px 0;
+        border-radius: 6px;
+
+        position: absolute;
+        bottom: 115%;
+        left: 50%;
+        margin-left: -50px;
+
+        opacity: 0;
+        transition: opacity 0.3;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border: 5px solid;
+          border-color: #555 transparent transparent transparent;
         }
       }
     }
   }
   &__Pages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3rem;
-    margin: auto;
+    display: grid;
+    place-content: center;
+    ul {
+      display: flex;
+      width: 50%;
+    }
     a {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       color: #111;
       border: 1px solid var(--color-background-dark);
       transition: background 0.3s;

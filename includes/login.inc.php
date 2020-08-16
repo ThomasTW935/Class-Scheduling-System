@@ -9,7 +9,6 @@ if (!isset($_POST)) {
 
 if (isset($_POST['submit'])) {
 
-   $usersView = new UsersView();
    $loginVal = new LoginVal($_POST);
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {
@@ -26,16 +25,16 @@ if (isset($_POST['submit'])) {
       header("Location: ../index.php?$query");
       exit();
    }
-   $result = $usersView->FetchUserByUsername($username);
+   $usersView = new UsersView();
+   $result = $usersView->FetchUserByUsername($_POST['username']);
    $user = $result[0];
    foreach ($user as $key => $value) {
       echo "<h2>$key: $value</h2>";
    }
    session_start();
    $_SESSION['id'] = $user['user_id'];
+   $_SESSION['username'] = $user['username'];
    $_SESSION['type'] = $user['role_level'];
-   header("Location: ../dashboard.php?signin=success");
+   $destination = ($_SESSION['type'] == 1) ? "scheduleview" : "dashboard";
+   header("Location: ../$destination.php?signin=success");
 }
-
-
-echo "<h1>Hello</h1>";

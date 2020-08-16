@@ -34,26 +34,17 @@ $searchValue = $_GET['q'] ?? '';
 
       </div>
    </div>
-   <div class='module__Container'>
+   <div class='module__Content'>
       <?php
 
       if (empty($searchValue)) {
          $sectView = new SectionsView();
          $results = $sectView->FetchSectionsByState($state);
-         $limit = 11;
-         $pages = ceil(sizeof($results) / $limit);
-         $paginatedResults = $sectView->FetchSectionsByState($state, $page, $limit);
-         $sectView->DisplaySections($paginatedResults, $page);
 
-         echo "<div class='module__Pages'>";
-
-         include_once './includes/functions.inc.php';
-
-         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-
-         BuildPagination($page, $pages, $destination);
-
-         echo "</div>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties('sect', $results, $isArchived);
+         $paginatedResults = $sectView->FetchSectionsByState($state, $page, $table['limit']);
+         $sectView->DisplaySections($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
       ?>

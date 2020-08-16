@@ -16,8 +16,8 @@ if (!isset($_POST['submitStatus'])) {
    $errors = $subjVal->validateForm();
    $query = '&' . http_build_query($errors);
    if (!empty($errors)) {
-      include_once './functions.inc.php';
-      $query = BuildQuery($errors, $_POST);
+      $func = new Functions();
+      $query = $func->BuildQuery($errors, $_POST);
       $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['subjID']}";
       header("Location: ../subjects.php?$destination" . $query);
       exit();

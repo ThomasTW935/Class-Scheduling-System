@@ -33,29 +33,17 @@ $searchValue = $_GET['q'] ?? '';
          ?>
       </div>
    </div>
-   <div class='module__Container'>
+   <div class='module__Content'>
       <?php
 
       if (empty($searchValue)) {
          $roomsView = new RoomsView();
          $results = $roomsView->FetchRoomsByState($state);
-         $limit = 11;
-         $pages = ceil(sizeof($results) / $limit);
 
-         $paginatedResults = $roomsView->FetchRoomsByState($state, $page, $limit);
-         $roomsView->DisplayRooms($paginatedResults, $page);
-
-         echo "<div class='module__Pages'>";
-
-         if (empty($searchValue)) {
-            include_once './includes/functions.inc.php';
-
-            $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-
-            BuildPagination($page, $pages, $destination);
-         }
-
-         echo "</div>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties('room', $results, $isArchived);
+         $paginatedResults = $roomsView->FetchRoomsByState($state, $page, $table['limit']);
+         $roomsView->DisplayRooms($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
       ?>

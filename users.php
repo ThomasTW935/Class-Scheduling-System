@@ -39,18 +39,12 @@ $searchValue = $_GET['q'] ?? '';
       if (empty($searchValue)) {
          $usersView = new UsersView();
          $results = $usersView->FetchUsersByState($state);
-         $limit = 11;
-         $pages = ceil(sizeof($results) / $limit);
 
-         $paginatedResults = $usersView->FetchUsersByState($state, $page, $limit);
-         $usersView->DisplayUsers($paginatedResults, $page);
-         echo "<div class='module__Pages'>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties('user', $results, $isArchived);
 
-         include_once './includes/functions.inc.php';
-         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-         BuildPagination($page, $pages, $destination);
-
-         echo "</div>";
+         $paginatedResults = $usersView->FetchUsersByState($state, $page, $table['limit']);
+         $usersView->DisplayUsers($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
       ?>

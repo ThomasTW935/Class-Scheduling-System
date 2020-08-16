@@ -13,20 +13,24 @@ class DepartmentsView extends Departments
       $results = $this->getDepartmentBySearch($search, $state, $type, $page, $limit);
       return $results;
    }
-   public function DisplayDepts($results, $page)
+   public function DisplayDepts($results, $page, $totalPages, $destination)
    {
-      echo "<ul class='module__List module__Title'>
-               <li class='module__Item'>Program</li>
-               <li class='module__Item'>Description</li>
-               <li class='module__Item'>Actions</li>
-            </ul>";
+      echo "<table class='module__Table'>";
+      echo "<thead>";
+      echo "<tr class='module__List module__Title'>
+               <th class='module__Item'>Program</th>
+               <th class='module__Item'>Description</th>
+               <th class='module__Item'>Actions</th>
+            </tr>";
+      echo "</thead>";
+      echo "<tbody>";
       foreach ($results as $result) {
          $iconName = ($result['dept_active'] == 1) ? 'delete' : 'restore';
-         echo "<ul class='module__List'>
-         <li class='module__Item'>" . $result['dept_name'] . "</li>
-         <li class='module__Item'>" . $result['dept_desc'] . "</li>
-         <li class='module__Item'>
-         <div>";
+         echo "<tr class='module__List'>
+         <td class='module__Item'>" . $result['dept_name'] . "</td>
+         <td class='module__Item'>" . $result['dept_desc'] . "</td>
+         <td class='module__Item'>
+            <div class='table-actions'>";
          if ($result['dept_active'] == 1) {
             echo "<a href='?dept={$result['dept_type']}&page=$page&id={$result['dept_id']}'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
@@ -39,9 +43,14 @@ class DepartmentsView extends Departments
             <span>" . $iconName . "</span>
          </form>
          </div>
-         </li>
-         </ul>";
+         </td>
+         </tr>";
       }
+      echo "</tbody>";
+      echo "</table>";
+
+      $func = new Functions();
+      $func->BuildPagination($page, $totalPages, $destination);
    }
    public function FetchDeptByID($id)
    {

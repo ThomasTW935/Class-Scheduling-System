@@ -47,15 +47,19 @@ class ProfessorsView extends Professors
       return $fullName;
    }
 
-   public function DisplayProfessors($results, $page)
+   public function DisplayProfessors($results, $page, $totalPages, $destination)
    {
-      echo "<ul class='module__List module__Title'>
-               <li class='module__Item'></li>
-               <li class='module__Item'>Employee ID</li>
-               <li class='module__Item'>Employee Name</li>
-               <li class='module__Item'>Department</li>
-               <li class='module__Item'>Actions</li>
-            </ul>";
+      echo "<table class='module__Table'>";
+      echo "<thead>";
+      echo "<tr class=' '>
+               <th class=''></th>
+               <th class=''>Employee ID</th>
+               <th class=''>Employee Name</th>
+               <th class=''>Department</th>
+               <th class=''>Actions</th>
+            </tr>";
+      echo "</thead>";
+      echo "<tbody>";
       foreach ($results as $result) {
          $imgSrc = $result['prof_img'];
          if (empty($result['prof_img']))
@@ -63,13 +67,13 @@ class ProfessorsView extends Professors
          $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
          $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
          $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
-         echo "<ul class='module__List'>
-            <li class='module__Item'><img src='./drawables/images/" . $imgSrc . "'></li>
-            <li class='module__Item'>" . $result['emp_no'] . "</li>
-            <li class='module__Item'>" . $fullName . "</li>
-            <li class='module__Item'>" . $result['dept_name'] . "</li>
-            <li class='module__Item'>
-               <div>";
+         echo "<tr class=''>
+            <td class='prof-image'><img src='./drawables/images/" . $imgSrc . "'></td>
+            <td class=''>" . $result['emp_no'] . "</td>
+            <td class=''>" . $fullName . "</td>
+            <td class=''>" . $result['dept_name'] . "</td>
+            <td class=''>
+               <div class='table-actions'>";
          if ($result['prof_active'] == 1) {
             echo "<form method='POST' action='./schedules.php'>
             <input type='hidden' name='type' value='prof'>
@@ -87,8 +91,13 @@ class ProfessorsView extends Professors
                      <span>" . $iconName . "</span>
                   </form>
                </div>
-            </li>
-         </ul>";
+            </td>
+         </tr>";
       }
+      echo "</tbody>";
+      echo "</table>";
+
+      $func = new Functions();
+      $func->BuildPagination($page, $totalPages, $destination);
    }
 }

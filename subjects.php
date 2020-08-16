@@ -34,24 +34,16 @@ $searchValue = $_GET['q'] ?? '';
          ?>
       </div>
    </div>
-   <div class='module__Container'>
+   <div class='module__Content'>
       <?php
-      $subjView = new SubjectsView();
       if (empty($searchValue)) {
+         $subjView = new SubjectsView();
          $results = $subjView->FetchSubjectsByState($state);
-         $limit = 11;
-         $pages = ceil(sizeof($results) / $limit);
 
-         $paginatedResults = $subjView->FetchSubjectsByState($state, $page, $limit);
-         $subjView->DisplaySubjects($paginatedResults, $page);
-
-         echo "<div class='module__Pages'>";
-
-         include_once './includes/functions.inc.php';
-         $destination = (!isset($_GET['archive'])) ? "?page=" : "?archive&page=";
-         BuildPagination($page, $pages, $destination);
-
-         echo "</div>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties('subj', $results, $isArchived);
+         $paginatedResults = $subjView->FetchSubjectsByState($state, $page, $table['limit']);
+         $subjView->DisplaySubjects($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
       ?>

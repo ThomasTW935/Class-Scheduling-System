@@ -1,13 +1,17 @@
 <?php
 session_start();
-$sessionType = $_SESSION['type'];
 $sessionID = $_SESSION['id'];
+$sessionUsername = $_SESSION['username'];
+$sessionType = $_SESSION['type'];
 if (empty($_SESSION)) {
    header("Location: ./index.php");
    exit();
 }
+
 include './includes/autoloader.inc.php';
 $page = $_GET['page'] ?? '1';
+$func = new Functions();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +39,17 @@ $page = $_GET['page'] ?? '1';
       }
 
       ?>
-      <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
-         <button type="submit" name="logout-Button" class="button">LOG OUT</button>
-      </form>
+      <div class='nav__Profile'>
+         <a href='#' class='nav__User'><?php echo $sessionUsername ?></a>
+         <ul>
+            <li>
+               <a href='./profile.php'>Profile</a>
+            </li>
+            <li>
+               <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
+                  <button type="submit" name="logout-Button" class="button">LOG OUT</button>
+               </form>
+            </li>
+         </ul>
+      </div>
    </nav>

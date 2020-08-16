@@ -52,6 +52,10 @@ body main {
   padding: 0 2rem;
 }
 
+a {
+  text-decoration: none;
+}
+
 .nav {
   background: #014887;
   position: -webkit-sticky;
@@ -111,6 +115,53 @@ body main {
   margin-right: 0.5rem;
 }
 
+.nav__Profile {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  position: relative;
+  color: white;
+  padding: 0.25rem 1rem;
+}
+
+.nav__Profile a {
+  color: var(--color-background-dark-grey);
+}
+
+.nav__Profile .nav__User {
+  padding: 0 0.3rem;
+}
+
+.nav__Profile .nav__User::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: calc(50% - 0.5rem);
+  border: solid var(--color-background-dark-grey);
+  border-width: 0 0 2px 2px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  padding: 0.3rem;
+}
+
+.nav__Profile ul {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  height: auto;
+  width: 100%;
+  padding: 1rem 0.5rem 0.25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+  background: var(--color-background-dark);
+}
+
 .nav__Button {
   height: 100%;
   display: -ms-grid;
@@ -132,7 +183,7 @@ body main {
   display: grid;
   -ms-grid-rows: auto 1fr;
   -ms-grid-columns: 1fr;
-      grid-template: auto 1fr / 1fr;
+      grid-template: auto 1fr/ 1fr;
 }
 
 .module a {
@@ -296,7 +347,7 @@ body main {
   border-color: #00aaff;
 }
 
-.module__Container {
+.module__Content {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -305,131 +356,106 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
   border-radius: 5px;
   overflow: hidden;
 }
 
-.module__List {
+.module__Table {
   width: 100%;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  border-spacing: 0;
+}
+
+.module__Table tbody tr:nth-child(2n + 2) {
+  background: #f0f0f0;
+}
+
+.module__Table tbody tr:hover {
+  background: var(--color-background-dark);
+  color: white;
+}
+
+.module__Table td,
+.module__Table th {
   border-bottom: 1px solid black;
 }
 
-.module__List:not(:first-child):hover {
-  background: var(--color-background-dark-grey);
-}
-
-.module__Title {
-  border-top: 1px solid black;
-}
-
-.module__Title li {
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-}
-
-.module__Item {
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
-  padding: 0.3rem 0;
-  color: #111;
-}
-
-.module__Item:last-child {
-  display: block;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-
-.module__Item:last-child div {
+.module__Table .table-actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-.module__Item:last-child div form {
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
-}
-
-.module__Item:last-child div form button {
-  background: none;
-}
-
-.module__Item:last-child div form,
-.module__Item:last-child div a {
+.module__Table .table-actions form,
+.module__Table .table-actions a {
   position: relative;
-  width: 50px;
+  margin: 0.5rem;
 }
 
-.module__Item:last-child div form span,
-.module__Item:last-child div a span {
-  font-size: 1rem;
-  text-transform: capitalize;
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
+.module__Table .table-actions form:hover span,
+.module__Table .table-actions a:hover span {
+  visibility: visible;
+  opacity: 1;
+}
+
+.module__Table .table-actions form button,
+.module__Table .table-actions a {
+  background: none;
+  height: 24px;
+  width: 24px;
+}
+
+.module__Table .table-actions span {
+  width: 100px;
   color: #fff;
+  background-color: #555;
+  z-index: 99;
+  visibility: hidden;
   text-align: center;
-  border-radius: 6px;
+  text-transform: capitalize;
   padding: 5px 0;
+  border-radius: 6px;
   position: absolute;
-  z-index: 2;
-  bottom: 125%;
+  bottom: 115%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -50px;
   opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3;
+  transition: opacity 0.3;
 }
 
-.module__Item:last-child div form span::after,
-.module__Item:last-child div a span::after {
+.module__Table .table-actions span::before {
   content: "";
   position: absolute;
   top: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
+  border: 5px solid;
   border-color: #555 transparent transparent transparent;
 }
 
-.module__Item:last-child div form:hover span,
-.module__Item:last-child div a:hover span {
-  opacity: 1;
-  visibility: visible;
+.module__Pages {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
 }
 
-.module__Pages {
+.module__Pages ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 3rem;
-  margin: auto;
+  width: 50%;
 }
 
 .module__Pages a {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   color: #111;
   border: 1px solid var(--color-background-dark);
   -webkit-transition: background 0.3s;
@@ -592,9 +618,9 @@ body main {
   cursor: default;
 }
 
-@media screen and (min-width: 2000px) {
+@media screen and (min-width: 1441px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
   .schedules {
     display: -ms-grid;
@@ -604,23 +630,9 @@ body main {
   }
 }
 
-@media screen and (min-width: 1441px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 @media screen and (max-width: 1440px) {
   html {
     font-size: 12px;
-  }
-  .schedules {
-    -ms-grid-columns: 90%;
-        grid-template-columns: 90%;
-    padding: 0;
-  }
-  .schedules__Details {
-    display: none;
   }
 }
 
@@ -630,6 +642,14 @@ body main {
   }
   .nav__List {
     width: 100%;
+  }
+  .schedules {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+    padding: 0;
+  }
+  .schedules__Details {
+    display: none;
   }
 }
 

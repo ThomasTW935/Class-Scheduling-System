@@ -38,22 +38,26 @@ class SectionsView extends Sections
             <li class='module__Item'>" . $result['dept_name'] . "</li></ul></option>";
         }
     }
-    public function DisplaySections($results, $page)
+    public function DisplaySections($results, $page, $totalPages, $destination)
     {
-        echo "<ul class='module__List module__Title'>
-            <li class='module__Item'>Section</li>
-            <li class='module__Item'>Year and Semester</li>
-            <li class='module__Item'>Department</li>
-            <li class='module__Item'>Actions</li>
-          </ul>";
+        echo "<table class='module__Table'>";
+        echo "<thead>";
+        echo "<tr class=' '>
+            <th class=''>Section</th>
+            <th class=''>Year and Semester</th>
+            <th class=''>Department</th>
+            <th class=''>Actions</th>
+        </tr>";
+        echo "</thead>";
+        echo "<tbody>";
         foreach ($results as $result) {
             $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
-            echo " <ul class='module__List'>
-            <li class='module__Item'>" . $result['sect_name'] . "</li>
-            <li class='module__Item'>{$result['sect_year']}YR {$result['sect_sem']}SEM</li>
-            <li class='module__Item'>" . $result['dept_name'] . "</li>
-            <li class='module__Item'>
-            <div>";
+            echo " <tr class=''>
+            <td class=''>" . $result['sect_name'] . "</td>
+            <td class=''>{$result['sect_year']}YR {$result['sect_sem']}SEM</td>
+            <td class=''>" . $result['dept_name'] . "</td>
+            <td class=''>
+            <div class='table-actions'>";
             if ($result['sect_active'] == 1) {
 
                 echo "<form method='POST' action='./schedules.php'>
@@ -71,8 +75,15 @@ class SectionsView extends Sections
                     <span>" . $iconName . "</span>
                 </form>
             </div>
-            </li>
-        </ul>";
+            </td>
+        </tr>";
         }
+        echo "</tbody>";
+        echo "</table>";
+
+
+
+        $func = new Functions();
+        $func->BuildPagination($page, $totalPages, $destination);
     }
 }

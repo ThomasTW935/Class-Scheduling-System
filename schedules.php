@@ -144,9 +144,8 @@ $jumpTime  = $dTime['op_jump'];
                   foreach ($schedSlots as $schedSlot) {
                      if ($days == $schedSlot['sched_day']) {
                         if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
-                           include_once './includes/functions.inc.php';
 
-                           $cellValues = GenerateCellValue($type, $schedSlot);
+                           $cellValues = $func->GenerateCellValue($type, $schedSlot);
                            $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
                                 <span>{$cellValues[0]}</span>
                                 <span>{$cellValues[1]}</span> 

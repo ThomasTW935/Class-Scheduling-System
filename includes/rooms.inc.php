@@ -17,8 +17,8 @@ if (!isset($_POST['submitStatus'])) {
   $errors = $roomsVal->validateForm();
 
   if (!empty($errors)) {
-    include_once './functions.inc.php';
-    $query = BuildQuery($errors, $_POST);
+    $func = new Functions();
+    $query = $func->BuildQuery($errors, $_POST);
     $destination .= (isset($_POST['submit'])) ? '&add' : "&id={$_POST['rmID']}";
     header("Location: ../rooms.php?$destination" . $query);
     exit();

@@ -35,24 +35,18 @@ $searchValue = $_GET['q'] ?? '';
          ?>
       </div>
    </div>
-   <div class='module__Container'>
+   <div class='module__Content'>
       <?php
 
       if (empty($searchValue)) {
          $deptView = new DepartmentsView();
          $results = $deptView->FetchDepts($department, $state);
-         $limit = 11;
-         $pages = ceil(sizeof($results) / $limit);
-         $paginatedResults = $deptView->FetchDepts($department, $state, $page, $limit);
-         $deptView->DisplayDepts($paginatedResults, $page);
 
-         echo "<div class='module__Pages'>";
+         $isArchived = isset($_GET['archive']);
+         $table = $func->TableProperties($department, $results, $isArchived);
 
-         include_once './includes/functions.inc.php';
-         $destination = (!isset($_GET['archive'])) ? "?dept=$department&page=" : "?dept=$department&archive&page=";
-         BuildPagination($page, $pages, $destination);
-
-         echo "</div>";
+         $paginatedResults = $deptView->FetchDepts($department, $state, $page, $table['limit']);
+         $deptView->DisplayDepts($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
       ?>

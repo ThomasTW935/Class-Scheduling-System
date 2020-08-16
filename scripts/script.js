@@ -60,7 +60,7 @@ function searchData(query) {
       if (this.readyState === 4 && this.status) {
          let response = this.responseText
          console.log(response)
-         let con = document.querySelector('.module__Container')
+         let con = document.querySelector('.module__Content')
          con.innerHTML = response
       }
    }

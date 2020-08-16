@@ -61,22 +61,26 @@ class RoomsView extends Rooms
         <li class='module__Item'>" . $floor . " floor</li></ul></option>";
     }
   }
-  public function DisplayRooms($results, $page)
+  public function DisplayRooms($results, $page, $totalPages, $destination)
   {
-    echo "<ul class='module__List module__Title'>
-            <li class='module__Item'>Room</li>
-            <li class='module__Item'>Description</li>
-            <li class='module__Item'>Floor</li>
-            <li class='module__Item'>Actions</li>
-          </ul>";
+    echo "<table class='module__Table'>";
+    echo "<thead>";
+    echo "<tr class=' '>
+            <th class=''>Room</th>
+            <th class=''>Description</th>
+            <th class=''>Floor</th>
+            <th class=''>Actions</th>
+          </tr>";
+    echo "</thead>";
+    echo "<tbody>";
     foreach ($results as $result) {
       $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
-      echo " <ul class='module__List'>
-        <li class='module__Item'>" . $result['rm_name'] . "</li>
-        <li class='module__Item'>" . $result['rm_desc'] . "</li>
-        <li class='module__Item'>" . $result['rm_floor'] . "</li>
-        <li class='module__Item'>
-          <div>";
+      echo " <tr class=''>
+        <td class=''>" . $result['rm_name'] . "</td>
+        <td class=''>" . $result['rm_desc'] . "</td>
+        <td class=''>" . $result['rm_floor'] . "</td>
+        <td class=''>
+          <div class='table-actions'>";
       if ($result['rm_active'] == 1) {
         echo "<form method='POST' action='./schedules.php'>
         <input type='hidden' name='type' value='room'>
@@ -93,8 +97,13 @@ class RoomsView extends Rooms
                 <span>" . $iconName . "</span>
               </form>
           </div>
-        </li>
-      </ul>";
+        </td>
+      </tr>";
     }
+    echo "</tbody>";
+    echo "</table>";
+
+    $func = new Functions();
+    $func->BuildPagination($page, $totalPages, $destination);
   }
 }
