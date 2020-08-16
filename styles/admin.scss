@@ -1,5 +1,4 @@
 @import "default.scss";
-@import "rooms.scss";
 @import "schedules.scss";
 @import "variables.scss";
 
@@ -29,36 +28,6 @@
     }
     h3 {
       font-family: "Times New Roman", Times, serif;
-    }
-  }
-}
-.departments {
-  .module__List {
-    grid-template-columns: 1fr 3fr 1fr;
-  }
-}
-.subjects,
-.rooms,
-.sections,
-.users {
-  .module__List {
-    grid-template-columns: 1fr 3fr repeat(2, 1fr);
-  }
-}
-.professors {
-  .module__List {
-    grid-template-columns: 70px 1fr 3fr repeat(2, 1fr);
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &:first-child {
-        height: 70px;
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
     }
   }
 }

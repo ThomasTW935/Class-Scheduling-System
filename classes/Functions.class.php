@@ -29,7 +29,7 @@ class Functions
 
       for ($i = 1; $i <= $pagesCount; $i++) {
         $activePage = ($currentPage != $i) ? "href='$destination$i'" : "class='active'";
-        echo "<a $activePage>$i</a>";
+        echo "<li><a $activePage>$i</a></li>";
       }
     } else if ($pagesCount > 10) {
       $secondLast = $pagesCount - 1;

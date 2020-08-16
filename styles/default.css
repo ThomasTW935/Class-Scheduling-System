@@ -57,7 +57,7 @@ a {
 }
 
 .nav {
-  background: #014887;
+  background: var(--color-background-dark);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -72,7 +72,7 @@ a {
       -ms-flex-align: center;
           align-items: center;
   padding: 1rem 2rem;
-  height: 2.5rem;
+  height: 3rem;
 }
 
 .nav button,
