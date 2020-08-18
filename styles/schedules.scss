@@ -1,5 +1,7 @@
 .schedules {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
   .module__Form {
     width: 50vw;
     font-size: 1rem;

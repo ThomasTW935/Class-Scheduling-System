@@ -3,34 +3,53 @@
   margin: 0;
   box-sizing: border-box;
 }
-tr,
-td,
-th {
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-  padding: 0.2rem;
-  margin: 0;
-  text-align: center;
+html {
+  font-family: sans-serif;
 }
-td,
-th {
-  width: 10rem;
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
   font-size: 0.8rem;
-  height: 1rem;
+  overflow: hidden;
 }
-.slot {
-  position: relative;
-  div {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: pink;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.15rem;
+
+td,
+th {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235, 235, 235);
+}
+tr {
+  td:hover {
+    background: red;
   }
+}
+tr:hover {
+  background-color: #ffa;
+}
+
+td,
+th {
+  text-align: center;
+  position: relative;
+}
+td:hover::after,
+th:hover::after {
+  content: "";
+  position: absolute;
+  background-color: #ffa;
+  left: 0;
+  top: -5000px;
+  height: 10000px;
+  width: 100%;
+  z-index: -1;
+}
+
+caption {
+  padding: 10px;
 }

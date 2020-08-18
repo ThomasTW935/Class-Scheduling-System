@@ -5,47 +5,55 @@
           box-sizing: border-box;
 }
 
-tr,
-td,
-th {
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-  padding: 0.2rem;
-  margin: 0;
-  text-align: center;
+html {
+  font-family: sans-serif;
 }
 
-td,
-th {
-  width: 10rem;
+table {
+  border-collapse: collapse;
+  border: 2px solid #c8c8c8;
+  letter-spacing: 1px;
   font-size: 0.8rem;
-  height: 1rem;
+  overflow: hidden;
 }
 
-.slot {
+td,
+th {
+  border: 1px solid #bebebe;
+  padding: 10px 20px;
+}
+
+th {
+  background-color: #ebebeb;
+}
+
+tr td:hover {
+  background: red;
+}
+
+tr:hover {
+  background-color: #ffa;
+}
+
+td,
+th {
+  text-align: center;
   position: relative;
 }
 
-.slot div {
+td:hover::after,
+th:hover::after {
+  content: "";
   position: absolute;
+  background-color: #ffa;
   left: 0;
-  top: 0;
-  background: pink;
-  height: 100%;
+  top: -5000px;
+  height: 10000px;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 0.15rem;
+  z-index: -1;
+}
+
+caption {
+  padding: 10px;
 }
 /*# sourceMappingURL=demo.css.map */

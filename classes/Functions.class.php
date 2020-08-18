@@ -112,4 +112,108 @@ class Functions
 
     return $newArray;
   }
+  public function TableTemplate($type, $results, $currentPage)
+  {
+    $tableValues = $this->SetTableValues($type);
+    echo "<table class='module__Table'>";
+    echo "<thead>";
+    echo "<tr class=''>";
+    foreach ($tableValues["head"] as $key => $value) {
+      echo "<th>$value</th>";
+    }
+    echo  "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    foreach ($results as $result) {
+      echo "<tr class=''>";
+      foreach ($tableValues["body"] as $key => $value) {
+        echo "<td>{$result[$value]}</td>";
+      }
+      $action = $this->BuildTableActions($type, $result, $currentPage);
+      echo "<td>
+      <div class='table-actions'>$action</div>
+      </td>";
+      echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+  }
+  public function SetTableValues($type)
+  {
+    $tableHead = [];
+    $tableBody = [];
+    $newArray = [];
+    if ($type == 'subj') {
+      $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Actions"];
+      $tableBody = ["subj_code", "subj_desc", "units"];
+    } else if ($type == 'sect') {
+      $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
+      $tableBody = ["sect_name", "sect_yrsem", "dept_name"];
+    } else if ($type == 'room') {
+      $tableHead = ["Room", "Description", "Floor", "Actions"];
+      $tableBody = ["rm_name", "rm_desc", "rm_floor"];
+    }
+    $newArray["head"] = $tableHead;
+    $newArray["body"] = $tableBody;
+    return $newArray;
+  }
+
+  public function BuildTableActions($type, $result, $page)
+  {
+    $action = '';
+    if ($type == "subj") {
+      if ($result['subj_active'] == 1) {
+        $action .= "<form method='POST' action='./schedules.php'>
+            <input type='hidden' name='type' value='subj'>
+            <input type='hidden' name='id' value='" . $result['subj_id'] . "'>
+            <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+            <span>Schedule</span></form>
+            <a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+      <input type='hidden' name='page' value='$page'>
+      <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
+      <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
+      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+      <span>" . $iconName . "</span>
+      </form>";
+    } else if ($type == 'sect') {
+      if ($result['sect_active'] == 1) {
+
+        $action .= "<form method='POST' action='./schedules.php'>
+        <input type='hidden' name='type' value='sect'>
+        <input type='hidden' name='id' value='" . $result['sect_id'] . "'>
+        <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+        <span>Schedule</span></form>
+        <a href=?page=$page&id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
+      <input name='page' type='hidden' value='$page'>
+      <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
+      <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
+            <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+            <span>" . $iconName . "</span>
+        </form>";
+    } else if ($type == 'room') {
+      if ($result['rm_active'] == 1) {
+        $action .= "<form method='POST' action='./schedules.php'>
+        <input type='hidden' name='type' value='room'>
+        <input type='hidden' name='id' value='" . $result['rm_id'] . "'>
+        <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+        <span>Schedule</span></form>
+        <a href=?page=$page&id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
+                <input name='page' type='hidden' value='$page'>
+                <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
+                <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
+                <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+                <span>" . $iconName . "</span>
+              </form>";
+    }
+    return $action;
+  }
 }

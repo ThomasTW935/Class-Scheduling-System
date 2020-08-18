@@ -129,20 +129,20 @@ class SchedulesView extends Schedules
 
         $time = date('g:i A', $i);
         $values[$time] = array();
-        $cellValue =  "<span class='table__Time'>$time - $toTime</span>";
+        $cellValue =  "<th scope='row'>$time - $toTime</th>";
         array_push($values[$time], $cellValue);
         foreach ($daysWeek as $days) {
-          $cellValue = '';
+          $cellValue = '<td>---</td>';
           foreach ($schedSlots as $schedSlot) {
             if ($days == $schedSlot['sched_day']) {
               if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
 
                 $cellValues = $this->GenerateCellValue($type, $schedSlot);
-                $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
+                $cellValue = "<td class='slot'><a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
                                 <span>{$cellValues[0]}</span>
                                 <span>{$cellValues[1]}</span> 
                                 <span>{$cellValues[2]}</span>
-                                </a>";
+                                </a></td>";
               }
             }
           }
@@ -154,9 +154,7 @@ class SchedulesView extends Schedules
       echo "<tr>";
       foreach ($value as $x) {
         if (!empty($x)) {
-          echo "<td class='slot'>$x</td>";
-        } else {
-          echo "<td>$x</td>";
+          echo "$x";
         }
       }
       echo "</tr>";

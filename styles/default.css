@@ -3,10 +3,10 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   height: 100vh;
   font-size: 16px;
 }
@@ -368,20 +368,38 @@ a {
 .module__Table {
   width: 100%;
   border-spacing: 0;
+  border-collapse: collapse;
+  border: 2px solid #c8c8c8;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
 }
 
-.module__Table tbody tr:nth-child(2n + 2) {
-  background: #f0f0f0;
-}
-
-.module__Table tbody tr:hover {
-  background: var(--color-background-dark);
-  color: white;
+.module__Table tr:hover {
+  background-color: var(--color-background-dark-grey);
 }
 
 .module__Table td,
 .module__Table th {
-  border-bottom: 1px solid black;
+  border: 1px solid #bebebe;
+  padding: 0.5em 1em;
+}
+
+.module__Table th {
+  background-color: var(--color-background-dark);
+  color: white;
+}
+
+.module__Table td {
+  text-align: center;
+}
+
+.module__Table td:hover {
+  background-color: var(--color-background-dark);
+  color: white;
+}
+
+.module__Table caption {
+  padding: 10px;
 }
 
 .module__Table .prof-image img {
@@ -431,7 +449,7 @@ a {
   padding: 5px 0;
   border-radius: 6px;
   position: absolute;
-  bottom: 115%;
+  bottom: 125%;
   left: 50%;
   margin-left: -50px;
   opacity: 0;
@@ -624,5 +642,17 @@ a {
   -webkit-backdrop-filter: blur(1px);
           backdrop-filter: blur(1px);
   cursor: default;
+}
+
+@media screen and (min-width: 1441px) {
+  html {
+    font-size: 16px;
+  }
+  .schedules {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 4fr;
+        grid-template-columns: 1fr 4fr;
+  }
 }
 /*# sourceMappingURL=default.css.map */

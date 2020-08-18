@@ -6,7 +6,7 @@ class Sections extends Dbh
   {
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-    $sql = "SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE sect_active = ? $withLimit";
+    $sql = "SELECT sect_id,sect_name, CONCAT(sect_year, 'YR ' , sect_sem, 'SEM') as sect_yrsem, s.dept_id, dept_name, dept_desc, dept_type, sect_active FROM sections s INNER JOIN departments d ON s.dept_id = d.dept_id WHERE sect_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state]);
@@ -21,7 +21,7 @@ class Sections extends Dbh
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%$search%";
-    $sql = "SELECT * FROM sections INNER JOIN departments ON sections.dept_id = departments.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
+    $sql = "SELECT sect_name, CONCAT(sect_year, 'YR ' , sect_sem, 'SEM') as sect_yrsem, s.dept_id, dept_name, dept_desc, dept_type, dept_active FROM sections s INNER JOIN departments d ON s.dept_id = d.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $search, $state]);
