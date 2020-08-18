@@ -12,5 +12,7 @@ function myAutoLoader($className)
       $fullPath = ".{$fullPath}";
    }
    echo "Path: $fullPath";
+   $fileExist = file_exists($fullPath);
+   echo "<br>File Exist: $fileExist";
    include_once $fullPath;
 }
