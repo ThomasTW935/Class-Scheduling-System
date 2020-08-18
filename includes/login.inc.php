@@ -9,6 +9,7 @@ if (!isset($_POST)) {
 
 if (isset($_POST['submit'])) {
 
+
    $loginVal = new LoginVal($_POST);
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {

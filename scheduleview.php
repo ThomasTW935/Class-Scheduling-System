@@ -6,6 +6,10 @@ include_once './layouts/__header.php';
   <?php
 
   var_dump($sessionID);
+  $schedView = new SchedulesView();
+  $profView = new ProfessorsView();
+
+  $id = $profView->FetchProfessorByUserID($sessionID);
 
 
   ?>
