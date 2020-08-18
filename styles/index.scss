@@ -47,7 +47,9 @@ html {
     color: white;
     padding: 0.5rem 0.75rem;
     border: none;
+    border-radius: 1rem;
     font-weight: bold;
+    cursor: pointer;
   }
 }
 @media screen and (max-width: 768px) {

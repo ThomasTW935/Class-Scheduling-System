@@ -13,6 +13,11 @@ class ProfessorsView extends Professors
       $result = $this->getProfessorByID($id);
       return $result;
    }
+   public function FetchProfessorByUserID($userID)
+   {
+      $result = $this->getProfessorByUserID($userID);
+      return $result;
+   }
    public function FetchProfessorByLatest()
    {
       $result = $this->getProfessorByLatest();

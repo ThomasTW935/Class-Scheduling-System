@@ -30,6 +30,18 @@ class Professors extends Dbh
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorByUserID($userID)
+   {
+      $sql = "select * from professors where user_id = ? LIMIT 1";
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$userID]);
+         $result = $stmt->fetchAll();
+         return $result;
+      } catch (PDOException $e) {
+         trigger_error("Error: $e");
+      }
+   }
    protected function getProfessorByID($id)
    {
       $sql = "SELECT * FROM professors 

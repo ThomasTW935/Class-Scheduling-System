@@ -57,7 +57,7 @@ a {
 }
 
 .nav {
-  background: #014887;
+  background: var(--color-background-dark);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -72,7 +72,7 @@ a {
       -ms-flex-align: center;
           align-items: center;
   padding: 1rem 2rem;
-  height: 2.5rem;
+  height: 3rem;
 }
 
 .nav button,
@@ -384,13 +384,21 @@ a {
   border-bottom: 1px solid black;
 }
 
+.module__Table .prof-image img {
+  height: 2rem;
+}
+
 .module__Table .table-actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-width: 88px;
+  width: 50%;
+  max-width: 200px;
+  margin: 0 auto;
 }
 
 .module__Table .table-actions form,

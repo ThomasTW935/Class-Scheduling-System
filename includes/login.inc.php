@@ -9,6 +9,13 @@ if (!isset($_POST)) {
 
 if (isset($_POST['submit'])) {
 
+   $path = "./classes/";
+   $extension = '.class.php';
+   $fullPath = $path . $className . $extension;
+   if (!file_exists($fullPath)) {
+      $fullPath = ".{$fullPath}";
+   }
+   echo "Path: $fullPath";
    $loginVal = new LoginVal($_POST);
    $errors = $loginVal->validateForm();
    if (!empty($errors)) {

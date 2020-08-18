@@ -115,63 +115,13 @@ $jumpTime  = $dTime['op_jump'];
       </section>
    </div>
    <div class='schedules__Table'>
-      <table>
-         <caption><?php echo $caption ?> </caption>
-         <tr>
-            <th></th>
-            <?php
-            $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+      <?php
 
-            foreach ($daysWeek as  $dayWeek) {
-               echo "<th>$dayWeek</th>";
-            }
-            ?>
-         </tr>
-         <?php
-         $values = array();
-         $schedSlots = $schedView->FetchTimeSlotValue($type, $ID);
-         for ($i = $newStartTime; $i < $newEndTime; $i += 15 * 60) {
-            $timeDisplay = (($i + $jumpTime * 60) - $newStartTime) / 60;
-            if ($timeDisplay % $jumpTime == 0) {
-               $toTime = date('g:i A', ($i + $jumpTime * 60));
 
-               $time = date('g:i A', $i);
-               $values[$time] = array();
-               $cellValue =  "<span class='table__Time'>$time - $toTime</span>";
-               array_push($values[$time], $cellValue);
-               foreach ($daysWeek as $days) {
-                  $cellValue = '';
-                  foreach ($schedSlots as $schedSlot) {
-                     if ($days == $schedSlot['sched_day']) {
-                        if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
+      $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $ID);
 
-                           $cellValues = $func->GenerateCellValue($type, $schedSlot);
-                           $cellValue = "<a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
-                                <span>{$cellValues[0]}</span>
-                                <span>{$cellValues[1]}</span> 
-                                <span>{$cellValues[2]}</span>
-                                </a>";
-                        }
-                     }
-                  }
-                  array_push($values[$time], $cellValue);
-               }
-            }
-         }
-         foreach ($values as $key => $value) {
-            echo "<tr>";
-            foreach ($value as $x) {
-               if (!empty($x)) {
-                  echo "<td class='slot'>$x</td>";
-               } else {
-                  echo "<td>$x</td>";
-               }
-            }
-            echo "</tr>";
-         }
+      ?>
 
-         ?>
-      </table>
    </div>
    <?php
    if (isset($_GET['action']) || isset($_GET['schedid'])) {
