@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2020 at 03:03 PM
+-- Generation Time: Aug 19, 2020 at 01:24 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -56,12 +56,12 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`, `dept_type`, `de
 (58, 'BSHM', 'Bachelor of Science in Hospitality Management', 'course', 1),
 (59, 'BSCM', 'Bachelor of Science in Culinary Management', 'course', 1),
 (60, 'BSCE', 'Bachelor of Science in Computer Engineering', 'course', 1),
-(61, 'BMA', 'Bachelor of Multimedia Arts', 'course', 1),
-(62, 'BACOM', 'Bachelor of Arts in Communication', 'course', 1),
-(63, 'HRS', 'Hospitality and Restaurant Services', 'course', 1),
+(61, 'BMA', 'Bachelor of Multimedia Arts', 'course', 0),
+(62, 'BACOM', 'Bachelor of Arts in Communication', 'course', 0),
+(63, 'HRS', 'Hospitality and Restaurant Services', 'course', 0),
 (64, 'HRA', 'Hotel and Restaurant Administration', 'course', 1),
 (65, 'TEM', 'Tourism and Events Management', 'course', 1),
-(66, 'IT', 'Information Technology', 'course', 1),
+(66, 'IT', 'Information Technolo', 'course', 1),
 (67, 'CS', 'Associate in Computer Technology', 'course', 0),
 (68, 'ABM', 'Accountancy, Business and Management', 'strand', 1),
 (69, 'STEM', 'Science, Technology, Engineering and Mathematics', 'strand', 1),
@@ -74,7 +74,9 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`, `dept_type`, `de
 (76, 'HRM', 'Hotel Operations', 'strand', 1),
 (77, 'TM', 'Tourism Operations', 'strand', 1),
 (78, 'HRS', 'Restaurant and Cafe Operation', 'strand', 1),
-(79, 'Culin', 'Culinary Arts', 'strand', 0);
+(79, 'Culin', 'Culinary Arts', 'strand', 0),
+(80, 'Tst', 'Testing', 'course', 1),
+(81, 'TEST', 'asdasd', 'course', 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +94,7 @@ CREATE TABLE `professors` (
   `dept_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `prof_active` tinyint(1) NOT NULL DEFAULT 1,
-  `prof_img` text NOT NULL
+  `prof_img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -100,17 +102,17 @@ CREATE TABLE `professors` (
 --
 
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `user_id`, `prof_active`, `prof_img`) VALUES
-(31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 1, ''),
-(32, 123456789, 'Thomas', 'Daryl', '', '', 43, 29, 1, ''),
-(33, 2000066525, 'Aparato', 'Christine', '', '', 43, 30, 1, ''),
-(34, 89896565, 'mendoza', 'setty', '', '', 51, 32, 1, ''),
-(35, 987654321, 'De peralta', 'hush', '', '', 51, 34, 1, ''),
-(36, 147258369, 'Legarde', 'Dianne', '', '', 43, 35, 1, ''),
-(37, 963852741, 'Abalos', 'Romabel ', 'S', '', 43, 36, 1, ''),
-(38, 852147963, 'Pacleb', 'Roland', 'P', '', 51, 37, 1, ''),
-(39, 195375465, 'Gajasan', 'Jonathan', 'F', '', 43, 38, 1, ''),
-(40, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 43, 39, 0, ''),
-(41, 14562487, 'Thomas', 'Isabel', 'P', '', 43, 40, 1, '');
+(31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 1, NULL),
+(32, 123456789, 'Thomas', 'Dary', '', '', 43, 29, 1, 'Thomas.5f3ca888ef2de.jpg'),
+(33, 2000066525, 'Aparato', 'Christine', '', '', 43, 30, 1, NULL),
+(34, 89896565, 'Mendoza', 'Setty', 'G', '', 51, 32, 1, NULL),
+(35, 987654321, 'De peralta', 'hush', '', '', 51, 34, 1, NULL),
+(36, 147258369, 'Legarde', 'Dianne', '', '', 43, 35, 1, NULL),
+(37, 963852741, 'Abalos', 'Romabel ', 'S', '', 43, 36, 1, NULL),
+(38, 852147963, 'Pacleb', 'Roland', 'P', '', 51, 37, 1, NULL),
+(39, 195375465, 'Gajasan', 'Jonathan', 'F', '', 43, 38, 1, NULL),
+(40, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 43, 39, 0, NULL),
+(41, 14562487, 'Thoma', 'Isab', 'P', '', 43, 40, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,7 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_active`) VALUES
-(3, '101', 'Computer Laboratory', 1, 1),
+(3, '101', 'Computer Laborato', 1, 1),
 (5, '201', 'Class Room', 2, 1),
 (6, '202', 'Class Room', 2, 1),
 (7, '203', 'Class Room', 2, 1),
@@ -141,7 +143,7 @@ INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_active`) VAL
 (11, '207', 'Class Room', 2, 1),
 (12, '208', 'Class Room', 2, 1),
 (13, '209', 'Class Room', 2, 1),
-(14, '210', 'Class Room', 2, 1),
+(14, '210', 'Class Room', 2, 0),
 (15, '211', 'Class Room', 2, 1),
 (16, '301', 'Class Room', 3, 1),
 (17, '302', 'Class Room', 3, 1),
@@ -162,7 +164,8 @@ INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_active`) VAL
 (32, '506', 'Computer Laboratory', 5, 1),
 (33, '507', 'Computer Laboratory', 5, 1),
 (34, '601', 'Class Room', 6, 1),
-(35, '508', 'THM Laboratory', 5, 1);
+(35, '508', 'THM Laboratory', 5, 1),
+(43, '555', 'Computer Laboratory', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -186,12 +189,12 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
-(33, '07:00:00', '10:00:00', '2020-08-02 00:42:27', 35, 8, 9, 3),
-(36, '07:00:00', '09:00:00', '2020-08-02 00:52:18', 34, 7, 9, 3),
-(37, '13:00:00', '15:00:00', '2020-08-01 20:38:31', 32, 5, 9, 4),
-(38, '08:00:00', '10:00:00', '2020-08-03 14:31:34', 33, 5, 6, 3),
-(39, '10:30:00', '12:00:00', '2020-08-03 14:32:06', 33, 8, 6, 4),
-(44, '11:00:00', '13:00:00', '2020-08-05 11:55:34', 0, 0, 9, 0);
+(33, '07:00:00', '10:00:00', '2020-08-08 18:55:37', 0, 8, 0, 3),
+(36, '07:00:00', '09:00:00', '2020-08-08 18:55:37', 34, 7, 0, 3),
+(37, '13:00:00', '15:00:00', '2020-08-08 18:55:37', 32, 0, 0, 0),
+(38, '08:00:00', '10:00:00', '2020-08-08 18:53:14', 33, 0, 6, 3),
+(39, '10:30:00', '12:00:00', '2020-08-08 18:50:28', 33, 8, 6, 0),
+(44, '11:00:00', '13:00:00', '2020-08-08 18:55:37', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -246,7 +249,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (3, '07:00:00', '15:00:00', '30', 'room', 3),
 (4, '07:00:00', '17:00:00', '15', 'room', 4),
 (5, '07:00:00', '10:00:00', '60', 'room', 5),
-(6, '07:00:00', '17:00:00', '15', 'room', 6),
+(6, '07:00:00', '15:00:00', '30', 'room', 6),
 (7, '09:00:00', '20:00:00', '15', 'room', 7),
 (8, '07:00:00', '17:00:00', '15', 'room', 8),
 (9, '07:00:00', '17:00:00', '30', 'room', 9),
@@ -481,7 +484,11 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (330, '07:00:00', '17:00:00', '15', 'prof', 38),
 (331, '07:00:00', '17:00:00', '15', 'prof', 39),
 (332, '07:00:00', '17:00:00', '15', 'prof', 40),
-(333, '07:00:00', '17:00:00', '15', 'prof', 41);
+(333, '07:00:00', '17:00:00', '15', 'prof', 41),
+(334, '07:00:00', '17:00:00', '15', 'prof', 42),
+(335, '07:00:00', '17:00:00', '15', 'prof', 43),
+(336, '07:00:00', '17:00:00', '15', 'room', 43),
+(337, '07:00:00', '17:00:00', '15', 'subj', 175);
 
 -- --------------------------------------------------------
 
@@ -505,13 +512,14 @@ CREATE TABLE `sections` (
 INSERT INTO `sections` (`sect_id`, `sect_name`, `sect_year`, `sect_sem`, `dept_id`, `sect_active`) VALUES
 (2, 'BSIT602', 3, 1, 47, 1),
 (3, 'BSIT701', 4, 1, 49, 1),
-(4, 'BSIT101', 1, 1, 49, 1),
+(4, 'BSIT103', 1, 1, 49, 0),
 (5, 'BSIT201', 1, 2, 49, 1),
 (6, 'BSIT301', 2, 1, 49, 1),
 (7, 'BSIT401', 2, 2, 49, 1),
 (8, 'BSIT801', 4, 2, 49, 1),
 (9, 'BSIT501', 3, 1, 49, 1),
-(10, 'BSIT601', 3, 2, 49, 1);
+(10, 'BSIT601', 3, 2, 49, 1),
+(11, 'BSIT111111', 3, 1, 49, 1);
 
 -- --------------------------------------------------------
 
@@ -533,10 +541,10 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`, `subj_active`) VALUES
-(5, 'MAT1003', 'Algebra', 3, 'Tertiarty', 1),
+(5, 'MAT1003', 'Algebra', 3, 'Tertiarty', 0),
 (6, 'COM1021', 'Communication Arts 1', 3, 'Tertiarty', 1),
-(7, 'IT1029', 'Computer Fundamentals (Lec)', 2, 'Tertiarty', 1),
-(8, 'IT1029L', 'Computer Fundamentals (Lab)', 1, 'Tertiarty', 1),
+(7, 'IT1029', 'Computer Fundamentals (Lec)', 2, 'Tertiarty', 0),
+(8, 'IT1029L', 'Computer Fundamentals (Lab)', 1, 'Tertiarty', 0),
 (9, 'IT1040', 'Computer Programming 1 (Lec)', 3, 'Tertiarty', 1),
 (10, 'IT1040L', 'Computer Programming 1 (Lab)', 1, 'Tertiarty', 1),
 (11, 'MAT1032', 'Math Plus', 1, 'Tertiarty', 1),
@@ -545,7 +553,7 @@ INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`,
 (14, 'SOC1030', 'Professional Ethics with Values Formation', 3, 'Tertiarty', 1),
 (15, 'COM1024', 'Communication Arts 2', 3, 'Tertiarty', 1),
 (16, 'IT1043', 'Computer Programming 2 (Lec)', 3, 'Tertiarty', 1),
-(17, 'IT1043L', 'Computer Programming 2 (Lab)', 1, 'Tertiarty', 1),
+(17, 'IT1043L', 'Computer Programming 2 (Lab)', 1, 'Tertiarty', 0),
 (18, 'IT1060', 'Data Structure (Lec)', 3, 'Tertiarty', 1),
 (19, 'IT1060L', 'Data Structure (Lab)', 1, 'Tertiarty', 1),
 (20, 'IT1069', 'Discrete Structures', 3, 'Tertiarty', 1),
@@ -617,7 +625,7 @@ INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`,
 (86, 'ELS', 'Earth and Life Science', 80, 'Tertiarty', 1),
 (87, 'FIL1', 'Komunikasyon at Pananaliksik sa Wika at kulturang Pilipino', 80, 'Tertiarty', 1),
 (88, 'PR1', 'Practical Research 1', 80, 'Tertiarty', 1),
-(89, 'PM', 'Principles of Marketing', 80, 'Tertiarty', 0),
+(89, 'PM', 'Principles of Marketing', 80, 'Tertiarty', 1),
 (90, 'FABM1', 'Fundamentals of Accountancy, Business and Management 1', 80, 'Tertiarty', 1),
 (91, 'CPAR', 'Contemporary Philippine Arts from the Regions', 80, 'Tertiarty', 1),
 (92, 'PE4', 'Physical Education and Health 4', 20, 'Tertiarty', 1),
@@ -646,7 +654,7 @@ INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`,
 (115, 'GENCHE1', 'General Chemistry1', 80, 'Tertiarty', 1),
 (116, 'PHYSICS2', 'General Physics 2', 80, 'Tertiarty', 1),
 (117, 'GENCHE2', 'General Chemistry2', 80, 'Tertiarty', 1),
-(118, 'IWRBS', 'Introduction to World Religions and Belief System', 80, 'Tertiarty', 1),
+(118, 'IWRBS', 'Introduction to World Religions and Belief System', 80, 'Tertiarty', 0),
 (119, 'DISS', 'Discipline and Ideas in the Social Sciences', 80, 'Tertiarty', 1),
 (120, 'CW', 'Creative Writing', 80, 'Tertiarty', 1),
 (121, 'CN', 'Creative Nonfiction', 80, 'Tertiarty', 1),
@@ -693,15 +701,16 @@ INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`,
 (162, 'IBMO', 'Introduction to Bar Management and Operation', 80, 'Tertiarty', 1),
 (163, 'CMF', 'Cocktail Mixology with Flairtending', 80, 'Tertiarty', 1),
 (164, 'BSM', 'Bar Services Management', 80, 'Tertiarty', 1),
-(165, 'WSM', 'Wine Service Management', 80, 'Tertiarty', 1),
-(166, 'ICO', 'Introduction to Culinary Operations', 80, 'Tertiarty', 1),
-(167, 'BFP101', 'Basic Food Production 101', 80, 'Tertiarty', 1),
-(168, 'BFP102', 'Basic Food Production 102', 80, 'Tertiarty', 1),
-(169, 'BFP103', 'Basic Food Production 103', 80, 'Tertiarty', 1),
-(170, 'ICC', 'Introduction to Commercial Cookery', 80, 'Tertiarty', 1),
-(171, 'LIC', 'Local and Internation Cuisines', 80, 'Tertiarty', 1),
-(172, 'CMCS', 'Catering Management and Control System', 80, 'Tertiarty', 1),
-(173, 'IBPP', 'Introduction to Bread and Pastry Production', 80, 'Tertiarty', 1);
+(165, 'WSM', 'Wine Service Management', 80, 'Tertiarty', 0),
+(166, 'ICO', 'Introduction to Culinary Operations', 80, 'Tertiarty', 0),
+(167, 'BFP101', 'Basic Food Production 101', 80, 'Tertiarty', 0),
+(168, 'BFP102', 'Basic Food Production 102', 80, 'Tertiarty', 0),
+(169, 'BFP103', 'Basic Food Production 103', 80, 'Tertiarty', 0),
+(170, 'ICC', 'Introduction to Commercial Cookery', 80, 'Tertiarty', 0),
+(171, 'LIC', 'Loca and Internation Cuisines', 80, 'Tertiarty', 0),
+(172, 'CMCS', 'Catering Management and Control System', 80, 'Tertiarty', 0),
+(173, 'IBPP', 'Introduction to Bread and Pastry Production', 80, 'Tertiarty', 0),
+(175, 'IDK', 'I Don\'t Know', 3, 'Tertiarty', 0);
 
 -- --------------------------------------------------------
 
@@ -723,20 +732,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `is_active`) VALUES
-(1, 'Admin', 'hushsua@gmal.com', '$2y$10$CjwSWLK4HPwfwtkSvHbHNuU.Ol0BMJ1umZR9YQNU/lqYypjPLuxwK', 4, 1),
-(28, '3232532', '', '$2y$10$/wGSM4yn76j1Tqtpp2nP8u0YnswezJE/8MIgP86dJgKAJR87oC9AO', 1, 1),
+(1, 'Admin', 'hushsua@gmal.com', '$2y$10$BMruBXjOt.6n8tAyGrCkzuzMq2pC6aEXYdb7E/4mV1F9MsbQDU0CS', 4, 1),
+(28, '3232532', '', '$2y$10$/wGSM4yn76j1Tqtpp2nP8u0YnswezJE/8MIgP86dJgKAJR87oC9AO', 1, 0),
 (29, '88888888', '', '$2y$10$HNFr/Uwf0NYTo.hsgH3ae.K5Hbjo8J4t4E.SbXttEew3bWjCGXMxW', 1, 1),
-(30, '0200006652', 'chris_tine09@yahoo.com', '$2y$10$WpVKlFearFw1GuG/JVZOC.sH24NUekp0OOwE6qzfJeSRpLeLRroPi', 1, 1),
-(31, 'darylpthomasss', '', '$2y$10$7m9yog4MzdGF6/MnFkTfB.1gDO8f2PkkZ4QVf2j7wiDHcfcmWrIue', 3, 1),
+(30, '0200006652', 'chris_tine09@yahoo.com', '$2y$10$WpVKlFearFw1GuG/JVZOC.sH24NUekp0OOwE6qzfJeSRpLeLRroPi', 1, 0),
+(31, 'darylpthomasss', '', '$2y$10$7m9yog4MzdGF6/MnFkTfB.1gDO8f2PkkZ4QVf2j7wiDHcfcmWrIue', 3, 0),
 (32, 'hellow', 'hahahahha@gmail.com', '$2y$10$RfObYnIiPfEGoZbQa5HpgejqNtlmKdOTXgYLdBEHuTDIXtY8eMNbS', 1, 1),
-(33, 'hakdtog', 'hahsdhja@gmail.com', '$2y$10$bYQ9LxqUVB8tbkrY5W5NtOgEJwjMrlqi73yzWBgV3iaInNfmAU6ta', 1, 0),
+(33, 'hakdtog', 'hahsdhja@gmail.com', '$2y$10$bYQ9LxqUVB8tbkrY5W5NtOgEJwjMrlqi73yzWBgV3iaInNfmAU6ta', 1, 1),
 (34, '987654321', '', '$2y$10$5MipXSVUGbftbWEwk1wYkeTPGG5B7KCV0TzxBXR79T1hjbnmGAt7i', 1, 1),
 (35, '147258369', '', '$2y$10$nZUlO7QaxjYsTyjSzm5EcudUa9/3I8nhJUDzrPN5DS6/SSzsEFLuO', 1, 1),
 (36, '963852741', '', '$2y$10$jjFqbgPloHcZcVLHsoFDFOcmOjOL.SlXLJzQ4xeT83ora8yXXF/XO', 1, 1),
 (37, '852147963', '', '$2y$10$1CMi8YGI1QtcEhP01JT/q.iyVdmUFqU/zubjB8AyeF.fy.YPSv/w.', 1, 1),
-(38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 1, 1),
-(39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 0),
-(40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$R7HKYxFVZdQRGtxYFwDkVee87.MRFFnqxrPRvE1N4TLwL5rbVOZEe', 1, 1);
+(38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 1, 0),
+(39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 1),
+(40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$l/UWyaBSzin9GsNvOF7nSuSJmy33H03Br0TpedUxEMkKz1SNULhOa', 1, 1),
+(41, '      ', '   ', '$2y$10$eJ/8PRYHNMtTfrPbVlVYNuerOYEd.uoqbHVPgKtDQVxshc4KQ.jmq', 1, 0),
+(42, 'b    ', '   ', '$2y$10$zoovyQ3qJpb63/vgOAjH1upII/JgfTwYEvIKiNBxQdeFDuASxZjbS', 1, 0),
+(43, 'Test', 'Test@example.com', '$2y$10$.6FbBvxSVp6Lg6zD2MhDs.oOy9d3XxZ/fRvP5CrR6Wpsacf6dKJfS', 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -804,19 +816,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `rm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `rm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `schedules`
@@ -834,25 +846,25 @@ ALTER TABLE `schedules_day`
 -- AUTO_INCREMENT for table `schedules_operation`
 --
 ALTER TABLE `schedules_operation`
-  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
+  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
 
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `sect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
