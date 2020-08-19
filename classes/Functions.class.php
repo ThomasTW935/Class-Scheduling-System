@@ -126,6 +126,13 @@ class Functions
     echo "<tbody>";
     foreach ($results as $result) {
       echo "<tr class=''>";
+      if ($type == 'prof') {
+        // $profView  = new ProfessorsView();
+        // $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
+        // $fullName = $prof->GenerateFullName($result['last_name'], $result['first_name'], $result['middle_initial'], $result['suffix']);
+        // $tableBody['full_name'] = $fullName;
+        echo "<td><img src='./drawables/images/" . $result['img'] . "'></td>";
+      }
       foreach ($tableValues["body"] as $key => $value) {
         echo "<td>{$result[$value]}</td>";
       }
@@ -152,6 +159,9 @@ class Functions
     } else if ($type == 'room') {
       $tableHead = ["Room", "Description", "Floor", "Actions"];
       $tableBody = ["rm_name", "rm_desc", "rm_floor"];
+    } else if ($type == 'prof') {
+      $tableHead = [" ", "Employee ID", "Employee Name", "Department", "Actions"];
+      $tableBody = ["emp_no", "full_name", "dept_name"];
     }
     $newArray["head"] = $tableHead;
     $newArray["body"] = $tableBody;
@@ -213,6 +223,24 @@ class Functions
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
                 <span>" . $iconName . "</span>
               </form>";
+    } else if ($type == 'prof') {
+      if ($result['prof_active'] == 1) {
+        $action .= "<form method='POST' action='./schedules.php'>
+        <input type='hidden' name='type' value='prof'>
+        <input type='hidden' name='id' value='" . $result['id'] . "'>
+        <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
+        <span>Schedule</span></form>
+        <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
+              <input name='page' type='hidden' value='$page'>
+              <input name='id' type='hidden' value='" . $result['id'] . "'>
+              <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+              <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
+              <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+              <span>" . $iconName . "</span>
+           </form>";
     }
     return $action;
   }

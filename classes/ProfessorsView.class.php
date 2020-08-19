@@ -54,55 +54,8 @@ class ProfessorsView extends Professors
 
    public function DisplayProfessors($results, $page, $totalPages, $destination)
    {
-      echo "<table class='module__Table'>";
-      echo "<thead>";
-      echo "<tr class=' '>
-               <th class=''></th>
-               <th class=''>Employee ID</th>
-               <th class=''>Employee Name</th>
-               <th class=''>Department</th>
-               <th class=''>Actions</th>
-            </tr>";
-      echo "</thead>";
-      echo "<tbody>";
-      foreach ($results as $result) {
-         $imgSrc = $result['prof_img'];
-         if (empty($result['prof_img']))
-            $imgSrc = "professor.png";
-         $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
-         $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
-         $fullName = "{$result['last_name']}, {$result['first_name']} {$middleInitial} {$result['suffix']}";
-         echo "<tr class=''>
-            <td class='prof-image'><img src='./drawables/images/" . $imgSrc . "'></td>
-            <td class=''>" . $result['emp_no'] . "</td>
-            <td class=''>" . $fullName . "</td>
-            <td class=''>" . $result['dept_name'] . "</td>
-            <td class=''>
-               <div class='table-actions'>";
-         if ($result['prof_active'] == 1) {
-            echo "<form method='POST' action='./schedules.php'>
-            <input type='hidden' name='type' value='prof'>
-            <input type='hidden' name='id' value='" . $result['id'] . "'>
-            <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
-            <span>Schedule</span></form>
-                  <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
-         }
-         echo "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
-                     <input name='page' type='hidden' value='$page'>
-                     <input name='id' type='hidden' value='" . $result['id'] . "'>
-                     <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
-                     <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
-                     <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
-                     <span>" . $iconName . "</span>
-                  </form>
-               </div>
-            </td>
-         </tr>";
-      }
-      echo "</tbody>";
-      echo "</table>";
-
       $func = new Functions();
+      $func->TableTemplate("prof", $results, $page);
       $func->BuildPagination($page, $totalPages, $destination);
    }
 }
