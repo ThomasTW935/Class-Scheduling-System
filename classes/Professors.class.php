@@ -12,7 +12,7 @@ class Professors extends Dbh
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, p.dept_id,user_id,prof_active, COALESCE(prof_img,'professor') as img , dept_name FROM professors p INNER JOIN departments d ON p.dept_id = d.dept_id WHERE prof_active = ? $withLimit";
+      $sql = "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, p.dept_id,user_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d ON p.dept_id = d.dept_id WHERE prof_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$state]);

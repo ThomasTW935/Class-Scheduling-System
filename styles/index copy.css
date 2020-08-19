@@ -25,7 +25,15 @@ body ul {
   list-style: none;
 }
 
-body button,
+body button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-decoration: none;
+  outline: none;
+}
+
 body .button {
   cursor: pointer;
   height: 35px;
@@ -40,7 +48,6 @@ body .button {
   color: var(--color-text-light);
 }
 
-body button:hover,
 body .button:hover {
   color: white;
 }
@@ -68,51 +75,49 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   height: 3rem;
 }
 
-.nav button,
-.nav a {
+.nav a,
+.nav button {
+  color: var(--color-background-dark-grey);
   background: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-.nav button::before,
-.nav a::before {
+.nav a:hover,
+.nav button:hover {
+  color: white;
+}
+
+.nav .nav__Home {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.nav .nav__Home span {
+  position: relative;
+  left: 1.6rem;
+}
+
+.nav .nav__Home span::before {
   content: "";
-  width: 24px;
-  height: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
   -webkit-mask: url("../drawables/icons/home.svg");
           mask: url("../drawables/icons/home.svg");
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   background: var(--color-text-light);
-  margin-right: 0.2rem;
+  position: absolute;
+  left: -1.5rem;
 }
 
-.nav button:hover::before,
-.nav a:hover::before {
+.nav .nav__Home span:hover::before {
   background: white;
-}
-
-.nav .back {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.nav .back img {
-  margin-right: 0.5rem;
 }
 
 .nav__Profile {
@@ -120,12 +125,9 @@ a {
   display: grid;
   place-content: center;
   position: relative;
-  color: white;
   padding: 0.25rem 1rem;
-}
-
-.nav__Profile a {
-  color: var(--color-background-dark-grey);
+  border-left: 1px solid #bebebe;
+  height: inherit;
 }
 
 .nav__Profile .nav__User {
@@ -150,7 +152,6 @@ a {
   top: 100%;
   height: auto;
   width: 100%;
-  padding: 1rem 0.5rem 0.25rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -158,19 +159,27 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 0.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: var(--color-background-dark);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 
-.nav__Button {
-  height: 100%;
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
+.nav__Profile ul li {
+  padding: 0.5rem 0.25rem;
 }
 
-.nav__Button button {
-  width: 100%;
+.nav__Profile ul li:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.nav__Profile:hover ul {
+  opacity: 1;
+  visibility: visible;
 }
 
 .card__Design {
@@ -374,8 +383,12 @@ a {
   font-size: 0.8rem;
 }
 
-.module__Table tr:hover {
-  background-color: var(--color-background-dark-grey);
+.module__Table th {
+  background-color: #ebebeb;
+}
+
+.module__Table tr:nth-child(even) {
+  background-color: whitesmoke;
 }
 
 .module__Table td,
@@ -384,18 +397,8 @@ a {
   padding: 0.5em 1em;
 }
 
-.module__Table th {
-  background-color: var(--color-background-dark);
-  color: white;
-}
-
 .module__Table td {
   text-align: center;
-}
-
-.module__Table td:hover {
-  background-color: var(--color-background-dark);
-  color: white;
 }
 
 .module__Table caption {

@@ -9,32 +9,6 @@ function submitForm(e) {
    return confirm(message + ' this record?')
 }
 
-
-// let radioCon = document.querySelectorAll('.form__Radio')
-// if (radioCon != null) {
-//    for (let i = 0; i < radioCon.length; i++) {
-//       radioCon[i].addEventListener('change', () => {
-//          let val = radioCon[i].value
-//          console.log(val)
-//          let query = name + '=' + val
-//          displayDepartments(query)
-//       })
-//    }
-// }
-
-// function displayDepartments(query) {
-//    let xhr = new XMLHttpRequest()
-//    xhr.onreadystatechange = function () {
-//       if (this.readyState === 4 && this.status) {
-//          let response = this.responseText
-//          let con = document.querySelector('.module__Form')
-//          con.innerHTML = response
-//       }
-//    }
-//    xhr.open("GET", 'includes/ajax.inc.php?' + query, true)
-//    xhr.send()
-// }
-
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
@@ -76,5 +50,26 @@ if (empID != null) {
       userName.value = empID.value
    })
 }
+
+let ConfirmPassword = () => {
+   let newPass = document.querySelector('#new');
+   let confirm = document.querySelector('#confirm');
+   let errorConfirm = document.querySelector('#errorConfirm');
+
+   confirm.addEventListener('keyup', () => {
+      let value = newPass.value
+      let confirmValue = confirm.value
+      let errorMessage = 'Incorrect'
+      if (value != confirmValue) {
+         errorConfirm.innerHTML = errorMessage
+      } else {
+         errorConfirm.innerHTML = ''
+      }
+      console.log(`Value: ${value}`)
+      console.log(`Confirm: ${confirmValue}`)
+   })
+}
+
+ConfirmPassword()
 
 

@@ -202,7 +202,7 @@ if ($schedIDExist) {
   }
 
   echo "<div class='btn__Container'>";
-  echo "<button class='form__Button' type='submit' name='$button'>$button</button>";
+  echo "<button class='form__Button button' type='submit'  name='$button'>$button</button>";
   echo $deleteButton ?? "";
   echo "</div>";
 

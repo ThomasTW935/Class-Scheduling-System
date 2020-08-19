@@ -45,6 +45,6 @@ if (isset($_GET['id'])) {
          <div class="form__Error"><?php echo $errorDesc ?></div>
       </div>
    </div>
-   <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
+   <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href="?dept=<?php echo "$department&page=$page" ?>" class='module__formBackground'></a>

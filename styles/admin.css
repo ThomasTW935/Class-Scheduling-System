@@ -25,7 +25,15 @@ body ul {
   list-style: none;
 }
 
-body button,
+body button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-decoration: none;
+  outline: none;
+}
+
 body .button {
   cursor: pointer;
   height: 35px;
@@ -40,7 +48,6 @@ body .button {
   color: var(--color-text-light);
 }
 
-body button:hover,
 body .button:hover {
   color: white;
 }
@@ -57,7 +64,8 @@ a {
 }
 
 .nav {
-  background: var(--color-background-dark);
+  background: -webkit-gradient(linear, left top, right top, from(var(--color-background-light)), to(var(--color-background-dark)));
+  background: linear-gradient(to right, var(--color-background-light) 0%, var(--color-background-dark) 100%);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -68,51 +76,49 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   height: 3rem;
 }
 
-.nav button,
-.nav a {
+.nav a,
+.nav button {
+  color: var(--color-background-dark-grey);
   background: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-.nav button::before,
-.nav a::before {
+.nav a:hover,
+.nav button:hover {
+  color: white;
+}
+
+.nav .nav__Home {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.nav .nav__Home span {
+  position: relative;
+  left: 1.6rem;
+}
+
+.nav .nav__Home span::before {
   content: "";
-  width: 24px;
-  height: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
   -webkit-mask: url("../drawables/icons/home.svg");
           mask: url("../drawables/icons/home.svg");
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   background: var(--color-text-light);
-  margin-right: 0.2rem;
+  position: absolute;
+  left: -1.5rem;
 }
 
-.nav button:hover::before,
-.nav a:hover::before {
+.nav .nav__Home span:hover::before {
   background: white;
-}
-
-.nav .back {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.nav .back img {
-  margin-right: 0.5rem;
 }
 
 .nav__Profile {
@@ -120,12 +126,9 @@ a {
   display: grid;
   place-content: center;
   position: relative;
-  color: white;
   padding: 0.25rem 1rem;
-}
-
-.nav__Profile a {
-  color: var(--color-background-dark-grey);
+  border-left: 1px solid #bebebe;
+  height: inherit;
 }
 
 .nav__Profile .nav__User {
@@ -150,7 +153,6 @@ a {
   top: 100%;
   height: auto;
   width: 100%;
-  padding: 1rem 0.5rem 0.25rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -158,19 +160,27 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 0.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background: var(--color-background-dark);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 
-.nav__Button {
-  height: 100%;
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
+.nav__Profile ul li {
+  padding: 0.5rem 0.25rem;
 }
 
-.nav__Button button {
-  width: 100%;
+.nav__Profile ul li:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.nav__Profile:hover ul {
+  opacity: 1;
+  visibility: visible;
 }
 
 .card__Design {
@@ -374,8 +384,12 @@ a {
   font-size: 0.8rem;
 }
 
-.module__Table tr:hover {
-  background-color: var(--color-background-dark-grey);
+.module__Table th {
+  background-color: #ebebeb;
+}
+
+.module__Table tr:nth-child(even) {
+  background-color: whitesmoke;
 }
 
 .module__Table td,
@@ -384,18 +398,8 @@ a {
   padding: 0.5em 1em;
 }
 
-.module__Table th {
-  background-color: var(--color-background-dark);
-  color: white;
-}
-
 .module__Table td {
   text-align: center;
-}
-
-.module__Table td:hover {
-  background-color: var(--color-background-dark);
-  color: white;
 }
 
 .module__Table caption {
@@ -528,7 +532,7 @@ a {
   font-size: 1rem;
 }
 
-.module__Form .form__Close {
+.module .form__Close {
   height: 2rem;
   padding: 0 1rem;
   border-top-left-radius: 0.8rem;
@@ -546,21 +550,21 @@ a {
           align-items: center;
 }
 
-.module__Form .form__Close a {
+.module .form__Close a {
   color: var(--color-text-light);
 }
 
-.module__Form .form__Close a:hover {
+.module .form__Close a:hover {
   color: white;
 }
 
-.module__Form .form__Title {
+.module .form__Title {
   margin: 1em;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-.module__Form .form__RadioContainer {
+.module .form__RadioContainer {
   padding: 1em;
   width: 100%;
   display: -webkit-box;
@@ -571,7 +575,7 @@ a {
           justify-content: space-evenly;
 }
 
-.module__Form .form__Container {
+.module .form__Container {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 2fr;
@@ -581,41 +585,41 @@ a {
   padding: 0 1.5em;
 }
 
-.module__Form .form__Container * {
+.module .form__Container * {
   font-size: 1rem;
 }
 
-.module__Form .form__Container .form__Input *:not(div) {
+.module .form__Input *:not(div) {
   padding: 0.5em 0.75em;
   border: 1px solid #d8d8e8;
   border-radius: 4px;
   width: 100%;
 }
 
-.module__Form .form__Container .form__Input *:not(div):focus, .module__Form .form__Container .form__Input *:not(div):hover {
+.module .form__Input *:not(div):focus, .module .form__Input *:not(div):hover {
   border-color: var(--color-background-light);
 }
 
-.module__Form .form__Container .form__Input input[type="number"] {
+.module .form__Input input[type="number"] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
 }
 
-.module__Form .form__Container .form__Input .name {
+.module .form__Input .name {
   width: 140px;
 }
 
-.module__Form .form__Container .form__Input .name--short {
+.module .form__Input .name--short {
   width: 80px;
 }
 
-.module__Form .form__Container .form__Input .form__Error {
+.module .form__Input .form__Error {
   color: red;
   font-size: 0.8rem;
 }
 
-.module__Form .form__Button {
+.module .form__Button {
   width: 100px;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -627,7 +631,7 @@ a {
   font-size: 1rem;
 }
 
-.module__Form .form__Button:hover {
+.module .form__Button:hover {
   color: var(--color-text-light);
 }
 
@@ -972,5 +976,97 @@ a {
 
 .dashboard__Card h3 {
   font-family: "Times New Roman", Times, serif;
+}
+
+.profile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[2];
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.profile div {
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
+.profile div:first-child {
+  border-right: 1px solid #b6b6b6;
+}
+
+.profile div form {
+  margin: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile div form label {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.profile div form input {
+  width: 15rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #d8d8e8;
+  border-radius: 4px;
+}
+
+.profile div form input:focus, .profile div form input:hover {
+  border-color: var(--color-background-light);
+}
+
+.profile div form span {
+  margin-bottom: 0.7rem;
+  color: red;
+  font-size: 0.8rem;
+}
+
+.profile div form button {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  width: 15rem;
+  color: white;
+  border-radius: 5px;
+  background: -webkit-gradient(linear, left top, right top, from(var(--color-background-light)), color-stop(50%, var(--color-text-light)), to(var(--color-background-dark)));
+  background: linear-gradient(to right, var(--color-background-light) 0%, var(--color-text-light) 50%, var(--color-background-dark) 100%);
+  background-size: 600%;
+}
+
+.profile div form button:hover {
+  -webkit-animation-name: gradient;
+          animation-name: gradient;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100%;
+  }
 }
 /*# sourceMappingURL=admin.css.map */

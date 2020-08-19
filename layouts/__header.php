@@ -33,7 +33,7 @@ $func = new Functions();
       <?php
       $url = $_SERVER['REQUEST_URI'];
       if (!strpos($url, "dashboard") && !strpos($url, "scheduleview")) {
-         echo "<a href='dashboard.php' class='button back'>HOME</span></a>";
+         echo "<a href='dashboard.php' class='nav__Home'><span>HOME</span></a>";
       } else {
          echo '<div></div>';
       }
@@ -47,7 +47,7 @@ $func = new Functions();
             </li>
             <li>
                <form class="nav__Button" action="./includes/logout.inc.php" method="POST">
-                  <button type="submit" name="logout-Button" class="button">LOG OUT</button>
+                  <button type="submit" name="logout-Button">Log out</button>
                </form>
             </li>
          </ul>

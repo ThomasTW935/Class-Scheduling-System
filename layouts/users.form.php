@@ -59,6 +59,6 @@ if (isset($_GET['id'])) {
          <input class='form__Input' type='number' value='<?php echo $roleLevel ?>' name='roleLevel'>
       </div>
    </div>
-   <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
+   <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href="users.php?page=<?php echo $page ?>" class='module__formBackground'></a>

@@ -131,7 +131,7 @@ class Functions
         // $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
         // $fullName = $prof->GenerateFullName($result['last_name'], $result['first_name'], $result['middle_initial'], $result['suffix']);
         // $tableBody['full_name'] = $fullName;
-        echo "<td><img src='./drawables/images/" . $result['img'] . "'></td>";
+        echo "<td class='prof-image'><img src='./drawables/images/" . $result['img'] . "'></td>";
       }
       foreach ($tableValues["body"] as $key => $value) {
         echo "<td>{$result[$value]}</td>";

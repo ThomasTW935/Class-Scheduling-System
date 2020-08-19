@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
          </select>
       </div>
    </div>
-   <button class='form__Button' type='submit' name='<?php echo $button ?>'> <?php echo $button ?> </button>
+   <button class='form__Button button' type='submit' name='<?php echo $button ?>'> <?php echo $button ?> </button>
 
 </form>
 <a href=" sections.php?page=<?php echo $page ?>" class='module__formBackground'></a>

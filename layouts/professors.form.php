@@ -102,6 +102,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
          <input id='image' type='file' value='<?php echo $prof['username'] ?? '' ?>' name='image' accept="image/*">
       </div>
    </div>
-   <button class='form__Button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
+   <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
 </form>
 <a href="professors.php?page=<?php echo $page ?>" class='module__formBackground'></a>
