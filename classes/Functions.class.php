@@ -162,6 +162,9 @@ class Functions
     } else if ($type == 'prof') {
       $tableHead = [" ", "Employee ID", "Employee Name", "Department", "Actions"];
       $tableBody = ["emp_no", "full_name", "dept_name"];
+    } else if ($type == 'user') {
+      $tableHead = ["Username", "Email", "Role Level", "Actions"];
+      $tableBody = ["username", "email", "role_level"];
     }
     $newArray["head"] = $tableHead;
     $newArray["body"] = $tableBody;
@@ -171,6 +174,7 @@ class Functions
   public function BuildTableActions($type, $result, $page)
   {
     $action = '';
+
     if ($type == "subj") {
       if ($result['subj_active'] == 1) {
         $action .= "<form method='POST' action='./schedules.php'>
@@ -181,11 +185,12 @@ class Functions
             <a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
+      $tableRestore = ($result['subj_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST' $tableRestore>
       <input type='hidden' name='page' value='$page'>
       <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
       <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
-      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
       <span>" . $iconName . "</span>
       </form>";
     } else if ($type == 'sect') {
@@ -199,11 +204,12 @@ class Functions
         <a href=?page=$page&id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST'>
+      $tableRestore = ($result['sect_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
       <input name='page' type='hidden' value='$page'>
       <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
       <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
-            <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+            <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
             <span>" . $iconName . "</span>
         </form>";
     } else if ($type == 'room') {
@@ -216,11 +222,12 @@ class Functions
         <a href=?page=$page&id=" . $result['rm_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'>
+      $tableRestore = ($result['rm_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'  $tableRestore>
                 <input name='page' type='hidden' value='$page'>
                 <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
                 <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
-                <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+                <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                 <span>" . $iconName . "</span>
               </form>";
     } else if ($type == 'prof') {
@@ -233,14 +240,28 @@ class Functions
         <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'>
+      $tableRestore = ($result['prof_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
               <input name='page' type='hidden' value='$page'>
               <input name='id' type='hidden' value='" . $result['id'] . "'>
               <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
               <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
-              <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+              <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
               <span>" . $iconName . "</span>
            </form>";
+    } else if ($type == 'user') {
+      if ($result['is_active'] == 1) {
+        $action .= "<a href=?page=$page&id=" . $result['user_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['is_active'] == 1) ? 'delete' : 'restore';
+      $tableRestore = ($result['is_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/users.inc.php' method='POST' $tableRestore>
+                 <input name='page' type='hidden' value='$page'>
+                 <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+                 <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
+                 <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+                 <span>" . $iconName . "</span>
+              </form>";
     }
     return $action;
   }

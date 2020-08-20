@@ -43,6 +43,21 @@ class Users extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
+   protected function getUsersBySearch($search, $state, $page, $limit)
+   {
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $search = "%{$search}%";
+      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ? $withLimit";
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$search, $search, $search, $state]);
+         $results = $stmt->fetchAll();
+         return $results;
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
+   }
    protected function getUserByID($id)
    {
       $sql = 'SELECT * FROM users WHERE user_id = ?';
@@ -58,20 +73,5 @@ class Users extends Dbh
       $stmt->execute([$username]);
       $results = $stmt->fetchAll();
       return $results;
-   }
-   protected function getUsersBySearch($search, $state, $page, $limit)
-   {
-      $jump = $limit * ($page - 1);
-      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $search = "%{$search}%";
-      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ? $withLimit";
-      try {
-         $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$search, $search, $search, $state]);
-         $results = $stmt->fetchAll();
-         return $results;
-      } catch (PDOException $e) {
-         trigger_error('Error: ' . $e);
-      }
    }
 }

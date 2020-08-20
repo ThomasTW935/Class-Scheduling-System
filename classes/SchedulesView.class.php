@@ -129,7 +129,8 @@ class SchedulesView extends Schedules
 
         $time = date('g:i A', $i);
         $values[$time] = array();
-        $cellValue =  "<th scope='row'>$time - $toTime</th>";
+
+        $cellValue =  "<th class='table__Time' scope='row'>$time - $toTime</th>";
         array_push($values[$time], $cellValue);
         foreach ($daysWeek as $days) {
           $cellValue = '<td>---</td>';

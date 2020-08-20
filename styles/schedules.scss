@@ -115,10 +115,12 @@
       background: var(--color-background-light);
       color: white;
     }
-    th,
-    .table__Time {
+    th {
       background: var(--color-background-dark);
       color: white;
+    }
+    .table__Time {
+      font-size: 0.8rem;
     }
     .slot {
       position: relative;
@@ -144,17 +146,7 @@
         }
       }
     }
-    .table__Time {
-      position: absolute;
-      left: 0;
-      top: 0;
-      display: grid;
-      width: 100%;
-      height: 100%;
-      place-content: center;
-    }
   }
-
   &__Subjects {
     font-size: 0.9rem;
     padding: 1em;

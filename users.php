@@ -33,7 +33,7 @@ $searchValue = $_GET['q'] ?? '';
          ?>
       </div>
    </div>
-   <div class='professors__Container module__Container'>
+   <div class='module__Content'>
       <?php
 
       if (empty($searchValue)) {

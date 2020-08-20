@@ -22,6 +22,19 @@ class Professors extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
+   protected function getProfessorsBySearch($search, $state, $page, $limit)
+   {
+      $jump = $limit * ($page - 1);
+      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
+      $search = "%{$search}%";
+      $sql =   "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, p.dept_id,user_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d 
+               ON p.dept_id = d.dept_id 
+               WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ?) AND prof_active = ? $withLimit";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$search, $search, $search, $search, $search, $state]);
+      $results = $stmt->fetchAll();
+      return $results;
+   }
    protected function getProfessor($empID)
    {
       $sql = "select * from professors where emp_no = ?";
@@ -64,19 +77,7 @@ class Professors extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getProfessorsBySearch($search, $state, $page, $limit)
-   {
-      $jump = $limit * ($page - 1);
-      $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $search = "%{$search}%";
-      $sql =   "SELECT * FROM professors INNER JOIN departments 
-               ON professors.dept_id = departments.dept_id 
-               WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR dept_name LIKE ?) AND prof_active = ? $withLimit";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$search, $search, $search, $search, $search, $state]);
-      $results = $stmt->fetchAll();
-      return $results;
-   }
+
    protected function updateProfessorState($state, $id)
    {
       $sql = "update professors set prof_active = ? where id = ?";

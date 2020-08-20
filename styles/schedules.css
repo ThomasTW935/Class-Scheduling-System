@@ -167,10 +167,13 @@
   color: white;
 }
 
-.schedules__Table th,
-.schedules__Table .table__Time {
+.schedules__Table th {
   background: var(--color-background-dark);
   color: white;
+}
+
+.schedules__Table .table__Time {
+  font-size: 0.8rem;
 }
 
 .schedules__Table .slot {
@@ -208,17 +211,6 @@
 
 .schedules__Table .slot a span {
   text-transform: capitalize;
-}
-
-.schedules__Table .table__Time {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: -ms-grid;
-  display: grid;
-  width: 100%;
-  height: 100%;
-  place-content: center;
 }
 
 .schedules__Subjects {

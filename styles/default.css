@@ -417,7 +417,7 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  min-width: 88px;
+  min-width: 5rem;
   width: 50%;
   max-width: 200px;
   margin: 0 auto;
@@ -469,6 +469,10 @@ a {
   margin-left: -5px;
   border: 5px solid;
   border-color: #555 transparent transparent transparent;
+}
+
+.module__Table .table__Restore {
+  width: 100%;
 }
 
 .module__Pages {
@@ -532,9 +536,8 @@ a {
   font-size: 1rem;
 }
 
-.module .form__Close {
+.module__Form .form__Close {
   height: 2rem;
-  padding: 0 1rem;
   border-top-left-radius: 0.8rem;
   border-top-right-radius: 0.8rem;
   background: var(--color-background-dark);
@@ -544,27 +547,60 @@ a {
   display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+          justify-content: flex-end;
 }
 
-.module .form__Close a {
+.module__Form .form__Close a {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
   color: var(--color-text-light);
+  height: inherit;
+  width: 2rem;
+  padding: 0 0.5rem;
+  border-top-right-radius: inherit;
+  position: relative;
 }
 
-.module .form__Close a:hover {
+.module__Form .form__Close a:hover {
+  background: red;
+}
+
+.module__Form .form__Close a:active {
   color: white;
 }
 
-.module .form__Title {
+.module__Form .form__Close a:active::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.module__Form .form__Close a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-top-right-radius: inherit;
+  background: rgba(149, 0, 0, 0.664);
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+}
+
+.module__Form .form__Title {
   margin: 1em;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-.module .form__RadioContainer {
+.module__Form .form__RadioContainer {
   padding: 1em;
   width: 100%;
   display: -webkit-box;
@@ -575,7 +611,7 @@ a {
           justify-content: space-evenly;
 }
 
-.module .form__Container {
+.module__Form .form__Container {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 2fr;
@@ -585,36 +621,36 @@ a {
   padding: 0 1.5em;
 }
 
-.module .form__Container * {
+.module__Form .form__Container * {
   font-size: 1rem;
 }
 
-.module .form__Input *:not(div) {
+.module__Form .form__Container .form__Input *:not(div) {
   padding: 0.5em 0.75em;
   border: 1px solid #d8d8e8;
   border-radius: 4px;
   width: 100%;
 }
 
-.module .form__Input *:not(div):focus, .module .form__Input *:not(div):hover {
+.module__Form .form__Container .form__Input *:not(div):focus, .module__Form .form__Container .form__Input *:not(div):hover {
   border-color: var(--color-background-light);
 }
 
-.module .form__Input input[type="number"] {
+.module__Form .form__Container .form__Input input[type="number"] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
 }
 
-.module .form__Input .name {
+.module__Form .form__Container .form__Input .name {
   width: 140px;
 }
 
-.module .form__Input .name--short {
+.module__Form .form__Container .form__Input .name--short {
   width: 80px;
 }
 
-.module .form__Input .form__Error {
+.module__Form .form__Container .form__Input .form__Error {
   color: red;
   font-size: 0.8rem;
 }
