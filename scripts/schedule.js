@@ -1,56 +1,47 @@
 // Selecting Time of Container
-
 let timeStart = document.querySelector('#startTime')
-let timeEnd = document.querySelector('#endTime')
-let timeJump = document.querySelector('#jumpTime')
+let ChangeFormatTime = () => {
+  let timeEnd = document.querySelector('#endTime')
+  let timeJump = document.querySelector('#jumpTime')
 
-timeStart.addEventListener('change', () => {
-  let startDate = new Date('January 1 2000 ' + timeStart.value)
-  let startDate_Hour = startDate.getHours()
-  let endValue = timeEnd.value
-  for (let k = timeEnd.options.length - 1; k >= 0; k--) {
-    timeEnd.remove(k)
-  }
-
-  for (let i = startDate_Hour + 1; i <= 22; i++) {
-    let option = document.createElement('option')
-    let timeValue = i
-    let timePeriod = 'AM'
-    if (timeValue > 12) {
-      timeValue = i - 12
-      timePeriod = 'PM'
+  timeStart.addEventListener('change', () => {
+    let startDate = new Date('January 1 2000 ' + timeStart.value)
+    let startDate_Hour = startDate.getHours()
+    let endValue = timeEnd.value
+    for (let k = timeEnd.options.length - 1; k >= 0; k--) {
+      timeEnd.remove(k)
     }
-    if (timeValue == 12) {
-      timePeriod = 'PM'
+
+    for (let i = startDate_Hour + 1; i <= 22; i++) {
+      let option = document.createElement('option')
+      let timeValue = i
+      let timePeriod = 'AM'
+      if (timeValue > 12) {
+        timeValue = i - 12
+        timePeriod = 'PM'
+      }
+      if (timeValue == 12) {
+        timePeriod = 'PM'
+      }
+      let m = ":00 "
+      option.value = i + m
+      option.innerHTML = timeValue + m + timePeriod
+      timeEnd.add(option)
     }
-    let m = ":00 "
-    option.value = i + m
-    option.innerHTML = timeValue + m + timePeriod
-    timeEnd.add(option)
-  }
 
-  let endDate = new Date('January 1 2000 ' + endValue)
-  let endDate_Hour = endDate.getHours()
-  if (startDate_Hour >= endDate_Hour) {
-    timeEnd.value = timeEnd.options[0].value
-  } else {
-    timeEnd.value = endValue
-  }
-})
+    let endDate = new Date('January 1 2000 ' + endValue)
+    let endDate_Hour = endDate.getHours()
+    if (startDate_Hour >= endDate_Hour) {
+      timeEnd.value = timeEnd.options[0].value
+    } else {
+      timeEnd.value = endValue
+    }
+  })
+}
 
-//Printing Time Table 
-
-// timeEnd.addEventListener('change', () => {
-//   console.log(timeStart.value)
-//   console.log(timeEnd.value)
-//   console.log(timeJump.value)
-//   let endDate = new Date('January 1 2000 ' + timeEnd.value)
-//   endDate_Minutes = endDate.getMinutes() + 120
-//   endDate.setMinutes(endDate_Minutes)
-//   console.log(endDate_Minutes)
-//   console.log(endDate)
-// })
-
+if (timeStart != null) {
+  ChangeFormatTime()
+}
 
 // Open/Close Modal
 
@@ -78,7 +69,6 @@ let TableFixLabel = () => {
   const table = document.querySelector('.schedules__Table table');
   let rows = table.rows
   let colLength = rows[0].cells.length
-
   for (let colIndex = 1; colIndex < colLength; colIndex++) {
     let mergeNum = 1
     for (let rowIndex = 1; rowIndex < rows.length; rowIndex++) {

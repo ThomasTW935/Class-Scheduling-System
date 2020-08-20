@@ -52,20 +52,32 @@
     }
   }
   &__Details {
-    padding: 0 0.5rem;
-    background: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 0.5rem;
     .schedules__Information {
+      display: flex;
+      flex-direction: column;
       div {
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        gap: 0.3rem;
+        margin-bottom: 1rem;
+        img {
+          height: 5rem;
+          width: 5rem;
+        }
         span {
           vertical-align: super;
         }
       }
+      a {
+        align-self: flex-end;
+      }
     }
     .schedules__Settings {
       background: pink;
+      display: none;
       form {
         display: flex;
         flex-direction: column;
@@ -76,20 +88,22 @@
           display: grid;
           grid-template-columns: 1fr 2fr;
         }
-        button {
-          width: 100px;
-          box-shadow: none;
-          text-transform: uppercase;
-          background: rgba(0, 170, 255, 1);
-          color: white;
-          font-weight: bold;
-          border-radius: 10px;
-          font-size: 1rem;
-          margin-top: 1em;
-          &:hover {
-            background: rgba(0, 170, 255, 0.6);
-          }
-        }
+      }
+    }
+    button,
+    .schedules__Add {
+      box-shadow: none;
+      text-transform: capitalize;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin: 1rem 0;
+      padding: 0.5rem 0.75rem;
+      position: relative;
+      background: var(--color-background-dark);
+      &:hover {
+        background: var(--color-background-light);
       }
     }
   }
@@ -110,7 +124,8 @@
     tr {
       height: 1.5rem;
     }
-    caption {
+    .table__Caption {
+      display: none;
       height: 3rem;
       background: var(--color-background-light);
       color: white;

@@ -45,7 +45,7 @@ class Professors extends Dbh
    }
    protected function getProfessorByUserID($userID)
    {
-      $sql = "select * from professors where user_id = ? LIMIT 1";
+      $sql = "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, p.dept_id,user_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d ON p.dept_id = d.dept_id WHERE user_id = ? LIMIT 1";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$userID]);

@@ -109,7 +109,7 @@ class SchedulesView extends Schedules
   {
 
     echo "<table>";
-    echo "<caption>$caption</caption>";
+    echo "<caption class='table__Caption'>$caption</caption>";
     echo "<tr>";
     echo   "<th></th>";
     $daysWeek = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");

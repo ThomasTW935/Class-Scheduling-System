@@ -484,19 +484,18 @@ a {
         }
       }
     }
-  }
-
-  .form__Button {
-    width: 100px;
-    box-shadow: none;
-    text-transform: capitalize;
-    background: var(--color-background-dark);
-    color: #fff;
-    font-weight: bold;
-    border-radius: 10px;
-    font-size: 1rem;
-    &:hover {
-      color: var(--color-text-light);
+    .form__Button {
+      width: 100px;
+      box-shadow: none;
+      text-transform: capitalize;
+      background: var(--color-background-dark);
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 1rem;
+      &:hover {
+        color: var(--color-text-light);
+      }
     }
   }
   &__formBackground {

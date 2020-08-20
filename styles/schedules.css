@@ -75,8 +75,17 @@
 }
 
 .schedules__Details {
-  padding: 0 0.5rem;
-  background: rgba(0, 0, 0, 0.05);
+  padding: 1.5rem 0.5rem;
+}
+
+.schedules__Details .schedules__Information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .schedules__Details .schedules__Information div {
@@ -90,14 +99,28 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.schedules__Details .schedules__Information div img {
+  height: 5rem;
+  width: 5rem;
 }
 
 .schedules__Details .schedules__Information div span {
   vertical-align: super;
 }
 
+.schedules__Details .schedules__Information a {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
 .schedules__Details .schedules__Settings {
   background: pink;
+  display: none;
 }
 
 .schedules__Details .schedules__Settings form {
@@ -122,21 +145,24 @@
       grid-template-columns: 1fr 2fr;
 }
 
-.schedules__Details .schedules__Settings form button {
-  width: 100px;
+.schedules__Details button,
+.schedules__Details .schedules__Add {
   -webkit-box-shadow: none;
           box-shadow: none;
-  text-transform: uppercase;
-  background: #00aaff;
+  text-transform: capitalize;
   color: white;
   font-weight: bold;
   border-radius: 10px;
   font-size: 1rem;
-  margin-top: 1em;
+  margin: 1rem 0;
+  padding: 0.5rem 0.75rem;
+  position: relative;
+  background: var(--color-background-dark);
 }
 
-.schedules__Details .schedules__Settings form button:hover {
-  background: rgba(0, 170, 255, 0.6);
+.schedules__Details button:hover,
+.schedules__Details .schedules__Add:hover {
+  background: var(--color-background-light);
 }
 
 .schedules__Table {
@@ -161,7 +187,8 @@
   height: 1.5rem;
 }
 
-.schedules__Table caption {
+.schedules__Table .table__Caption {
+  display: none;
   height: 3rem;
   background: var(--color-background-light);
   color: white;

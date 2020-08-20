@@ -41,59 +41,8 @@ class SubjectsView extends Subjects
    }
    public function DisplaySubjects($results, $page, $totalPages, $destination)
    {
-
       $func = new Functions();
       $func->TableTemplate("subj", $results, $page);
       $func->BuildPagination($page, $totalPages, $destination);
    }
-   // public function DisplaySubjects($results, $page, $totalPages, $destination)
-   // {
-   //    $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Actions"];
-   //    $tableBody = [];
-   //    echo "<table class='module__Table'>";
-   //    echo "<thead>";
-   //    echo "<tr class=''>";
-   //    foreach ($tableHead as $th) {
-   //       echo "<th>$th</th>";
-   //    }
-   //    // <th class=''>Subject Code</th>
-   //    // <th class=''>Subject Description</th>
-   //    // <th class=''>Unit/s</th>
-   //    // <th >Actions</th>
-   //    echo  "</tr>";
-   //    echo "</thead>";
-   //    echo "<tbody>";
-   //    foreach ($results as $result) {
-   //       $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
-   //       echo "<tr class=''>
-   //          <td class=''>" . $result['subj_code'] . "</td>
-   //          <td class=''>" . $result['subj_desc'] . "</td>
-   //          <td class=''>" . $result['units'] . "</td>
-   //          <td class=''>
-   //             <div class='table-actions'>";
-   //       if ($result['subj_active'] == 1) {
-   //          echo "<form method='POST' action='./schedules.php'>
-   //          <input type='hidden' name='type' value='subj'>
-   //          <input type='hidden' name='id' value='" . $result['subj_id'] . "'>
-   //          <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
-   //          <span>Schedule</span></form>
-   //                <a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
-   //       }
-   //       echo "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST'>
-   //                   <input type='hidden' name='page' value='$page'>
-   //                   <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
-   //                   <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
-   //                   <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
-   //                   <span>" . $iconName . "</span>
-   //                </form>
-   //             </div>
-   //          </td>
-   //       </tr>";
-   //    }
-   //    echo "</tbody>";
-   //    echo "</table>";
-
-   //    $func = new Functions();
-   //    $func->BuildPagination($page, $totalPages, $destination);
-   // }
 }
