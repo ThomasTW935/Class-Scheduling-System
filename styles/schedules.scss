@@ -2,6 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 4fr;
+  padding: 0;
   .module__Form {
     width: 50vw;
     font-size: 1rem;
@@ -52,7 +53,26 @@
     }
   }
   &__Details {
-    padding: 1.5rem 0.5rem;
+    background: var(--color-text-light);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 0.5rem 1rem;
+    padding-left: 2rem;
+    .schedules__Back {
+      position: relative;
+      color: black;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      width: 100px;
+      margin-bottom: 1rem;
+      img {
+        padding-right: 0.3rem;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     .schedules__Information {
       display: flex;
       flex-direction: column;

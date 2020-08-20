@@ -40,7 +40,7 @@ $func = new Functions();
 
       ?>
       <div class='nav__Profile'>
-         <a href='#' class='nav__User'><?php echo $sessionUsername ?></a>
+         <a href='./scheduleview.php' class='nav__User'><?php echo $sessionUsername ?></a>
          <ul>
             <li>
                <a href='./profile.php'>Profile</a>

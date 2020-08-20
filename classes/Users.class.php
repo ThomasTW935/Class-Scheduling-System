@@ -23,6 +23,16 @@ class Users extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
+   protected function updatePassword($newPass, $id)
+   {
+      $sql = 'UPDATE users SET password = ? WHERE user_id = ?';
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$newPass, $id]);
+      } catch (PDOException $e) {
+         trigger_error('Error: ' . $e);
+      }
+   }
    protected function updateUserState($state, $id)
    {
       $sql = 'UPDATE users SET is_active = ? WHERE user_id = ?';

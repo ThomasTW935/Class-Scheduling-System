@@ -4,6 +4,7 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
+var_dump($errors);
 $schedID = '';
 $schedIDExist = isset($_GET['schedid']) && !empty($_GET['schedid']);
 if ($schedIDExist) {
@@ -50,6 +51,7 @@ if ($schedIDExist) {
       </select>
     </div>
   </div>
+  <div class='form__Error'></div>
   <div class="form__DayContainer">
 
     <?php
@@ -75,6 +77,8 @@ if ($schedIDExist) {
 
     ?>
   </div>
+  <div class='form__Error' id='inputError'></div>
+
   <?php
   $optionValue = '';
   $optionID = '';
@@ -202,7 +206,7 @@ if ($schedIDExist) {
   }
 
   echo "<div class='btn__Container'>";
-  echo "<button class='form__Button button' type='submit'  name='$button'>$button</button>";
+  echo "<button id='schedulesButton' class='form__Button button' type='submit'  name='$button'>$button</button>";
   echo $deleteButton ?? "";
   echo "</div>";
 

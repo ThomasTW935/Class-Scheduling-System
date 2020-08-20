@@ -35,6 +35,10 @@ class SchedulesVal
     return $this->errors;
   }
 
+  private function validateDay()
+  {
+  }
+
   private function validateTime()
   {
     $schedView = new SchedulesView();

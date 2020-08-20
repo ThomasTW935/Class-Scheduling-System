@@ -702,6 +702,7 @@ a {
   display: grid;
   -ms-grid-columns: 1fr 4fr;
       grid-template-columns: 1fr 4fr;
+  padding: 0;
 }
 
 .schedules .module__Form {
@@ -773,7 +774,35 @@ a {
 }
 
 .schedules__Details {
-  padding: 1.5rem 0.5rem;
+  background: var(--color-text-light);
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 0.5rem 1rem;
+  padding-left: 2rem;
+}
+
+.schedules__Details .schedules__Back {
+  position: relative;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+.schedules__Details .schedules__Back img {
+  padding-right: 0.3rem;
+}
+
+.schedules__Details .schedules__Back:hover {
+  text-decoration: underline;
 }
 
 .schedules__Details .schedules__Information {
@@ -1066,6 +1095,7 @@ a {
 .profile div form label {
   font-size: 0.9rem;
   margin-top: 0.5rem;
+  width: 15rem;
 }
 
 .profile div form input {
@@ -1079,10 +1109,14 @@ a {
   border-color: var(--color-background-light);
 }
 
-.profile div form span {
+.profile div form .error {
   margin-bottom: 0.7rem;
   color: red;
   font-size: 0.8rem;
+}
+
+.profile div form .success {
+  color: green;
 }
 
 .profile div form button {

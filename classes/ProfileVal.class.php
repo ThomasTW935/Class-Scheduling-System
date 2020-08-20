@@ -19,37 +19,23 @@ class ProfileVal
       }
     }
 
-    $this->validateUsername();
+    $this->validatePassword();
 
     return $this->errors;
   }
-  private function validateUsername()
-  {
-
-    $val = trim($this->data['username']);
-    if (empty($val)) {
-      $this->addError('errorUsername', 'Username is empty.');
-    } else {
-      $usersView = new UsersView();
-      $result = $usersView->FetchUserByUsername($val);
-      if (!empty($result)) {
-        $user = $result[0];
-        $this->validatePassword($user['password']);
-      } else {
-        $this->addError('errorUsername', 'Username does not exist!');
-      }
-    }
-  }
-  private function validatePassword($password)
+  private function validatePassword()
   {
 
     $val = trim($this->data['current-password']);
+    $id = $this->data['id'];
 
     if (empty($val)) {
       $this->addError('errorPassword', 'Password is empty.');
     } else {
+      $usersView = new UsersView();
+      $result = $usersView->FetchUserByID($id)[0];
       $passHash = password_hash($val, PASSWORD_DEFAULT);
-      $passCheck = password_verify($val, $password);
+      $passCheck = password_verify($val, $result['password']);
       if (!$passCheck) {
         $this->addError('errorPassword', 'Password is incorrect.');
       }

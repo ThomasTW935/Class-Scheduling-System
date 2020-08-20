@@ -82,11 +82,11 @@ let TableFixLabel = () => {
         var cellNext = rowNext.cells[colIndex]
         var cellTextNext = cellNext.innerText
       }
-      if (rowIndex == 6 && colIndex == 1) {
-        console.log(cellTextNext == cellTextCurrent)
-        console.log(rowCurrent)
-        console.log(rowNext)
-      }
+      // if (rowIndex == 6 && colIndex == 1) {
+      //   console.log(cellTextNext == cellTextCurrent)
+      //   console.log(rowCurrent)
+      //   console.log(rowNext)
+      // }
       if (cellTextNext == cellTextCurrent) {
         mergeNum++
         cellNext.style.display = 'none'
@@ -115,30 +115,82 @@ let timeFrom = document.querySelector('#timeFrom')
 let timeTo = document.querySelector('#timeTo')
 let timeToInput = document.querySelector('#timeToInput')
 
-let inputs = ['Prof', 'Subj', 'Room', 'Sect']
-let searchInputs = document.querySelectorAll('.search__Input')
-for (x of searchInputs) {
-  x.addEventListener('change', FetchDatalistValue)
-}
 
-function FetchDatalistValue(e) {
-  let input = e.target
-  let name = input.className.split(' ')[0]
-  let inputHidden = document.querySelector('.' + name + '--Hidden')
-  let inputList = document.querySelector('.' + name + '--List')
-  let options = inputList.options
-  for (let i = 0; i < options.length; i++) {
-    let option = options[i]
-    let inputValue = input.value
-    if (inputValue.trim() == '') {
-      input.value = ''
-      break
-    } else if (inputValue == option.value) {
-      inputHidden.value = option.dataset.value
-      console.log(name + ': ' + option.dataset.value)
-      break
+
+let FetchDataFromDataList = () => {
+  let inputs = ['Prof', 'Subj', 'Room', 'Sect']
+  let searchInputs = document.querySelectorAll('.search__Input')
+  for (x of searchInputs) {
+    x.addEventListener('change', FetchDatalistValue)
+  }
+
+  function FetchDatalistValue(e) {
+    let input = e.target
+    let name = input.className.split(' ')[0]
+    let inputHidden = document.querySelector('.' + name + '--Hidden')
+    let inputList = document.querySelector('.' + name + '--List')
+    let options = inputList.options
+    for (let i = 0; i < options.length; i++) {
+      let option = options[i]
+      let inputValue = input.value
+      if (inputValue.trim() == '') {
+        input.value = ''
+        break
+      } else if (inputValue == option.value) {
+        inputHidden.value = option.dataset.value
+        console.log(name + ': ' + option.dataset.value)
+        break
+      }
     }
   }
+}
+
+// Confirm that CheckBox have a value
+
+let FormValidation = () => {
+  let schedButton = document.querySelector('#schedulesButton')
+  let searchInputs = document.querySelectorAll('.search__Input')
+  let checkBoxCon = document.querySelectorAll('.form__DayContainer input')
+
+  checkBoxCon.forEach(checkBox => {
+    checkBox.addEventListener('click', () => {
+      if (checkBox.checked) {
+        console.log(checkBox)
+      }
+    })
+  })
+
+  let nullValues = 0
+  let errorMsg = ''
+  let errorCon = '';
+
+  // schedButton.addEventListener('click', (e) => {
+  //   console.log(nullValues)
+
+  //   searchInputs.forEach(input => {
+  //     let value = input.value
+  //     if (value == '' || value) {
+  //       nullValues++
+  //     }
+  //     if (nullValues == 3) {
+  //       errorMsg = 'Fill at least 1'
+  //       errorCon = document.querySelector('#inputError')
+  //       errorCon.value = errorMsg
+  //       e.preventDefault()
+  //     } else {
+  //       schedButton.removeAttribute('disabled')
+  //     }
+  //     console.log(nullValues)
+
+  //   })
+  // })
+  console.log('Null: ' + nullValues)
+}
+
+let schedulesForm = document.querySelector('.module__Form')
+if (schedulesForm != null) {
+  FormValidation()
+  FetchDataFromDataList()
 }
 
 // Actions 

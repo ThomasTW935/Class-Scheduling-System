@@ -8,9 +8,14 @@ include_once './layouts/__header.php';
   $schedView = new SchedulesView();
   $profView = new ProfessorsView();
 
+  var_dump($_SESSION);
   $userID = $sessionID;
-  $prof = $profView->FetchProfessorByUserID($userID)[0];
-  $profID = $prof['id'];
+  $prof = $profView->FetchProfessorByUserID($userID);
+  if (empty($prof)) {
+    echo "Schedule Not Applicable";
+    exit();
+  }
+  $profID = $prof[0]['id'];
 
   $caption = "{$prof['full_name']}";
   $type = 'prof';
