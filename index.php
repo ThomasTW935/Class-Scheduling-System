@@ -19,19 +19,20 @@ $username = (isset($errors['username'])) ? "{$errors['username']}" : '';
 
 <body>
    <form class="form" action="includes/login.inc.php" method="POST">
-      <label class="form__Title">Sign in</label>
-      <section>
-         <label for='usename'>Username:</label>
+      <section class="form__Title">
+         <label>Log in</label>
+      </section>
+      <fieldset class='form__Content'>
+         <label for='usename'>User ID</label>
          <input type="text" name="username" id="username" value='<?php echo $username ?>' autofocus autocomplete="username" required>
          <span class='error'><?php echo "$errorUsername"; ?></span>
-      </section>
-      <section>
-         <label for='password'>Password:</label>
+         <label for='password'>Password</label>
          <input type="password" name="current-password" id="password" autocomplete="off" required>
          <span class='error'><?php echo "$errorPassword"; ?></span>
-      </section>
-      <button class="form__Button" type="submit" name="submit">Sign in</button>
+         <button class="form__Button" type="submit" name="submit">Log in</button>
+      </fieldset>
    </form>
+   <div class='form__Background'></div>
 </body>
 
 </html>

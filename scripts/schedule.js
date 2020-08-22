@@ -147,49 +147,73 @@ let FetchDataFromDataList = () => {
 
 // Confirm that CheckBox have a value
 
-let FormValidation = () => {
-  let schedButton = document.querySelector('#schedulesButton')
+let validateForm = () => {
   let searchInputs = document.querySelectorAll('.search__Input')
   let checkBoxCon = document.querySelectorAll('.form__DayContainer input')
 
+  let errors = [
+    days = {
+      'msg': '*Choose a day',
+      'con': document.querySelector('#errorDay'),
+      'isError': false,
+      'count': checkBoxCon.length
+    },
+    inputs = {
+      'msg': '*Select at least 1',
+      'con': document.querySelector('#errorInput'),
+      'isError': false,
+      'count': searchInputs.length
+    }
+  ]
+
+
   checkBoxCon.forEach(checkBox => {
-    checkBox.addEventListener('click', () => {
-      if (checkBox.checked) {
-        console.log(checkBox)
-      }
-    })
+    if (!checkBox.checked) {
+      console.log(errors[0].count)
+      errors[0].count -= 1
+    }
   })
 
-  let nullValues = 0
-  let errorMsg = ''
-  let errorCon = '';
-
-  // schedButton.addEventListener('click', (e) => {
-  //   console.log(nullValues)
-
-  //   searchInputs.forEach(input => {
-  //     let value = input.value
-  //     if (value == '' || value) {
-  //       nullValues++
-  //     }
-  //     if (nullValues == 3) {
-  //       errorMsg = 'Fill at least 1'
-  //       errorCon = document.querySelector('#inputError')
-  //       errorCon.value = errorMsg
-  //       e.preventDefault()
-  //     } else {
-  //       schedButton.removeAttribute('disabled')
-  //     }
-  //     console.log(nullValues)
-
-  //   })
+  // searchInputs.forEach(input => {
+  //   value = input.value.trim()
+  //   if (value == '' || value == null) {
+  //     nullValues++
+  //   }
   // })
-  console.log('Null: ' + nullValues)
+
+  // if (nullValues > 0) {
+  //   errors[1].isError = true
+  // }
+
+  let submitForm = true
+
+  errors.forEach(error => {
+    if (error.count <= 0) {
+      error.isError = true
+    }
+    if (error.isError) {
+      error.con.innerText = error.msg
+      submitForm = false
+    }
+  })
+
+  if (!submitForm) {
+    console.log("Sumit Form:" + submitForm)
+    return false
+  }
+
 }
+
+// Print Button 
+
+let PrintContent = () => {
+  window.print()
+}
+
+// Conditions
 
 let schedulesForm = document.querySelector('.module__Form')
 if (schedulesForm != null) {
-  FormValidation()
   FetchDataFromDataList()
 }
 

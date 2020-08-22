@@ -6,6 +6,10 @@
   .module__Form {
     width: 50vw;
     font-size: 1rem;
+    .form__Error {
+      color: red;
+      font-size: 0.8rem;
+    }
     .form__TimeContainer {
       display: flex;
       width: 50%;
@@ -56,20 +60,29 @@
     background: var(--color-text-light);
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     padding-left: 2rem;
-    .schedules__Back {
+    .schedules__Actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .schedules__Action {
+      display: flex;
+      align-items: center;
       position: relative;
       color: black;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      width: 100px;
-      margin-bottom: 1rem;
+      height: 3rem;
+      width: auto;
+      margin: 0;
+      padding: 0;
+      background: 0;
       img {
         padding-right: 0.3rem;
       }
       &:hover {
+        background: none;
         text-decoration: underline;
       }
     }
@@ -128,6 +141,7 @@
     }
   }
   &__Table {
+    margin-top: 0.5rem;
     min-height: 323px;
     table {
       width: 100%;
@@ -153,6 +167,8 @@
     th {
       background: var(--color-background-dark);
       color: white;
+      resize: both;
+      overflow: auto;
     }
     .table__Time {
       font-size: 0.8rem;

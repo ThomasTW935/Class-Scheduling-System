@@ -12,6 +12,11 @@
   font-size: 1rem;
 }
 
+.schedules .module__Form .form__Error {
+  color: red;
+  font-size: 0.8rem;
+}
+
 .schedules .module__Form .form__TimeContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -79,31 +84,45 @@
   background: var(--color-text-light);
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   padding-left: 2rem;
 }
 
-.schedules__Details .schedules__Back {
-  position: relative;
-  color: black;
+.schedules__Details .schedules__Actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
   margin-bottom: 1rem;
 }
 
-.schedules__Details .schedules__Back img {
+.schedules__Details .schedules__Action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  color: black;
+  height: 3rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: 0;
+}
+
+.schedules__Details .schedules__Action img {
   padding-right: 0.3rem;
 }
 
-.schedules__Details .schedules__Back:hover {
+.schedules__Details .schedules__Action:hover {
+  background: none;
   text-decoration: underline;
 }
 
@@ -195,6 +214,7 @@
 }
 
 .schedules__Table {
+  margin-top: 0.5rem;
   min-height: 323px;
 }
 
@@ -226,6 +246,8 @@
 .schedules__Table th {
   background: var(--color-background-dark);
   color: white;
+  resize: both;
+  overflow: auto;
 }
 
 .schedules__Table .table__Time {

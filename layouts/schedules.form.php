@@ -4,9 +4,15 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
-var_dump($errors);
 $schedID = '';
 $schedIDExist = isset($_GET['schedid']) && !empty($_GET['schedid']);
+
+$errorProf = $errors['errorProf'] ?? "";
+$errorRoom = $errors['errorRoom'] ?? "";
+$errorSect = $errors['errorSect'] ?? "";
+$errorSubj = $errors['errorSubj'] ?? "";
+
+
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
   $result = $schedView->FetchScheduleByID($schedID)[0];
@@ -17,7 +23,7 @@ if ($schedIDExist) {
 
 ?>
 
-<form action='./includes/schedules.inc.php' class='module__Form' method='POST'>
+<form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()'>
   <section class="form__Close">
     <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle'>X</a>
   </section>
@@ -51,7 +57,6 @@ if ($schedIDExist) {
       </select>
     </div>
   </div>
-  <div class='form__Error'></div>
   <div class="form__DayContainer">
 
     <?php
@@ -77,7 +82,7 @@ if ($schedIDExist) {
 
     ?>
   </div>
-  <div class='form__Error' id='inputError'></div>
+  <div class='form__Error' id='errorDay'></div>
 
   <?php
   $optionValue = '';
@@ -106,6 +111,7 @@ if ($schedIDExist) {
     $profView->DisplayProfessorsInSearch($profs);
 
     echo "</datalist>
+      <div class='form__Error'>$errorProf</div>
       </div>
     </div>";
   } else {
@@ -137,6 +143,7 @@ if ($schedIDExist) {
     $subjView->DisplaySubjectsInSearch($subjs);
 
     echo "</datalist>
+    <div class='form__Error'>$errorSubj</div>
     </div>
   </div>";
   } else {
@@ -169,6 +176,7 @@ if ($schedIDExist) {
     $roomView->DisplayRoomsInSearch($rooms);
 
     echo "</datalist>
+      <div class='form__Error'>$errorRoom</div>
       </div>
     </div>";
   } else {
@@ -199,6 +207,7 @@ if ($schedIDExist) {
     $sectView->DisplaySectionsInSearch($sects);
 
     echo "</datalist>
+    <div class='form__Error'>$errorSect</div>
       </div>
     </div>";
   } else {
@@ -206,7 +215,7 @@ if ($schedIDExist) {
   }
 
   echo "<div class='btn__Container'>";
-  echo "<button id='schedulesButton' class='form__Button button' type='submit'  name='$button'>$button</button>";
+  echo "<button id='schedulesButton' class='form__Button button' type='submit'    name='$button'>$button</button>";
   echo $deleteButton ?? "";
   echo "</div>";
 

@@ -530,16 +530,14 @@ a {
       -ms-flex-align: center;
           align-items: center;
   background: white;
-  border-radius: 0.8rem;
-  -webkit-box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
-          box-shadow: 2px 6px 6px 6px rgba(181, 181, 181, 0.7);
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
 }
 
 .module__Form .form__Close {
   height: 2rem;
-  border-top-left-radius: 0.8rem;
-  border-top-right-radius: 0.8rem;
   background: var(--color-background-dark);
   width: 100%;
   display: -webkit-box;
@@ -548,6 +546,7 @@ a {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  overflow: hidden;
 }
 
 .module__Form .form__Close a {
@@ -558,7 +557,6 @@ a {
   height: inherit;
   width: 2rem;
   padding: 0 0.5rem;
-  border-top-right-radius: inherit;
   position: relative;
 }
 
@@ -582,7 +580,6 @@ a {
   top: 0;
   height: 100%;
   width: 100%;
-  border-top-right-radius: inherit;
   background: rgba(149, 0, 0, 0.664);
   -webkit-transform: scale(0);
           transform: scale(0);
@@ -650,7 +647,7 @@ a {
   width: 80px;
 }
 
-.module__Form .form__Container .form__Input .form__Error {
+.module__Form .form__Error {
   color: red;
   font-size: 0.8rem;
 }
@@ -708,6 +705,11 @@ a {
 .schedules .module__Form {
   width: 50vw;
   font-size: 1rem;
+}
+
+.schedules .module__Form .form__Error {
+  color: red;
+  font-size: 0.8rem;
 }
 
 .schedules .module__Form .form__TimeContainer {
@@ -777,31 +779,45 @@ a {
   background: var(--color-text-light);
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   padding-left: 2rem;
 }
 
-.schedules__Details .schedules__Back {
-  position: relative;
-  color: black;
+.schedules__Details .schedules__Actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
   margin-bottom: 1rem;
 }
 
-.schedules__Details .schedules__Back img {
+.schedules__Details .schedules__Action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  color: black;
+  height: 3rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: 0;
+}
+
+.schedules__Details .schedules__Action img {
   padding-right: 0.3rem;
 }
 
-.schedules__Details .schedules__Back:hover {
+.schedules__Details .schedules__Action:hover {
+  background: none;
   text-decoration: underline;
 }
 
@@ -893,6 +909,7 @@ a {
 }
 
 .schedules__Table {
+  margin-top: 0.5rem;
   min-height: 323px;
 }
 
@@ -924,6 +941,8 @@ a {
 .schedules__Table th {
   background: var(--color-background-dark);
   color: white;
+  resize: both;
+  overflow: auto;
 }
 
 .schedules__Table .table__Time {

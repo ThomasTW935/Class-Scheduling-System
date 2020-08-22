@@ -16,6 +16,8 @@ html {
   position: absolute;
   left: 0;
   top: 0;
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100vh;
 }
@@ -23,7 +25,11 @@ html {
 .schedules__Table td,
 .schedules__Table th,
 .schedules__Table tr {
-  font-size: 1rem;
+  font-size: 1.5rem;
+  height: 2rem;
+}
+
+.schedules__Table tr {
   height: 2rem;
 }
 

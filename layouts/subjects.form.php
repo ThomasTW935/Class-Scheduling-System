@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">
          <input class='form__Input' type='text' value='<?php echo $code ?>' name='code' required>
-         <div class="form__Error"><?php echo $errorCode ?></div>
+         <div class="form__Error">asdasd<?php echo $errorCode ?></div>
       </div>
    </div>
    <div class="form__Container">
