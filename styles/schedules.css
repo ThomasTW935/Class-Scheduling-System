@@ -81,7 +81,6 @@
 }
 
 .schedules__Details {
-  background: var(--color-text-light);
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   padding: 0 1rem;
@@ -126,6 +125,32 @@
   text-decoration: underline;
 }
 
+.schedules__Details .schedules__Nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0 1rem;
+}
+
+.schedules__Details .schedules__Nav input {
+  display: none;
+}
+
+.schedules__Details .schedules__Nav input[type="radio"] + label {
+  font-style: italic;
+  cursor: pointer;
+}
+
+.schedules__Details .schedules__Nav input[type="radio"]:checked + label {
+  text-decoration: underline;
+  font-style: normal;
+}
+
 .schedules__Details .schedules__Information {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -167,11 +192,12 @@
 }
 
 .schedules__Details .schedules__Settings {
-  background: pink;
   display: none;
 }
 
 .schedules__Details .schedules__Settings form {
+  padding-top: 10px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -179,18 +205,20 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  gap: 0.75rem;
 }
 
 .schedules__Details .schedules__Settings form div {
-  background: red;
-  width: 75%;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 2fr;
       grid-template-columns: 1fr 2fr;
+}
+
+.schedules__Details .schedules__Settings form button {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .schedules__Details button,

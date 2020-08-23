@@ -204,6 +204,23 @@ let validateForm = () => {
 
 }
 
+//Toggle Information and Settings
+
+
+
+
+let ToggleSchedNav = () => {
+  let radioButtons = document.querySelectorAll(".schedules__Nav input")
+  radioButtons.forEach(radio => {
+    con = document.querySelector("#" + radio.id + "-con")
+    if (radio.checked) {
+      con.style.display = 'flex'
+    } else {
+      con.style.display = 'none'
+    }
+  })
+}
+
 // Print Button 
 
 let PrintContent = () => {

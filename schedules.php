@@ -71,7 +71,14 @@ if ($type == 'sect' || empty($type) || $type == null) {
          <a class='schedules__Action' href='<?php echo "./$returnDestination.php" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
          <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' /><span>Print</span></button>
       </div>
-      <section class="schedules__Information">
+      <div class='schedules__Nav'>
+         <input type="radio" name="schedule-details" id="information" onclick="ToggleSchedNav()" checked>
+         <label for='information'>Information</label>
+         <span>\</span>
+         <input type="radio" name="schedule-details" id="settings" onclick="ToggleSchedNav()">
+         <label for='settings'>Settings</label>
+      </div>
+      <section class="schedules__Information" id='information-con'>
          <div>
             <?php
 
@@ -81,7 +88,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
          </div>
          <a href='<?php echo "?type=$type&id=$ID&action" ?>' class='form__Toggle schedules__Add'>Add Schedule</a>
       </section>
-      <section class='schedules__Settings'>
+      <section class='schedules__Settings' id='settings-con'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
             <input type="hidden" name="opID" value=<?php echo $dTime['op_id'] ?>>
             <input type="hidden" name="id" value=<?php echo $ID ?>>
