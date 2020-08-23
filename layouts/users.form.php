@@ -23,6 +23,7 @@ if (isset($_GET['id'])) {
    $email = $user['email'];
    $password = $user['password'];
    $roleLevel = $user['role_level'];
+   $resetPassword = "<button type='submit' name='reset-password' class='form__Button btn__Secondary'>Reset Password</button>";
 }
 ?>
 
@@ -48,17 +49,19 @@ if (isset($_GET['id'])) {
       </div>
    </div>
    <div class="form__Container">
-      <label for="" class="form__Label">Password:</label>
-      <div class="form__Input">
-         <input class='form__Input' type='password' value='<?php echo $password ?>' name='password' autocomplete="0">
-      </div>
-   </div>
-   <div class="form__Container">
       <label for="" class="form__Label">Role Level:</label>
       <div class="form__Input">
          <input class='form__Input' type='number' value='<?php echo $roleLevel ?>' name='roleLevel'>
       </div>
    </div>
-   <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
+
+
+   <?php
+
+   echo "<div class='btn__Container'>";
+   echo "<button class='form__Button button' type='submit' name='$button'>$button</button>";
+   echo $resetPassword ?? "";
+   echo "</div>";
+   ?>
 </form>
 <a href="users.php?page=<?php echo $page ?>" class='module__formBackground'></a>

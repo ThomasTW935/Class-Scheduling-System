@@ -34,6 +34,7 @@ $searchValue = $_GET['q'] ?? '';
    </div>
    <div class='module__Content'>
       <?php
+      var_dump($_SESSION);
 
       if (empty($searchValue)) {
          $profView = new ProfessorsView();

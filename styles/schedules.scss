@@ -42,19 +42,6 @@
         margin: 0.4em;
       }
     }
-    .btn__Container {
-      display: flex;
-      gap: 2rem;
-      .btn__Delete {
-        background: white;
-        color: var(--color-background-light);
-        border: 1px solid var(--color-background-light);
-        &:hover {
-          color: var(--color-background-dark);
-          border: 1px solid var(--color-background-dark);
-        }
-      }
-    }
   }
   &__Details {
     border-bottom-left-radius: 5px;
@@ -214,34 +201,6 @@
         span {
           text-transform: capitalize;
         }
-      }
-    }
-  }
-  &__Subjects {
-    font-size: 0.9rem;
-    padding: 1em;
-    form {
-      display: flex;
-      flex-direction: column;
-      input {
-        border: 0;
-        border-bottom: 2px solid #9b9b9b;
-        outline: 0;
-        font-size: 1rem;
-        padding: 7px 0;
-        &:focus {
-          border-color: rgba(0, 170, 255, 1);
-        }
-      }
-    }
-    #searchSubjects__Results {
-      margin-top: 1em;
-      background: white;
-      border: 1px solid black;
-      max-height: 70vh;
-      overflow: auto;
-      li {
-        cursor: pointer;
       }
     }
   }

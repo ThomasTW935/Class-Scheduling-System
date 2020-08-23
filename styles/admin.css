@@ -516,7 +516,6 @@ a {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding-bottom: 1rem;
   max-height: 90vh;
   max-width: 70vw;
   display: -webkit-box;
@@ -530,6 +529,7 @@ a {
       -ms-flex-align: center;
           align-items: center;
   background: white;
+  padding-bottom: 1rem;
   border-radius: 3px;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -652,6 +652,28 @@ a {
   font-size: 0.8rem;
 }
 
+.module__Form .btn__Container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.module__Form .btn__Container .btn__Secondary {
+  background: white;
+  color: var(--color-background-light);
+  border: 1px solid var(--color-background-light);
+}
+
+.module__Form .btn__Container .btn__Secondary:hover {
+  color: white;
+  background: Red;
+  border-color: transparent;
+}
+
 .module__Form .form__Button {
   width: 100px;
   -webkit-box-shadow: none;
@@ -660,6 +682,7 @@ a {
   background: var(--color-background-dark);
   color: #fff;
   font-weight: bold;
+  margin: 1rem 0;
   border-radius: 10px;
   font-size: 1rem;
 }
@@ -755,24 +778,6 @@ a {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   margin: 0.4em;
-}
-
-.schedules .module__Form .btn__Container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 2rem;
-}
-
-.schedules .module__Form .btn__Container .btn__Delete {
-  background: white;
-  color: var(--color-background-light);
-  border: 1px solid var(--color-background-light);
-}
-
-.schedules .module__Form .btn__Container .btn__Delete:hover {
-  color: var(--color-background-dark);
-  border: 1px solid var(--color-background-dark);
 }
 
 .schedules__Details {
@@ -1014,45 +1019,6 @@ a {
   text-transform: capitalize;
 }
 
-.schedules__Subjects {
-  font-size: 0.9rem;
-  padding: 1em;
-}
-
-.schedules__Subjects form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.schedules__Subjects form input {
-  border: 0;
-  border-bottom: 2px solid #9b9b9b;
-  outline: 0;
-  font-size: 1rem;
-  padding: 7px 0;
-}
-
-.schedules__Subjects form input:focus {
-  border-color: #00aaff;
-}
-
-.schedules__Subjects #searchSubjects__Results {
-  margin-top: 1em;
-  background: white;
-  border: 1px solid black;
-  max-height: 70vh;
-  overflow: auto;
-}
-
-.schedules__Subjects #searchSubjects__Results li {
-  cursor: pointer;
-}
-
 :root {
   --color-background-dark: hsl(206, 100%, 43%);
   --color-background-light: hsl(206, 100%, 53%);
@@ -1164,6 +1130,7 @@ a {
 
 .profile div form .success {
   color: green;
+  font-size: 0.8rem;
 }
 
 .profile div form button {
@@ -1172,37 +1139,10 @@ a {
   width: 15rem;
   color: white;
   border-radius: 5px;
-  background: -webkit-gradient(linear, left top, right top, from(var(--color-background-light)), color-stop(50%, var(--color-text-light)), to(var(--color-background-dark)));
-  background: linear-gradient(to right, var(--color-background-light) 0%, var(--color-text-light) 50%, var(--color-background-dark) 100%);
-  background-size: 600%;
+  background: var(--color-background-dark);
 }
 
 .profile div form button:hover {
-  -webkit-animation-name: gradient;
-          animation-name: gradient;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100%;
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100%;
-  }
+  background: var(--color-background-light);
 }
 /*# sourceMappingURL=admin.css.map */

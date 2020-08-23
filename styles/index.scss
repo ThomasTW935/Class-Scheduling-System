@@ -44,17 +44,17 @@ html {
       outline: none;
       padding: 0.5rem 0.75rem;
       width: 35ch;
-      margin-bottom: 1rem;
       &:focus {
         border-color: var(--color-background-dark);
       }
       &:invalid {
-        color: red;
+        border-color: red;
       }
     }
     .error {
       font-size: 0.7rem;
       color: red;
+      margin-bottom: 0.5rem;
     }
     button {
       align-self: center;
@@ -62,6 +62,7 @@ html {
       background: var(--color-background-dark);
       color: white;
       padding: 0.5rem 0.75rem;
+      margin-top: 1rem;
       border: none;
       border-radius: 1rem;
       font-weight: bold;

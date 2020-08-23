@@ -13,7 +13,7 @@ $success = (isset($_GET['success'])) ? "Successfully changed password!" : '';
   <div>
     <h3>Password</h3>
     <form class='' action='./includes/profile.inc.php' method='POST'>
-      <input type="hidden" name="id" value='<?php echo $sessionID ?>'>
+      <input type="hidden" name="userID" value='<?php echo $sessionID ?>'>
       <span class='success'><?php echo $success ?></span>
       <label for="current">Current Password</label>
       <input class='' type="password" name="current-password" id="current" required>

@@ -67,6 +67,7 @@
       }
       .success {
         color: green;
+        font-size: 0.8rem;
       }
       button {
         margin: 0.5rem 0;
@@ -74,26 +75,9 @@
         width: 15rem;
         color: white;
         border-radius: 5px;
-        background: linear-gradient(
-          to right,
-          var(--color-background-light) 0%,
-          var(--color-text-light) 50%,
-          var(--color-background-dark) 100%
-        );
-        background-size: 600%;
+        background: var(--color-background-dark);
         &:hover {
-          animation-name: gradient;
-          animation-duration: 2s;
-          animation-iteration-count: 1;
-          animation-fill-mode: forwards;
-        }
-      }
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        100% {
-          background-position: 100%;
+          background: var(--color-background-light);
         }
       }
     }

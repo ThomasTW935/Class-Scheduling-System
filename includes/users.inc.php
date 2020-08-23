@@ -11,7 +11,14 @@ $usersContr = new UsersContr();
 $usersVal = new UsersVal($_POST);
 $page = $_POST['page'];
 $destination = "page=$page";
-if (!isset($_POST['submitStatus'])) {
+
+
+if (isset($_POST['reset-password'])) {
+  $_POST['new-password'] = 'STICubao005';
+  $usersContr->ModifyPassword($_POST);
+}
+var_dump($_POST);
+if (!isset($_POST['submitStatus']) && !isset($_POST['reset-password'])) {
   $errors = $usersVal->validateForm();
 
   if (!empty($errors)) {

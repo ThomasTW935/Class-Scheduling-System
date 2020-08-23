@@ -34,7 +34,7 @@ $func = new Functions();
    <nav class="nav">
       <?php
       $url = $_SERVER['REQUEST_URI'];
-      if (!strpos($url, "dashboard") && !strpos($url, "scheduleview")) {
+      if (!strpos($url, "dashboard")) {
          echo "<a href='dashboard.php' class='nav__Home'><span>HOME</span></a>";
       } else {
          echo '<div></div>';

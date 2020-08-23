@@ -62,24 +62,6 @@
   margin: 0.4em;
 }
 
-.schedules .module__Form .btn__Container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 2rem;
-}
-
-.schedules .module__Form .btn__Container .btn__Delete {
-  background: white;
-  color: var(--color-background-light);
-  border: 1px solid var(--color-background-light);
-}
-
-.schedules .module__Form .btn__Container .btn__Delete:hover {
-  color: var(--color-background-dark);
-  border: 1px solid var(--color-background-dark);
-}
-
 .schedules__Details {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
@@ -317,44 +299,5 @@
 
 .schedules__Table .slot a span {
   text-transform: capitalize;
-}
-
-.schedules__Subjects {
-  font-size: 0.9rem;
-  padding: 1em;
-}
-
-.schedules__Subjects form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.schedules__Subjects form input {
-  border: 0;
-  border-bottom: 2px solid #9b9b9b;
-  outline: 0;
-  font-size: 1rem;
-  padding: 7px 0;
-}
-
-.schedules__Subjects form input:focus {
-  border-color: #00aaff;
-}
-
-.schedules__Subjects #searchSubjects__Results {
-  margin-top: 1em;
-  background: white;
-  border: 1px solid black;
-  max-height: 70vh;
-  overflow: auto;
-}
-
-.schedules__Subjects #searchSubjects__Results li {
-  cursor: pointer;
 }
 /*# sourceMappingURL=schedules.css.map */

@@ -18,7 +18,7 @@ if ($schedIDExist) {
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $button = "update";
-  $deleteButton = "<button class='form__Button btn__Delete' type='submit' name='delete'>delete</button>";
+  $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
 }
 
 ?>

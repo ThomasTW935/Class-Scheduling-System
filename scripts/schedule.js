@@ -118,7 +118,6 @@ let timeToInput = document.querySelector('#timeToInput')
 
 
 let FetchDataFromDataList = () => {
-  let inputs = ['Prof', 'Subj', 'Room', 'Sect']
   let searchInputs = document.querySelectorAll('.search__Input')
   for (x of searchInputs) {
     x.addEventListener('change', FetchDatalistValue)

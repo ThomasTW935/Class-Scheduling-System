@@ -28,7 +28,7 @@ class UsersVal
 
     $val = trim($this->data['username']);
     if (empty($val)) {
-      $this->addError('errorUsername', '*Username cannot be empty');
+      $this->addError('errorUsername', '*User ID cannot be empty');
     } else {
       $usersView = new UsersView();
       $results = $usersView->FetchUserByUsername($val);
@@ -42,7 +42,7 @@ class UsersVal
             return;
           }
         }
-        $this->addError('errorUsername', '*Username already exist');
+        $this->addError('errorUsername', '*User ID already exist');
       }
     }
   }
