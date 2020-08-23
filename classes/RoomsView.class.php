@@ -33,12 +33,14 @@ class RoomsView extends Rooms
   {
     $schedView = new SchedulesView();
     foreach ($results as $result) {
-      $name = "Rm {$result['rm_name']}";
-      $optionData = $schedView->GenerateOptionDataValue($result['rm_id'], [$name, $result['rm_desc'], $floor]);
+      $capacity = "Capacity: {$result['rm_capacity']}";
+      $optionData = $schedView->GenerateOptionDataValue($result['rm_id'], [$result['rm_name'], $result['rm_desc'], $result['rm_floor'], $capacity]);
       echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'><ul class='module__List'>
         <li class='module__Item'>" . $result['rm_name'] . " |</li>
         <li class='module__Item'>" . $result['rm_desc'] . " |</li>
-        <li class='module__Item'>{$result['rm_floor']}</li></ul></option>";
+        <li class='module__Item'>{$result['rm_floor']} |</li>
+        <li class='module__Item'>$capacity</li>
+        </ul></option>";
     }
   }
   public function DisplayRooms($results, $page, $totalPages, $destination)

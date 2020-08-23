@@ -154,10 +154,9 @@ if ($schedIDExist) {
 
   if ($type != 'room') {
     if (!empty($result) && !empty($result['room_id'])) {
-      $selSect = $roomView->FetchRoomByID($result['room_id'])[0];
-      $floor = $roomView->FloorConvert($selSect['rm_floor']) . ' floor';
-      $name = "Rm {$selSect['rm_name']}";
-      $optionData = $schedView->GenerateOptionDataValue($selSect['rm_id'], [$name, $selSect['rm_desc'], $floor]);
+      $selRoom = $roomView->FetchRoomByID($result['room_id'])[0];
+      $capacity = "Capacity: {$selRoom['rm_capacity']}";
+      $optionData = $schedView->GenerateOptionDataValue($selRoom['rm_id'], [$selRoom['rm_name'], $selRoom['rm_desc'], $selRoom['rm_floor'], $capacity]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }
@@ -188,7 +187,7 @@ if ($schedIDExist) {
   if ($type != 'sect') {
     if (!empty($result) && !empty($result['sect_id'])) {
       $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];
-      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name']]);
+      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name'], $selSect['sect_yrsem'], $selSect['dept_name']]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }

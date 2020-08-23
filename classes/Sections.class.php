@@ -33,7 +33,7 @@ class Sections extends Dbh
   }
   protected function getSectionByID($id)
   {
-    $sql = 'SELECT * FROM sections WHERE sect_id = ? LIMIT 1';
+    $sql = "SELECT sect_id,sect_name, CONCAT(sect_year, 'YR ' , sect_sem, 'SEM') as sect_yrsem, s.dept_id, dept_name, dept_desc, dept_type, sect_active FROM sections s INNER JOIN departments d ON s.dept_id = d.dept_id WHERE sect_id = ? LIMIT 1";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
