@@ -34,10 +34,9 @@ if ($type == 'sect' || empty($type) || $type == null) {
 } else if ($type == 'room') {
    $roomID = $ID;
    $room = $roomView->FetchRoomByID($roomID)[0];
-   $floor = $roomView->FloorConvert($room['rm_floor']);
    $sideBarText .= "<h2>" . $room['rm_name'] . "</h2>";
    $sideBarText .= "<h3>" . $room['rm_desc'] . "</h3>";
-   $sideBarText .= "<h4>" . $floor . " Floor</h4>";
+   $sideBarText .= "<h4>{$room['rm_floor']}</h4>";
    $caption = "Rm.{$room['rm_name']}";
    $returnDestination = 'rooms';
 } else if ($type == 'subj') {

@@ -57,32 +57,32 @@ class Rooms extends Dbh
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%{$search}%";
-    $sql = "SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ?) AND rm_active = ? $withLimit";
+    $sql = "SELECT * FROM rooms WHERE (rm_name LIKE ? OR rm_desc LIKE ? OR rm_floor LIKE ? OR rm_capacity LIKE ?) AND rm_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$search, $search, $search, $state]);
+      $stmt->execute([$search, $search, $search, $search, $state]);
       $result = $stmt->fetchAll();
       return $result;
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }
   }
-  protected function setRoom($name, $desc, $floor)
+  protected function setRoom($name, $desc, $floor, $capacity)
   {
-    $sql = 'INSERT INTO rooms (rm_name, rm_desc, rm_floor) VALUES (?,?,?)';
+    $sql = 'INSERT INTO rooms (rm_name, rm_desc, rm_floor,rm_capacity) VALUES (?,?,?,?)';
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$name, $desc, $floor]);
+      $stmt->execute([$name, $desc, $floor, $capacity]);
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }
   }
-  protected function updateRoom($name, $desc, $floor, $id)
+  protected function updateRoom($name, $desc, $floor, $capacity, $id)
   {
-    $sql = 'UPDATE rooms SET rm_name = ?, rm_desc = ?, rm_floor = ? WHERE rm_id = ?';
+    $sql = 'UPDATE rooms SET rm_name = ?, rm_desc = ?, rm_floor = ?,rm_capacity = ? WHERE rm_id = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$name, $desc, $floor, $id]);
+      $stmt->execute([$name, $desc, $floor, $capacity, $id]);
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }

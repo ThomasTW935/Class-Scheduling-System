@@ -4,7 +4,7 @@ class RoomsVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['name', 'desc', 'floor'];
+  private static $fields = ['name', 'desc', 'floor', 'capacity'];
   public function __construct($post_data)
   {
     $this->data = $post_data;
@@ -47,7 +47,6 @@ class RoomsVal
       }
     }
   }
-
   private function addError($key, $val)
   {
     $this->errors[$key] = $val;

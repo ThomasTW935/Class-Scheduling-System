@@ -157,8 +157,8 @@ class Functions
       $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
       $tableBody = ["sect_name", "sect_yrsem", "dept_name"];
     } else if ($type == 'room') {
-      $tableHead = ["Room", "Description", "Floor", "Actions"];
-      $tableBody = ["rm_name", "rm_desc", "rm_floor"];
+      $tableHead = ["Room", "Description", "Floor", "Capacity", "Actions"];
+      $tableBody = ["rm_name", "rm_desc", "rm_floor", "rm_capacity"];
     } else if ($type == 'prof') {
       $tableHead = [" ", "Employee ID", "Employee Name", "Department", "Actions"];
       $tableBody = ["emp_no", "full_name", "dept_name"];
