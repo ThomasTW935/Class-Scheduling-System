@@ -20,7 +20,7 @@ $destination = "page=$page";
 if (!isset($_POST['submitStatus'])) {
    $isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
    $password = (!isset($_POST['password'])) ? "{$_POST['lastName']}.{$_POST['empID']}" : $_POST['password'];
-   $data = ['id' => $_POST['userID'], 'username' => $_POST['username'], 'email' => $_POST['email'], 'password' => $password, 'roleLevel' => 1, $isFrom => ''];
+   $data = ['id' => $_POST['userID'], 'username' => $_POST['username'], 'email' => $_POST['email'], 'new-password' => $password, 'roleLevel' => 1, $isFrom => ''];
    $usersVal = new UsersVal($data);
    $middleInitial = explode('.', $_POST['middleInitial']);
    $_POST['middleInitial'] = strtoupper(implode('', $middleInitial));
@@ -36,8 +36,11 @@ if (!isset($_POST['submitStatus'])) {
       $imgExt = strtolower(end($imgNameArray));
       $imgFullName = $_POST['lastName'] . '.' . uniqid() . '.' . $imgExt;
    }
-   $_POST += ['image' => $imgFullName];
-
+   if ($imgFullName) {
+      $_POST += ['image' => $imgFullName];
+   } else {
+      $_POST += ['image' => $_POST['imgName']];
+   }
    if (!empty($errors)) {
       $func = new Functions();
       $query = $func->BuildQuery($errors, $_POST);

@@ -50,7 +50,7 @@ if ($schedIDExist) {
 
         $selected = strtotime($result['sched_to']) ?? "";
 
-        $schedView->GenerateTimeOptions($newStartTime + (60 * 60), $newEndTime, $selected, $jump = $jumpTime, true)
+        $schedView->GenerateTimeOptions($newStartTime + (60 * 90), $newEndTime, $selected, $jump = $jumpTime, true)
 
         ?>
       </select>

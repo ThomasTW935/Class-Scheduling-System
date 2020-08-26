@@ -43,24 +43,7 @@ if (timeStart != null) {
   ChangeFormatTime()
 }
 
-// Open/Close Modal
 
-// let toggles = document.querySelectorAll(".form__Toggle")
-// let form = document.querySelector(".module__Form")
-// let formBg = document.querySelector(".module__formBackground")
-// let arrForm = [form, formBg]
-
-// arrForm.forEach(x => {
-//   x.style.display = 'none'
-// })
-// toggles.forEach(toggle => {
-//   toggle.addEventListener('click', FormToggle)
-// })
-// function FormToggle() {
-//   arrForm.forEach(x => {
-//     x.style.display = (x.style.display == 'none') ? 'flex' : 'none'
-//   })
-// }
 
 //Fixing Schedules Labels
 
@@ -102,7 +85,7 @@ let TableFixLabel = () => {
     if (slot.rowSpan == 2) {
       console.log(slot.rowSpan)
       console.log(slot)
-      let newSize = 0.75 * .9
+      let newSize = 0.75 * .85
       slot.style.fontSize = newSize + "rem"
       console.log(slot.style.fontSize)
     }

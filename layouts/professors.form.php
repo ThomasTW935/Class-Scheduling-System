@@ -34,6 +34,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    $suffix =  $prof['suffix'];
    $username =  $prof['username'];
    $email =  $prof['email'];
+   $imgName = $prof['prof_img'];
 }
 ?>
 
@@ -45,6 +46,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
    <input type='hidden' value='<?php echo $profID ?? '' ?>' name='profID'>
    <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>
+   <input type='hidden' value='<?php echo $imgName ?? '' ?>' name='imgName'>
    <div class="form__Container">
       <label for='' class='form__Label'>Employee ID:</label>
       <div class="form__Input">
@@ -99,7 +101,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    <div class="form__Container">
       <label for='' class='form__Label'>Select Image:</label>
       <div class="form__Input">
-         <input id='image' type='file' value='<?php echo $prof['username'] ?? '' ?>' name='image' accept="image/*">
+         <input id='image' type='file' value='' name='image' accept="image/*">
       </div>
    </div>
    <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>

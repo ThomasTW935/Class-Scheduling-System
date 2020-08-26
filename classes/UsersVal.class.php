@@ -14,10 +14,10 @@ class UsersVal
     foreach (self::$fields as $field) {
       if (!array_key_exists($field, $this->data)) {
         trigger_error("$field is not present in data");
-        return;
+        //return;
       }
     }
-
+    var_dump($this->data);
     $this->validateName();
     $this->validateEmail();
 
@@ -33,7 +33,7 @@ class UsersVal
       $usersView = new UsersView();
       $results = $usersView->FetchUserByUsername($val);
       if (!empty($results)) {
-        $id = trim($this->data['userID']);
+        $id = trim($this->data['id']);
         $idResult = $results[0]['id'] ?? '';
         if (isset($this->data['update'])) {
           $user = $usersView->FetchUserByID($id);
