@@ -1,7 +1,7 @@
 <?php
 
 include 'autoloader.inc.php';
-
+session_start();
 
 $func = new Functions();
 
