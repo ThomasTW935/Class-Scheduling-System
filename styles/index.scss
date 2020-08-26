@@ -113,7 +113,6 @@ html {
   left: 50%;
   min-height: 320px;
   transform: translate(-40%, -50%);
-  display: flex;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -129,6 +128,21 @@ html {
     width: 100%;
     min-height: 44px;
     padding: 10px 10px 3px;
+    display: flex;
+    justify-content: space-between;
+    .form__Close {
+      background: red;
+      height: 1.5rem;
+      width: 1.5rem;
+      background: none;
+      color: var(--color-text-light);
+      border: none;
+      &:hover {
+        cursor: pointer;
+        color: white;
+        transform: scale(1.2);
+      }
+    }
   }
   .form__Content {
     display: flex;

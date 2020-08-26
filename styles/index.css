@@ -157,9 +157,6 @@ html {
   min-height: 320px;
   -webkit-transform: translate(-40%, -50%);
           transform: translate(-40%, -50%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -183,6 +180,28 @@ html {
   width: 100%;
   min-height: 44px;
   padding: 10px 10px 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.module__Form .form__Title .form__Close {
+  background: red;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: none;
+  color: var(--color-text-light);
+  border: none;
+}
+
+.module__Form .form__Title .form__Close:hover {
+  cursor: pointer;
+  color: white;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .module__Form .form__Content {

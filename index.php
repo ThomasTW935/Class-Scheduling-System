@@ -66,7 +66,7 @@ include "./includes/autoloader.inc.php";
    <form class="module__Form" action="includes/login.inc.php" method="POST">
       <section class="form__Title">
          <label>Log in</label>
-         <button type='button' onclick='ToggleModalForm()'>X</button>
+         <button class='form__Close' type='button' onclick='ToggleModalForm()'>X</button>
       </section>
       <fieldset class='form__Content'>
          <label for='usename'>User ID</label>
@@ -78,7 +78,7 @@ include "./includes/autoloader.inc.php";
          <button class="form__Button" type="submit" name="submit">Log in</button>
       </fieldset>
    </form>
-   <div class='form__Background'></div>
+   <div class='form__Background' onclick='ToggleModalForm()'></div>
 </body>
 
 </html>
