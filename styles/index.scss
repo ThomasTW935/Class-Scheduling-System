@@ -159,9 +159,6 @@ html {
       &:focus {
         border-color: var(--color-background-dark);
       }
-      &:invalid {
-        border-color: red;
-      }
     }
     .error {
       font-size: 0.7rem;

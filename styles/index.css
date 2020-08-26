@@ -228,10 +228,6 @@ html {
   border-color: var(--color-background-dark);
 }
 
-.module__Form .form__Content input:invalid {
-  border-color: red;
-}
-
 .module__Form .form__Content .error {
   font-size: 0.7rem;
   color: red;
