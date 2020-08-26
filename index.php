@@ -39,7 +39,8 @@ include "./includes/autoloader.inc.php";
          $deptView = new DepartmentsView();
          $depts = $deptView->FetchDeptsWithSect("course", 1);
          foreach ($depts as $dept) {
-            echo "<option value='{$dept['dept_id']}'>{$dept['dept_desc']}</option>";
+            $selected = ($depts[0]['dept_id'] == $dept['dept_id']) ? "selected" : "";
+            echo "<option value='{$dept['dept_id']}' $selected>{$dept['dept_desc']}</option>";
          }
 
          ?>
