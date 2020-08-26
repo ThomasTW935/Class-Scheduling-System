@@ -7,54 +7,18 @@ $func = new Functions();
 
 
 if (isset($_GET['selectLevel']) || isset($_GET['selectDept'])) {
-   // $level = $_GET['selectLevel'] ?? "course";
-   // $levels = [];
-   // $levels['course'] = "College";
-   // $levels['strand'] = "Senior High School";
-
-   // echo "<select class='liveSelect' name='selectLevel' onchange='selectChangeValue()'>";
-   // foreach ($levels as $key => $value) {
-   //    $selected = ($level == $key) ? "selected" : "";
-   //    echo "<option value='$key' $selected>$value</option>";
-   // }
-   // echo "</select>";
-   // echo "<select name='selectDept' onchange='selectChangeValue()'>";
-   // $deptView = new DepartmentsView();
-   // $depts = $deptView->FetchDepts($level, 1);
-   // foreach ($depts as $dept) {
-   //    echo "<option value='{$dept['dept_id']}'>{$dept['dept_desc']}</option>";
-   // }
-
-   // echo "</select>";
-
-   // $department = $_GET['selectDept'];
-   // echo "<select name='selectSection' onchange='selectChangeValue()'>";
-
-   // $sectView = new SectionsView();
-   // $sects = $sectView->FetchSectionByDept($department);
-   // foreach ($sects as $sect) {
-   //    echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
-   // }
-
-   // echo "</select>";
 
    if (isset($_GET['selectLevel'])) {
       $level = $_GET['selectLevel'];
       $deptView = new DepartmentsView();
       $depts = $deptView->FetchDeptsWithSect($level, 1);
       echo json_encode($depts);
-      // foreach ($depts as $dept) {
-      //    echo "<option value='{$dept['dept_id']}'>{$dept['dept_desc']}</option>";
-      // }
    }
    if (isset($_GET['selectDept'])) {
       $department = $_GET['selectDept'];
       $sectView = new SectionsView();
       $sects = $sectView->FetchSectionByDept($department);
       echo json_encode($sects);
-      // foreach ($sects as $sect) {
-      //    echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
-      // }
    }
 
    exit();
@@ -81,9 +45,6 @@ if (isset($_GET['selectSection'])) {
    $newEndTime = strtotime($endTime);
 
    $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id);
-   // $id = $_GET['selectSection'];
-   // $func->BuildLiveSelect($id, 'section');
-
    exit();
 }
 
