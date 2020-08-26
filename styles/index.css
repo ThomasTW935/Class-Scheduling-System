@@ -13,11 +13,144 @@
 }
 
 html {
-  font-size: 20px;
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.form {
+.liveSelect__Form {
+  padding: 0 2rem;
+}
+
+.module__Content {
+  padding: 0 2rem;
+  margin-top: 0.5rem;
+  min-height: 323px;
+}
+
+.module__Content table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.module__Content td,
+.module__Content th {
+  min-width: 5rem;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 0.25rem 0;
+}
+
+.module__Content tr {
+  height: 1.5rem;
+}
+
+.module__Content .table__Caption {
+  background: var(--color-background-light);
+  color: white;
+}
+
+.module__Content th {
+  background: var(--color-background-dark);
+  color: white;
+  resize: both;
+  overflow: auto;
+}
+
+.module__Content .table__Time {
+  font-size: 0.8rem;
+}
+
+.module__Content .slot {
+  position: relative;
+  font-size: 0.8rem;
+}
+
+.module__Content .slot a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: black;
+  background: rgba(255, 255, 0, 0.4);
+}
+
+.module__Content .slot a:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.module__Content .slot a span {
+  text-transform: capitalize;
+}
+
+.nav {
+  background: -webkit-gradient(linear, left top, right top, from(var(--color-background-light)), to(var(--color-background-dark)));
+  background: linear-gradient(to right, var(--color-background-light) 0%, var(--color-background-dark) 100%);
+  width: 100%;
+  padding: 0 2rem;
+  height: 3rem;
+}
+
+.nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav ul li {
+  list-style: none;
+  height: 3rem;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.nav ul a {
+  height: 3rem;
+}
+
+.nav ul img {
+  height: 100%;
+}
+
+.nav ul button {
+  background: none;
+  cursor: pointer;
+  height: 35px;
+  width: 68px;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  padding: 0.3rem 0;
+  color: var(--color-text-light);
+}
+
+.nav ul button:hover {
+  color: white;
+}
+
+.module__Form {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -27,6 +160,7 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -42,7 +176,7 @@ html {
   color: #313131;
 }
 
-.form .form__Title {
+.module__Form .form__Title {
   font-size: 19px;
   background: var(--color-background-dark);
   color: white;
@@ -51,7 +185,7 @@ html {
   padding: 10px 10px 3px;
 }
 
-.form .form__Content {
+.module__Form .form__Content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,28 +198,28 @@ html {
   gap: 0.3rem;
 }
 
-.form .form__Content input {
+.module__Form .form__Content input {
   border: 1px solid #ccc;
   outline: none;
   padding: 0.5rem 0.75rem;
   width: 35ch;
 }
 
-.form .form__Content input:focus {
+.module__Form .form__Content input:focus {
   border-color: var(--color-background-dark);
 }
 
-.form .form__Content input:invalid {
+.module__Form .form__Content input:invalid {
   border-color: red;
 }
 
-.form .form__Content .error {
+.module__Form .form__Content .error {
   font-size: 0.7rem;
   color: red;
   margin-bottom: 0.5rem;
 }
 
-.form .form__Content button {
+.module__Form .form__Content button {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -100,12 +234,13 @@ html {
   cursor: pointer;
 }
 
-.form .form__Content button:hover {
+.module__Form .form__Content button:hover {
   background: var(--color-background-light);
 }
 
 .form__Background {
-  position: fixed;
+  display: none;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

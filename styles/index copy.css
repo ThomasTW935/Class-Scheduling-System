@@ -395,7 +395,7 @@ a {
 .module__Table td,
 .module__Table th {
   border: 1px solid #bebebe;
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
 }
 
 .module__Table td {
@@ -516,7 +516,6 @@ a {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  padding-bottom: 1rem;
   max-height: 90vh;
   max-width: 70vw;
   display: -webkit-box;
@@ -530,10 +529,12 @@ a {
       -ms-flex-align: center;
           align-items: center;
   background: white;
-  border-radius: 3px;
+  padding-bottom: 1rem;
+  border-radius: 5px;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
+  overflow: hidden;
 }
 
 .module__Form .form__Close {
@@ -652,6 +653,28 @@ a {
   font-size: 0.8rem;
 }
 
+.module__Form .btn__Container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.module__Form .btn__Container .btn__Secondary {
+  background: white;
+  color: var(--color-background-light);
+  border: 1px solid var(--color-background-light);
+}
+
+.module__Form .btn__Container .btn__Secondary:hover {
+  color: white;
+  background: Red;
+  border-color: transparent;
+}
+
 .module__Form .form__Button {
   width: 100px;
   -webkit-box-shadow: none;
@@ -660,8 +683,10 @@ a {
   background: var(--color-background-dark);
   color: #fff;
   font-weight: bold;
+  margin: 1rem 0;
   border-radius: 10px;
   font-size: 1rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .module__Form .form__Button:hover {

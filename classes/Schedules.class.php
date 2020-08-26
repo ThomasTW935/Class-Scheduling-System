@@ -151,7 +151,6 @@ class Schedules extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute();
       $result = $stmt->fetchAll();
-      var_dump($result);
       return $result;
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);

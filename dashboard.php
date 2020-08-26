@@ -38,10 +38,17 @@ if ($sessionType == 1) {
          <h3>FACULTY</h3>
          <img src="./drawables/icons/faculty.svg" alt="faculty">
       </a>
-      <a class="dashboard__Card card__Design" href="./users.php?page=1">
+      <?php
+
+      if ($_SESSION['type'] == 4) {
+         echo "<a class='dashboard__Card card__Design' href='./users.php?page=1'>
          <h3>USERS</h3>
-         <img src="./drawables/icons/student.svg" alt="Users">
-      </a>
+         <img src='./drawables/icons/student.svg'; alt='Users'>
+         </a>";
+      }
+
+      ?>
+
 
    </div>
 </main>

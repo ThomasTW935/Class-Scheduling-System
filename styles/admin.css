@@ -395,7 +395,7 @@ a {
 .module__Table td,
 .module__Table th {
   border: 1px solid #bebebe;
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
 }
 
 .module__Table td {
@@ -530,10 +530,11 @@ a {
           align-items: center;
   background: white;
   padding-bottom: 1rem;
-  border-radius: 3px;
+  border-radius: 5px;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
+  overflow: hidden;
 }
 
 .module__Form .form__Close {
@@ -685,6 +686,7 @@ a {
   margin: 1rem 0;
   border-radius: 10px;
   font-size: 1rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .module__Form .form__Button:hover {
@@ -965,8 +967,6 @@ a {
 }
 
 .schedules__Table .table__Caption {
-  display: none;
-  height: 3rem;
   background: var(--color-background-light);
   color: white;
 }

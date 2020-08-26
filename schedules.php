@@ -27,9 +27,13 @@ if ($type == 'sect' || empty($type) || $type == null) {
    $sect = $sectView->FetchSectionByID($sectID)[0];
    $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
    $sideBarText .= "<h2>" . $sect['sect_name'] . "</h2>";
-   $sideBarText .= "<h3>" . $sect['sect_year'] . " YEAR " . $sect['sect_sem'] . " SEMESTER</h3>";
-   $sideBarText .= "<h4>" . $dept['dept_desc'] . "</h4>";
-   $caption = "{$sect['sect_name']}";
+   $sideBarText .= "<h3>{$sect['sect_yrsem']}</h3>";
+   $sideBarText .= "<h4>" . $sect['dept_desc'] . "</h4>";
+   $caption = "
+   <p>{$sect['dept_desc']}</p>
+   <p>{$sect['sect_yrsem']}</p>
+   <h3>{$sect['sect_name']}</h3>
+   ";
    $returnDestination = 'sections';
 } else if ($type == 'room') {
    $roomID = $ID;

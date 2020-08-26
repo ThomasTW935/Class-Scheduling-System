@@ -286,7 +286,7 @@ a {
     td,
     th {
       border: 1px solid rgb(190, 190, 190);
-      padding: 0.5em 1em;
+      padding: 0.25em 0.5em;
     }
     td {
       text-align: center;
@@ -393,9 +393,10 @@ a {
     align-items: center;
     background: white;
     padding-bottom: 1rem;
-    border-radius: 3px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
+    overflow: hidden;
     .form__Close {
       height: 2rem;
       background: var(--color-background-dark);
@@ -506,6 +507,7 @@ a {
       margin: 1rem 0;
       border-radius: 10px;
       font-size: 1rem;
+      padding: 0.5rem 0.75rem;
       &:hover {
         color: var(--color-text-light);
       }

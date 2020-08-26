@@ -13,12 +13,12 @@ class Users extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function updateUser($username,  $email, $pass, $roleLevel, $id)
+   protected function updateUser($username,  $email,  $roleLevel, $id)
    {
-      $sql = 'UPDATE users SET username = ?, email = ?, password = ?, role_level = ? WHERE user_id = ?';
+      $sql = 'UPDATE users SET username = ?, email = ?, role_level = ? WHERE user_id = ?';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$username, $email, $pass, $roleLevel, $id]);
+         $stmt->execute([$username, $email, $roleLevel, $id]);
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }

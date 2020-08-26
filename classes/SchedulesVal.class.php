@@ -18,28 +18,35 @@ class SchedulesVal
       }
     }
 
+    $datas = $this->validateSlot();
 
-
-    var_dump($this->data);
-    $datas = $this->validateTime();
 
     if (!empty($datas)) {
-      $prof = $this->validateProfessor($datas['prof']);
-      $room = $this->validateRoom($datas['room']);
-      $sect = $this->validateSection($datas['sect']);
-      if (empty($prof) && empty($room) && empty($sect)) {
-        $subj = $this->validateSubject($datas['subj']);
+      $time = $this->validateTime($datas[$this->data['type']], $this->data['type']);
+      if (empty($time)) {
+        $prof = $this->validateProfessor($datas['prof']);
+        $room = $this->validateRoom($datas['room']);
+        $sect = $this->validateSection($datas['sect']);
+        if (empty($prof) && empty($room) && empty($sect)) {
+          $subj = $this->validateSubject($datas['subj']);
+        }
       }
     }
+
+    // echo "<br>";
+    // echo "<br>";
+    // var_dump($this->data);
+    // echo "<br>";
+    // echo "<br>";
+    // echo "Errors: ";
+    // var_dump($this->errors);
+    // exit();
+
 
     return $this->errors;
   }
 
-  private function validateDay()
-  {
-  }
-
-  private function validateTime()
+  private function validateSlot()
   {
     $schedView = new SchedulesView();
     $timeFrom = trim($this->data['timeFrom']);
@@ -64,21 +71,25 @@ class SchedulesVal
       'sect' => $sectID,
     );
 
-    echo '<br>';
-    echo '<br>';
-    echo 'Data: ';
-    var_dump($this->data);
-    echo '<br>';
-    echo 'Error: ';
-    var_dump($this->errors);
     return $datas;
+  }
+
+  private function validateTime($con, $type)
+  {
+    $input = "input" . ucfirst($type);
+    $result = $this->CheckIfExist($con, $input);
+    var_dump($result);
+    if (!empty($result)) {
+      $this->addError('errorTime', '*Time occupied');
+      return $result;
+    }
   }
 
   private function validateSection($con)
   {
     $result = $this->CheckIfExist($con, 'inputSect');
     if (!empty($result)) {
-      $this->addError('errorSect', 'Section occupied');
+      $this->addError('errorSect', '*Section occupied');
       return $result;
     }
   }
@@ -87,7 +98,7 @@ class SchedulesVal
   {
     $result = $this->CheckIfExist($con, 'inputRoom');
     if (!empty($result)) {
-      $this->addError('errorRoom', 'Room occupied');
+      $this->addError('errorRoom', '*Room occupied');
       return $result;
     }
   }
@@ -95,14 +106,14 @@ class SchedulesVal
   {
     $result = $this->CheckIfExist($con, 'inputSubj');
     if (!empty($result)) {
-      $this->addError('errorSubj', 'Subject occupied');
+      $this->addError('errorSubj', '*Subject occupied');
     }
   }
   private function validateProfessor($con)
   {
     $result = $this->CheckIfExist($con, 'inputProf');
     if (!empty($result)) {
-      $this->addError('errorProf', 'Professor occupied');
+      $this->addError('errorProf', '*Professor occupied');
       return $result;
     }
   }

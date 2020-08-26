@@ -4,7 +4,7 @@ class UsersVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['username', 'email', 'password', 'roleLevel'];
+  private static $fields = ['username', 'email', 'new-password', 'roleLevel'];
   public function __construct($post_data)
   {
     $this->data = $post_data;

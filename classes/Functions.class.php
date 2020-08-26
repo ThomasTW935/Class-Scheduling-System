@@ -72,35 +72,51 @@ class Functions
     echo "</ul>";
     echo "</div>";
   }
+  public function GenerateModuleLinks($page, $dept = '')
+  {
+    $destination = (!empty($dept)) ? "dept=$dept&" : "";
+    if (!isset($_GET['archive'])) {
+      echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
+      <span>Add</span>
+      </a>";
+      if ($_SESSION['type'] > 2) {
+        echo "<a href='?{$destination}archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
+         <span>Archive</span>
+         </a>";
+      }
+    } else {
+      echo "<a class= 'module__Return' href='?{$destination}page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
+    }
+  }
 
   public function TableProperties($type, $data, $archived = false, $search = '')
   {
     $newArray = [];
     $isSearch = (!empty($search)) ? "q=$search&" : "";
     if ($type == 'prof') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
     } else if ($type == 'room') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
     } else if ($type == 'sect') {
-      $limit = 4;
+      $limit = 10;
       $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
     } else if ($type == 'subj') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
     } else if ($type == 'user') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
     }
     if ($type == 'faculty') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ?  "?dept=faculty&{$isSearch}page=" : "?dept=faculty&archive&{$isSearch}page=";
     } else if ($type == 'course') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ?  "?dept=course&{$isSearch}page=" : "?dept=course&archive&{$isSearch}page=";
     } else if ($type == 'strand') {
-      $limit = 11;
+      $limit = 10;
       $destination = (!$archived) ?  "?dept=strand&{$isSearch}page=" : "?dept=strand&archive&{$isSearch}page=";
     }
 
@@ -174,7 +190,6 @@ class Functions
   public function BuildTableActions($type, $result, $page)
   {
     $action = '';
-
     if ($type == "subj") {
       if ($result['subj_active'] == 1) {
         $action .= "<form method='POST' action='./schedules.php'>
@@ -186,13 +201,15 @@ class Functions
       }
       $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['subj_active'] == 1) ? '' : "class='table__Restore'";
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST' $tableRestore>
-      <input type='hidden' name='page' value='$page'>
-      <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
-      <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
-      <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
-      <span>" . $iconName . "</span>
-      </form>";
+      if ($_SESSION['type'] >= 3) {
+        $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST' $tableRestore>
+        <input type='hidden' name='page' value='$page'>
+        <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
+        <input id='state' name='state' type='hidden' value='" . $result['subj_active'] . "'>
+        <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+        <span>" . $iconName . "</span>
+        </form>";
+      }
     } else if ($type == 'sect') {
       if ($result['sect_active'] == 1) {
 
@@ -205,13 +222,15 @@ class Functions
       }
       $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['sect_active'] == 1) ? '' : "class='table__Restore'";
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
-      <input name='page' type='hidden' value='$page'>
-      <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
-      <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
-            <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
-            <span>" . $iconName . "</span>
-        </form>";
+      if ($_SESSION['type'] >= 3) {
+        $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
+        <input name='page' type='hidden' value='$page'>
+        <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
+        <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
+              <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+              <span>" . $iconName . "</span>
+          </form>";
+      }
     } else if ($type == 'room') {
       if ($result['rm_active'] == 1) {
         $action .= "<form method='POST' action='./schedules.php'>
@@ -223,13 +242,15 @@ class Functions
       }
       $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['rm_active'] == 1) ? '' : "class='table__Restore'";
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'  $tableRestore>
-                <input name='page' type='hidden' value='$page'>
-                <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
-                <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
-                <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
-                <span>" . $iconName . "</span>
-              </form>";
+      if ($_SESSION['type'] >= 3) {
+        $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'  $tableRestore>
+                  <input name='page' type='hidden' value='$page'>
+                  <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
+                  <input id='state' name='state' type='hidden' value='" . $result['rm_active'] . "'>
+                  <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+                  <span>" . $iconName . "</span>
+                </form>";
+      }
     } else if ($type == 'prof') {
       if ($result['prof_active'] == 1) {
         $action .= "<form method='POST' action='./schedules.php'>
@@ -241,14 +262,16 @@ class Functions
       }
       $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['prof_active'] == 1) ? '' : "class='table__Restore'";
-      $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
-              <input name='page' type='hidden' value='$page'>
-              <input name='id' type='hidden' value='" . $result['id'] . "'>
-              <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
-              <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
-              <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
-              <span>" . $iconName . "</span>
-           </form>";
+      if ($_SESSION['type'] >= 3) {
+        $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
+                <input name='page' type='hidden' value='$page'>
+                <input name='id' type='hidden' value='" . $result['id'] . "'>
+                <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+                <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
+                <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+                <span>" . $iconName . "</span>
+             </form>";
+      }
     } else if ($type == 'user') {
       if ($result['is_active'] == 1) {
         $action .= "<a href=?page=$page&id=" . $result['user_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
@@ -264,5 +287,59 @@ class Functions
               </form>";
     }
     return $action;
+  }
+
+  public function BuildLiveSelect($id, $target, $level = '')
+  {
+    echo "<select class='liveSelect' name='selectLevel'>
+    <option value='course'>College</option>
+    <option value='strand'>Senior High School</option>
+    </select>";
+    if ($target != 'section') {
+      var_dump($target);
+
+      echo "<select class='liveSelect' name='selectDept'>";
+      $deptView = new DepartmentsView();
+      $depts = $deptView->FetchDepts($level, 1);
+      foreach ($depts as $dept) {
+        echo "<option value='{$dept['dept_id']}'>{$dept['dept_desc']}</option>";
+      }
+
+      echo "</select>";
+      $id = $depts[0]['dept_id'] ?? $id;
+    }
+    echo "<select class='liveSelect' name='selectSection'>";
+
+    $sectView = new SectionsView();
+    $sects = $sectView->FetchSectionByDept($id);
+    foreach ($sects as $sect) {
+      echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
+    }
+
+    echo "</select>";
+    $id = $sects[0]['sect_id'] ?? $id;
+
+    if ($target == 'section') {
+
+      $sectView = new SectionsView();
+      $sect = $sectView->FetchSectionByID($id)[0];
+      $caption = "
+     <p>{$sect['dept_desc']}</p>
+     <p>{$sect['sect_yrsem']}</p>
+     <h3>{$sect['sect_name']}</h3>
+     ";
+
+      $schedView = new SchedulesView();
+      $type = 'sect';
+      $dTime = $schedView->FetchDisplayTime($type, $id)[0];
+
+      $startTime = $dTime['op_start'];
+      $endTime   = $dTime['op_end'];
+      $jumpTime  = $dTime['op_jump'];
+      $newStartTime = strtotime($startTime);
+      $newEndTime = strtotime($endTime);
+
+      $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id);
+    }
   }
 }

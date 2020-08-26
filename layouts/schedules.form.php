@@ -11,7 +11,7 @@ $errorProf = $errors['errorProf'] ?? "";
 $errorRoom = $errors['errorRoom'] ?? "";
 $errorSect = $errors['errorSect'] ?? "";
 $errorSubj = $errors['errorSubj'] ?? "";
-
+$errorTime = $errors['errorTime'] ?? "";
 
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
@@ -20,7 +20,6 @@ if ($schedIDExist) {
   $button = "update";
   $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
 }
-
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()'>
@@ -57,6 +56,7 @@ if ($schedIDExist) {
       </select>
     </div>
   </div>
+  <div class='form__Error'><?php echo $errorTime ?></div>
   <div class="form__DayContainer">
 
     <?php

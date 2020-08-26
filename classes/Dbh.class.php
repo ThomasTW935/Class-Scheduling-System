@@ -11,7 +11,9 @@ class Dbh
    // private $user = "b9e547a06bfec3";
    // private $pwd = "0e937125";
    // private $dbName = "heroku_47a94c0a6cb5111";
+   // $herokuHost = mysql -u b9e547a06bfec3 -h us-cdbr-east-02.cleardb.com -p heroku_47a94c0a6cb5111 < classschedulingsystem.sql
 
+   // mysql://b9e547a06bfec3:0e937125@us-cdbr-east-02.cleardb.com/heroku_47a94c0a6cb5111?reconnect=true
    protected function connect()
    {
       try {

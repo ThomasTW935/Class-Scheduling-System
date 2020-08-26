@@ -17,6 +17,18 @@ class Departments extends Dbh
          trigger_error("Error: " . $e->getMessage());
       }
    }
+   protected function getDeptartmentsWithSection($type, $state)
+   {
+      $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? AND dept_id IN(SELECT dept_id FROM sections)";
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$type, $state]);
+         $result = $stmt->fetchAll();
+         return $result;
+      } catch (PDOException $e) {
+         trigger_error("Error: " . $e->getMessage());
+      }
+   }
    protected function getDepartmentByNameAndType($name, $type)
    {
       $sql = 'SELECT * FROM departments WHERE dept_name = ? AND dept_type = ? LIMIT 1';

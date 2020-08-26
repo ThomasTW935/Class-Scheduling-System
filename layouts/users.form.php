@@ -8,6 +8,7 @@ parse_str($query, $errors);
 
 $errorUsername = $errors['errorUsername'] ?? '';
 $errorEmail = $errors['errorEmail'] ?? '';
+$errorPassword = $errors['errorPassword'] ?? '';
 
 $userID = '';
 $username = $errors['username'] ?? '';
@@ -48,6 +49,20 @@ if (isset($_GET['id'])) {
          <div class="form__Error"><?php echo $errorEmail ?></div>
       </div>
    </div>
+   <?php
+
+   if (!isset($_GET['id'])) {
+      echo "<div class='form__Container'>
+         <label for='' class='form__Label'>Password:</label>
+         <div class='form__Input'>
+            <input class='form__Input' type='password' name='new-password' autocomplete='0' required>
+            <div class='form__Error'>$errorPassword</div>
+         </div>
+      </div>";
+   }
+
+   ?>
+
    <div class="form__Container">
       <label for="" class="form__Label">Role Level:</label>
       <div class="form__Input">
