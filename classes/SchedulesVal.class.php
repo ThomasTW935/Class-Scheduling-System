@@ -79,6 +79,11 @@ class SchedulesVal
     $input = "input" . ucfirst($type);
     $result = $this->CheckIfExist($con, $input);
     var_dump($result);
+    $timeFrom = trim($this->data['timeFrom']);
+    $timeTo = trim($this->data['timeTo']);
+    if (empty($timeFrom) || empty($timeTo)) {
+      $this->addError('errorTime', '*Choose a time');
+    }
     if (!empty($result)) {
       $this->addError('errorTime', '*Time occupied');
       return $result;

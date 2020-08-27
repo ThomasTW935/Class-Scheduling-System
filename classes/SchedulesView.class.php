@@ -44,7 +44,7 @@ class SchedulesView extends Schedules
   public function GenerateTimeOptions($startTime, $endTime, $selected, $jump = 60, $showTimeDiff = false)
   {
     for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
-      echo "<option value = '" . date('H:i', $i) . "' ";
+      echo "<option value = '" . date('G:i', $i) . "' ";
       if ($i == $selected) {
         echo "selected >" . date('g:i A', $i) . "</option>";
       } else {

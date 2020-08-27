@@ -102,7 +102,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
                   <?php
 
                   $newStartTime = strtotime($startTime);
-                  $schedView->GenerateTimeOptions(strtotime('0:00'), strtotime('23:00'), $newStartTime);
+                  $schedView->GenerateTimeOptions(strtotime('6:00'), strtotime('23:00'), $newStartTime);
 
                   ?>
                </select>

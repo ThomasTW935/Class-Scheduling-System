@@ -7,7 +7,7 @@ let ChangeFormatTime = (e) => {
   let timeEnd = ''
   if (id == 'timeStart') {
     timeStart = document.querySelector('#timeStart')
-    timeEnd = document.querySelector('#timeFrom')
+    timeEnd = document.querySelector('#timeEnd')
   } else {
     timeStart = document.querySelector('#timeFrom')
     timeEnd = document.querySelector('#timeTo')
@@ -35,14 +35,13 @@ let ChangeFormatTime = (e) => {
     }
     if (id == 'timeStart') {
       let option = document.createElement('option')
-      let m = ":00 "
+      let m = ":00"
       option.value = i + m
-      option.innerHTML = timeValue + m + timePeriod
+      option.innerHTML = timeValue + m + ` ${timePeriod}`
       timeEnd.add(option)
     } else {
       let timeJump = document.querySelector('#timeJump')
       let jumpValue = Number(timeJump.value)
-
       for (let k = 0; k < 60; k += jumpValue) {
         if (i == 22 && k > 0) break;
         let timeDiff = new Date('January 1 2000')
@@ -50,28 +49,33 @@ let ChangeFormatTime = (e) => {
         timeDiff.setMinutes(k)
         let diff = timeDiff - startDate_Time
         let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        if (hours < 1) {
+          continue
+        }
         let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-        let formatHours = (hours > 0) ? hours : ""
         let convertMinutes = (minutes / 60) * 100
         convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
         let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''
-        let diffResult = `(${formatHours}${formatMinutes} hour/s)`
-        console.log(diffResult)
-        let m = (k == 0) ? ":00 " : `:${k} `;
+        let diffResult = `(${hours}${formatMinutes} hour/s)`
+        let m = (k == 0) ? ":00" : `:${k}`;
         let option = document.createElement('option')
         option.value = i + m
-        option.innerHTML = timeValue + m + timePeriod + diffResult
+        option.innerHTML = timeValue + m + ` ${timePeriod}` + diffResult
         timeEnd.add(option)
       }
     }
   }
 
 
-
   if (startDate_Time >= endDate_Time) {
     timeEnd.value = timeEnd.options[0].value
-  } else {
+  }
+  else {
     timeEnd.value = endValue
+    if (timeEnd.value == '') {
+      timeEnd.value = timeEnd.options[0].value
+    }
+    console.log(endValue)
   }
 }
 
@@ -103,11 +107,6 @@ let TableFixLabel = () => {
         var cellNext = rowNext.cells[colIndex]
         var cellTextNext = cellNext.innerText
       }
-      // if (rowIndex == 6 && colIndex == 1) {
-      //   console.log(cellTextNext == cellTextCurrent)
-      //   console.log(rowCurrent)
-      //   console.log(rowNext)
-      // }
       if (cellTextNext == cellTextCurrent) {
         mergeNum++
         cellNext.style.display = 'none'
