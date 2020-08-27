@@ -53,7 +53,7 @@ class SchedulesView extends Schedules
         $formatMinutes = ($minutes / 60) * 100;
         $formatMinutes = ($formatMinutes == 50) ? 5 : $formatMinutes;
         $formatMinutes = ($formatMinutes == 0) ? '' : ".$formatMinutes";
-        echo " ($hours$formatMinutes hour/s)";
+        // echo " ($hours$formatMinutes hour/s)";
       }
       "</option>";
     }
