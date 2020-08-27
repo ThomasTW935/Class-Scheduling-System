@@ -47,7 +47,7 @@ class SchedulesView extends Schedules
       $optSelect = ($i == $selected) ? "selected" : "";
       echo "<option value='" . date('G:i', $i) . "' $optSelect>" . date('g:i A', $i);
       if ($showTimeDiff) {
-        $timeDiff = $i - ($startTime - (60 * 30));
+        $timeDiff = $i - ($startTime - (60 * 60));
         $hours = date('G', $timeDiff);
         $minutes = date('i', $timeDiff);
         $formatMinutes = ($minutes / 60) * 100;
