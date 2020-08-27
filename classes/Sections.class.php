@@ -21,10 +21,10 @@ class Sections extends Dbh
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%$search%";
-    $sql = "SELECT sect_id,sect_name, sect_year, s.dept_id, dept_name, dept_desc, dept_type, sect_active FROM sections s INNER JOIN departments d ON s.dept_id = d.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR sect_sem LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
+    $sql = "SELECT sect_id,sect_name, sect_year, s.dept_id, dept_name, dept_desc, dept_type, sect_active FROM sections s INNER JOIN departments d ON s.dept_id = d.dept_id WHERE (sect_name LIKE ? OR sect_year LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$search, $search, $search, $search, $state]);
+      $stmt->execute([$search, $search, $search, $state]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
