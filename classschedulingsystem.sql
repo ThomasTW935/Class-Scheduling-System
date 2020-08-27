@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2020 at 08:57 AM
+-- Generation Time: Aug 27, 2020 at 10:25 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -45,7 +45,6 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`, `dept_type`, `de
 (47, 'BSTM', 'Bachelor of Science in Tourism Management', 'course', 1),
 (48, 'BSTM', 'Bachelor of Science in Tourism Management', 'faculty', 0),
 (49, 'BSIT', 'Bachelor of Science in Information Technology', 'course', 1),
-(50, 'fdghd', 'kjvkjffjdfji', 'strand', 0),
 (51, 'IT', 'Information Technology', 'faculty', 1),
 (52, 'BSIS', 'Bachelor of Science in Information System', 'course', 1),
 (53, 'BSCS', 'Bachelor of Science in Computer Science', 'course', 1),
@@ -74,9 +73,7 @@ INSERT INTO `departments` (`dept_id`, `dept_name`, `dept_desc`, `dept_type`, `de
 (76, 'HRM', 'Hotel Operations', 'strand', 1),
 (77, 'TM', 'Tourism Operations', 'strand', 1),
 (78, 'HRS', 'Restaurant and Cafe Operation', 'strand', 1),
-(79, 'Culin', 'Culinary Arts', 'strand', 0),
-(80, 'Tst', 'Testing', 'course', 1),
-(81, 'TEST', 'asdasd', 'course', 1);
+(79, 'Culin', 'Culinary Arts', 'strand', 0);
 
 -- --------------------------------------------------------
 
@@ -103,7 +100,7 @@ CREATE TABLE `professors` (
 
 INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_initial`, `suffix`, `dept_id`, `user_id`, `prof_active`, `prof_img`) VALUES
 (31, 323253243, 'Aparato', 'Christine', '', '', 17, 28, 1, NULL),
-(32, 123456789, 'Thomas', 'Dary', '', '', 43, 29, 1, 'Thomas.5f3ca888ef2de.jpg'),
+(32, 123456789, 'Thomas', 'Daryyl', 'P', '', 43, 29, 1, 'Thomas.5f46a0044a035.jpg'),
 (33, 2000066525, 'Aparato', 'Christine', '', '', 43, 30, 1, NULL),
 (34, 89896565, 'Mendoza', 'Setty', 'G', '', 51, 32, 1, NULL),
 (35, 987654321, 'De peralta', 'hush', '', '', 51, 34, 1, NULL),
@@ -112,7 +109,7 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 (38, 852147963, 'Pacleb', 'Roland', 'P', '', 51, 37, 1, NULL),
 (39, 195375465, 'Gajasan', 'Jonathan', 'F', '', 43, 38, 1, NULL),
 (40, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 43, 39, 0, NULL),
-(41, 14562487, 'Thoma', 'Isab', 'P', '', 43, 40, 1, NULL);
+(41, 14562487, 'Thomas', 'Isab', 'P', '', 43, 40, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,7 +121,7 @@ CREATE TABLE `rooms` (
   `rm_id` int(11) NOT NULL,
   `rm_name` varchar(30) NOT NULL,
   `rm_desc` text NOT NULL,
-  `rm_floor` enum('2nd Floor','3rd Floor','4th Floor','5th Floor') NOT NULL,
+  `rm_floor` enum('Ground Floor','2nd Floor','3rd Floor','4th Floor','5th Floor','6th Floor','7th Floor','8th Floor') NOT NULL,
   `rm_capacity` smallint(6) NOT NULL,
   `rm_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -192,42 +189,15 @@ CREATE TABLE `schedules` (
 INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
 (33, '07:00:00', '10:00:00', '2020-08-08 18:55:37', 0, 8, 0, 3),
 (36, '07:00:00', '09:00:00', '2020-08-08 18:55:37', 34, 7, 0, 3),
-(37, '13:00:00', '15:00:00', '2020-08-08 18:55:37', 32, 0, 0, 0),
-(38, '08:00:00', '10:00:00', '2020-08-20 12:14:31', 0, 0, 6, 3),
 (39, '10:30:00', '12:00:00', '2020-08-20 12:14:31', 0, 8, 6, 0),
-(44, '11:00:00', '13:00:00', '2020-08-08 18:55:37', 0, 0, 0, 0),
-(46, '07:00:00', '08:00:00', '2020-08-20 12:22:14', 41, 14, 9, 2),
-(47, '07:00:00', '08:00:00', '2020-08-20 12:22:22', 0, 0, 0, 2),
-(48, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 41, 15, 0, 8),
-(49, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 36, 10, 0, 2),
 (50, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 33, 12, 0, 8),
-(51, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 0, 0, 0, 0),
-(53, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 0, 0, 0, 0),
-(54, '07:00:00', '08:00:00', '2020-08-20 13:38:53', 0, 0, 0, 3),
-(55, '07:00:00', '08:00:00', '2020-08-20 13:38:57', 0, 0, 0, 3),
-(56, '07:00:00', '08:00:00', '2020-08-20 13:41:36', 0, 0, 0, 3),
-(57, '07:00:00', '08:00:00', '2020-08-20 13:41:49', 0, 0, 0, 3),
-(58, '07:00:00', '08:00:00', '2020-08-20 13:49:48', 0, 0, 0, 3),
-(59, '07:00:00', '08:00:00', '2020-08-20 13:51:50', 0, 0, 0, 3),
-(60, '07:00:00', '08:00:00', '2020-08-20 13:51:59', 0, 0, 0, 3),
-(61, '07:00:00', '08:00:00', '2020-08-20 13:52:12', 0, 0, 0, 3),
-(62, '07:00:00', '08:00:00', '2020-08-20 14:17:55', 0, 0, 0, 3),
-(63, '07:00:00', '08:00:00', '2020-08-20 14:18:00', 0, 0, 0, 3),
-(64, '07:00:00', '08:00:00', '2020-08-20 14:18:05', 0, 0, 0, 3),
-(65, '07:00:00', '10:00:00', '2020-08-21 02:03:09', 32, 10, 7, 3),
-(66, '14:00:00', '16:00:00', '2020-08-23 05:46:12', 32, 10, 7, 11),
-(67, '10:00:00', '12:00:00', '2020-08-21 02:07:15', 34, 12, 44, 5),
-(68, '08:30:00', '09:45:00', '2020-08-21 02:07:45', 35, 11, 44, 6),
 (69, '10:00:00', '12:00:00', '2020-08-21 02:08:26', 33, 12, 44, 6),
-(70, '07:00:00', '08:00:00', '2020-08-22 04:22:17', 0, 6, 0, 0),
-(71, '07:00:00', '08:00:00', '2020-08-22 04:22:45', 0, 6, 0, 0),
-(72, '07:00:00', '08:00:00', '2020-08-22 04:25:51', 0, 6, 0, 0),
-(73, '07:00:00', '08:00:00', '2020-08-22 04:26:03', 0, 6, 0, 0),
-(74, '07:00:00', '08:00:00', '2020-08-22 04:29:10', 0, 6, 0, 0),
 (75, '07:00:00', '08:00:00', '2020-08-22 04:57:57', 35, 6, 6, 9),
-(76, '07:00:00', '08:00:00', '2020-08-22 05:38:01', 0, 6, 0, 0),
-(77, '07:00:00', '08:00:00', '2020-08-22 05:38:05', 0, 6, 0, 0),
-(78, '07:00:00', '08:00:00', '2020-08-22 05:38:19', 0, 6, 0, 0);
+(79, '14:00:00', '17:00:00', '2020-08-24 09:37:11', 34, 6, 7, 6),
+(80, '07:00:00', '08:00:00', '2020-08-24 08:44:42', 32, 11, 8, 2),
+(81, '10:00:00', '12:00:00', '2020-08-26 17:50:11', 32, 10, 8, 7),
+(82, '07:00:00', '08:30:00', '2020-08-27 07:54:54', 37, 138, 31, 16),
+(83, '08:30:00', '11:30:00', '2020-08-27 07:55:48', 39, 14, 5, 17);
 
 -- --------------------------------------------------------
 
@@ -249,17 +219,22 @@ INSERT INTO `schedules_day` (`id`, `sched_id`, `sched_day`) VALUES
 (69, 33, 'Monday'),
 (81, 36, 'Tuesday'),
 (82, 33, 'Wednesday'),
-(83, 37, 'Tuesday'),
-(84, 37, 'Thursday'),
 (85, 33, 'Friday'),
 (86, 36, 'Thursday'),
 (87, 39, 'Tuesday'),
 (88, 39, 'Thursday'),
-(91, 44, 'Monday'),
 (92, 50, 'Monday'),
-(94, 66, 'Saturday'),
 (95, 69, 'Friday'),
-(96, 75, 'Thursday');
+(96, 75, 'Thursday'),
+(101, 80, 'Wednesday'),
+(103, 79, 'Tuesday'),
+(104, 79, 'Thursday'),
+(105, 81, 'Tuesday'),
+(106, 81, 'Thursday'),
+(107, 82, 'Monday'),
+(108, 82, 'Wednesday'),
+(109, 83, 'Tuesday'),
+(110, 83, 'Thursday');
 
 -- --------------------------------------------------------
 
@@ -529,7 +504,14 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (338, '07:00:00', '17:00:00', '15', 'room', 44),
 (339, '07:00:00', '17:00:00', '15', 'room', 45),
 (340, '07:00:00', '17:00:00', '15', 'room', 46),
-(341, '07:00:00', '17:00:00', '30', 'room', 47);
+(341, '07:00:00', '17:00:00', '30', 'room', 47),
+(342, '07:00:00', '17:00:00', '30', 'sect', 10),
+(343, '07:00:00', '17:00:00', '30', 'sect', 10),
+(344, '07:00:00', '17:00:00', '30', 'sect', 10),
+(345, '07:00:00', '17:00:00', '30', 'sect', 10),
+(346, '07:00:00', '17:00:00', '30', 'sect', 16),
+(347, '07:00:00', '17:00:00', '30', 'sect', 17),
+(348, '07:00:00', '17:00:00', '30', 'sect', 18);
 
 -- --------------------------------------------------------
 
@@ -540,8 +522,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 CREATE TABLE `sections` (
   `sect_id` int(11) NOT NULL,
   `sect_name` varchar(50) NOT NULL,
-  `sect_year` int(11) NOT NULL,
-  `sect_sem` int(11) NOT NULL,
+  `sect_year` enum('Grade 11','Grade 12','1st Year First Semester','1st Year Second Semester','2nd Year First Semester','2nd Year Second Semester','3rd Year First Semester','3rd Year Second Semester','4th Year First Semester','4th Year Second Semester') NOT NULL,
   `dept_id` int(11) NOT NULL,
   `sect_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -550,17 +531,19 @@ CREATE TABLE `sections` (
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`sect_id`, `sect_name`, `sect_year`, `sect_sem`, `dept_id`, `sect_active`) VALUES
-(2, 'BSIT602', 3, 1, 47, 1),
-(3, 'BSIT701', 4, 1, 49, 1),
-(4, 'BSIT103', 1, 1, 49, 0),
-(5, 'BSIT201', 1, 2, 49, 1),
-(6, 'BSIT301', 2, 1, 49, 1),
-(7, 'BSIT401', 2, 2, 49, 1),
-(8, 'BSIT801', 4, 2, 49, 1),
-(9, 'BSIT501', 3, 1, 49, 1),
-(10, 'BSIT601', 3, 2, 49, 1),
-(11, 'BSIT111111', 3, 1, 49, 1);
+INSERT INTO `sections` (`sect_id`, `sect_name`, `sect_year`, `dept_id`, `sect_active`) VALUES
+(2, 'BSIT602', '1st Year First Semester', 47, 1),
+(3, 'BSIT701', '1st Year Second Semester', 49, 1),
+(4, 'BSIT103', 'Grade 11', 49, 0),
+(5, 'BSIT201', 'Grade 11', 49, 1),
+(6, 'BSIT301', 'Grade 12', 49, 1),
+(7, 'BSIT401', 'Grade 12', 49, 1),
+(8, 'BSIT801', '1st Year Second Semester', 49, 1),
+(9, 'BSIT501', '1st Year First Semester', 49, 1),
+(10, 'BSIT601', '1st Year First Semester', 49, 1),
+(16, 'ABM101', 'Grade 11', 68, 1),
+(17, 'STEM201', 'Grade 12', 69, 1),
+(18, 'ABM102', 'Grade 11', 68, 1);
 
 -- --------------------------------------------------------
 
@@ -652,105 +635,105 @@ INSERT INTO `subjects` (`subj_id`, `subj_code`, `subj_desc`, `units`, `dept_id`,
 (72, 'IT1102', 'Mobile Application Development (Lec)', 2, 'Tertiarty', 1),
 (73, 'IT1102L', 'Mobile Application Development (Lab)', 1, 'Tertiarty', 1),
 (74, 'IT1152', 'IT Practicum', 9, 'Tertiarty', 1),
-(75, 'OC', 'Oral Communication', 80, 'Tertiarty', 1),
-(76, 'GM', 'General Mathematics', 80, 'Tertiarty', 1),
-(77, 'Literature', '21st Century Literature form the Philippines and the World', 80, 'Tertiarty', 1),
-(78, 'MIT', 'Media and Information Literacy', 80, 'Tertiarty', 1),
-(79, 'IPHP', 'Introduction to the Philosophy of the Human Person', 80, 'Tertiarty', 1),
+(75, 'OC', 'Oral Communication', 3, 'Tertiarty', 1),
+(76, 'GM', 'General Mathematics', 3, 'Tertiarty', 1),
+(77, 'Literature', '21st Century Literature form the Philippines and the World', 3, 'Tertiarty', 1),
+(78, 'MIT', 'Media and Information Literacy', 3, 'Tertiarty', 1),
+(79, 'IPHP', 'Introduction to the Philosophy of the Human Person', 3, 'Tertiarty', 1),
 (80, 'PE1', 'Physical Education and Health 1', 20, 'Tertiarty', 1),
-(81, 'OM', 'Organization and Management', 80, 'Tertiarty', 1),
-(82, 'BM', 'Business Mathematics', 80, 'Tertiarty', 1),
-(83, 'RW', 'Reading and Writing', 80, 'Tertiarty', 1),
-(84, 'SP', 'Statistic and Probability', 80, 'Tertiarty', 1),
-(85, 'UCSP', 'Understanding Culture , Society and Politics', 80, 'Tertiarty', 1),
-(86, 'ELS', 'Earth and Life Science', 80, 'Tertiarty', 1),
-(87, 'FIL1', 'Komunikasyon at Pananaliksik sa Wika at kulturang Pilipino', 80, 'Tertiarty', 1),
-(88, 'PR1', 'Practical Research 1', 80, 'Tertiarty', 1),
-(89, 'PM', 'Principles of Marketing', 80, 'Tertiarty', 1),
-(90, 'FABM1', 'Fundamentals of Accountancy, Business and Management 1', 80, 'Tertiarty', 1),
-(91, 'CPAR', 'Contemporary Philippine Arts from the Regions', 80, 'Tertiarty', 1),
+(81, 'OM', 'Organization and Management', 3, 'Tertiarty', 1),
+(82, 'BM', 'Business Mathematics', 3, 'Tertiarty', 1),
+(83, 'RW', 'Reading and Writing', 3, 'Tertiarty', 1),
+(84, 'SP', 'Statistic and Probability', 3, 'Tertiarty', 1),
+(85, 'UCSP', 'Understanding Culture , Society and Politics', 3, 'Tertiarty', 1),
+(86, 'ELS', 'Earth and Life Science', 3, 'Tertiarty', 1),
+(87, 'FIL1', 'Komunikasyon at Pananaliksik sa Wika at kulturang Pilipino', 3, 'Tertiarty', 1),
+(88, 'PR1', 'Practical Research 1', 3, 'Tertiarty', 1),
+(89, 'PM', 'Principles of Marketing', 3, 'Tertiarty', 1),
+(90, 'FABM1', 'Fundamentals of Accountancy, Business and Management 1', 3, 'Tertiarty', 1),
+(91, 'CPAR', 'Contemporary Philippine Arts from the Regions', 3, 'Tertiarty', 1),
 (92, 'PE4', 'Physical Education and Health 4', 20, 'Tertiarty', 1),
-(93, 'ET', 'Empowerment Technologies', 80, 'Tertiarty', 1),
-(94, 'ENTREP', 'Entrepreneurship', 80, 'Tertiarty', 1),
-(95, 'INM', 'Inquiries, Investigation and Immersion', 80, 'Tertiarty', 1),
-(96, 'AECO', 'Applied Economics', 80, 'Tertiarty', 1),
-(97, 'BESR', 'Business Ethics and Social Responsibility', 80, 'Tertiarty', 1),
-(98, 'BES', 'Work Immersion/Research/Career Advocacy/Culminating Activity', 80, 'Tertiarty', 1),
-(99, 'PRECal', 'Pre-Calculus', 80, 'Tertiarty', 1),
-(100, 'GENBIO', 'General Biology 1', 80, 'Tertiarty', 1),
-(101, 'BCAL', 'Basic Calculus', 80, 'Tertiarty', 1),
-(102, 'GENBIO2', 'General Biology 2', 80, 'Tertiarty', 1),
+(93, 'ET', 'Empowerment Technologies', 3, 'Tertiarty', 1),
+(94, 'ENTREP', 'Entrepreneurship', 3, 'Tertiarty', 1),
+(95, 'INM', 'Inquiries, Investigation and Immersion', 3, 'Tertiarty', 1),
+(96, 'AECO', 'Applied Economics', 3, 'Tertiarty', 1),
+(97, 'BESR', 'Business Ethics and Social Responsibility', 3, 'Tertiarty', 1),
+(98, 'BES', 'Work Immersion/Research/Career Advocacy/Culminating Activity', 3, 'Tertiarty', 1),
+(99, 'PRECal', 'Pre-Calculus', 3, 'Tertiarty', 1),
+(100, 'GENBIO', 'General Biology 1', 3, 'Tertiarty', 1),
+(101, 'BCAL', 'Basic Calculus', 3, 'Tertiarty', 1),
+(102, 'GENBIO2', 'General Biology 2', 3, 'Tertiarty', 1),
 (103, 'PE2', 'Physical Education and Health 2', 20, 'Tertiarty', 1),
-(104, 'PD', 'Personal Development', 80, 'Tertiarty', 1),
-(105, 'FIL2', 'Pagbasa at Pagsuri ng Iba\'t Ibang Teksto Tungo sa Pananaliksik', 80, 'Tertiarty', 1),
-(106, 'PS', 'Physical Science', 80, 'Tertiarty', 1),
+(104, 'PD', 'Personal Development', 3, 'Tertiarty', 1),
+(105, 'FIL2', 'Pagbasa at Pagsuri ng Iba\'t Ibang Teksto Tungo sa Pananaliksik', 3, 'Tertiarty', 1),
+(106, 'PS', 'Physical Science', 3, 'Tertiarty', 1),
 (107, 'PE3', 'Physical Education and Health 3', 20, 'Tertiarty', 1),
-(108, 'PR2', 'Practical Research 2', 80, 'Tertiarty', 1),
-(109, 'FIL3', 'Filipino sa Piling Larangan', 80, 'Tertiarty', 1),
-(110, 'EAPP', 'English for Academic and Professional Purposes', 80, 'Tertiarty', 1),
-(111, 'BF', 'Business Finance', 80, 'Tertiarty', 1),
-(112, 'FABM2', 'Fundamentals of Accountancy, Business and Management 2', 80, 'Tertiarty', 1),
-(113, 'DRRR', 'Disaster Readiness and Risk Reduction', 80, 'Tertiarty', 1),
-(114, 'PHYSICS1', 'General Physics 1', 80, 'Tertiarty', 1),
-(115, 'GENCHE1', 'General Chemistry1', 80, 'Tertiarty', 1),
-(116, 'PHYSICS2', 'General Physics 2', 80, 'Tertiarty', 1),
-(117, 'GENCHE2', 'General Chemistry2', 80, 'Tertiarty', 1),
-(118, 'IWRBS', 'Introduction to World Religions and Belief System', 80, 'Tertiarty', 0),
-(119, 'DISS', 'Discipline and Ideas in the Social Sciences', 80, 'Tertiarty', 1),
-(120, 'CW', 'Creative Writing', 80, 'Tertiarty', 1),
-(121, 'CN', 'Creative Nonfiction', 80, 'Tertiarty', 1),
-(122, 'PPG', 'Philippine Politics and Governance', 80, 'Tertiarty', 1),
-(123, 'TNCT', 'Trends, Networks and Critical Thingking in the 21st Century', 80, 'Tertiarty', 1),
-(124, 'CESC', 'Community Engagement Solidarity and Citizenship', 80, 'Tertiarty', 1),
-(125, 'COMPRO1', 'Computer Programming 1 (Java/Intro to Programming)', 80, 'Tertiarty', 1),
-(126, 'COMPRO2', 'Computer Programming 2 (HTML,CSS/Web Interfaces)', 80, 'Tertiarty', 1),
-(127, 'COMPRO3', 'Computer Programming 3 (Intermediate Java Programming)', 80, 'Tertiarty', 1),
-(128, 'MAP', 'Mobile App Programming 1 (Android OS and Java)', 80, 'Tertiarty', 1),
-(129, 'COMPRO4', 'Computer Programming 4 (C#/Intro to .Net Programming)', 80, 'Tertiarty', 1),
-(130, 'COMPRO5', 'Computer Programming 5 (JavaScript,jQuery)', 80, 'Tertiarty', 1),
-(131, 'COMPRO6', 'Computer Programming 6 (SQL/Intro to ASP.Net)', 80, 'Tertiarty', 1),
-(132, 'MAP2', 'Mobile App Programming 1 (Android OS and .NET Framework)', 80, 'Tertiarty', 1),
-(133, '2D', '2D Concept', 80, 'Tertiarty', 1),
-(134, 'BDD', 'Basic Drawing and Drafting', 80, 'Tertiarty', 1),
-(135, 'FCD', 'Fundamental of Computer Drawing', 80, 'Tertiarty', 1),
-(136, 'DGDIM', 'Digital Graphics Design and Image Manipulation', 80, 'Tertiarty', 1),
-(137, 'DP', 'Digital Photography', 80, 'Tertiarty', 1),
-(138, 'CA', 'Computer Animation', 80, 'Tertiarty', 1),
-(139, 'DVAP', 'Digital Video and Audio Production', 80, 'Tertiarty', 1),
-(140, '3D', '3D Modeling', 80, 'Tertiarty', 1),
-(141, 'CEDD', 'Computer Engineering Drafting and Design', 80, 'Tertiarty', 1),
-(142, 'FEE', 'Fundamentals of Electricity and Electronics', 80, 'Tertiarty', 1),
-(143, 'CHF', 'Computer Hardware Fundamentals', 80, 'Tertiarty', 1),
-(144, 'BCT', 'Basic Computer Technology', 80, 'Tertiarty', 1),
-(145, 'EC', 'Electronic and Communications', 80, 'Tertiarty', 1),
-(146, 'DC', 'Data Communications', 80, 'Tertiarty', 1),
-(147, 'BT', 'Broadband Technology', 80, 'Tertiarty', 1),
-(148, 'COMNETS', 'Computer Networks', 80, 'Tertiarty', 1),
-(149, 'RE', 'Radio Electronics', 80, 'Tertiarty', 1),
-(150, 'TV', 'TV Electronics', 80, 'Tertiarty', 1),
-(151, 'MT', 'Mobile Technology', 80, 'Tertiarty', 1),
-(152, 'TGE', 'Tour Guiding and Escorting', 80, 'Tertiarty', 1),
-(153, 'ITTI', 'Introduction to Travel and Tourism Industry', 80, 'Tertiarty', 1),
-(154, 'ITS', 'Introduction to travel  and Services', 80, 'Tertiarty', 1),
-(155, 'TSMP', 'Tourism Sales and Marketing Principles', 80, 'Tertiarty', 1),
-(156, 'TIM', 'Tourism Information Management', 80, 'Tertiarty', 1),
-(157, 'IETC', 'Internet and E-Travel Commerce', 80, 'Tertiarty', 1),
-(158, 'IFBO', 'Introduction to Food and Beverages Operations', 80, 'Tertiarty', 1),
-(159, 'NABC', 'Non-alcoholic Beverages Concoction', 80, 'Tertiarty', 1),
-(160, 'FBS', 'Food and Beverages Services', 80, 'Tertiarty', 1),
-(161, 'CC', 'Coffee Concoction', 80, 'Tertiarty', 1),
-(162, 'IBMO', 'Introduction to Bar Management and Operation', 80, 'Tertiarty', 1),
-(163, 'CMF', 'Cocktail Mixology with Flairtending', 80, 'Tertiarty', 1),
-(164, 'BSM', 'Bar Services Management', 80, 'Tertiarty', 1),
-(165, 'WSM', 'Wine Service Management', 80, 'Tertiarty', 0),
-(166, 'ICO', 'Introduction to Culinary Operations', 80, 'Tertiarty', 0),
-(167, 'BFP101', 'Basic Food Production 101', 80, 'Tertiarty', 0),
-(168, 'BFP102', 'Basic Food Production 102', 80, 'Tertiarty', 0),
-(169, 'BFP103', 'Basic Food Production 103', 80, 'Tertiarty', 0),
-(170, 'ICC', 'Introduction to Commercial Cookery', 80, 'Tertiarty', 0),
-(171, 'LIC', 'Loca and Internation Cuisines', 80, 'Tertiarty', 0),
-(172, 'CMCS', 'Catering Management and Control System', 80, 'Tertiarty', 0),
-(173, 'IBPP', 'Introduction to Bread and Pastry Production', 80, 'Tertiarty', 0),
+(108, 'PR2', 'Practical Research 2', 3, 'Tertiarty', 1),
+(109, 'FIL3', 'Filipino sa Piling Larangan', 3, 'Tertiarty', 1),
+(110, 'EAPP', 'English for Academic and Professional Purposes', 3, 'Tertiarty', 1),
+(111, 'BF', 'Business Finance', 3, 'Tertiarty', 1),
+(112, 'FABM2', 'Fundamentals of Accountancy, Business and Management 2', 3, 'Tertiarty', 1),
+(113, 'DRRR', 'Disaster Readiness and Risk Reduction', 3, 'Tertiarty', 1),
+(114, 'PHYSICS1', 'General Physics 1', 3, 'Tertiarty', 1),
+(115, 'GENCHE1', 'General Chemistry1', 3, 'Tertiarty', 1),
+(116, 'PHYSICS2', 'General Physics 2', 3, 'Tertiarty', 1),
+(117, 'GENCHE2', 'General Chemistry2', 3, 'Tertiarty', 1),
+(118, 'IWRBS', 'Introduction to World Religions and Belief System', 3, 'Tertiarty', 0),
+(119, 'DISS', 'Discipline and Ideas in the Social Sciences', 3, 'Tertiarty', 1),
+(120, 'CW', 'Creative Writing', 3, 'Tertiarty', 1),
+(121, 'CN', 'Creative Nonfiction', 3, 'Tertiarty', 1),
+(122, 'PPG', 'Philippine Politics and Governance', 3, 'Tertiarty', 1),
+(123, 'TNCT', 'Trends, Networks and Critical Thingking in the 21st Century', 3, 'Tertiarty', 1),
+(124, 'CESC', 'Community Engagement Solidarity and Citizenship', 3, 'Tertiarty', 1),
+(125, 'COMPRO1', 'Computer Programming 1 (Java/Intro to Programming)', 3, 'Tertiarty', 1),
+(126, 'COMPRO2', 'Computer Programming 2 (HTML,CSS/Web Interfaces)', 3, 'Tertiarty', 1),
+(127, 'COMPRO3', 'Computer Programming 3 (Intermediate Java Programming)', 3, 'Tertiarty', 1),
+(128, 'MAP', 'Mobile App Programming 1 (Android OS and Java)', 3, 'Tertiarty', 1),
+(129, 'COMPRO4', 'Computer Programming 4 (C#/Intro to .Net Programming)', 3, 'Tertiarty', 1),
+(130, 'COMPRO5', 'Computer Programming 5 (JavaScript,jQuery)', 3, 'Tertiarty', 1),
+(131, 'COMPRO6', 'Computer Programming 6 (SQL/Intro to ASP.Net)', 3, 'Tertiarty', 1),
+(132, 'MAP2', 'Mobile App Programming 1 (Android OS and .NET Framework)', 3, 'Tertiarty', 1),
+(133, '2D', '2D Concept', 3, 'Tertiarty', 1),
+(134, 'BDD', 'Basic Drawing and Drafting', 3, 'Tertiarty', 1),
+(135, 'FCD', 'Fundamental of Computer Drawing', 3, 'Tertiarty', 1),
+(136, 'DGDIM', 'Digital Graphics Design and Image Manipulation', 3, 'Tertiarty', 1),
+(137, 'DP', 'Digital Photography', 3, 'Tertiarty', 1),
+(138, 'CA', 'Computer Animation', 3, 'Tertiarty', 1),
+(139, 'DVAP', 'Digital Video and Audio Production', 3, 'Tertiarty', 1),
+(140, '3D', '3D Modeling', 3, 'Tertiarty', 1),
+(141, 'CEDD', 'Computer Engineering Drafting and Design', 3, 'Tertiarty', 1),
+(142, 'FEE', 'Fundamentals of Electricity and Electronics', 3, 'Tertiarty', 1),
+(143, 'CHF', 'Computer Hardware Fundamentals', 3, 'Tertiarty', 1),
+(144, 'BCT', 'Basic Computer Technology', 3, 'Tertiarty', 1),
+(145, 'EC', 'Electronic and Communications', 3, 'Tertiarty', 1),
+(146, 'DC', 'Data Communications', 3, 'Tertiarty', 1),
+(147, 'BT', 'Broadband Technology', 3, 'Tertiarty', 1),
+(148, 'COMNETS', 'Computer Networks', 3, 'Tertiarty', 1),
+(149, 'RE', 'Radio Electronics', 3, 'Tertiarty', 1),
+(150, 'TV', 'TV Electronics', 3, 'Tertiarty', 1),
+(151, 'MT', 'Mobile Technology', 3, 'Tertiarty', 1),
+(152, 'TGE', 'Tour Guiding and Escorting', 3, 'Tertiarty', 1),
+(153, 'ITTI', 'Introduction to Travel and Tourism Industry', 3, 'Tertiarty', 1),
+(154, 'ITS', 'Introduction to travel  and Services', 3, 'Tertiarty', 1),
+(155, 'TSMP', 'Tourism Sales and Marketing Principles', 3, 'Tertiarty', 1),
+(156, 'TIM', 'Tourism Information Management', 3, 'Tertiarty', 1),
+(157, 'IETC', 'Internet and E-Travel Commerce', 3, 'Tertiarty', 1),
+(158, 'IFBO', 'Introduction to Food and Beverages Operations', 3, 'Tertiarty', 1),
+(159, 'NABC', 'Non-alcoholic Beverages Concoction', 3, 'Tertiarty', 1),
+(160, 'FBS', 'Food and Beverages Services', 3, 'Tertiarty', 1),
+(161, 'CC', 'Coffee Concoction', 3, 'Tertiarty', 1),
+(162, 'IBMO', 'Introduction to Bar Management and Operation', 3, 'Tertiarty', 1),
+(163, 'CMF', 'Cocktail Mixology with Flairtending', 3, 'Tertiarty', 1),
+(164, 'BSM', 'Bar Services Management', 3, 'Tertiarty', 1),
+(165, 'WSM', 'Wine Service Management', 3, 'Tertiarty', 0),
+(166, 'ICO', 'Introduction to Culinary Operations', 3, 'Tertiarty', 0),
+(167, 'BFP101', 'Basic Food Production 101', 3, 'Tertiarty', 0),
+(168, 'BFP102', 'Basic Food Production 102', 3, 'Tertiarty', 0),
+(169, 'BFP103', 'Basic Food Production 103', 3, 'Tertiarty', 0),
+(170, 'ICC', 'Introduction to Commercial Cookery', 3, 'Tertiarty', 0),
+(171, 'LIC', 'Loca and Internation Cuisines', 3, 'Tertiarty', 0),
+(172, 'CMCS', 'Catering Management and Control System', 3, 'Tertiarty', 0),
+(173, 'IBPP', 'Introduction to Bread and Pastry Production', 3, 'Tertiarty', 0),
 (175, 'IDK', 'I Don\'t Know', 3, 'Tertiarty', 0);
 
 -- --------------------------------------------------------
@@ -773,7 +756,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `is_active`) VALUES
-(1, 'Admin', 'hushsua@gmal.com', '$2y$10$VaC/5X0y9wE8KlQCpwPqP.GRBlxdrT8kr079K0krUgMGC6Ea3PtEG', 3, 1),
+(1, 'Admin', 'hushsua@gmal.com', '$2y$10$2fgPZSPWqfHVUx75//RiIezBP5cKv5hpWi7tGn2Nhu7rn/QVLrv52', 4, 1),
 (28, '3232532', '', '$2y$10$/wGSM4yn76j1Tqtpp2nP8u0YnswezJE/8MIgP86dJgKAJR87oC9AO', 1, 0),
 (29, '88888888', '', '$2y$10$G0XCro/zxWEwl8SgZDRXy.ibKBl5Fkk.3E9O6Z8dyig5FAOVCEbyy', 1, 1),
 (30, '0200006652', 'chris_tine09@yahoo.com', '$2y$10$WpVKlFearFw1GuG/JVZOC.sH24NUekp0OOwE6qzfJeSRpLeLRroPi', 1, 1),
@@ -784,7 +767,9 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `
 (37, '852147963', '', '$2y$10$1CMi8YGI1QtcEhP01JT/q.iyVdmUFqU/zubjB8AyeF.fy.YPSv/w.', 1, 1),
 (38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 1, 0),
 (39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 1),
-(40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$ZrwGj8V.waDuoIdsp8pC5.VStErNRyVjlXzg5oQWO05JhaBArwFV.', 1, 1);
+(40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$ZrwGj8V.waDuoIdsp8pC5.VStErNRyVjlXzg5oQWO05JhaBArwFV.', 1, 1),
+(44, 'Dean', '', '$2y$10$6ThSEgoLZL3ei/ThlYTOjOefpNxCFRuKjkzvfJe/8b7SAe/3cIywO', 2, 1),
+(45, 'ITHead', '', '$2y$10$FOCswG1SGll.hp.IHKmZwOTLPaKc8Bm61CuGG4A2HkYzd36VmZPPW', 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -870,25 +855,25 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `schedules_day`
 --
 ALTER TABLE `schedules_day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `schedules_operation`
 --
 ALTER TABLE `schedules_operation`
-  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
 
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `sect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `sect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -900,7 +885,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
