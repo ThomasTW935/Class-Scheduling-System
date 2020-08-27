@@ -12,6 +12,7 @@ $errorRoom = $errors['errorRoom'] ?? "";
 $errorSect = $errors['errorSect'] ?? "";
 $errorSubj = $errors['errorSubj'] ?? "";
 $errorTime = $errors['errorTime'] ?? "";
+$baseStartTime =  $newStartTime;
 
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
@@ -19,6 +20,7 @@ if ($schedIDExist) {
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $button = "update";
   $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
+  $baseStartTime = strtotime($result['sched_from']);
 }
 ?>
 
@@ -49,8 +51,8 @@ if ($schedIDExist) {
         <?php
 
         $selected = strtotime($result['sched_to']) ?? "";
-
-        $schedView->GenerateTimeOptions($newStartTime + (60 * 90), $newEndTime, $selected, $jump = $jumpTime, true)
+        $baseEndTime = strtotime('22:00');
+        $schedView->GenerateTimeOptions($baseStartTime + (60 * 90), $baseEndTime, $selected, $jump = $jumpTime, true)
 
         ?>
       </select>

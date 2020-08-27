@@ -44,21 +44,18 @@ class SchedulesView extends Schedules
   public function GenerateTimeOptions($startTime, $endTime, $selected, $jump = 60, $showTimeDiff = false)
   {
     for ($i = $startTime; $i <= $endTime; $i += $jump * 60) {
-      echo "<option value = '" . date('G:i', $i) . "' ";
-      if ($i == $selected) {
-        echo "selected >" . date('g:i A', $i) . "</option>";
-      } else {
-        echo " >" . date('g:i A', $i);
-        if ($showTimeDiff) {
-          $timeDiff = $i - ($startTime - (60 * 30));
-          $hours = date('G', $timeDiff);
-          $minutes = date('i', $timeDiff);
-          $formatMinutes = ($minutes / 60) * 100;
-          $formatMinutes = ($formatMinutes == 50) ? 5 : $formatMinutes;
-          echo " ($hours.$formatMinutes hour/s)";
-        }
-        "</option>";
+      $optSelect = ($i == $selected) ? "selected" : "";
+      echo "<option value='" . date('G:i', $i) . "' $optSelect>" . date('g:i A', $i);
+      if ($showTimeDiff) {
+        $timeDiff = $i - ($startTime - (60 * 30));
+        $hours = date('G', $timeDiff);
+        $minutes = date('i', $timeDiff);
+        $formatMinutes = ($minutes / 60) * 100;
+        $formatMinutes = ($formatMinutes == 50) ? 5 : $formatMinutes;
+        $formatMinutes = ($formatMinutes == 0) ? '' : ".$formatMinutes";
+        echo " ($hours$formatMinutes hour/s)";
       }
+      "</option>";
     }
   }
   public function GenerateDayChoices($display, $value, $isChecked = false)
