@@ -49,10 +49,10 @@ let ChangeFormatTime = (e) => {
         timeDiff.setMinutes(k)
         let diff = timeDiff - startDate_Time
         let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        if (hours < 1) {
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        if (hours < 1 || hours == 1 && minutes == 0) {
           continue
         }
-        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
         let convertMinutes = (minutes / 60) * 100
         convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
         let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''

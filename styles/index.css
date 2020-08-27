@@ -195,6 +195,7 @@ html {
   background: none;
   border: none;
   outline: none;
+  text-decoration: none;
 }
 
 .module__Form .form__Title .form__Close:hover {

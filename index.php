@@ -5,7 +5,7 @@ parse_str($query, $errors);
 $errorPassword = (isset($errors['errorPassword'])) ? "*{$errors['errorPassword']}" : '';
 $errorUsername = (isset($errors['errorUsername'])) ? "*{$errors['errorUsername']}" : '';
 $username = (isset($errors['username'])) ? "{$errors['username']}" : '';
-
+$triggerModal = (!empty($errors)) ? "style='display:flex;'" : '';
 include "./includes/autoloader.inc.php";
 
 ?>
@@ -63,10 +63,10 @@ include "./includes/autoloader.inc.php";
 
    </div>
 
-   <form class="module__Form" action="includes/login.inc.php" method="POST">
+   <form class="module__Form" action="includes/login.inc.php" method="POST" <?php echo $triggerModal ?>>
       <section class="form__Title">
          <label>Log in</label>
-         <button class='form__Close' type='button' onclick='ToggleModalForm()'>X</button>
+         <a href='index.php' class='form__Close' onclick='ToggleModalForm()'>X</a>
       </section>
       <fieldset class='form__Content'>
          <label for='usename'>User ID</label>
@@ -78,7 +78,7 @@ include "./includes/autoloader.inc.php";
          <button class="form__Button" type="submit" name="submit">Log in</button>
       </fieldset>
    </form>
-   <div class='form__Background' onclick='ToggleModalForm()'></div>
+   <div class='form__Background' onclick='ToggleModalForm()' <?php echo $triggerModal ?>></div>
 </body>
 
 </html>

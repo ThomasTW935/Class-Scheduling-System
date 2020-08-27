@@ -50,8 +50,12 @@ class SchedulesView extends Schedules
       } else {
         echo " >" . date('g:i A', $i);
         if ($showTimeDiff) {
-          $timeDiff = $i - $startTime;
-          echo " (" . date('g:i', $timeDiff) . " hrs)";
+          $timeDiff = $i - ($startTime - (60 * 30));
+          $hours = date('G', $timeDiff);
+          $minutes = date('i', $timeDiff);
+          $formatMinutes = ($minutes / 60) * 100;
+          $formatMinutes = ($formatMinutes == 50) ? 5 : $formatMinutes;
+          echo " ($hours.$formatMinutes hour/s)";
         }
         "</option>";
       }
