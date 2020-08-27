@@ -10,7 +10,6 @@ $errorName = $errors['errorName'] ?? '';
 $sectID  = '';
 $name    = '';
 $year    = $errors['year'] ?? '';
-$sem     = $errors['sem'] ?? '';
 $deptID  = $errors['deptID'] ?? '';
 if (isset($_GET['id'])) {
    $id      = $_GET['id'];
@@ -20,9 +19,12 @@ if (isset($_GET['id'])) {
    $sectID  = $sect['sect_id'];
    $name    = $sect['sect_name'];
    $year    = $sect['sect_year'];
-   $sem     = $sect['sect_sem'];
    $deptID  = $sect['dept_id'];
 }
+$years = [
+   'Grade 11', 'Grade 12', "1st Year First Semester", "1st Year Second Semester", "2nd Year First Semester", "2nd Year Second Semester",
+   "3rd Year First Semester", "3rd Year Second Semester", "4th Year First Semester", "4th Year Second Semester"
+];
 ?>
 
 <form action='./includes/sections.inc.php' class='module__Form' method='POST'>
@@ -42,26 +44,42 @@ if (isset($_GET['id'])) {
    <div class='form__Container'>
       <label for='' class='form__Label'>Year Level:</label>
       <div class='form__Input'>
-         <input class='form__Input' type='number' value='<?php echo $year ?>' name='year' required>
+         <select name='year'>
+            <?php
+
+            foreach ($years as $optYear) {
+               $selected = ($year == $optYear) ? "selected" : "";
+               echo "<option value='$optYear' $selected>$optYear</option>";
+            }
+
+            ?>
+         </select>
       </div>
    </div>
-   <div class='form__Container'>
-      <label for='' class='form__Label'>Semester:</label>
-      <div class='form__Input'>
-         <input class='form__Input' type='number' value='<?php echo $sem ?>' name='sem' required>
-      </div>
-   </div>
+
    <div class='form__Container'>
       <label for='formSelect' class='form__Label'>Department:</label>
       <div class='form__Input'>
          <select name='deptID' id='formSelect'>
             <?php
             $deptView = new DepartmentsView();
-            $departments = $deptView->FetchDepts('course', 1);
+
+            echo "</optgroup>";
+            $departments = $deptView->FetchDepts('strand', 1);
+            echo "<optgroup label='Strands'>";
             foreach ($departments as $dept) {
                $selected = ($deptID != $dept['dept_id']) ? '' : 'selected';
                echo "<option class='form__Option' value='{$dept['dept_id']} ' {$selected}>{$dept['dept_name']}</option>";
             }
+            echo "</optgroup>";
+
+            $departments = $deptView->FetchDepts('course', 1);
+            echo "<optgroup label='Courses'>";
+            foreach ($departments as $dept) {
+               $selected = ($deptID != $dept['dept_id']) ? '' : 'selected';
+               echo "<option class='form__Option' value='{$dept['dept_id']} ' {$selected}>{$dept['dept_name']}</option>";
+            }
+
             ?>
          </select>
       </div>

@@ -1076,20 +1076,20 @@ a {
 .profile {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(300px, 1fr))[2];
-      grid-template-columns: repeat(2, minmax(300px, 1fr));
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-top: 3rem;
 }
 
 .profile div {
   width: 100%;
   padding: 1rem 2rem;
-}
-
-.profile div:first-child {
-  border-right: 1px solid #b6b6b6;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .profile div form {

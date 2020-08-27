@@ -189,12 +189,12 @@ html {
 }
 
 .module__Form .form__Title .form__Close {
-  background: red;
   height: 1.5rem;
   width: 1.5rem;
-  background: none;
   color: var(--color-text-light);
+  background: none;
   border: none;
+  outline: none;
 }
 
 .module__Form .form__Title .form__Close:hover {

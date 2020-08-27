@@ -36,10 +36,10 @@ class SectionsView extends Sections
     {
         $schedView = new SchedulesView();
         foreach ($results as $result) {
-            $optionData = $schedView->GenerateOptionDataValue($result['sect_id'], [$result['sect_name'], $result['sect_yrsem'], $result['dept_name']]);
+            $optionData = $schedView->GenerateOptionDataValue($result['sect_id'], [$result['sect_name'], $result['sect_year'], $result['dept_name']]);
             echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'> <ul class='module__List'>
             <li class='module__Item'>" . $result['sect_name'] . " |</li>
-            <li class='module__Item'>{$result['sect_yrsem']} |</li>
+            <li class='module__Item'>{$result['sect_year']} |</li>
             <li class='module__Item'>" . $result['dept_name'] . "</li>
             </ul></option>";
         }

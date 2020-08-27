@@ -12,7 +12,6 @@ function submitForm(e) {
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
-console.log(liveSearch)
 if (liveSearch != null) {
    if (liveSearch.value != '') SearchQuery(searchPage.value)
    liveSearch.addEventListener('keyup', () => {
@@ -51,8 +50,8 @@ if (empID != null) {
    })
 }
 
+let newPass = document.querySelector('#new');
 let ConfirmPassword = () => {
-   let newPass = document.querySelector('#new');
    let confirm = document.querySelector('#confirm');
    let errorConfirm = document.querySelector('#errorConfirm');
 
@@ -69,7 +68,8 @@ let ConfirmPassword = () => {
       console.log(`Confirm: ${confirmValue}`)
    })
 }
-
-ConfirmPassword()
+if (newPass) {
+   ConfirmPassword()
+}
 
 

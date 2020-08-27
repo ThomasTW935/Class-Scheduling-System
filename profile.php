@@ -7,10 +7,6 @@ $success = (isset($_GET['success'])) ? "Successfully changed password!" : '';
 
 <main class='profile '>
   <div>
-    <h3>Email</h3>
-    <form></form>
-  </div>
-  <div>
     <h3>Password</h3>
     <form class='' action='./includes/profile.inc.php' method='POST'>
       <input type="hidden" name="userID" value='<?php echo $sessionID ?>'>

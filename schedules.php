@@ -27,11 +27,11 @@ if ($type == 'sect' || empty($type) || $type == null) {
    $sect = $sectView->FetchSectionByID($sectID)[0];
    $dept = $deptView->FetchDeptByID($sect['dept_id'])[0];
    $sideBarText .= "<h2>" . $sect['sect_name'] . "</h2>";
-   $sideBarText .= "<h3>{$sect['sect_yrsem']}</h3>";
+   $sideBarText .= "<h3>{$sect['sect_year']}</h3>";
    $sideBarText .= "<h4>" . $sect['dept_desc'] . "</h4>";
    $caption = "
    <p>{$sect['dept_desc']}</p>
-   <p>{$sect['sect_yrsem']}</p>
+   <p>{$sect['sect_year']}</p>
    <h3>{$sect['sect_name']}</h3>
    ";
    $returnDestination = 'sections';
@@ -97,8 +97,8 @@ if ($type == 'sect' || empty($type) || $type == null) {
             <input type="hidden" name="id" value=<?php echo $ID ?>>
             <input type="hidden" name="type" value=<?php echo $type ?>>
             <div>
-               <label for="startTime">Start:</label>
-               <select id='startTime' name="startTime">
+               <label for="timeStart">Start:</label>
+               <select id='timeStart' class='start-time' name="startTime">
                   <?php
 
                   $newStartTime = strtotime($startTime);
@@ -108,8 +108,8 @@ if ($type == 'sect' || empty($type) || $type == null) {
                </select>
             </div>
             <div>
-               <label for="endTime">End:</label>
-               <select id="endTime" name="endTime">
+               <label for="timeEnd">End:</label>
+               <select id="timeEnd" class="end-time" name="endTime">
                   <?php
 
                   $newEndTime = strtotime($endTime);
@@ -120,8 +120,8 @@ if ($type == 'sect' || empty($type) || $type == null) {
                </select>
             </div>
             <div>
-               <label for="jumpTime">View By:</label>
-               <select id='jumpTime' name='jumpTime'>
+               <label for="timeJump">View By:</label>
+               <select id='timeJump' name='jumpTime'>
                   <?php
                   for ($i = 15; $i <= 60; $i += 15) {
                      $selected = ($jumpTime == $i) ? 'selected' : '';

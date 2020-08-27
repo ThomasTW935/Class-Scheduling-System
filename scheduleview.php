@@ -12,6 +12,7 @@ include_once './layouts/__header.php';
   $prof = $profView->FetchProfessorByUserID($userID);
   if (empty($prof)) {
     echo "Schedule Not Applicable";
+    header("Location: ./dashboard.php");
     exit();
   }
   $prof = $prof[0];

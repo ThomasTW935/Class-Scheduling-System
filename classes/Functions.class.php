@@ -171,7 +171,7 @@ class Functions
       $tableBody = ["subj_code", "subj_desc", "units"];
     } else if ($type == 'sect') {
       $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
-      $tableBody = ["sect_name", "sect_yrsem", "dept_name"];
+      $tableBody = ["sect_name", "sect_year", "dept_name"];
     } else if ($type == 'room') {
       $tableHead = ["Room", "Description", "Floor", "Capacity", "Actions"];
       $tableBody = ["rm_name", "rm_desc", "rm_floor", "rm_capacity"];

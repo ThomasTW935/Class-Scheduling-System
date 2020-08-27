@@ -30,7 +30,7 @@ if (isset($_GET['selectSection'])) {
    $sect = $sectView->FetchSectionByID($id)[0];
    $caption = "
    <p>{$sect['dept_desc']}</p>
-   <p>{$sect['sect_yrsem']}</p>
+   <p>{$sect['sect_year']}</p>
    <h3>{$sect['sect_name']}</h3>
    ";
 

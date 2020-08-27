@@ -1,46 +1,84 @@
 // Selecting Time of Container
-let timeStart = document.querySelector('#startTime')
-let ChangeFormatTime = () => {
-  let timeEnd = document.querySelector('#endTime')
-  let timeJump = document.querySelector('#jumpTime')
+let timeStarts = document.querySelectorAll('.start-time')
+let ChangeFormatTime = (e) => {
+  let target = e.target
+  let id = target.id
+  let timeStart = ''
+  let timeEnd = ''
+  if (id == 'timeStart') {
+    timeStart = document.querySelector('#timeStart')
+    timeEnd = document.querySelector('#timeFrom')
+  } else {
+    timeStart = document.querySelector('#timeFrom')
+    timeEnd = document.querySelector('#timeTo')
+  }
 
-  timeStart.addEventListener('change', () => {
-    let startDate = new Date('January 1 2000 ' + timeStart.value)
-    let startDate_Hour = startDate.getHours()
-    let endValue = timeEnd.value
-    for (let k = timeEnd.options.length - 1; k >= 0; k--) {
-      timeEnd.remove(k)
+  let startDate = new Date('January 1 2000 ' + timeStart.value)
+  let startDate_Hour = startDate.getHours()
+  let startDate_Time = startDate.getTime()
+  let endValue = timeEnd.value
+  let endDate = new Date('January 1 2000 ' + endValue)
+  let endDate_Time = endDate.getTime()
+
+  for (let k = timeEnd.options.length - 1; k >= 0; k--) {
+    timeEnd.remove(k)
+  }
+  for (let i = startDate_Hour + 1; i <= 22; i++) {
+    let timeValue = i
+    let timePeriod = 'AM'
+    if (timeValue > 12) {
+      timeValue = i - 12
+      timePeriod = 'PM'
     }
-
-    for (let i = startDate_Hour + 1; i <= 22; i++) {
+    if (timeValue == 12) {
+      timePeriod = 'PM'
+    }
+    if (id == 'timeStart') {
       let option = document.createElement('option')
-      let timeValue = i
-      let timePeriod = 'AM'
-      if (timeValue > 12) {
-        timeValue = i - 12
-        timePeriod = 'PM'
-      }
-      if (timeValue == 12) {
-        timePeriod = 'PM'
-      }
       let m = ":00 "
       option.value = i + m
       option.innerHTML = timeValue + m + timePeriod
       timeEnd.add(option)
-    }
-
-    let endDate = new Date('January 1 2000 ' + endValue)
-    let endDate_Hour = endDate.getHours()
-    if (startDate_Hour >= endDate_Hour) {
-      timeEnd.value = timeEnd.options[0].value
     } else {
-      timeEnd.value = endValue
+      let timeJump = document.querySelector('#timeJump')
+      let jumpValue = Number(timeJump.value)
+
+      for (let k = 0; k < 60; k += jumpValue) {
+        if (i == 22 && k > 0) break;
+        let timeDiff = new Date('January 1 2000')
+        timeDiff.setHours(i)
+        timeDiff.setMinutes(k)
+        let diff = timeDiff - startDate_Time
+        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        let formatHours = (hours > 0) ? hours : ""
+        let convertMinutes = (minutes / 60) * 100
+        convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
+        let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''
+        let diffResult = `(${formatHours}${formatMinutes} hour/s)`
+        console.log(diffResult)
+        let m = (k == 0) ? ":00 " : `:${k} `;
+        let option = document.createElement('option')
+        option.value = i + m
+        option.innerHTML = timeValue + m + timePeriod + diffResult
+        timeEnd.add(option)
+      }
     }
-  })
+  }
+
+
+
+  if (startDate_Time >= endDate_Time) {
+    timeEnd.value = timeEnd.options[0].value
+  } else {
+    timeEnd.value = endValue
+  }
 }
 
-if (timeStart != null) {
-  ChangeFormatTime()
+if (timeStarts != null) {
+  timeStarts.forEach(timeStart => {
+    timeStart.addEventListener('change', ChangeFormatTime)
+  })
 }
 
 
@@ -83,11 +121,9 @@ let TableFixLabel = () => {
 
   for (let slot of slots) {
     if (slot.rowSpan == 2) {
-      console.log(slot.rowSpan)
-      console.log(slot)
+
       let newSize = 0.75 * .85
       slot.style.fontSize = newSize + "rem"
-      console.log(slot.style.fontSize)
     }
   }
 }

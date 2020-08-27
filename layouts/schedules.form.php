@@ -33,7 +33,7 @@ if ($schedIDExist) {
   <div class="form__TimeContainer">
     <div class="form__Input">
       <label for='timeFrom' class='form__Label'>From:</label>
-      <select name="timeFrom">
+      <select id='timeFrom' name="timeFrom" class='start-time'>
         <?php
 
         $selected = strtotime($result['sched_from']) ?? "";
@@ -45,7 +45,7 @@ if ($schedIDExist) {
     </div>
     <div class="form__Input">
       <label for='timeTo' class='form__Label'>To:</label>
-      <select name="timeTo" class='select__To'>
+      <select id='timeTo' name="timeTo" class='end-time'>
         <?php
 
         $selected = strtotime($result['sched_to']) ?? "";
@@ -187,7 +187,7 @@ if ($schedIDExist) {
   if ($type != 'sect') {
     if (!empty($result) && !empty($result['sect_id'])) {
       $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];
-      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name'], $selSect['sect_yrsem'], $selSect['dept_name']]);
+      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name'], $selSect['sect_year'], $selSect['dept_name']]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }
