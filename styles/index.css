@@ -239,6 +239,7 @@ html {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  margin: 0 auto;
   width: 10rem;
   background: var(--color-background-dark);
   color: white;
