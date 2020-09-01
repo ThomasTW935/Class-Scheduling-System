@@ -29,6 +29,15 @@ if (isset($_GET['id'])) {
    </section>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $subjID ?>' name='subjID'>
+   <div class="form__RadioCon">
+      <label for="" class="form__Label"></label>
+      <div class="form__Input">
+         <input type="radio" name="" id="" checked>
+         <label for="lecture">Lecture</label>
+         <input type="radio" name="" id="laboratory">
+         <label for="laboratory">Laboratory</label>
+      </div>
+   </div>
    <div class="form__Container">
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">
@@ -42,16 +51,11 @@ if (isset($_GET['id'])) {
          <input class='form__Input' type='text' value='<?php echo $desc ?>' name='desc' required>
       </div>
    </div>
+
    <div class="form__Container">
       <label for="" class="form__Label">Unit/s:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' name='units' required>
-      </div>
-   </div>
-   <div class="form__Container">
-      <label for="" class="form__Label">Unit/s:</label>
-      <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' name='units' required>
+         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' max='15' name='units' required>
       </div>
    </div>
    <div class="form__Container">
