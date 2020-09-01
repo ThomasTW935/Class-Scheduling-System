@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2020 at 10:25 AM
+-- Generation Time: Sep 01, 2020 at 01:39 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -132,7 +132,7 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_capacity`, `rm_active`) VALUES
 (3, '101', 'Computer Laborato', '2nd Floor', 30, 0),
-(5, '201', 'Class Room', '3rd Floor', 30, 1),
+(5, '201', 'Class Room', '2nd Floor', 30, 1),
 (6, '202', 'Class Room', '3rd Floor', 30, 1),
 (7, '203', 'Class Room', '3rd Floor', 30, 1),
 (8, '204', 'Class Room', '3rd Floor', 30, 1),
@@ -187,17 +187,18 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`) VALUES
-(33, '07:00:00', '10:00:00', '2020-08-08 18:55:37', 0, 8, 0, 3),
-(36, '07:00:00', '09:00:00', '2020-08-08 18:55:37', 34, 7, 0, 3),
+(33, '10:00:00', '13:00:00', '2020-08-27 17:26:59', 0, 8, 0, 3),
+(36, '07:00:00', '08:30:00', '2020-08-27 17:35:12', 34, 7, 0, 3),
 (39, '10:30:00', '12:00:00', '2020-08-20 12:14:31', 0, 8, 6, 0),
 (50, '07:00:00', '08:00:00', '2020-08-20 18:45:52', 33, 12, 0, 8),
 (69, '10:00:00', '12:00:00', '2020-08-21 02:08:26', 33, 12, 44, 6),
 (75, '07:00:00', '08:00:00', '2020-08-22 04:57:57', 35, 6, 6, 9),
 (79, '14:00:00', '17:00:00', '2020-08-24 09:37:11', 34, 6, 7, 6),
-(80, '07:00:00', '08:00:00', '2020-08-24 08:44:42', 32, 11, 8, 2),
+(80, '07:00:00', '08:30:00', '2020-08-27 17:00:47', 32, 11, 8, 2),
 (81, '10:00:00', '12:00:00', '2020-08-26 17:50:11', 32, 10, 8, 7),
 (82, '07:00:00', '08:30:00', '2020-08-27 07:54:54', 37, 138, 31, 16),
-(83, '08:30:00', '11:30:00', '2020-08-27 07:55:48', 39, 14, 5, 17);
+(83, '08:30:00', '11:30:00', '2020-08-27 07:55:48', 39, 14, 5, 17),
+(85, '10:00:00', '11:30:00', '2020-08-27 16:31:37', 37, 45, 8, 18);
 
 -- --------------------------------------------------------
 
@@ -234,7 +235,9 @@ INSERT INTO `schedules_day` (`id`, `sched_id`, `sched_day`) VALUES
 (107, 82, 'Monday'),
 (108, 82, 'Wednesday'),
 (109, 83, 'Tuesday'),
-(110, 83, 'Thursday');
+(110, 83, 'Thursday'),
+(113, 85, 'Monday'),
+(114, 85, 'Wednesday');
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (2, '07:00:00', '17:00:00', '30', 'room', 2),
 (3, '07:00:00', '15:00:00', '30', 'room', 3),
 (4, '07:00:00', '17:00:00', '30', 'room', 4),
-(5, '07:00:00', '10:00:00', '30', 'room', 5),
+(5, '07:00:00', '17:00:00', '30', 'room', 5),
 (6, '07:00:00', '15:00:00', '30', 'room', 6),
 (7, '09:00:00', '20:00:00', '30', 'room', 7),
 (8, '07:00:00', '17:00:00', '30', 'room', 8),
@@ -298,7 +301,7 @@ INSERT INTO `schedules_operation` (`op_id`, `op_start`, `op_end`, `op_jump`, `op
 (40, '07:00:00', '17:00:00', '30', 'room', 40),
 (41, '07:00:00', '17:00:00', '30', 'room', 41),
 (42, '07:00:00', '17:00:00', '30', 'room', 42),
-(43, '07:00:00', '10:00:00', '30', 'sect', 2),
+(43, '07:00:00', '17:00:00', '30', 'sect', 2),
 (44, '07:00:00', '17:00:00', '30', 'sect', 3),
 (45, '07:00:00', '17:00:00', '30', 'sect', 4),
 (46, '07:00:00', '18:00:00', '30', 'sect', 5),
@@ -760,7 +763,7 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `
 (28, '3232532', '', '$2y$10$/wGSM4yn76j1Tqtpp2nP8u0YnswezJE/8MIgP86dJgKAJR87oC9AO', 1, 0),
 (29, '88888888', '', '$2y$10$G0XCro/zxWEwl8SgZDRXy.ibKBl5Fkk.3E9O6Z8dyig5FAOVCEbyy', 1, 1),
 (30, '0200006652', 'chris_tine09@yahoo.com', '$2y$10$WpVKlFearFw1GuG/JVZOC.sH24NUekp0OOwE6qzfJeSRpLeLRroPi', 1, 1),
-(32, 'hellow', 'hahahahha@gmail.com', '$2y$10$J91EB08xL38Fqp8l09ypUeCBnfH089XzPbHnaEIvI84K2LOEfw3QG', 1, 1),
+(32, 'hellow', 'hahahahha@gmail.com', '$2y$10$U2XkxhRYZzeIRTpcwqKpLuMc2pI/Fv8cYG8s0l1uARb/ws8gUZ3cu', 1, 1),
 (34, '987654321', '', '$2y$10$5MipXSVUGbftbWEwk1wYkeTPGG5B7KCV0TzxBXR79T1hjbnmGAt7i', 1, 1),
 (35, '147258369', '', '$2y$10$nZUlO7QaxjYsTyjSzm5EcudUa9/3I8nhJUDzrPN5DS6/SSzsEFLuO', 1, 1),
 (36, '963852741', '', '$2y$10$jjFqbgPloHcZcVLHsoFDFOcmOjOL.SlXLJzQ4xeT83ora8yXXF/XO', 1, 1),
@@ -769,7 +772,7 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role_level`, `
 (39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 1, 1),
 (40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$ZrwGj8V.waDuoIdsp8pC5.VStErNRyVjlXzg5oQWO05JhaBArwFV.', 1, 1),
 (44, 'Dean', '', '$2y$10$6ThSEgoLZL3ei/ThlYTOjOefpNxCFRuKjkzvfJe/8b7SAe/3cIywO', 2, 1),
-(45, 'ITHead', '', '$2y$10$FOCswG1SGll.hp.IHKmZwOTLPaKc8Bm61CuGG4A2HkYzd36VmZPPW', 2, 1);
+(45, 'ITHead', '', '$2y$10$fpYZ1G2SMdw0lc8duGJ9buvEawYFMskuz/fu8Qwc1Wp82imebAVie', 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -855,13 +858,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `schedules_day`
 --
 ALTER TABLE `schedules_day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `schedules_operation`
