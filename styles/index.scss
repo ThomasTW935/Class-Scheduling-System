@@ -87,6 +87,10 @@ html {
     }
     a {
       height: 3rem;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
     }
     img {
       height: 100%;

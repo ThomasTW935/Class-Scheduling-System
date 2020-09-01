@@ -24,7 +24,7 @@ include "./includes/autoloader.inc.php";
 <body>
    <nav class='nav'>
       <ul>
-         <li><a href='index.php'><img src="./drawables/images/STI_LOGO.png" alt="STI"></a></li>
+         <li><a href='index.php'><img src="./drawables/images/STI_LOGO.png" alt="STI">Scheduling System</a></li>
          <li><button onclick='ToggleModalForm()'>Login</button></li>
       </ul>
    </nav>

@@ -49,6 +49,12 @@ if (isset($_GET['id'])) {
       </div>
    </div>
    <div class="form__Container">
+      <label for="" class="form__Label">Unit/s:</label>
+      <div class="form__Input">
+         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' name='units' required>
+      </div>
+   </div>
+   <div class="form__Container">
       <label for="type" class="form__Label">Type:</label>
       <div class="form__Input">
          <select name="type" id="type">
