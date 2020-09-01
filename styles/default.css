@@ -537,65 +537,49 @@ a {
   overflow: hidden;
 }
 
-.module__Form .form__Close {
-  height: 2rem;
+.module__Form .form__Title {
   background: var(--color-background-dark);
   width: 100%;
+  padding: 0.25em 0.25em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
-.module__Form .form__Close a {
+.module__Form .form__Title label {
+  color: white;
+  font-weight: bold;
+}
+
+.module__Form .form__Title a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 2rem;
   display: -ms-grid;
   display: grid;
   place-content: center;
   color: var(--color-text-light);
-  height: inherit;
-  width: 2rem;
-  padding: 0 0.5rem;
-  position: relative;
-}
-
-.module__Form .form__Close a:hover {
-  background: red;
-}
-
-.module__Form .form__Close a:active {
-  color: white;
-}
-
-.module__Form .form__Close a:active::before {
   -webkit-transform: scale(1);
           transform: scale(1);
+  -webkit-transition: -webkit-transform 0.1s;
+  transition: -webkit-transform 0.1s;
+  transition: transform 0.1s;
+  transition: transform 0.1s, -webkit-transform 0.1s;
 }
 
-.module__Form .form__Close a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(149, 0, 0, 0.664);
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-transition: -webkit-transform 1s ease-in-out;
-  transition: -webkit-transform 1s ease-in-out;
-  transition: transform 1s ease-in-out;
-  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
-}
-
-.module__Form .form__Title {
-  margin: 1em;
-  text-transform: uppercase;
-  font-weight: bold;
+.module__Form .form__Title a:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .module__Form .form__RadioContainer {

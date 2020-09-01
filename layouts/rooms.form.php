@@ -25,10 +25,10 @@ $setFloors = ["Ground Floor", "2nd Floor", "3rd Floor", "4th Floor", "5th Floor"
 ?>
 
 <form action='./includes/rooms.inc.php' class='module__Form' method='POST'>
-   <section class="form__Close">
+   <section class="form__Title">
+      <label>Room's Information</label>
       <a href="rooms.php?page=<?php echo $page ?>">X</a>
    </section>
-   <label for='formSelect' class='form__Title'>Room's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $rmID ?>' name='rmID'>
    <div class="form__Container">

@@ -28,10 +28,10 @@ $years = [
 ?>
 
 <form action='./includes/sections.inc.php' class='module__Form' method='POST'>
-   <section class="form__Close">
+   <section class="form__Title">
+      <label>Section's Information</label>
       <a href='sections.php?page=<?php echo $page ?>'>X</a>
    </section>
-   <label for='formSelect' class='form__Title'>Section's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $sectID ?>' name='sectID'>
    <div class='form__Container'>

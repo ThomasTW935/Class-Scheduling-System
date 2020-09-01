@@ -25,10 +25,10 @@ if ($schedIDExist) {
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()'>
-  <section class="form__Close">
+  <section class="form__Title">
+    <label>Schedules's Information</label>
     <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle'>X</a>
   </section>
-  <label class='form__Title'>Schedules's Information</label>
   <input type="hidden" name="type" value='<?php echo $type ?>'>
   <input type="hidden" name="id" value='<?php echo $ID ?>'>
   <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>

@@ -25,9 +25,9 @@ if (isset($_GET['id'])) {
 
 <form action='./includes/departments.inc.php' class='module__Form' method='POST'>
    <section class="form__Close">
+      <label for='formSelect' class='form__Title'>Department's Information</label>
       <a href="?dept=<?php echo "$department&page=$page" ?>">X</a>
    </section>
-   <label for='formSelect' class='form__Title'>Department's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $deptID ?>' name='deptID'>
    <input class='form__Input' type='hidden' value='<?php echo $department ?>' name='department'>

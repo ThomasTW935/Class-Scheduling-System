@@ -39,10 +39,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 ?>
 
 <form action='./includes/professors.inc.php' class='module__Form' method='POST' enctype="multipart/form-data">
-   <section class='form__Close'>
+   <section class='form__Title'>
+      <label>Professor's Information</label>
       <a href="professors.php?page=<?php echo $page ?>">X</a>
    </section>
-   <label class='form__Title'>Professor's Information</label>
    <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
    <input type='hidden' value='<?php echo $profID ?? '' ?>' name='profID'>
    <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>

@@ -397,49 +397,36 @@ a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
     overflow: hidden;
-    .form__Close {
-      height: 2rem;
+    .form__Title {
       background: var(--color-background-dark);
       width: 100%;
+      padding: 0.25em 0.25em;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
+      position: relative;
+      label {
+        color: white;
+        font-weight: bold;
+      }
       a {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 2rem;
         display: grid;
         place-content: center;
         color: var(--color-text-light);
-        height: inherit;
-        width: 2rem;
-        padding: 0 0.5rem;
-        position: relative;
+        transform: scale(1);
+        transition: transform 0.1s;
         &:hover {
-          background: red;
-        }
-        &:active {
-          color: white;
-          &::before {
-            transform: scale(1);
-          }
-        }
-        &::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          width: 100%;
-          background: rgba(149, 0, 0, 0.664);
-          transform: scale(0);
-          transform-origin: center;
-          transition: transform 1s ease-in-out;
+          transform: scale(1.2);
         }
       }
     }
-    .form__Title {
-      margin: 1em;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+
     .form__RadioContainer {
       padding: 1em;
       width: 100%;

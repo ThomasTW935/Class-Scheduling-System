@@ -29,10 +29,10 @@ if (isset($_GET['id'])) {
 ?>
 
 <form action='./includes/users.inc.php' class='module__Form' method='POST'>
-   <section class="form__Close">
+   <section class="form__Title">
+      <label>User's Information</label>
       <a href="users.php?page=<?php echo $page ?>">X</a>
    </section>
-   <label for='formSelect' class='form__Title'>User's Information</label>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $userID ?>' name='userID'>
    <div class="form__Container">
