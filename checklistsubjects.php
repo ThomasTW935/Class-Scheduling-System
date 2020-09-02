@@ -4,7 +4,6 @@ $searchValue = $_GET['q'] ?? '';
 $id = $_GET['id'];
 $checklistView = new ChecklistView();
 $checkList = $checklistView->FetchChecklistByID($id)[0];
-var_dump($checkList);
 ?>
 <main class='professors module'>
   <div class="module__Header">
@@ -24,11 +23,45 @@ var_dump($checkList);
     </div>
   </div>
   <div class='module__Content'>
+
     <?php
 
-    if (empty($searchValue)) {
-      $checklistView = new ChecklistView();
+    $checklistView = new ChecklistView();
+    $levels = $checklistView->FetchDistinctLevel($id);
+
+    foreach ($levels as $level) {
+      echo "<table>
+        <caption>{$level['description']}</caption>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Units</th>
+          </tr>
+        </thead>
+        <tbody>";
+      $subjects = $checklistView->FetchChecklistSubjectsByLevel($id, $level['level_id']);
+      $totalUnits = 0;
+      foreach ($subjects as $subject) {
+        $totalUnits += $subject['units'];
+        echo "<tr>
+            <td>{$subject['subj_code']}</td>
+            <td>{$subject['subj_desc']}</td>
+            <td>{$subject['units']}</td>
+          </tr>";
+      }
+      echo "</tbody>
+        <tfooter>
+          <tr>
+          <td></td>
+          <td>Total Units: </td>
+          <td>$totalUnits</td>
+          </tr>
+        </tfooter>
+      </table>";
     }
+
+
     ?>
   </div>
   <?php

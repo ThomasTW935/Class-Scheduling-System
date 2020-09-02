@@ -19,6 +19,19 @@ class ChecklistView extends Checklist
     $func->BuildPagination($page, $totalPages, $destination);
   }
 
+  // CheckList Subjects
+
+  public function FetchDistinctLevel($id)
+  {
+    $results = $this->getDistinctLevel($id);
+    return $results;
+  }
+  public function FetchChecklistSubjectsByLevel($id, $levelID)
+  {
+    $results = $this->getChecklistSubjectsByLevel($id, $levelID);
+    return $results;
+  }
+
   //Levels
   public function FetchLevel($type)
   {

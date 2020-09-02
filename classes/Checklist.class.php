@@ -49,6 +49,33 @@ class Checklist extends Dbh
     }
   }
 
+  // Checklist Subjects
+
+  protected function getDistinctLevel($id)
+  {
+    $sql = "SELECT DISTINCT level_id, description FROM subjects_to_checklist stc INNER JOIN level l ON stc.level_id = l.id WHERE chk_id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$id]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function getChecklistSubjectsByLevel($id, $levelID)
+  {
+    $sql = "SELECT * FROM subjects_to_checklist stc INNER JOIN subjects s ON stc.subj_id = s.subj_id WHERE chk_id = ? AND level_id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$id, $levelID]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+
   // Levels
   protected function getLevels($type)
   {
