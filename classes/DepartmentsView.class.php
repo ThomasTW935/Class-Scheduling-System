@@ -37,6 +37,7 @@ class DepartmentsView extends Departments
          <td class='module__Item'>
             <div class='table-actions'>";
          if ($result['dept_active'] == 1) {
+            echo "<a href='checklist.php?deptid={$result['dept_id']}&page=1'><img src='drawables/icons/checkschedule.svg' alter='Checklists'/><span>Checklists</span></a>";
             echo "<a href='?dept={$result['dept_type']}&page=$page&id={$result['dept_id']}'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
          }
          echo "<form onsubmit='return submitForm(this)' action='./includes/departments.inc.php' method='POST'>

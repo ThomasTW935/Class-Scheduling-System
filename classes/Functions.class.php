@@ -72,9 +72,10 @@ class Functions
     echo "</ul>";
     echo "</div>";
   }
-  public function GenerateModuleLinks($page, $dept = '')
+  public function GenerateModuleLinks($page, $dept = '', $check = false)
   {
     $destination = (!empty($dept)) ? "dept=$dept&" : "";
+    $destination = ($check) ? "deptid=$dept" : $destination;
     if (!isset($_GET['archive'])) {
       echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
       <span>Add</span>
@@ -93,21 +94,19 @@ class Functions
   {
     $newArray = [];
     $isSearch = (!empty($search)) ? "q=$search&" : "";
-    if ($type == 'prof') {
-      $limit = 10;
-      $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
-    } else if ($type == 'room') {
-      $limit = 10;
-      $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
-    } else if ($type == 'sect') {
-      $limit = 10;
-      $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
-    } else if ($type == 'subj') {
-      $limit = 10;
-      $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
-    } else if ($type == 'user') {
-      $limit = 10;
-      $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
+    switch ($type) {
+      case 'prof':
+      case 'room':
+      case 'sect':
+      case 'subj':
+      case 'user':
+        $limit = 10;
+        $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
+        break;
+      case 'checklist':
+        $limit = 10;
+        $destination = (!$archived) ? "?deptid=$search&page=" : "?deptid={$search}&archive&page=";
+        break;
     }
     if ($type == 'faculty') {
       $limit = 10;
@@ -119,6 +118,7 @@ class Functions
       $limit = 10;
       $destination = (!$archived) ?  "?dept=strand&{$isSearch}page=" : "?dept=strand&archive&{$isSearch}page=";
     }
+
 
 
     $totalPages = ceil(count($data) / $limit);
@@ -143,10 +143,6 @@ class Functions
     foreach ($results as $result) {
       echo "<tr class=''>";
       if ($type == 'prof') {
-        // $profView  = new ProfessorsView();
-        // $middleInitial = (!empty($result['middle_initial'])) ? $result['middle_initial'] . '.' : '';
-        // $fullName = $prof->GenerateFullName($result['last_name'], $result['first_name'], $result['middle_initial'], $result['suffix']);
-        // $tableBody['full_name'] = $fullName;
         echo "<td class='prof-image'><img src='./drawables/images/" . $result['img'] . "'></td>";
       }
       foreach ($tableValues["body"] as $key => $value) {
@@ -181,6 +177,9 @@ class Functions
     } else if ($type == 'user') {
       $tableHead = ["Username", "Email", "Role Level", "Actions"];
       $tableBody = ["username", "email", "role_level"];
+    } else if ($type == 'checklist') {
+      $tableHead = ["Name", "Deptartment", "Actions"];
+      $tableBody = ["name", "dept_name"];
     }
     $newArray["head"] = $tableHead;
     $newArray["body"] = $tableBody;
@@ -281,6 +280,20 @@ class Functions
       $action .= "<form onsubmit='return submitForm(this)' action='./includes/users.inc.php' method='POST' $tableRestore>
                  <input name='page' type='hidden' value='$page'>
                  <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+                 <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
+                 <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
+                 <span>" . $iconName . "</span>
+              </form>";
+    } else if ($type == 'checklist') {
+      if ($result['is_active'] == 1) {
+        $action .= "<a href=checklistsubjects.php?id={$result['id']}&page=$page><img src='drawables/icons/checkschedule.svg' alter='Edit'/><span>Checklist Subjects</span></a>";
+        $action .= "<a href=?deptid={$result['dept_id']}&page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['is_active'] == 1) ? 'delete' : 'restore';
+      $tableRestore = ($result['is_active'] == 1) ? '' : "class='table__Restore'";
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/checklist.inc.php' method='POST' $tableRestore>
+                 <input name='page' type='hidden' value='$page'>
+                 <input name='chkID' type='hidden' value='" . $result['id'] . "'>
                  <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
                  <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                  <span>" . $iconName . "</span>
