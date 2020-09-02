@@ -163,8 +163,8 @@ class Functions
     $tableBody = [];
     $newArray = [];
     if ($type == 'subj') {
-      $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Actions"];
-      $tableBody = ["subj_code", "subj_desc", "units"];
+      $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department', "Actions"];
+      $tableBody = ["subj_code", "subj_desc", "units", 'hours', 'dept_name'];
     } else if ($type == 'sect') {
       $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
       $tableBody = ["sect_name", "sect_year", "dept_name"];

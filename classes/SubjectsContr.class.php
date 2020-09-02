@@ -4,11 +4,11 @@ class SubjectsContr extends Subjects
 {
    public function CreateSubject($data)
    {
-      $this->setSubject($data['code'], $data['desc'], $data['units']);
+      $this->setSubject($data['code'], $data['desc'], $data['units'], $data['hours'], $data['deptID'], $data['type']);
    }
    public function ModifySubject($data)
    {
-      $this->updateSubject($data['code'], $data['desc'], $data['units'], $data['subjID']);
+      $this->updateSubject($data['code'], $data['desc'], $data['units'], $data['hours'], $data['deptID'], $data['type'], $data['subjID']);
    }
    public function ModifySubjectState($state, $id)
    {

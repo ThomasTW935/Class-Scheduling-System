@@ -11,6 +11,9 @@ $subjID = '';
 $code = $errors['code'] ?? '';
 $desc = $errors['desc'] ?? '';
 $units = $errors['units'] ?? '1';
+$hours = $errors['hours'] ?? '';
+$type = $errors['type'] ?? '0';
+$deptID = $errors['deptID'] ?? '';
 if (isset($_GET['id'])) {
    $subjID = $_GET['id'];
    $result = $subjView->FetchSubjectByID($subjID);
@@ -18,7 +21,10 @@ if (isset($_GET['id'])) {
    $button = "update";
    $code = $subj['subj_code'];
    $desc = $subj['subj_desc'];
+   $hours = $subj['hours'];
    $units = $subj['units'];
+   $deptID = $subj['dept_id'];
+   $type = $subj['is_laboratory'];
 }
 ?>
 
@@ -29,15 +35,7 @@ if (isset($_GET['id'])) {
    </section>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $subjID ?>' name='subjID'>
-   <div class="form__RadioCon">
-      <label for="" class="form__Label"></label>
-      <div class="form__Input">
-         <input type="radio" name="" id="" checked>
-         <label for="lecture">Lecture</label>
-         <input type="radio" name="" id="laboratory">
-         <label for="laboratory">Laboratory</label>
-      </div>
-   </div>
+
    <div class="form__Container">
       <label for='' class='form__Label'>Code:</label>
       <div class="form__Input">
@@ -51,7 +49,6 @@ if (isset($_GET['id'])) {
          <input class='form__Input' type='text' value='<?php echo $desc ?>' name='desc' required>
       </div>
    </div>
-
    <div class="form__Container">
       <label for="" class="form__Label">Unit/s:</label>
       <div class="form__Input">
@@ -59,34 +56,50 @@ if (isset($_GET['id'])) {
       </div>
    </div>
    <div class="form__Container">
-      <label for="type" class="form__Label">Type:</label>
+      <label for="hours" class="form__Label">Hour/s:</label>
       <div class="form__Input">
-         <select name="type" id="type">
+         <select name="hours" id="hours">
             <?php
 
-            $types = ['Core', 'Minor', 'General Education'];
-            for ($i = 0; $i < sizeof($types); $i++) {
-               echo "<option value='{$types[$i]}'>{$types[$i]}</option>";
+            $optsHour = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+            foreach ($optsHour as $opt) {
+               $selOpt = ($opt == $hours) ? "selected" : "";
+               echo "<option value='$opt' $selOpt>$opt hour/s</option>";
             }
 
             ?>
-
          </select>
       </div>
    </div>
    <div class="form__Container">
-      <label for="hour" class="form__Label">Hour/s:</label>
+      <label for="" class="form__Label">Type:</label>
+      <div class="">
+         <?php
+
+         $types = ["Lecture", "Laboratory"];
+         for ($i = 0; $i < sizeof($types); $i++) {
+            $selOpt = ($type == $i) ? 'checked' : '';
+            echo "<input type='radio' name='type' id='$types[$i]' value='$i' $selOpt>";
+            echo "<label for='$types[$i]'>$types[$i]</label>";
+         }
+
+         ?>
+      </div>
+   </div>
+   <div class="form__Container">
+      <label for="" class="form__Label">Department:</label>
       <div class="form__Input">
-         <select name="hour" id="hour">
-            <option value='1'>1 hour</option>
-            <option value='1.5'>1.5 hours</option>
-            <option value='2'>2 hours</option>
-            <option value='2.5'>2.5 hours</option>
-            <option value='3'>3 hours</option>
-            <option value='3.5'>3.5 hours</option>
-            <option value='4'>4 hours</option>
-            <option value='4.5'>4.5 hours</option>
-            <option value='5'>5 hours</option>
+         <select name='deptID'>
+            <?php
+
+            $deptView = new DepartmentsView();
+            $departments = $deptView->FetchDepts('faculty', 1);
+            foreach ($departments as $department) {
+               $selOpt = ($deptID == $department['dept_id']) ? 'selected' : '';
+               echo "<option value='{$department['dept_id']}' $selOpt>{$department['dept_name']}</option>";
+            }
+
+            ?>
          </select>
       </div>
    </div>

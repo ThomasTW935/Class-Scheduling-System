@@ -15,8 +15,8 @@ var_dump($checkList);
 
 <form action='./includes/checklist.inc.php' class='module__Form' method='POST'>
   <section class="form__Title">
-    <label>Add Subjects Information</label>
-    <a href="??id=<?php echo $checkList['id'] ?>">X</a>
+    <label>Add Subjects To Checklist</label>
+    <a href="?id=<?php echo $checkList['id'] ?>">X</a>
   </section>
 
   <div class="form__Container">
@@ -50,6 +50,6 @@ var_dump($checkList);
       </select>
     </div>
   </div>
-  <button class='form__Button button' type='submit' name='<?php echo $button ?>'><?php echo $button ?></button>
+  <button class='form__Button button' type='submit' name='submit-subject'>Add Subject</button>
 </form>
 <a href="?id=<?php echo $checkList['id'] ?>" class='module__formBackground'></a>
