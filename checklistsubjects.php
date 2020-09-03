@@ -1,13 +1,14 @@
 <?php
 include_once './layouts/__header.php';
-$searchValue = $_GET['q'] ?? '';
 $id = $_GET['id'];
 $checklistView = new ChecklistView();
 $checkList = $checklistView->FetchChecklistByID($id)[0];
 ?>
 <main class='module' id='checklistSubjects'>
   <div class="module__Header">
-    <div></div>
+    <div class='module__Actions'>
+      <a href='<?php echo "./checklist.php?deptid=" . $checkList['dept_id'] ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
+    </div>
     <div class="module__Logo">
       <h2><?php echo $checkList['dept_desc'] ?></h2>
       <h3><?php echo $checkList['name'] ?> Checklist</h3>
