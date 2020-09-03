@@ -2,8 +2,17 @@
 
 class ChecklistContr extends Checklist
 {
-  public function CreateChecklist()
+  public function CreateChecklist($data)
   {
+    $this->setChecklist($data);
+  }
+  public function ModifyChecklist($data)
+  {
+    $this->updateChecklist($data);
+  }
+  public function ModifyChecklistState($state, $id)
+  {
+    $this->updateChecklistState($state, $id);
   }
 
 

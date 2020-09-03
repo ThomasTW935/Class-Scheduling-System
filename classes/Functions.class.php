@@ -75,7 +75,7 @@ class Functions
   public function GenerateModuleLinks($page, $dept = '', $check = false)
   {
     $destination = (!empty($dept)) ? "dept=$dept&" : "";
-    $destination = ($check) ? "deptid=$dept" : $destination;
+    $destination = ($check) ? "deptid=$dept&" : $destination;
     if (!isset($_GET['archive'])) {
       echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
       <span>Add</span>
@@ -178,8 +178,8 @@ class Functions
       $tableHead = ["Username", "Email", "Role Level", "Actions"];
       $tableBody = ["username", "email", "role_level"];
     } else if ($type == 'checklist') {
-      $tableHead = ["Name", "Deptartment", "Actions"];
-      $tableBody = ["name", "dept_name"];
+      $tableHead = ["Name", "Actions"];
+      $tableBody = ["name"];
     }
     $newArray["head"] = $tableHead;
     $newArray["body"] = $tableBody;
@@ -292,8 +292,8 @@ class Functions
       $iconName = ($result['is_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['is_active'] == 1) ? '' : "class='table__Restore'";
       $action .= "<form onsubmit='return submitForm(this)' action='./includes/checklist.inc.php' method='POST' $tableRestore>
-                 <input name='page' type='hidden' value='$page'>
-                 <input name='chkID' type='hidden' value='" . $result['id'] . "'>
+                 <input name='id' type='hidden' value='" . $result['id'] . "'>
+                 <input name='deptID' type='hidden' value='" . $result['dept_id'] . "'>
                  <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
                  <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                  <span>" . $iconName . "</span>

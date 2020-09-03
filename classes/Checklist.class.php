@@ -4,10 +4,10 @@ class Checklist extends Dbh
 {
   protected function setChecklist($data)
   {
-    $sql = "INSERT INTO checklist(name) VALUES(?)";
+    $sql = "INSERT INTO checklist(name,dept_id) VALUES(?,?)";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$data['name']]);
+      $stmt->execute([$data['name'], $data['deptID']]);
     } catch (PDOException $e) {
       trigger_error("Error: $e");
     }
@@ -18,6 +18,16 @@ class Checklist extends Dbh
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$data['name'], $data['id']]);
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function updateChecklistState($state, $id)
+  {
+    $sql = "UPDATE checklist SET is_active = ? WHERE id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$state, $id]);
     } catch (PDOException $e) {
       trigger_error("Error: $e");
     }

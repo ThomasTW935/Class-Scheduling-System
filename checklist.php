@@ -6,6 +6,7 @@ $deptID = $_GET['deptid'];
 $deptView = new DepartmentsView();
 $dept = $deptView->FetchDeptByID($deptID)[0];
 $deptType = $dept['dept_type'];
+$deptName = $dept['dept_name'];
 ?>
 <main class='professors module'>
   <div class="module__Header">
@@ -14,7 +15,7 @@ $deptType = $dept['dept_type'];
     </div>
     <div class="module__Logo">
       <img src=" drawables/icons/professor.svg">
-      <a href='?#'><span>Checklists<?php echo $subTitle ?></span></a>
+      <a href='#'><span><?php echo "$deptName Checklists$subTitle" ?></span></a>
     </div>
     <div class="module__Links">
       <?php
@@ -40,6 +41,9 @@ $deptType = $dept['dept_type'];
   </div>
   <?php
 
+  if (isset($_GET['add']) || isset($_GET['id'])) {
+    include './layouts/checklist.form.php';
+  }
 
   ?>
 
