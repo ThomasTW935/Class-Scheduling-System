@@ -89,9 +89,8 @@ if (timeStarts != null) {
 
 //Fixing Schedules Labels
 
+const table = document.querySelector('.schedules__Table table');
 let TableFixLabel = () => {
-
-  const table = document.querySelector('.schedules__Table table');
   let rows = table.rows
   let colLength = rows[0].cells.length
   for (let colIndex = 1; colIndex < colLength; colIndex++) {
@@ -125,6 +124,9 @@ let TableFixLabel = () => {
       slot.style.fontSize = newSize + "rem"
     }
   }
+}
+if (table) {
+  TableFixLabel()
 }
 
 // Adding Schedules
@@ -252,7 +254,6 @@ if (schedulesForm != null) {
 }
 
 // Actions 
-TableFixLabel()
 
 
 

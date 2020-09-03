@@ -1127,4 +1127,47 @@ a {
 .profile div form button:hover {
   background: var(--color-background-light);
 }
+
+#checklistSubjects .module__Header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr 1fr;
+      grid-template-columns: 1fr 2fr 1fr;
+}
+
+#checklistSubjects .module__Header .module__Links {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+#checklistSubjects .module__Content {
+  margin: 1em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#checklistSubjects .module__Content table {
+  margin: 0.5em 0;
+  min-width: 300px;
+  width: 50%;
+  border-spacing: 0;
+  border: 0;
+}
+
+#checklistSubjects .module__Content table caption {
+  text-align: start;
+  font-weight: bold;
+}
+
+#checklistSubjects .module__Content table td,
+#checklistSubjects .module__Content table th {
+  padding: 0.25em 0.5em;
+}
 /*# sourceMappingURL=admin.css.map */

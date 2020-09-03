@@ -82,3 +82,33 @@
     }
   }
 }
+#checklistSubjects {
+  .module__Header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    .module__Links {
+      justify-self: end;
+    }
+  }
+  .module__Content {
+    margin: 1em 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    table {
+      margin: 0.5em 0;
+      min-width: 300px;
+      width: 50%;
+      border-spacing: 0;
+      border: 0;
+      caption {
+        text-align: start;
+        font-weight: bold;
+      }
+      td,
+      th {
+        padding: 0.25em 0.5em;
+      }
+    }
+  }
+}

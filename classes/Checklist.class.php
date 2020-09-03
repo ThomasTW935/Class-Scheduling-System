@@ -51,9 +51,40 @@ class Checklist extends Dbh
 
   // Checklist Subjects
 
+  protected function setChecklistSubject($data)
+  {
+    $sql = "INSERT INTO subjects_to_checklist(chk_id,subj_id,level_id) VALUES(?,?,?)";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$data['chkID'], $data['subjID'], $data['levelID']]);
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function updateChecklistSubject($data)
+  {
+    $sql = "UPDATE subjects_to_checklist SET subj_id = ?, level_id = ? WHERE id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$data['subjID'], $data['levelID'], $data['stcID']]);
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function deleteChecklistSubject($stcID)
+  {
+    $sql = "DELETE FROM subjects_to_checklist WHERE id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$stcID]);
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+
   protected function getDistinctLevel($id)
   {
-    $sql = "SELECT DISTINCT level_id, description FROM subjects_to_checklist stc INNER JOIN level l ON stc.level_id = l.id WHERE chk_id = ?";
+    $sql = "SELECT DISTINCT level_id, description FROM subjects_to_checklist stc INNER JOIN level l ON stc.level_id = l.id WHERE chk_id = ? ORDER BY level_id";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
@@ -69,6 +100,18 @@ class Checklist extends Dbh
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id, $levelID]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function getChecklistSubject($stcID)
+  {
+    $sql = "SELECT * FROM subjects_to_checklist where id = ? LIMIT 1";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$stcID]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {

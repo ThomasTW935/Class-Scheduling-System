@@ -5,7 +5,7 @@ $id = $_GET['id'];
 $checklistView = new ChecklistView();
 $checkList = $checklistView->FetchChecklistByID($id)[0];
 ?>
-<main class='professors module'>
+<main class='module' id='checklistSubjects'>
   <div class="module__Header">
     <div></div>
     <div class="module__Logo">
@@ -30,34 +30,49 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
     $levels = $checklistView->FetchDistinctLevel($id);
 
     foreach ($levels as $level) {
-      echo "<table>
+      echo "<table class='module__Table'>
         <caption>{$level['description']}</caption>
         <thead>
           <tr>
             <th>Code</th>
             <th>Name</th>
             <th>Units</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>";
       $subjects = $checklistView->FetchChecklistSubjectsByLevel($id, $level['level_id']);
       $totalUnits = 0;
       foreach ($subjects as $subject) {
-        $totalUnits += $subject['units'];
+        $units = number_format($subject['units'], 2);
+        $totalUnits += $units;
+        $totalUnits = number_format($totalUnits, 2);
         echo "<tr>
             <td>{$subject['subj_code']}</td>
             <td>{$subject['subj_desc']}</td>
-            <td>{$subject['units']}</td>
+            <td>{$units}</td>
+            <td>
+            <div class='table-actions'>
+              <a href='?id=$id&stcid={$subject['id']}'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>
+              <form onsubmit='return submitForm(this)' action='./includes/checklistsubjects.inc.php' method='POST'>
+                <input name='chkID' type='hidden' value='$id'>
+                <input name='stcID' type='hidden' value='" . $subject['id'] . "'>
+                <input type='hidden' name='' value='1' id='state'>
+                <button name='delete-subject' type='submit'><img src='drawables/icons/delete.svg' alter='delete'/></button>
+                <span>Delete</span>
+              </form>
+            </div>
+            </td>
           </tr>";
       }
       echo "</tbody>
-        <tfooter>
+        <tfoot>
           <tr>
           <td></td>
-          <td>Total Units: </td>
+          <td style='text-align: end;'>Total Units: </td>
           <td>$totalUnits</td>
           </tr>
-        </tfooter>
+        </tfoot>
       </table>";
     }
 
@@ -66,7 +81,7 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
   </div>
   <?php
 
-  if (isset($_GET['add'])) {
+  if (isset($_GET['add']) || isset($_GET['stcid'])) {
     include './layouts/checklistsubjects.form.php';
   }
 

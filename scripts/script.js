@@ -8,7 +8,7 @@ function submitForm(e) {
    }
    return confirm(message + ' this record?')
 }
-
+console.log(123)
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
