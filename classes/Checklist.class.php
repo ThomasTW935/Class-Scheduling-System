@@ -59,6 +59,7 @@ class Checklist extends Dbh
     }
   }
 
+
   // Checklist Subjects
 
   protected function setChecklistSubject($data)
@@ -122,6 +123,20 @@ class Checklist extends Dbh
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$stcID]);
+      $results = $stmt->fetchAll();
+      return $results;
+    } catch (PDOException $e) {
+      trigger_error("Error: $e");
+    }
+  }
+  protected function getChecklistSubjectsByChkID($chkID, $levelID)
+  {
+    $sql = "SELECT stc.id, chk_id, stc.subj_id, subj_code,subj_desc FROM subjects_to_checklist stc 
+    INNER JOIN checklist c ON stc.chk_id = c.id
+    INNER JOIN subjects s ON stc.subj_id = s.subj_id WHERE chk_id = ? AND stc.level_id = ?";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$chkID, $levelID]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {

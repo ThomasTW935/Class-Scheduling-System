@@ -125,8 +125,7 @@ if ($schedIDExist) {
   if ($type != 'subj') {
     if (!empty($result) && !empty($result['subj_id'])) {
       $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
-      $unit = $selSubj['units'] . " Unit/s";
-      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc'], $unit]);
+      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
       $optionValue = $optionData['value'];
       $optionID = $optionData['id'];
     }
@@ -141,7 +140,11 @@ if ($schedIDExist) {
       <input class='input__Subject--Hidden' name='inputSubj' type='hidden' value='$optionID'>
       <datalist class='input__Subject--List' id='subjList'>";
 
-    $subjs = $subjView->FetchSubjectsByState(1);
+    if ($type == 'sect') {
+      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id']);
+    } else {
+      $subjs = $subjView->FetchSubjectsByState(1);
+    }
     $subjView->DisplaySubjectsInSearch($subjs);
 
     echo "</datalist>

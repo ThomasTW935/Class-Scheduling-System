@@ -165,6 +165,9 @@ class Functions
     if ($type == 'subj') {
       $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department', "Actions"];
       $tableBody = ["subj_code", "subj_desc", "units", 'hours', 'dept_name'];
+    } else if ($type == 'dept') {
+      $tableHead = ["Program", "Description", "Actions"];
+      $tableBody = ["dept_name", "dept_desc"];
     } else if ($type == 'sect') {
       $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
       $tableBody = ["sect_name", "sect_year", "dept_name"];
@@ -209,6 +212,20 @@ class Functions
         <span>" . $iconName . "</span>
         </form>";
       }
+    } else if ($type == 'dept') {
+      if ($result['dept_active'] == 1) {
+        $action .= "<a href='checklist.php?deptid={$result['dept_id']}&page=1'><img src='drawables/icons/clipboard.svg' alter='Checklists'/><span>Checklists</span></a>";
+        $action .= "<a href='?dept={$result['dept_type']}&page=$page&id={$result['dept_id']}'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+      }
+      $iconName = ($result['dept_active'] == 1) ? 'delete' : 'restore';
+      $action .= "<form onsubmit='return submitForm(this)' action='./includes/departments.inc.php' method='POST'>
+        <input name='page' type='hidden' value='$page'>
+        <input name='deptID' type='hidden' value='" . $result['dept_id'] . "'>
+        <input name='department' type='hidden' value='" . $result['dept_type'] . "'>
+        <input id='state' name='state' type='hidden' value='" . $result['dept_active'] . "'>
+        <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='Delete'/></button>
+        <span>" . $iconName . "</span>
+     </form>";
     } else if ($type == 'sect') {
       if ($result['sect_active'] == 1) {
 

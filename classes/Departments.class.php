@@ -33,7 +33,7 @@ class Departments extends Dbh
    }
    protected function getDeptartmentsWithSection($type, $state)
    {
-      $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? AND dept_id IN(SELECT dept_id FROM sections)";
+      $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? AND dept_id IN(SELECT dept_id FROM sections s INNER JOIN checklist c ON s.chk_id = c.id)";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$type, $state]);

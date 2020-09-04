@@ -56,6 +56,7 @@ class Sections extends Dbh
   protected function getSectionByDept($deptID)
   {
     $sql = "SELECT sect_id,sect_name,level_id, description as sect_year, sect_active FROM sections s 
+    INNER JOIN checklist c ON c.id = s.chk_id
     INNER JOIN level l ON s.level_id = l.id WHERE dept_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);

@@ -8,6 +8,7 @@ $roomView = new RoomsView();
 $profView = new ProfessorsView();
 $subjView = new SubjectsView();
 $schedView = new SchedulesView();
+$checklistView = new ChecklistView();
 $type = $_POST['type'] ?? $_GET['type'];
 $ID = $_POST['id'] ?? $_GET['id'];
 if (!isset($type) xor empty($type)) {

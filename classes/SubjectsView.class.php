@@ -31,12 +31,11 @@ class SubjectsView extends Subjects
    {
       $schedView = new SchedulesView();
       foreach ($results as $result) {
-         $unit = $result['units'] . " Unit/s";
-         $optionData = $schedView->GenerateOptionDataValue($result['subj_id'], [$result['subj_code'], $result['subj_desc'], $unit]);
+         $optionData = $schedView->GenerateOptionDataValue($result['subj_id'], [$result['subj_code'], $result['subj_desc']]);
          echo "<option data-value='{$optionData['id']}' value='{$optionData['value']}'><ul class='module__List'>
             <li class='module__Item'>" . $result['subj_code'] . " |</li>
-            <li class='module__Item'>" . $result['subj_desc'] . " |</li>
-            <li class='module__Item'>" . $result['units'] . "Unit/s</li></ul></option>";
+            <li class='module__Item'>" . $result['subj_desc'] . "</li>
+            </ul></option>";
       }
    }
    public function DisplaySubjects($results, $page, $totalPages, $destination)
