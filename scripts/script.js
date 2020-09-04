@@ -8,7 +8,6 @@ function submitForm(e) {
    }
    return confirm(message + ' this record?')
 }
-console.log(123)
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
@@ -25,16 +24,61 @@ function SearchQuery(pageNum) {
    let state = searchStatus.value
    let page = pageNum
    let query = name + '=' + val + '&state=' + state + `&page=${page}`
-   searchData(query)
+   searchData(query, 'search')
 }
-function searchData(query) {
+let SectionsDepartmentChange = () => {
+   let selectTag = document.querySelector('#sectionsDepartment')
+   let name = selectTag.name
+   let value = selectTag.value
+   let query = `${name}=${value}`
+   searchData(query, 'department')
+   console.log(selectTag)
+}
+let SectionsChecklistChange = () => {
+   let selectTag = document.querySelector('#sectionsChecklist')
+   let name = selectTag.name
+   let value = selectTag.value
+   let query = `${name}=${value}`
+   searchData(query, 'checklist')
+}
+let RemoveOptions = (sel) => {
+   let len = sel.options.length
+   for (let i = len - 1; i >= 0; i--) {
+      sel.removeChild(sel.options[i])
+   }
+}
+function searchData(query, target) {
    let xhr = new XMLHttpRequest()
    xhr.onreadystatechange = function () {
       if (this.readyState === 4 && this.status) {
          let response = this.responseText
-         console.log(response)
-         let con = document.querySelector('.module__Content')
-         con.innerHTML = response
+         console.log(this.responseURL)
+         console.log(this.response)
+         if (target == 'search') {
+            let con = document.querySelector('.module__Content')
+            con.innerHTML = response
+         } else if (target == 'department') {
+            let con = document.querySelector('#sectionsChecklist')
+            RemoveOptions(con)
+            let datas = JSON.parse(this.responseText)
+            datas.forEach(data => {
+               let option = document.createElement('option')
+               option.value = data['id']
+               option.innerHTML = data['name']
+               con.appendChild(option)
+            })
+            SectionsChecklistChange()
+         } else if (target == 'checklist') {
+            let con = document.querySelector('#sectionsLevel')
+            RemoveOptions(con)
+            let datas = JSON.parse(this.responseText)
+            datas.forEach(data => {
+               let option = document.createElement('option')
+               option.value = data['id']
+               option.innerHTML = data['description']
+               con.appendChild(option)
+            })
+         }
       }
    }
    xhr.open("GET", 'includes/ajax.inc.php?' + query, true)

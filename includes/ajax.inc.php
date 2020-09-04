@@ -5,6 +5,21 @@ session_start();
 
 $func = new Functions();
 
+if (isset($_GET['deptID'])) {
+   $deptView = new DepartmentsView();
+   $deptID = $_GET['deptID'];
+   $checklistView = new ChecklistView();
+   $checklists = $checklistView->FetchChecklist($deptID, 1);
+   echo json_encode($checklists);
+   exit();
+}
+if (isset($_GET['chkID'])) {
+   $chkID = $_GET['chkID'];
+   $checklistView = new ChecklistView();
+   $levels = $checklistView->FetchDistinctLevel($chkID);
+   echo json_encode($levels);
+   exit();
+}
 
 if (isset($_GET['selectLevel']) || isset($_GET['selectDept'])) {
 

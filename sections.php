@@ -31,7 +31,6 @@ $searchValue = $_GET['q'] ?? '';
       if (empty($searchValue)) {
          $sectView = new SectionsView();
          $results = $sectView->FetchSectionsByState($state);
-
          $isArchived = isset($_GET['archive']);
          $table = $func->TableProperties('sect', $results, $isArchived);
          $paginatedResults = $sectView->FetchSectionsByState($state, $page, $table['limit']);

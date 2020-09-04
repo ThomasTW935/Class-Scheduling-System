@@ -17,6 +17,20 @@ class Departments extends Dbh
          trigger_error("Error: " . $e->getMessage());
       }
    }
+   protected function getDeptartmentsWithChecklist($type, $state)
+   {
+      $sql = "SELECT DISTINCT c.dept_id, dept_name FROM departments d 
+      INNER JOIN checklist c ON c.dept_id = d.dept_id
+      WHERE dept_type = ? AND dept_active = ?";
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute([$type, $state]);
+         $result = $stmt->fetchAll();
+         return $result;
+      } catch (PDOException $e) {
+         trigger_error("Error: " . $e->getMessage());
+      }
+   }
    protected function getDeptartmentsWithSection($type, $state)
    {
       $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? AND dept_id IN(SELECT dept_id FROM sections)";

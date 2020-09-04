@@ -4,7 +4,7 @@ class SectionsVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['sectID', 'name', 'year'];
+  private static $fields = ['sectID', 'name', 'levelID'];
   public function __construct($post_data)
   {
     $this->data = $post_data;

@@ -13,6 +13,11 @@ class DepartmentsView extends Departments
       $results = $this->getDeptartmentsWithSection($type, $state);
       return $results;
    }
+   public function FetchDeptsWithChecklist($type, $state)
+   {
+      $results = $this->getDeptartmentsWithChecklist($type, $state);
+      return $results;
+   }
    public function FetchDeptsBySearch($search, $state, $type, $page = 0, $limit = 0)
    {
       $results = $this->getDepartmentBySearch($search, $state, $type, $page, $limit);
