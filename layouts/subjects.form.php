@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
    <div class="form__Container">
       <label for="" class="form__Label">Unit/s:</label>
       <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' max='15' name='units' required>
+         <input class='form__Input' type='number' value='<?php echo $units ?>' min='1' name='units' required>
       </div>
    </div>
    <div class="form__Container">

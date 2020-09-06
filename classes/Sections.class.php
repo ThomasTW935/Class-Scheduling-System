@@ -2,36 +2,38 @@
 
 class Sections extends Dbh
 {
-  protected function getSectionsByState($state, $page, $limit)
+  protected function getSectionsByState($schoolYearID, $state, $page, $limit)
   {
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-    $sql = "SELECT sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sect_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
-    LEFT JOIN departments d ON c.dept_id = d.dept_id WHERE sect_active = ? $withLimit";
+    LEFT JOIN departments d ON c.dept_id = d.dept_id 
+    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id WHERE school_year_id = ? AND sd.is_active = ?  $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state]);
+      $stmt->execute([$schoolYearID, $state]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionsBySearch($search, $state, $page, $limit)
+  protected function getSectionsBySearch($search, $schoolYearID, $state, $page, $limit)
   {
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%$search%";
-    $sql = "SELECT sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sect_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id  
-    WHERE (sect_name LIKE ? OR sect_year LIKE ? OR dept_name LIKE ?) AND sect_active = ? $withLimit";
+    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id
+    WHERE (sect_name LIKE ? OR l.description LIKE ? OR dept_name LIKE ?) AND school_year_id = ? AND sd.is_active = ? $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$search, $search, $search, $state]);
+      $stmt->execute([$search, $search, $search, $schoolYearID, $state]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
@@ -40,10 +42,12 @@ class Sections extends Dbh
   }
   protected function getSectionByID($id)
   {
-    $sql = "SELECT sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sect_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
-    LEFT JOIN departments d ON c.dept_id = d.dept_id  WHERE sect_id = ? LIMIT 1";
+    LEFT JOIN departments d ON c.dept_id = d.dept_id
+    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id
+    WHERE s.sect_id = ? LIMIT 1";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
@@ -55,9 +59,11 @@ class Sections extends Dbh
   }
   protected function getSectionByDept($deptID)
   {
-    $sql = "SELECT sect_id,sect_name,level_id, description as sect_year, sect_active FROM sections s 
+    $sql = "SELECT sect_id,sect_name,level_id, description as sect_year, sd.is_active FROM sections s 
     INNER JOIN checklist c ON c.id = s.chk_id
-    INNER JOIN level l ON s.level_id = l.id WHERE dept_id = ?";
+    INNER JOIN level l ON s.level_id = l.id
+    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id
+     WHERE dept_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$deptID]);
@@ -102,6 +108,16 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function setSectionDetails($schoolYearID)
+  {
+    $sql = "INSERT INTO sections_details (sect_id,school_year_id,is_active) SELECT sect_id, $schoolYearID, 1 FROM sections ORDER BY sect_id DESC LIMIT 1";
+    try {
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+    } catch (PDOException $e) {
+      trigger_error('Error: ' . $e);
+    }
+  }
   protected function updateSection($name, $chkID, $levelID, $sectID)
   {
     $sql = 'UPDATE sections SET sect_name = ?, chk_id = ?, level_id = ? WHERE sect_id = ?';
@@ -112,9 +128,9 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function updateSectionState($state, $id)
+  protected function updateSectionState($state, $schoolYearID, $id)
   {
-    $sql = 'UPDATE sections SET sect_active = ? WHERE sect_id = ?';
+    $sql = 'UPDATE sections_details SET is_active = ? WHERE school_year_id = ? AND sect_id = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$state, $id]);

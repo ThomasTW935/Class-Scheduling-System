@@ -38,6 +38,7 @@ if (isset($_GET['id'])) {
    </section>
    <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
    <input class='form__Input' type='hidden' value='<?php echo $sectID ?>' name='sectID'>
+   <input class='form__Input' type='hidden' value='<?php echo $schoolYearID ?>' name='schoolYearID'>
    <div class='form__Container'>
       <label for='' class='form__Label'>Section:</label>
       <div class='form__Input'>

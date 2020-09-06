@@ -2,9 +2,9 @@
 
 class SectionsView extends Sections
 {
-    public function FetchSectionsByState($state, $page = 0, $limit = 0)
+    public function FetchSectionsByState($schoolYearID, $state,  $page = 0, $limit = 0)
     {
-        $results = $this->getSectionsByState($state, $page, $limit);
+        $results = $this->getSectionsByState($schoolYearID, $state,  $page, $limit);
         return $results;
     }
     public function FetchSectionByID($id)
@@ -27,9 +27,9 @@ class SectionsView extends Sections
         $results = $this->getSectionByLatest();
         return $results;
     }
-    public function FetchSectionsBySearch($search, $state, $page = 0, $limit = 0)
+    public function FetchSectionsBySearch($search, $schoolYearID, $state, $page = 0, $limit = 0)
     {
-        $results = $this->getSectionsBySearch($search, $state, $page, $limit);
+        $results = $this->getSectionsBySearch($search, $schoolYearID, $state, $page, $limit);
         return $results;
     }
     public function DisplaySectionsInSearch($results)

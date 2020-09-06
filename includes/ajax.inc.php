@@ -113,14 +113,17 @@ if (isset($_GET['searchSubj'])) {
    $subjView->DisplaySubjects($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }
+$schoolyearView = new SchoolyearView();
+$schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
+$schoolYearID = $schoolYear['id'];
 if (isset($_GET['searchSect'])) {
    $value = $_GET['searchSect'];
    $sectView = new SectionsView();
-   $results = $sectView->FetchSectionsBySearch($value, $state);
+   $results = $sectView->FetchSectionsBySearch($value, $schoolYearID, $state);
 
    $isArchived = ($state == 0);
    $table = $func->TableProperties('sect', $results, !$state, $value);
-   $paginatedResults = $sectView->FetchSectionsBySearch($value, $state, $page, $table['limit']);
+   $paginatedResults = $sectView->FetchSectionsBySearch($value, $schoolYearID, $state, $page, $table['limit']);
    $sectView->DisplaySections($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }

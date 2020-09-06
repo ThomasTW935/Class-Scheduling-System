@@ -30,10 +30,10 @@ $searchValue = $_GET['q'] ?? '';
 
       if (empty($searchValue)) {
          $sectView = new SectionsView();
-         $results = $sectView->FetchSectionsByState($state);
+         $results = $sectView->FetchSectionsByState($schoolYearID, $state);
          $isArchived = isset($_GET['archive']);
          $table = $func->TableProperties('sect', $results, $isArchived);
-         $paginatedResults = $sectView->FetchSectionsByState($state, $page, $table['limit']);
+         $paginatedResults = $sectView->FetchSectionsByState($schoolYearID, $state, $page, $table['limit']);
          $sectView->DisplaySections($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 

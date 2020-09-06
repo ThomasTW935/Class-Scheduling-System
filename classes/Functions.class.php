@@ -99,6 +99,7 @@ class Functions
       case 'room':
       case 'sect':
       case 'subj':
+      case 'schoolyear':
       case 'user':
         $limit = 10;
         $destination = (!$archived) ? "?{$isSearch}page=" : "?archive&{$isSearch}page=";
@@ -165,6 +166,9 @@ class Functions
     if ($type == 'subj') {
       $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department', "Actions"];
       $tableBody = ["subj_code", "subj_desc", "units", 'hours', 'dept_name'];
+    } else if ($type == 'schoolyear') {
+      $tableHead = ["School Year", "Term", "Operation Start", "Operation End", "Actions"];
+      $tableBody = ["year", "term", "operation_start", "operation_end"];
     } else if ($type == 'dept') {
       $tableHead = ["Program", "Description", "Actions"];
       $tableBody = ["dept_name", "dept_desc"];
@@ -192,6 +196,9 @@ class Functions
   public function BuildTableActions($type, $result, $page)
   {
     $action = '';
+    $isActive = $result['is_active'] == 1;
+    $iconName = ($isActive) ? 'delete' : 'restore';
+    $tableRestore = ($isActive) ? '' : "class='table__Restore'";
     if ($type == "subj") {
       if ($result['subj_active'] == 1) {
         $action .= "<form method='POST' action='./schedules.php'>
@@ -227,7 +234,7 @@ class Functions
         <span>" . $iconName . "</span>
      </form>";
     } else if ($type == 'sect') {
-      if ($result['sect_active'] == 1) {
+      if ($isActive) {
 
         $action .= "<form method='POST' action='./schedules.php'>
         <input type='hidden' name='type' value='sect'>
@@ -236,13 +243,11 @@ class Functions
         <span>Schedule</span></form>
         <a href=?page=$page&id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
-      $iconName = ($result['sect_active'] == 1) ? 'delete' : 'restore';
-      $tableRestore = ($result['sect_active'] == 1) ? '' : "class='table__Restore'";
       if ($_SESSION['type'] >= 3) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
         <input name='page' type='hidden' value='$page'>
         <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
-        <input id='state' name='state' type='hidden' value='" . $result['sect_active'] . "'>
+        <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
               <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
               <span>" . $iconName . "</span>
           </form>";
@@ -315,6 +320,9 @@ class Functions
                  <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                  <span>" . $iconName . "</span>
               </form>";
+    } else if ($type == 'schoolyear') {
+
+      $action .= "<a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
     }
     return $action;
   }

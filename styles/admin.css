@@ -1009,22 +1009,35 @@ a {
 }
 
 .dashboard {
-  display: -ms-grid;
-  display: grid;
-  place-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5em 2rem;
+}
+
+.dashboard > h3 {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .dashboard__Container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(120px, 250px))[4];
-      grid-template-columns: repeat(4, minmax(120px, 250px));
-  -ms-grid-rows: (minmax(120px, 250px))[2];
-      grid-template-rows: repeat(2, minmax(120px, 250px));
-  gap: 1em;
+  -ms-grid-columns: (minmax(120px, 250px))[3];
+      grid-template-columns: repeat(3, minmax(120px, 250px));
+  gap: 0.5em;
 }
 
 .dashboard__Card {
+  height: 220px;
+  width: 220px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -5,9 +5,12 @@ if ($sessionType == 1) {
    exit();
 }
 
+
+
 ?>
 
 <main class="dashboard">
+   <h3><?php echo $schoolYearText ?></h3>
    <div class="dashboard__Container">
       <a class="dashboard__Card card__Design" href="./professors.php?page=1">
          <h3>PROFESSORS</h3>
@@ -37,6 +40,10 @@ if ($sessionType == 1) {
       <a class="dashboard__Card card__Design" href="./department.php?dept=faculty&page=1">
          <h3>FACULTY</h3>
          <img src="./drawables/icons/faculty.svg" alt="faculty">
+      </a>
+      <a class="dashboard__Card card__Design" href="./settings.php?page=1">
+         <h3>Settings</h3>
+         <img src="./drawables/icons/settings.svg" alt="Settings">
       </a>
       <?php
 

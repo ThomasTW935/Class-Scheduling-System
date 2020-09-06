@@ -129,11 +129,12 @@ class Checklist extends Dbh
       trigger_error("Error: $e");
     }
   }
-  protected function getChecklistSubjectsByChkID($chkID, $levelID)
+  protected function getChecklistSubjectsByChkID($chkID, $levelID, $sectID)
   {
-    $sql = "SELECT stc.id, chk_id, stc.subj_id, subj_code,subj_desc FROM subjects_to_checklist stc 
+    $sql = "SELECT stc.id, chk_id, stc.subj_id, subj_code,subj_desc,hours FROM subjects_to_checklist stc 
     INNER JOIN checklist c ON stc.chk_id = c.id
-    INNER JOIN subjects s ON stc.subj_id = s.subj_id WHERE chk_id = ? AND stc.level_id = ?";
+    INNER JOIN subjects s ON stc.subj_id = s.subj_id WHERE chk_id = ? AND stc.level_id = ? ORDER BY subj_desc";
+    //  AND s.subj_id NOT IN (SELECT subj_id FROM schedules WHERE sect_id = ?)
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$chkID, $levelID]);

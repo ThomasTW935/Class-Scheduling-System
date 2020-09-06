@@ -3,15 +3,21 @@
 @import "variables.scss";
 
 .dashboard {
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em 2rem;
+  & > h3 {
+    align-self: flex-end;
+  }
   &__Container {
     display: grid;
-    grid-template-columns: repeat(4, minmax(120px, 250px));
-    grid-template-rows: repeat(2, minmax(120px, 250px));
-    gap: 1em;
+    grid-template-columns: repeat(3, minmax(120px, 250px));
+    gap: 0.5em;
   }
   &__Card {
+    height: 220px;
+    width: 220px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-evenly;

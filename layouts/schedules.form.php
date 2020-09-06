@@ -14,10 +14,13 @@ $errorSubj = $errors['errorSubj'] ?? "";
 $errorTime = $errors['errorTime'] ?? "";
 $baseStartTime =  $newStartTime;
 
+$subjID = $errors['inputSubj'] ?? '';
+
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
+  $subjID = $result['subj_id'];
   $button = "update";
   $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
   $baseStartTime = strtotime($result['sched_from']);
@@ -136,18 +139,20 @@ if ($schedIDExist) {
     echo "<div class='form__Container'>
     <label for=''>Select Subject</label>
     <div class='form__Input'>
-      <input class='input__Subject search__Input' list='subjList' value='$optionValue'>
-      <input class='input__Subject--Hidden' name='inputSubj' type='hidden' value='$optionID'>
-      <datalist class='input__Subject--List' id='subjList'>";
+      <select name='inputSubj'>";
 
     if ($type == 'sect') {
-      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id']);
+      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
     } else {
       $subjs = $subjView->FetchSubjectsByState(1);
     }
-    $subjView->DisplaySubjectsInSearch($subjs);
+    foreach ($subjs as $subj) {
+      $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
+      echo "<option value='{$subj['subj_id']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
+    }
+    // $subjView->DisplaySubjectsInSearch($subjs);
 
-    echo "</datalist>
+    echo "</select>
     <div class='form__Error'>$errorSubj</div>
     </div>
   </div>";

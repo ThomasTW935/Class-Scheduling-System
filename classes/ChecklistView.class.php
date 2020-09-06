@@ -36,9 +36,9 @@ class ChecklistView extends Checklist
     $results = $this->getChecklistSubject($stcID);
     return $results;
   }
-  public function FetchCheclistSubjectsByChkID($chkID, $levelID)
+  public function FetchCheclistSubjectsByChkID($chkID, $levelID, $sectID)
   {
-    $results = $this->getChecklistSubjectsByChkID($chkID, $levelID);
+    $results = $this->getChecklistSubjectsByChkID($chkID, $levelID, $sectID);
     return $results;
   }
 
