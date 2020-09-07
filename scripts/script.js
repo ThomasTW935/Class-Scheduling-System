@@ -82,7 +82,7 @@ function searchData(query, target) {
             let datas = JSON.parse(this.responseText)
             datas.forEach(data => {
                let option = document.createElement('option')
-               option.value = data['id']
+               option.value = data['level_id']
                option.innerHTML = data['description']
                con.appendChild(option)
             })
