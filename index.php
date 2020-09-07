@@ -8,6 +8,26 @@ $username = (isset($errors['username'])) ? "{$errors['username']}" : '';
 $triggerModal = (!empty($errors)) ? "style='display:flex;'" : '';
 include "./includes/autoloader.inc.php";
 
+$schoolyearView = new SchoolyearView();
+$schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
+
+switch ($schoolYear['term'] % 10) {
+   case 1:
+      $term = 'st';
+      break;
+   case 2:
+      $term = 'nd';
+      break;
+   case 3:
+      $term = 'rd';
+      break;
+   default:
+      $term = 'th';
+      break;
+}
+$schoolYearText = "SY. {$schoolYear['year']} {$schoolYear['term']}<sup>$term</sup> Term";
+$schoolYearID = $schoolYear['id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,36 +48,39 @@ include "./includes/autoloader.inc.php";
          <li><button onclick='ToggleModalForm()'>Login</button></li>
       </ul>
    </nav>
-   <form class='liveSelect__Form'>
-      <select class='liveSelect' name='selectLevel' id='selectLevel'>
-         <option value='course'>College</option>
-         <option value='strand'>Senior High School</option>
-      </select>
-      <select class='liveSelect' name='selectDept' id='selectDept'>
-         <?php
+   <div class="module__Header">
+      <form class='liveSelect__Form'>
+         <select class='liveSelect' name='selectLevel' id='selectLevel'>
+            <option value='course'>College</option>
+            <option value='strand'>Senior High School</option>
+         </select>
+         <select class='liveSelect' name='selectDept' id='selectDept'>
+            <?php
 
-         $deptView = new DepartmentsView();
-         $depts = $deptView->FetchDeptsWithSect("course", 1);
-         foreach ($depts as $dept) {
-            $selected = ($depts[0]['dept_id'] == $dept['dept_id']) ? "selected" : "";
-            echo "<option value='{$dept['dept_id']}' $selected>{$dept['dept_desc']}</option>";
-         }
+            $deptView = new DepartmentsView();
+            $depts = $deptView->FetchDeptsWithSect("course", 1);
+            foreach ($depts as $dept) {
+               $selected = ($depts[0]['dept_id'] == $dept['dept_id']) ? "selected" : "";
+               echo "<option value='{$dept['dept_id']}' $selected>{$dept['dept_desc']}</option>";
+            }
 
-         ?>
-      </select>
-      <select class='liveSelect' name='selectSection' id='selectSection'>
-         <?php
+            ?>
+         </select>
+         <select class='liveSelect' name='selectSection' id='selectSection'>
+            <?php
 
-         $sectView = new SectionsView();
-         $sects = $sectView->FetchSectionByDept($depts[0]['dept_id']);
-         foreach ($sects as $sect) {
-            echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
-         }
+            $sectView = new SectionsView();
+            $sects = $sectView->FetchSectionByDept($depts[0]['dept_id'], $schoolYearID);
+            foreach ($sects as $sect) {
+               echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
+            }
 
-         ?>
+            ?>
 
-      </select>
-   </form>
+         </select>
+      </form>
+      <h3 class='schoolYear__Text'><?php echo $schoolYearText ?></h3>
+   </div>
 
    <div class="module__Content">
 

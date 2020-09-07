@@ -196,7 +196,7 @@ class Functions
   public function BuildTableActions($type, $result, $page)
   {
     $action = '';
-    $isActive = $result['is_active'] == 1;
+    $isActive = (isset($result['is_active'])) ? $result['is_active'] == 1 : '';
     $iconName = ($isActive) ? 'delete' : 'restore';
     $tableRestore = ($isActive) ? '' : "class='table__Restore'";
     if ($type == "subj") {

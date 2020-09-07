@@ -17,9 +17,9 @@ class SectionsView extends Sections
         $results = $this->getSectionByName($name);
         return $results;
     }
-    public function FetchSectionByDept($deptID)
+    public function FetchSectionByDept($deptID, $schoolYearID)
     {
-        $results = $this->getSectionByDept($deptID);
+        $results = $this->getSectionByDept($deptID, $schoolYearID);
         return $results;
     }
     public function FetchSectionByLatest()

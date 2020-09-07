@@ -4,6 +4,9 @@ include 'autoloader.inc.php';
 session_start();
 
 $func = new Functions();
+$schoolyearView = new SchoolyearView();
+$schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
+$schoolYearID = $schoolYear['id'];
 
 if (isset($_GET['deptID'])) {
    $deptView = new DepartmentsView();
@@ -32,7 +35,7 @@ if (isset($_GET['selectLevel']) || isset($_GET['selectDept'])) {
    if (isset($_GET['selectDept'])) {
       $department = $_GET['selectDept'];
       $sectView = new SectionsView();
-      $sects = $sectView->FetchSectionByDept($department);
+      $sects = $sectView->FetchSectionByDept($department, $schoolYearID);
       echo json_encode($sects);
    }
 
@@ -49,16 +52,16 @@ if (isset($_GET['selectSection'])) {
    <h3>{$sect['sect_name']}</h3>
    ";
 
-   $schedView = new SchedulesView();
-   $type = 'sect';
-   $dTime = $schedView->FetchDisplayTime($type, $id)[0];
 
-   $startTime = $dTime['op_start'];
-   $endTime   = $dTime['op_end'];
-   $jumpTime  = $dTime['op_jump'];
+
+   $startTime = $schoolYear['operation_start'];
+   $endTime   = $schoolYear['operation_end'];
+   $jumpTime  = 30;
+   $type = 'sect';
    $newStartTime = strtotime($startTime);
    $newEndTime = strtotime($endTime);
 
+   $schedView = new SchedulesView();
    $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id);
    exit();
 }
@@ -113,9 +116,7 @@ if (isset($_GET['searchSubj'])) {
    $subjView->DisplaySubjects($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }
-$schoolyearView = new SchoolyearView();
-$schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
-$schoolYearID = $schoolYear['id'];
+
 if (isset($_GET['searchSect'])) {
    $value = $_GET['searchSect'];
    $sectView = new SectionsView();

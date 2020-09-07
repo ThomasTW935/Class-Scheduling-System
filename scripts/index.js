@@ -68,7 +68,7 @@ function searchData(query, con, optVal = '') {
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status) {
       if (optVal) {
-        //console.log(this)
+        console.log(this)
         let datas = JSON.parse(this.responseText)
         datas.forEach(data => {
           let option = document.createElement('option')

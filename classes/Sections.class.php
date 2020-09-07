@@ -57,16 +57,16 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionByDept($deptID)
+  protected function getSectionByDept($deptID, $schoolYearID)
   {
-    $sql = "SELECT sect_id,sect_name,level_id, description as sect_year, sd.is_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,level_id, description as sect_year, sd.is_active FROM sections s 
     INNER JOIN checklist c ON c.id = s.chk_id
     INNER JOIN level l ON s.level_id = l.id
     INNER JOIN sections_details sd ON s.sect_id = sd.sect_id
-     WHERE dept_id = ?";
+     WHERE dept_id = ? AND school_year_id = ? AND sd.is_active = 1 ORDER BY sect_name";
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$deptID]);
+      $stmt->execute([$deptID, $schoolYearID]);
       $results = $stmt->fetchAll();
       return $results;
     } catch (PDOException $e) {
