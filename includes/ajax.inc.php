@@ -66,6 +66,13 @@ if (isset($_GET['selectSection'])) {
    exit();
 }
 
+if (isset($_GET['schoolYear-Change'])) {
+   $id = $_GET['schoolYear-Change'];
+   $schoolyearContr = new SchoolyearContr();
+   $schoolyearContr->ModifySchoolYearActive($id);
+   exit();
+}
+
 $value = '';
 $state = $_GET['state'];
 $page = $_GET['page'];

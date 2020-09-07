@@ -28,9 +28,21 @@ class Schoolyear extends Dbh
   }
   protected function updateSchoolyear($data)
   {
-    $sql = "UPDATE school_year year = ?, term = ?, operation_start = ?, operation_end = ? WHERE id = ?";
+    $sql = "UPDATE school_year SET year = ?, term = ?, operation_start = ?, operation_end = ? WHERE id = ?";
     $this->tryCatchBlock($sql, [$data['year'], $data['term'], $data['start'], $data['end'], $data['id']]);
   }
+  protected function updateSchoolyearActive($id)
+  {
+    $sql = "UPDATE school_year SET is_active = 1 WHERE id = ?";
+    $this->tryCatchBlock($sql, [$id]);
+  }
+  protected function updateSchoolyearDeactive()
+  {
+    $sql = "UPDATE school_year SET is_active = 0";
+    $this->tryCatchBlock($sql, []);
+  }
+
+
   protected function getSchoolyear($page, $limit)
   {
     $jump = $limit * ($page - 1);

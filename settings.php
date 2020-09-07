@@ -8,12 +8,13 @@ $searchValue = $_GET['q'] ?? '';
 <main class='sections module'>
   <div class="module__Header">
     <form class="liveSearch__Form">
-      <select>
+      <select id='schoolYearSelect' name='schoolYear-Change' onchange="SchoolYearOnChange()">
 
         <?php
         $schoolyearView = new SchoolyearView();
         $results = $schoolyearView->FetchSchoolyear();
         foreach ($results as $schoolYear) {
+          $optSel = ($schoolYear['id'] == $schoolYearID) ? 'selected' : '';
           switch ($schoolYear['term'] % 10) {
             case 1:
               $term = 'st';
@@ -28,7 +29,7 @@ $searchValue = $_GET['q'] ?? '';
               $term = 'th';
               break;
           }
-          echo "<option value='{$schoolYear['id']}'>SY{$schoolYear['year']} {$schoolYear['term']}<sup>$term</sup> Term</option>";
+          echo "<option value='{$schoolYear['id']}' $optSel>SY{$schoolYear['year']} {$schoolYear['term']}<sup>$term</sup> Term</option>";
         }
 
         ?>

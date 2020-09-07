@@ -10,4 +10,9 @@ class SchoolyearContr extends Schoolyear
   {
     $this->updateSchoolyear($data);
   }
+  public function ModifySchoolYearActive($id)
+  {
+    $this->updateSchoolyearDeactive();
+    $this->updateSchoolyearActive($id);
+  }
 }

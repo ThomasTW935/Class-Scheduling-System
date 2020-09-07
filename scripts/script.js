@@ -47,6 +47,14 @@ let RemoveOptions = (sel) => {
       sel.removeChild(sel.options[i])
    }
 }
+let SchoolYearOnChange = () => {
+   let schoolTag = document.querySelector('#schoolYearSelect')
+   let name = schoolTag.name
+   let value = schoolTag.value
+   let query = `${name}=${value}`
+   searchData(query, 'schoolYear')
+}
+
 function searchData(query, target) {
    let xhr = new XMLHttpRequest()
    xhr.onreadystatechange = function () {
