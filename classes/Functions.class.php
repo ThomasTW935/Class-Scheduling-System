@@ -179,8 +179,8 @@ class Functions
       $tableHead = ["Room", "Description", "Floor", "Capacity", "Actions"];
       $tableBody = ["rm_name", "rm_desc", "rm_floor", "rm_capacity"];
     } else if ($type == 'prof') {
-      $tableHead = [" ", "Employee ID", "Employee Name", "Department", "Actions"];
-      $tableBody = ["emp_no", "full_name", "dept_name"];
+      $tableHead = [" ", "Employee ID", "Employee Name", "Position", "Department", "Actions"];
+      $tableBody = ["emp_no", "full_name", 'type', "dept_name"];
     } else if ($type == 'user') {
       $tableHead = ["Username", "Email", "Role Level", "Actions"];
       $tableBody = ["username", "email", "role_level"];
@@ -287,7 +287,6 @@ class Functions
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
                 <input name='page' type='hidden' value='$page'>
                 <input name='id' type='hidden' value='" . $result['id'] . "'>
-                <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
                 <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                 <span>" . $iconName . "</span>

@@ -18,9 +18,10 @@ $page = $_POST['page'];
 $destination = "page=$page";
 
 if (!isset($_POST['submitStatus'])) {
+   $_POST['new-password'] = 'STICubao005';
    $isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
-   $password = (!isset($_POST['password'])) ? "{$_POST['lastName']}.{$_POST['empID']}" : $_POST['password'];
-   $data = ['id' => $_POST['userID'], 'username' => $_POST['username'], 'email' => $_POST['email'], 'new-password' => $password, 'roleLevel' => 1, $isFrom => ''];
+   // $password = (!isset($_POST['password'])) ? "{$_POST['lastName']}.{$_POST['empID']}" : $_POST['new-password'];
+   $data = ['id' => $_POST['userID'], 'username' => $_POST['empID'], 'email' => $_POST['email'], 'new-password' => $_POST['new-password'], $isFrom => ''];
    $usersVal = new UsersVal($data);
    $middleInitial = explode('.', $_POST['middleInitial']);
    $_POST['middleInitial'] = strtoupper(implode('', $middleInitial));
@@ -39,7 +40,11 @@ if (!isset($_POST['submitStatus'])) {
    if ($imgFullName) {
       $_POST += ['image' => $imgFullName];
    } else {
-      $_POST += ['image' => $_POST['imgName']];
+      if (empty($_POST['imgName'])) {
+         $_POST += ['image' => null];
+      } else {
+         $_POST += ['image' => $_POST['imgName']];
+      }
    }
    if (!empty($errors)) {
       $func = new Functions();
@@ -53,15 +58,7 @@ if (!isset($_POST['submitStatus'])) {
 
 if (isset($_POST['submit'])) {
 
-   $usersContr->CreateUser($data);
-   $result = $usersView->FetchUserByUsername($_POST['username']);
-   $id = $result[0]['user_id'];
-   $_POST['userID'] = $id;
    $profContr->CreateProfessors($_POST);
-   $prof = $profView->FetchProfessorByLatest();
-   $profID = $prof[0]["id"];
-   $schedContr = new SchedulesContr();
-   $schedContr->CreateDisplayTime("prof", $profID);
 } else if (isset($_POST['update'])) {
 
    $usersContr->ModifyUser($data);

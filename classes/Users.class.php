@@ -3,22 +3,22 @@
 class Users extends Dbh
 {
 
-   protected function setUser($username, $pass, $email, $roleLevel)
+   protected function setUser($username, $pass, $email)
    {
-      $sql = 'INSERT INTO users (username,email,password,role_level) VALUES (?,?,?,?)';
+      $sql = 'INSERT INTO users (username,email,password,prof_id) SELECT ?,?,?, id FROM professors ORDER BY id DESC LIMIT 1';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$username, $pass, $email, $roleLevel]);
+         $stmt->execute([$username, $pass, $email]);
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
    }
-   protected function updateUser($username,  $email,  $roleLevel, $id)
+   protected function updateUser($username,  $email,   $id)
    {
-      $sql = 'UPDATE users SET username = ?, email = ?, role_level = ? WHERE user_id = ?';
+      $sql = 'UPDATE users SET username = ?, email = ? WHERE user_id = ?';
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$username, $email, $roleLevel, $id]);
+         $stmt->execute([$username, $email, $id]);
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
@@ -58,7 +58,7 @@ class Users extends Dbh
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ? OR role_level LIKE ?) AND is_active = ? $withLimit";
+      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ?) AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$search, $search, $search, $state]);

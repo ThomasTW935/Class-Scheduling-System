@@ -9,15 +9,15 @@ $firstName = (!empty($errors['firstName'])) ? $errors['firstName'] : '';
 $lastName = (!empty($errors['lastName'])) ? $errors['lastName'] : '';
 $middleName = (!empty($errors['middleInitial'])) ? $errors['middleInitial'] : '';
 $suffix = (!empty($errors['suffix'])) ? $errors['suffix'] : '';
-$username = (!empty($errors['username'])) ? $errors['username'] : '';
 $email = (!empty($errors['email'])) ? $errors['email'] : '';
+$type = $errors['type'] ?? '';
+$imgName = $errors['image'] ?? null;
 
 $errorEmpID       = (!empty($errors['errorEmpID'])) ? $errors['errorEmpID'] : '';
 $errorFirstName   = (!empty($errors['errorFirstname'])) ? $errors['errorFirstname'] : '';
 $errorLastName    = (!empty($errors['errorLastname'])) ? $errors['errorLastname'] : '';
 $errorMiddleName  = (!empty($errors['errorMiddlename'])) ? $errors['errorMiddlename'] : '';
 $errorSuffix      = (!empty($errors['errorSuffix'])) ? $errors['errorSuffix'] : '';
-$errorUsername    = (!empty($errors['errorUsername'])) ? $errors['errorUsername'] : '';
 $errorEmail       = (!empty($errors['errorEmail'])) ? $errors['errorEmail'] : '';
 if (isset($_GET['id']) && !empty($_GET['id'])) {
    $id = $_GET['id'];
@@ -32,7 +32,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
    $lastName =  $prof['last_name'];
    $middleName = $prof['middle_initial'];
    $suffix =  $prof['suffix'];
-   $username =  $prof['username'];
+   $type = $prof['type'];
    $email =  $prof['email'];
    $imgName = $prof['prof_img'];
 }
@@ -40,13 +40,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 <form action='./includes/professors.inc.php' class='module__Form' method='POST' enctype="multipart/form-data">
    <section class='form__Title'>
-      <label>Professor's Information</label>
+      <label>Instructor's Information</label>
       <a href="professors.php?page=<?php echo $page ?>">X</a>
    </section>
    <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
    <input type='hidden' value='<?php echo $profID ?? '' ?>' name='profID'>
    <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>
-   <input type='hidden' value='<?php echo $imgName ?? '' ?>' name='imgName'>
+   <input type='hidden' value='<?php echo $imgName ?>' name='imgName'>
    <div class="form__Container">
       <label for='' class='form__Label'>Employee ID:</label>
       <div class="form__Input">
@@ -68,18 +68,34 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
          <div></div>
       </div>
    </div>
-   <div class="form__Container">
+   <!-- <div class="form__Container">
       <label for='' class='form__Label'>Username:</label>
       <div class="form__Input">
          <input id="userName" type='text' value='<?php echo $username ?? '' ?>' name='username' required>
          <div class="form__Error"><?php echo $errorUsername ?></div>
       </div>
-   </div>
+   </div> -->
    <div class="form__Container">
       <label class='form__Label'>Email:</label>
       <div class="form__Input">
          <input type='text' value='<?php echo $email ?? '' ?>' name='email'>
          <div class="form__Error"><?php echo $errorEmail ?></div>
+      </div>
+   </div>
+   <div class="form__Container">
+      <label class='form__Label'>Position:</label>
+      <div class="form__Input">
+         <select name='type'>
+            <?php
+
+            $positions = ['Instructor', 'Program Head', 'Academic Head', 'MIS'];
+            foreach ($positions as $position) {
+               $selOpt = ($position == $type) ? 'selected' : '';
+               echo "<option value='{$position}' $selOpt>$position</option>";
+            }
+
+            ?>
+         </select>
       </div>
    </div>
    <div class="form__Container">

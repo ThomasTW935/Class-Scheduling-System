@@ -33,9 +33,11 @@ class ProfessorsVal
       $id = trim($this->data['profID']);
       if (empty($val)) {
          $this->addError('errorEmpID', 'Employee ID cannot be empty');
-      } else if (!preg_match('/^[0-9]{8,}$/', $val)) {
-         $this->addError('errorEmpID', 'Employee ID must only be numbers and at least 8 numbers');
-      } else {
+      }
+      //  else if (!preg_match('/^[0-9]{8,}$/', $val)) {
+      //    $this->addError('errorEmpID', 'Employee ID must only be numbers and at least 8 numbers');
+      // } 
+      else {
          $profView = new ProfessorsView();
          $result = $profView->FetchProfessorByEmpID($val);
          if (!empty($result)) {

@@ -10,11 +10,11 @@ class UsersContr extends Users
   public function CreateUser($data)
   {
     $passNew = $this->HashPass($data['new-password']);
-    $this->setUser($data['username'], $data['email'], $passNew, $data['roleLevel']);
+    $this->setUser($data['empID'], $data['email'], $passNew);
   }
   public function ModifyUser($data)
   {
-    $this->updateUser($data['username'], $data['email'], $data['roleLevel'], $data['userID']);
+    $this->updateUser($data['username'], $data['email'], $data['userID']);
   }
   public function ModifyPassword($data)
   {

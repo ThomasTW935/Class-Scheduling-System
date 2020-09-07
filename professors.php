@@ -13,7 +13,7 @@ $searchValue = $_GET['q'] ?? '';
       </form>
       <div class="module__Logo">
          <img src=" drawables/icons/professor.svg">
-         <a href='?#'><span>Professors<?php echo $subTitle ?></span></a>
+         <a href='?#'><span>Instructor<?php echo $subTitle ?></span></a>
       </div>
       <div class="module__Links">
          <?php
