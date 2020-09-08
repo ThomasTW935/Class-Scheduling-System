@@ -8,36 +8,41 @@ class Professors extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$employeeID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName]);
    }
-   protected function getProfessorsByState($state, $page, $limit)
+   protected function getProfessorsByState($schoolYearID, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d ON p.dept_id = d.dept_id WHERE prof_active = ? $withLimit";
+      $sql = "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,  COALESCE(prof_img,'professor.png') as img , dept_name, school_year_id, pd.is_active FROM professors p 
+      INNER JOIN departments d ON p.dept_id = d.dept_id 
+      INNER JOIN professors_details pd ON p.id = pd.prof_id
+      WHERE school_year_id = ? AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$state]);
+         $stmt->execute([$schoolYearID, $state]);
          $result = $stmt->fetchAll();
          return $result;
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getProfessorsBySearch($search, $state, $page, $limit)
+   protected function getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql =   "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d 
-               ON p.dept_id = d.dept_id 
-               WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR type LIKE ? OR dept_name LIKE ?) AND prof_active = ? $withLimit";
+      $sql =   "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id, COALESCE(prof_img,'professor.png') as img , dept_name, school_year_id, pd.is_active FROM professors p 
+      INNER JOIN departments d ON p.dept_id = d.dept_id 
+      INNER JOIN professors_details pd ON p.id = pd.prof_id
+      WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR type LIKE ? OR dept_name LIKE ?) 
+      AND school_year_id = ? AND is_active = ? $withLimit";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$search, $search, $search, $search, $search, $search, $state]);
+      $stmt->execute([$search, $search, $search, $search, $search, $search, $schoolYearID, $state]);
       $results = $stmt->fetchAll();
       return $results;
    }
    protected function getProfessor($empID)
    {
-      $sql = "select * from professors where emp_no = ?";
+      $sql = "SELECT * FROM professors WHERE emp_no = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$empID]);
       $result = $stmt->fetchAll();
@@ -66,16 +71,44 @@ class Professors extends Dbh
       return $result;
    }
 
-   protected function updateProfessorState($state, $id)
+   protected function updateProfessorState($state, $profID, $schoolYearID)
    {
-      $sql = "UPDATE professors p INNER JOIN users u ON p.id = u.prof_id SET prof_active = ?,is_active = ? WHERE id = ?";
+      $sql = "UPDATE professors_details SET is_active = ? WHERE prof_id = ? AND school_year_id = ?";
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state, $state, $id]);
+      $stmt->execute([$state,  $profID, $schoolYearID]);
    }
    protected function updateProfessor($id, $empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName)
    {
       $sql = "UPDATE professors SET emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?, type = ?, dept_id = ?, prof_img = ? WHERE id = ?";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName, $id]);
+   }
+
+   // Professors Details Queries
+
+   protected function tryCatchBlock($sql, $datas = [], $hasReturn = false)
+   {
+      $stmt;
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         if (!empty($datas)) {
+            $data = implode(',', $datas);
+            $stmt->execute([$data]);
+         } else {
+            $stmt->execute();
+         }
+         if ($hasReturn) {
+            $results = $stmt->fetchAll();
+            return $results;
+         }
+      } catch (PDOException $e) {
+         trigger_error("Error Professors: $e");
+      }
+   }
+
+   protected function setProfessorDetails($schoolYearID)
+   {
+      $sql = "INSERT INTO professors_details(prof_id,school_year_id) SELECT id, ? FROM professors ORDER BY id DESC LIMIT 1";
+      $this->tryCatchBlock($sql, [$schoolYearID]);
    }
 }

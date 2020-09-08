@@ -12,6 +12,7 @@ $suffix = (!empty($errors['suffix'])) ? $errors['suffix'] : '';
 $email = (!empty($errors['email'])) ? $errors['email'] : '';
 $type = $errors['type'] ?? '';
 $imgName = $errors['image'] ?? null;
+$profID = '';
 
 $errorEmpID       = (!empty($errors['errorEmpID'])) ? $errors['errorEmpID'] : '';
 $errorFirstName   = (!empty($errors['errorFirstname'])) ? $errors['errorFirstname'] : '';
@@ -39,14 +40,16 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 ?>
 
 <form action='./includes/professors.inc.php' class='module__Form' method='POST' enctype="multipart/form-data">
+   <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
+   <input type='hidden' value='<?php echo $profID ?>' name='profID'>
+   <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>
+   <input type='hidden' value='<?php echo $imgName ?>' name='imgName'>
+   <input type='hidden' value='<?php echo $schoolYearID ?>' name='schoolYearID'>
    <section class='form__Title'>
       <label>Instructor's Information</label>
       <a href="professors.php?page=<?php echo $page ?>">X</a>
    </section>
-   <input type='hidden' value='<?php echo $page ?? '' ?>' name='page'>
-   <input type='hidden' value='<?php echo $profID ?? '' ?>' name='profID'>
-   <input type='hidden' value='<?php echo $userID ?? '' ?>' name='userID'>
-   <input type='hidden' value='<?php echo $imgName ?>' name='imgName'>
+
    <div class="form__Container">
       <label for='' class='form__Label'>Employee ID:</label>
       <div class="form__Input">

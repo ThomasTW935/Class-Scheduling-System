@@ -6,7 +6,7 @@ class Sections extends Dbh
   {
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc,school_year_id, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id 
@@ -25,7 +25,7 @@ class Sections extends Dbh
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
     $search = "%$search%";
-    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc,school_year_id, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id  
@@ -42,7 +42,7 @@ class Sections extends Dbh
   }
   protected function getSectionByID($id)
   {
-    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc, sd.is_active FROM sections s 
+    $sql = "SELECT s.sect_id,sect_name,chk_id,level_id, l.description as sect_year, c.dept_id, dept_name, dept_desc,school_year_id, sd.is_active FROM sections s 
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id
@@ -133,7 +133,7 @@ class Sections extends Dbh
     $sql = 'UPDATE sections_details SET is_active = ? WHERE school_year_id = ? AND sect_id = ?';
     try {
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state, $id]);
+      $stmt->execute([$state, $schoolYearID, $id]);
     } catch (PDOException $e) {
       trigger_error('Error: ' . $e);
     }

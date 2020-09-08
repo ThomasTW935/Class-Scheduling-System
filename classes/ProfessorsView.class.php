@@ -15,14 +15,14 @@ class ProfessorsView extends Professors
    }
 
 
-   public function FetchProfessorsBySearch($search, $state, $page = 0, $limit = 0)
+   public function FetchProfessorsBySearch($search, $schoolYearID, $state, $page = 0, $limit = 0)
    {
-      $results = $this->getProfessorsBySearch($search, $state, $page, $limit);
+      $results = $this->getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit);
       return $results;
    }
-   public function FetchProfessorsByState($state, $page = 0, $limit = 0)
+   public function FetchProfessorsByState($schoolYearID, $state, $page = 0, $limit = 0)
    {
-      $results = $this->getProfessorsByState($state, $page, $limit);
+      $results = $this->getProfessorsByState($schoolYearID, $state, $page, $limit);
       return $results;
    }
    public function DisplayProfessorsInSearch($results)

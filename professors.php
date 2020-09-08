@@ -28,11 +28,11 @@ $searchValue = $_GET['q'] ?? '';
 
       if (empty($searchValue)) {
          $profView = new ProfessorsView();
-         $results = $profView->FetchProfessorsByState($state);
+         $results = $profView->FetchProfessorsByState($schoolYearID, $state);
 
          $isArchived = isset($_GET['archive']);
          $table = $func->TableProperties('prof', $results, $isArchived);
-         $paginatedResults = $profView->FetchProfessorsByState($state, $page, $table['limit']);
+         $paginatedResults = $profView->FetchProfessorsByState($schoolYearID, $state, $page, $table['limit']);
          $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
       ?>

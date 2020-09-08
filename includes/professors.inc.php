@@ -16,7 +16,7 @@ $usersView = new UsersView();
 
 $page = $_POST['page'];
 $destination = "page=$page";
-
+var_dump($_POST);
 if (!isset($_POST['submitStatus'])) {
    $_POST['new-password'] = 'STICubao005';
    $isFrom = (isset($_POST['submit'])) ? 'submit' : 'update';
@@ -65,8 +65,8 @@ if (isset($_POST['submit'])) {
    $profContr->ModifyProfessor($_POST);
 } else if (isset($_POST['submitStatus'])) {
    $state = ($_POST['state'] == 0) ? 1 : 0;
-   $profContr->ModifyProfessorState($state, $_POST['id']);
-   $usersContr->ModifyUserState($state, $_POST['userID']);
+   var_dump($_POST);
+   $profContr->ModifyProfessorState($state, $_POST['profID'], $_POST['schoolYearID']);
    $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
    $destination = $isArchived . $destination;
 }

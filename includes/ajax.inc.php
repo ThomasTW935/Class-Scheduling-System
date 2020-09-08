@@ -81,11 +81,11 @@ if (isset($_GET['searchProf'])) {
    $profView = new ProfessorsView();
    $value = $_GET['searchProf'];
 
-   $results = $profView->FetchProfessorsBySearch($value, $state);
+   $results = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state);
 
    $isArchived = ($state == 0);
    $table = $func->TableProperties('prof', $results, !$state, $value);
-   $paginatedResults = $profView->FetchProfessorsBySearch($value, $state, $page, $table['limit']);
+   $paginatedResults = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state, $page, $table['limit']);
    $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }

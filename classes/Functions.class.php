@@ -195,6 +195,9 @@ class Functions
 
   public function BuildTableActions($type, $result, $page)
   {
+    $schoolyearView = new SchoolyearView();
+    $schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
+    $schoolYearID = $schoolYear['id'];
     $action = '';
     $isActive = (isset($result['is_active'])) ? $result['is_active'] == 1 : '';
     $iconName = ($isActive) ? 'delete' : 'restore';
@@ -247,6 +250,7 @@ class Functions
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
         <input name='page' type='hidden' value='$page'>
         <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
+        <input name='schoolYearID' type='hidden' value='" . $result['school_year_id'] . "'>
         <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
               <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
               <span>" . $iconName . "</span>
@@ -273,7 +277,7 @@ class Functions
                 </form>";
       }
     } else if ($type == 'prof') {
-      if ($result['prof_active'] == 1) {
+      if ($isActive) {
         $action .= "<form method='POST' action='./schedules.php'>
         <input type='hidden' name='type' value='prof'>
         <input type='hidden' name='id' value='" . $result['id'] . "'>
@@ -281,13 +285,12 @@ class Functions
         <span>Schedule</span></form>
         <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
-      $iconName = ($result['prof_active'] == 1) ? 'delete' : 'restore';
-      $tableRestore = ($result['prof_active'] == 1) ? '' : "class='table__Restore'";
       if ($_SESSION['type'] >= 3) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
                 <input name='page' type='hidden' value='$page'>
-                <input name='id' type='hidden' value='" . $result['id'] . "'>
-                <input id='state' name='state' type='hidden' value='" . $result['prof_active'] . "'>
+                <input name='profID' type='hidden' value='" . $result['id'] . "'>
+                <input name='schoolYearID' type='hidden' value='{$result['school_year_id']}'>
+                <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
                 <button name='submitStatus' type='submit'><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                 <span>" . $iconName . "</span>
              </form>";
