@@ -104,11 +104,11 @@ if (isset($_GET['searchUsers'])) {
    $value = $_GET['searchUsers'];
    $usersView = new UsersView();
 
-   $results = $usersView->FetchUsersBySearch($value, $state);
+   $results = $usersView->FetchUsersBySearch($value, $schoolYearID, $state);
 
    $isArchived = ($state == 0);
    $table = $func->TableProperties('user', $results, !$state, $value);
-   $paginatedResults = $usersView->FetchUsersBySearch($value, $state, $page, $table['limit']);
+   $paginatedResults = $usersView->FetchUsersBySearch($value, $schoolYearID, $state, $page, $table['limit']);
    $usersView->DisplayUsers($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }

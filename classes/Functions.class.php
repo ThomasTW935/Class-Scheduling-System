@@ -182,8 +182,8 @@ class Functions
       $tableHead = [" ", "Employee ID", "Employee Name", "Position", "Department", "Actions"];
       $tableBody = ["emp_no", "full_name", 'type', "dept_name"];
     } else if ($type == 'user') {
-      $tableHead = ["Username", "Email", "Role Level", "Actions"];
-      $tableBody = ["username", "email", "role_level"];
+      $tableHead = ["Username", "Email", "Actions"];
+      $tableBody = ["username", "email"];
     } else if ($type == 'checklist') {
       $tableHead = ["Name", "Actions"];
       $tableBody = ["name"];
@@ -296,14 +296,13 @@ class Functions
              </form>";
       }
     } else if ($type == 'user') {
-      if ($result['is_active'] == 1) {
+      if ($isActive) {
         $action .= "<a href=?page=$page&id=" . $result['user_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
-      $iconName = ($result['is_active'] == 1) ? 'delete' : 'restore';
-      $tableRestore = ($result['is_active'] == 1) ? '' : "class='table__Restore'";
       $action .= "<form onsubmit='return submitForm(this)' action='./includes/users.inc.php' method='POST' $tableRestore>
                  <input name='page' type='hidden' value='$page'>
                  <input name='userID' type='hidden' value='" . $result['user_id'] . "'>
+                 <input name='schoolYearID' type='hidden' value='" . $result['school_year_id'] . "'>
                  <input id='state' name='state' type='hidden' value='" . $result['is_active'] . "'>
                  <button name='submitStatus' type='submit' ><img src='drawables/icons/" . $iconName . ".svg' alter='$iconName'/></button>
                  <span>" . $iconName . "</span>

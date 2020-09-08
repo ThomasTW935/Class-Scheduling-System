@@ -21,8 +21,8 @@ class UsersContr extends Users
     $passNew = $this->HashPass($data['new-password']);
     $this->updatePassword($passNew, $data['userID']);
   }
-  public function ModifyUserState($state, $id)
+  public function ModifyUserState($state, $id, $schoolYearID)
   {
-    $this->updateUserState($state, $id);
+    $this->updateUserState($state, $id, $schoolYearID);
   }
 }

@@ -29,12 +29,12 @@ $searchValue = $_GET['q'] ?? '';
 
       if (empty($searchValue)) {
          $usersView = new UsersView();
-         $results = $usersView->FetchUsersByState($state);
+         $results = $usersView->FetchUsersByState($schoolYearID, $state);
 
          $isArchived = isset($_GET['archive']);
          $table = $func->TableProperties('user', $results, $isArchived);
 
-         $paginatedResults = $usersView->FetchUsersByState($state, $page, $table['limit']);
+         $paginatedResults = $usersView->FetchUsersByState($schoolYearID, $state, $page, $table['limit']);
          $usersView->DisplayUsers($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 

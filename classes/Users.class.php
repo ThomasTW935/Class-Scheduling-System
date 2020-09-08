@@ -33,35 +33,40 @@ class Users extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function updateUserState($state, $id)
+   protected function updateUserState($state, $id, $schoolYearID)
    {
-      $sql = 'UPDATE users SET is_active = ? WHERE user_id = ?';
+      $sql = 'UPDATE users u 
+      INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      SET is_active = ? WHERE user_id = ? AND school_year_id = ?';
       $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state, $id]);
+      $stmt->execute([$state, $id, $schoolYearID]);
    }
-   protected function getUsersByState($state, $page, $limit)
+   protected function getUsersByState($schoolYearID, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT * FROM users WHERE is_active = ? $withLimit";
+      $sql = "SELECT user_id,username,email,password,u.prof_id,school_year_id, is_active FROM users u 
+      INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      WHERE school_year_id = ? AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$state]);
+         $stmt->execute([$schoolYearID, $state]);
          $results = $stmt->fetchAll();
          return $results;
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getUsersBySearch($search, $state, $page, $limit)
+   protected function getUsersBySearch($search, $schoolYearID, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = "SELECT * FROM users WHERE (username LIKE ? OR email LIKE ?) AND is_active = ? $withLimit";
+      $sql = "SELECT user_id,username,email,password,u.prof_id,school_year_id, is_active FROM users u INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      WHERE (username LIKE ? OR email LIKE ?) AND school_year_id = ? AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$search, $search, $search, $state]);
+         $stmt->execute([$search, $search, $schoolYearID, $state]);
          $results = $stmt->fetchAll();
          return $results;
       } catch (PDOException $e) {

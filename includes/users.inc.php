@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
   $usersContr->ModifyUser($_POST);
 } else if (isset($_POST['submitStatus'])) {
   $state = ($_POST['state'] == 0) ? 1 : 0;
-  $usersContr->ModifyUserState($state, $_POST['userID']);
+  $usersContr->ModifyUserState($state, $_POST['userID'], $_POST['schoolYearID']);
   $isArchived = ($_POST['state'] == 0) ? 'archive&' : '';
   $destination = $isArchived . $destination;
 }
