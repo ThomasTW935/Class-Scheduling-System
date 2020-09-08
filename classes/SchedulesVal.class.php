@@ -48,7 +48,6 @@ class SchedulesVal
 
   private function validateSlot()
   {
-    $schedView = new SchedulesView();
     $timeFrom = trim($this->data['timeFrom']);
     $timeTo = trim($this->data['timeTo']);
     $days = $this->data['days'];
@@ -57,7 +56,9 @@ class SchedulesVal
     $roomID = array();
     $subjID = array();
     $schedID = (isset($this->data['update'])) ? $this->data['schedID'] : '';
-    $results = $schedView->FetchScheduleByTimeAndDay($timeFrom, $timeTo, $days, $schedID);
+    $schoolyearView = new SchoolyearView();
+    $schedView = new SchedulesView();
+    $results = $schedView->FetchScheduleByTimeAndDay($timeFrom, $timeTo, $days, $schedID, $this->data['schoolYearID']);
     foreach ($results as $result) {
       array_push($sectID, $result['sect_id']);
       array_push($profID, $result['prof_id']);

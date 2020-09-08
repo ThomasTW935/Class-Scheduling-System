@@ -14,7 +14,7 @@ class SchedulesContr extends Schedules
 
   public function CreateSchedule($data)
   {
-    $this->setSchedule($data['timeFrom'], $data['timeTo'], $data['inputProf'], $data['inputSubj'], $data['inputRoom'], $data['inputSect']);
+    $this->setSchedule($data['timeFrom'], $data['timeTo'], $data['inputProf'], $data['inputSubj'], $data['inputRoom'], $data['inputSect'], $data['schoolYearID']);
   }
   public function ModifySchedule($data)
   {

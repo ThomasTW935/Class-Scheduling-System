@@ -22,14 +22,14 @@ class SchedulesView extends Schedules
     $results = $this->getScheduleByTypeID($type, $id);
     return $results;
   }
-  public function FetchTimeSlotValue($type, $id)
+  public function FetchTimeSlotValue($type, $id, $schoolYearID)
   {
-    $results = $this->getTimeSlotValue($type, $id);
+    $results = $this->getTimeSlotValue($type, $id, $schoolYearID);
     return $results;
   }
-  public function FetchScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID)
+  public function FetchScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID, $schoolYearID)
   {
-    $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID);
+    $results = $this->getScheduleByTimeAndDay($timeFrom, $timeTo, $day, $schedID, $schoolYearID);
     return $results;
   }
 
@@ -106,7 +106,7 @@ class SchedulesView extends Schedules
     }
     return $newArray;
   }
-  public function DisplaySchedule($caption, $start, $end, $jump, $type, $ID)
+  public function DisplaySchedule($caption, $start, $end, $jump, $type, $ID, $schoolYearID)
   {
 
     echo "<table>";
@@ -121,7 +121,7 @@ class SchedulesView extends Schedules
     echo "</tr>";
 
     $values = array();
-    $schedSlots = $this->FetchTimeSlotValue($type, $ID);
+    $schedSlots = $this->FetchTimeSlotValue($type, $ID, $schoolYearID);
 
     for ($i = $start; $i < $end; $i += 15 * 60) {
       $timeDisplay = (($i + $jump * 60) - $start) / 60;

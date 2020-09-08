@@ -15,10 +15,9 @@ if (!isset($type) xor empty($type)) {
    header('Location: ./dashboard.php');
    exit();
 }
-$dTime = $schedView->FetchDisplayTime($type, $ID)[0];
-$startTime = $dTime['op_start'];
-$endTime   = $dTime['op_end'];
-$jumpTime  = $dTime['op_jump'];
+$startTime = $schoolYear['operation_start'];
+$endTime   = $schoolYear['operation_end'];
+$jumpTime  = 30;
 
 $sideBarText = '';
 $returnDestination = '';
@@ -140,7 +139,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
       <?php
 
 
-      $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $ID);
+      $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $ID, $schoolYearID);
 
       ?>
 

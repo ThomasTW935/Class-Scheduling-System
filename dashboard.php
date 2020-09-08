@@ -42,8 +42,8 @@ if ($sessionType == 1) {
          <img src="./drawables/icons/faculty.svg" alt="faculty">
       </a>
       <a class="dashboard__Card card__Design" href="./settings.php?page=1">
-         <h3>Settings</h3>
-         <img src="./drawables/icons/settings.svg" alt="Settings">
+         <h3>School Year</h3>
+         <img src="./drawables/icons/settings.svg" alt="School Year">
       </a>
       <?php
 

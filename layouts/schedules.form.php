@@ -28,13 +28,14 @@ if ($schedIDExist) {
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()'>
+  <input type="hidden" name="type" value='<?php echo $type ?>'>
+  <input type="hidden" name="id" value='<?php echo $ID ?>'>
+  <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>
+  <input type="hidden" name="schoolYearID" value='<?php echo $schoolYearID ?>'>
   <section class="form__Title">
     <label>Schedules's Information</label>
     <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle'>X</a>
   </section>
-  <input type="hidden" name="type" value='<?php echo $type ?>'>
-  <input type="hidden" name="id" value='<?php echo $ID ?>'>
-  <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>
   <div class="form__TimeContainer">
     <div class="form__Input">
       <label for='timeFrom' class='form__Label'>From:</label>
@@ -90,6 +91,42 @@ if ($schedIDExist) {
   <div class='form__Error' id='errorDay'></div>
 
   <?php
+
+  if ($type != 'subj') {
+    if (!empty($result) && !empty($result['subj_id'])) {
+      $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
+      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
+      $optionValue = $optionData['value'];
+      $optionID = $optionData['id'];
+    }
+    if (empty($result['subj_id'])) {
+      $optionValue = '';
+      $optionID = '';
+    }
+    echo "<div class='form__Container'>
+  <label for=''>Select Subject</label>
+  <div class='form__Input'>
+    <select name='inputSubj'>";
+
+    if ($type == 'sect') {
+      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
+    } else {
+      $subjs = $subjView->FetchSubjectsByState(1);
+    }
+    foreach ($subjs as $subj) {
+      $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
+      echo "<option value='{$subj['subj_id']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
+    }
+
+    echo "</select>
+  <div class='form__Error'>$errorSubj</div>
+  </div>
+</div>";
+  } else {
+    echo "<input type='hidden' name='inputSubj' value='" . $ID . "'>";
+  }
+
+
   $optionValue = '';
   $optionID = '';
   if ($type != 'prof') {
@@ -112,7 +149,7 @@ if ($schedIDExist) {
         <input class='input__Prof--Hidden' name='inputProf' type='hidden' value='$optionID'>
         <datalist class='input__Prof--List' id='profList'>";
 
-    $profs = $profView->FetchProfessorsByState(1);
+    $profs = $profView->FetchProfessorsByState($schoolYearID, 1);
     $profView->DisplayProfessorsInSearch($profs);
 
     echo "</datalist>
@@ -122,45 +159,7 @@ if ($schedIDExist) {
   } else {
     echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
-  ?>
-  <?php
 
-  if ($type != 'subj') {
-    if (!empty($result) && !empty($result['subj_id'])) {
-      $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
-      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
-      $optionValue = $optionData['value'];
-      $optionID = $optionData['id'];
-    }
-    if (empty($result['subj_id'])) {
-      $optionValue = '';
-      $optionID = '';
-    }
-    echo "<div class='form__Container'>
-    <label for=''>Select Subject</label>
-    <div class='form__Input'>
-      <select name='inputSubj'>";
-
-    if ($type == 'sect') {
-      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
-    } else {
-      $subjs = $subjView->FetchSubjectsByState(1);
-    }
-    foreach ($subjs as $subj) {
-      $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
-      echo "<option value='{$subj['subj_id']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
-    }
-    // $subjView->DisplaySubjectsInSearch($subjs);
-
-    echo "</select>
-    <div class='form__Error'>$errorSubj</div>
-    </div>
-  </div>";
-  } else {
-    echo "<input type='hidden' name='inputSubj' value='" . $ID . "'>";
-  }
-  ?>
-  <?php
 
   if ($type != 'room') {
     if (!empty($result) && !empty($result['room_id'])) {
@@ -192,8 +191,6 @@ if ($schedIDExist) {
     echo "<input type='hidden' name='inputRoom' value='" . $ID . "'>";
   }
 
-  ?>
-  <?php
   if ($type != 'sect') {
     if (!empty($result) && !empty($result['sect_id'])) {
       $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];

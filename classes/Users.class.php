@@ -2,7 +2,6 @@
 
 class Users extends Dbh
 {
-
    protected function setUser($username, $pass, $email)
    {
       $sql = 'INSERT INTO users (username,email,password,prof_id) SELECT ?,?,?, id FROM professors ORDER BY id DESC LIMIT 1';
