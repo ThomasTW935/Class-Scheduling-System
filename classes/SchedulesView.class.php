@@ -2,11 +2,11 @@
 
 class SchedulesView extends Schedules
 {
-  public function FetchDisplayTime($type, $id)
-  {
-    $result = $this->getDisplayTime($type, $id);
-    return $result;
-  }
+  // public function FetchDisplayTime($type, $id)
+  // {
+  //   $result = $this->getDisplayTime($type, $id);
+  //   return $result;
+  // }
   public function FetchScheduleByID($schedID)
   {
     $result = $this->getScheduleByID($schedID);
@@ -17,9 +17,9 @@ class SchedulesView extends Schedules
     $result = $this->getScheduleByIDDesc();
     return $result;
   }
-  public function FetchScheduleByTypeID($type, $id)
+  public function FetchScheduleByTypeID($type, $id, $schoolYearID)
   {
-    $results = $this->getScheduleByTypeID($type, $id);
+    $results = $this->getScheduleByTypeID($type, $id, $schoolYearID);
     return $results;
   }
   public function FetchTimeSlotValue($type, $id, $schoolYearID)

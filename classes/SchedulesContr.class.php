@@ -2,14 +2,14 @@
 
 class SchedulesContr extends Schedules
 {
-  public function CreateDisplayTime($type, $id)
-  {
-    $this->setDisplayTime($type, $id);
-  }
-  public function ModifyDisplayTime($data)
-  {
-    $this->updateDisplayTime($data["startTime"], $data["endTime"], $data["jumpTime"], $data["opID"]);
-  }
+  // public function CreateDisplayTime($type, $id)
+  // {
+  //   $this->setDisplayTime($type, $id);
+  // }
+  // public function ModifyDisplayTime($data)
+  // {
+  //   $this->updateDisplayTime($data["startTime"], $data["endTime"], $data["jumpTime"], $data["opID"]);
+  // }
 
 
   public function CreateSchedule($data)
