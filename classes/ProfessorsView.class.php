@@ -25,6 +25,11 @@ class ProfessorsView extends Professors
       $results = $this->getProfessorsByState($schoolYearID, $state, $page, $limit);
       return $results;
    }
+   public function FetchProfessorsBySubj($schoolYearID, $subjID)
+   {
+      $results = $this->getProfessorsBySubj($schoolYearID, $subjID);
+      return $results;
+   }
    public function DisplayProfessorsInSearch($results)
    {
       $schedView = new SchedulesView();

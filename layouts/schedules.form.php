@@ -15,12 +15,14 @@ $errorTime = $errors['errorTime'] ?? "";
 $baseStartTime =  $newStartTime;
 
 $subjID = $errors['inputSubj'] ?? '';
+$profID = $errors['inputProf'] ?? '';
 
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $subjID = $result['subj_id'];
+  $profID = $result['prof_id'];
   $button = "update";
   $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
   $baseStartTime = strtotime($result['sched_from']);
@@ -93,16 +95,16 @@ if ($schedIDExist) {
   <?php
 
   if ($type != 'subj') {
-    if (!empty($result) && !empty($result['subj_id'])) {
-      $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
-      $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
-      $optionValue = $optionData['value'];
-      $optionID = $optionData['id'];
-    }
-    if (empty($result['subj_id'])) {
-      $optionValue = '';
-      $optionID = '';
-    }
+    // if (!empty($result) && !empty($result['subj_id'])) {
+    //   $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
+    //   $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
+    //   $optionValue = $optionData['value'];
+    //   $optionID = $optionData['id'];
+    // }
+    // if (empty($result['subj_id'])) {
+    //   $optionValue = '';
+    //   $optionID = '';
+    // }
     echo "<div class='form__Container'>
   <label for=''>Select Subject</label>
   <div class='form__Input'>
@@ -110,8 +112,6 @@ if ($schedIDExist) {
 
     if ($type == 'sect') {
       $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
-    } else {
-      $subjs = $subjView->FetchSubjectsByState(1);
     }
     foreach ($subjs as $subj) {
       $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
@@ -122,43 +122,8 @@ if ($schedIDExist) {
   <div class='form__Error'>$errorSubj</div>
   </div>
 </div>";
-  } else {
-    echo "<input type='hidden' name='inputSubj' value='" . $ID . "'>";
   }
 
-
-  $optionValue = '';
-  $optionID = '';
-  if ($type != 'prof') {
-    if (!empty($result) && !empty($result['prof_id'])) {
-      $selProf = $profView->FetchProfessorByID($result['prof_id'])[0];
-      $fullName = $profView->GenerateFullName($selProf['last_name'], $selProf['first_name'], $selProf['middle_initial'], $selProf['suffix']);
-      $optionData = $schedView->GenerateOptionDataValue($selProf['id'], [$fullName, $selProf['dept_name']]);
-      $optionValue = $optionData['value'];
-      $optionID = $optionData['id'];
-    }
-    if (empty($result['prof_id'])) {
-      $optionValue = '';
-      $optionID = '';
-    }
-
-    echo "<div class='form__Container'>
-      <label for=''>Select Professor</label>
-      <div class='form__Input'>
-        <input class='input__Prof search__Input' list='profList' value='$optionValue'>
-        <input class='input__Prof--Hidden' name='inputProf' type='hidden' value='$optionID'>
-        <datalist class='input__Prof--List' id='profList'>";
-
-    $profs = $profView->FetchProfessorsByState($schoolYearID, 1);
-    $profView->DisplayProfessorsInSearch($profs);
-
-    echo "</datalist>
-      <div class='form__Error'>$errorProf</div>
-      </div>
-    </div>";
-  } else {
-    echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
-  }
 
 
   if ($type != 'room') {
@@ -191,6 +156,28 @@ if ($schedIDExist) {
     echo "<input type='hidden' name='inputRoom' value='" . $ID . "'>";
   }
 
+
+  if ($type != 'prof') {
+
+
+    echo "<div class='form__Container'>
+      <label for=''>Select Professor</label>
+      <div class='form__Input'>";
+
+    echo "<select name='inputProf'>";
+    $subjID = (empty($subjID)) ? $subjs[0]['subj_id'] : $subjID;
+    $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
+    foreach ($profs as $prof) {
+      $selOpt = ($profID == $prof['id']) ? 'selected' : '';
+      echo "<option value='{$prof['id']}' $selOpt> {$prof['dept_name']} | {$prof['full_name']}</option>";
+    }
+    echo "</select>";
+
+    echo "</div>
+    </div>";
+  } else {
+    echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
+  }
   if ($type != 'sect') {
     if (!empty($result) && !empty($result['sect_id'])) {
       $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];

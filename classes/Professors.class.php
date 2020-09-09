@@ -2,11 +2,43 @@
 
 class Professors extends Dbh
 {
+   protected function tryCatchBlock($sql, $datas = [], $hasReturn = false)
+   {
+      $stmt;
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         if (!empty($datas)) {
+            $data = implode(', ', $datas);
+            $stmt->execute($datas);
+         } else {
+            $stmt->execute();
+         }
+         if ($hasReturn) {
+            $results = $stmt->fetchAll();
+            return $results;
+         }
+      } catch (PDOException $e) {
+         trigger_error("Error Professors: $e");
+      }
+   }
+
    protected function setProfessors($employeeID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName)
    {
       $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,type,dept_id,prof_img) VALUES(?,?,?,?,?,?,?,?)";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$employeeID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName]);
+   }
+   protected function updateProfessorState($state, $profID, $schoolYearID)
+   {
+      $sql = "UPDATE professors_details SET is_active = ? WHERE prof_id = ? AND school_year_id = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$state,  $profID, $schoolYearID]);
+   }
+   protected function updateProfessor($id, $empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName)
+   {
+      $sql = "UPDATE professors SET emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?, type = ?, dept_id = ?, prof_img = ? WHERE id = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName, $id]);
    }
    protected function getProfessorsByState($schoolYearID, $state, $page, $limit)
    {
@@ -48,18 +80,6 @@ class Professors extends Dbh
       $result = $stmt->fetchAll();
       return $result;
    }
-   // protected function getProfessorByUserID($userID)
-   // {
-   //    $sql = "SELECT id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,prof_active, COALESCE(prof_img,'professor.png') as img , dept_name FROM professors p INNER JOIN departments d ON p.dept_id = d.dept_id WHERE user_id = ? LIMIT 1";
-   //    try {
-   //       $stmt = $this->connect()->prepare($sql);
-   //       $stmt->execute([$userID]);
-   //       $result = $stmt->fetchAll();
-   //       return $result;
-   //    } catch (PDOException $e) {
-   //       trigger_error("Error: $e");
-   //    }
-   // }
    protected function getProfessorByID($id)
    {
       $sql = "SELECT * FROM professors p 
@@ -70,41 +90,18 @@ class Professors extends Dbh
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorsBySubj($schoolYearID, $subjID)
+   {
+      $sql = "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, school_year_id, dept_name, pd.is_active FROM professors p 
+      INNER JOIN departments d ON p.dept_id = d.dept_id
+      INNER JOIN professors_details pd ON p.id = pd.prof_id WHERE pd.is_active = 1 AND school_year_id = ? AND p.dept_id = (SELECT dept_id FROM subjects WHERE subj_id = ?)";
 
-   protected function updateProfessorState($state, $profID, $schoolYearID)
-   {
-      $sql = "UPDATE professors_details SET is_active = ? WHERE prof_id = ? AND school_year_id = ?";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$state,  $profID, $schoolYearID]);
-   }
-   protected function updateProfessor($id, $empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName)
-   {
-      $sql = "UPDATE professors SET emp_no = ?, last_name = ?,first_name = ?,middle_initial = ?,suffix = ?, type = ?, dept_id = ?, prof_img = ? WHERE id = ?";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName, $id]);
+      return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true);
    }
 
    // Professors Details Queries
 
-   protected function tryCatchBlock($sql, $datas = [], $hasReturn = false)
-   {
-      $stmt;
-      try {
-         $stmt = $this->connect()->prepare($sql);
-         if (!empty($datas)) {
-            $data = implode(',', $datas);
-            $stmt->execute([$data]);
-         } else {
-            $stmt->execute();
-         }
-         if ($hasReturn) {
-            $results = $stmt->fetchAll();
-            return $results;
-         }
-      } catch (PDOException $e) {
-         trigger_error("Error Professors: $e");
-      }
-   }
+
 
    protected function setProfessorDetails($schoolYearID)
    {
