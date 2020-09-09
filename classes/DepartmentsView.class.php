@@ -8,9 +8,9 @@ class DepartmentsView extends Departments
       $results = $this->getDepartments($type, $state, $page, $limit);
       return $results;
    }
-   public function FetchDeptsWithSect($type, $state)
+   public function FetchDeptsWithSect($type, $state, $schoolYearID)
    {
-      $results = $this->getDeptartmentsWithSection($type, $state);
+      $results = $this->getDeptartmentsWithSection($type, $state, $schoolYearID);
       return $results;
    }
    public function FetchDeptsWithChecklist($type, $state)

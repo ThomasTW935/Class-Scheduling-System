@@ -148,7 +148,7 @@ class Checklist extends Dbh
   // Levels
   protected function getLevels($type)
   {
-    $sql = "SELECT * FROM level WHERE type = ?";
+    $sql = "SELECT * FROM level WHERE type = ? ORDER BY description";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$type]);

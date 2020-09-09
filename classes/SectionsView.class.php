@@ -22,11 +22,6 @@ class SectionsView extends Sections
         $results = $this->getSectionByDept($deptID, $schoolYearID);
         return $results;
     }
-    public function FetchSectionByLatest()
-    {
-        $results = $this->getSectionByLatest();
-        return $results;
-    }
     public function FetchSectionsBySearch($search, $schoolYearID, $state, $page = 0, $limit = 0)
     {
         $results = $this->getSectionsBySearch($search, $schoolYearID, $state, $page, $limit);

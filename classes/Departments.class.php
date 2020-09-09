@@ -31,12 +31,16 @@ class Departments extends Dbh
          trigger_error("Error: " . $e->getMessage());
       }
    }
-   protected function getDeptartmentsWithSection($type, $state)
+   protected function getDeptartmentsWithSection($type, $state, $schoolYearID)
    {
-      $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? AND dept_id IN(SELECT dept_id FROM sections s INNER JOIN checklist c ON s.chk_id = c.id)";
+      $sql = "SELECT * FROM departments d WHERE dept_type = ? AND dept_active = ? 
+      AND dept_id IN(SELECT dept_id FROM sections s 
+      INNER JOIN checklist c ON s.chk_id = c.id 
+      INNER JOIN sections_details sd ON s.sect_id = sd.sect_id 
+      WHERE school_year_id = ? AND sd.is_active = 1)";
       try {
          $stmt = $this->connect()->prepare($sql);
-         $stmt->execute([$type, $state]);
+         $stmt->execute([$type, $state, $schoolYearID]);
          $result = $stmt->fetchAll();
          return $result;
       } catch (PDOException $e) {

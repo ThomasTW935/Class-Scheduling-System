@@ -10,7 +10,7 @@ class Sections extends Dbh
     LEFT JOIN level l ON s.level_id = l.id
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id 
-    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id WHERE school_year_id = ? AND sd.is_active = ?  $withLimit";
+    INNER JOIN sections_details sd ON s.sect_id = sd.sect_id WHERE school_year_id = ? AND sd.is_active = ? ORDER BY dept_name,sect_name $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$schoolYearID, $state]);
@@ -30,7 +30,7 @@ class Sections extends Dbh
     LEFT JOIN checklist c ON c.id = s.chk_id
     LEFT JOIN departments d ON c.dept_id = d.dept_id  
     INNER JOIN sections_details sd ON s.sect_id = sd.sect_id
-    WHERE (sect_name LIKE ? OR l.description LIKE ? OR dept_name LIKE ?) AND school_year_id = ? AND sd.is_active = ? $withLimit";
+    WHERE (sect_name LIKE ? OR l.description LIKE ? OR dept_name LIKE ?) AND school_year_id = ? AND sd.is_active = ? ORDER BY sect_name,dept_name $withLimit";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $schoolYearID, $state]);
@@ -85,18 +85,18 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getSectionByLatest()
-  {
-    $sql = 'SELECT sect_id FROM sections ORDER BY sect_id DESC LIMIT 1';
-    try {
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
-      $results = $stmt->fetchAll();
-      return $results;
-    } catch (PDOException $e) {
-      trigger_error('Error: ' . $e);
-    }
-  }
+  // protected function getSectionByLatest()
+  // {
+  //   $sql = 'SELECT sect_id FROM sections ORDER BY sect_id DESC LIMIT 1';
+  //   try {
+  //     $stmt = $this->connect()->prepare($sql);
+  //     $stmt->execute();
+  //     $results = $stmt->fetchAll();
+  //     return $results;
+  //   } catch (PDOException $e) {
+  //     trigger_error('Error: ' . $e);
+  //   }
+  // }
 
   protected function setSection($name, $chkID, $levelID)
   {

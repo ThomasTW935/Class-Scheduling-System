@@ -29,7 +29,7 @@ if (isset($_GET['selectLevel']) || isset($_GET['selectDept'])) {
    if (isset($_GET['selectLevel'])) {
       $level = $_GET['selectLevel'];
       $deptView = new DepartmentsView();
-      $depts = $deptView->FetchDeptsWithSect($level, 1);
+      $depts = $deptView->FetchDeptsWithSect($level, 1, $schoolYearID);
       echo json_encode($depts);
    }
    if (isset($_GET['selectDept'])) {
@@ -62,7 +62,7 @@ if (isset($_GET['selectSection'])) {
    $newEndTime = strtotime($endTime);
 
    $schedView = new SchedulesView();
-   $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id);
+   $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id, $schoolYearID);
    exit();
 }
 

@@ -25,10 +25,6 @@ if (!isset($_POST['submitStatus'])) {
 
 if (isset($_POST['submit'])) {
   $sectContr->CreateSection($_POST);
-  $sect = $sectView->FetchSectionByLatest();
-  $sectID = $sect[0]["sect_id"];
-  $schedContr = new SchedulesContr();
-  $schedContr->CreateDisplayTime("sect", $sectID);
 } else if (isset($_POST['update'])) {
   $sectContr->ModifySection($_POST);
 } else if (isset($_POST['submitStatus'])) {

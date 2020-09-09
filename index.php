@@ -58,7 +58,7 @@ $schoolYearID = $schoolYear['id'];
             <?php
 
             $deptView = new DepartmentsView();
-            $depts = $deptView->FetchDeptsWithSect("course", 1);
+            $depts = $deptView->FetchDeptsWithSect("course", 1, $schoolYearID);
             foreach ($depts as $dept) {
                $selected = ($depts[0]['dept_id'] == $dept['dept_id']) ? "selected" : "";
                echo "<option value='{$dept['dept_id']}' $selected>{$dept['dept_desc']}</option>";
