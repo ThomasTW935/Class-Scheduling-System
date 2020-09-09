@@ -73,6 +73,21 @@ if (isset($_GET['schoolYear-Change'])) {
    exit();
 }
 
+if (isset($_GET['inputSect'])) {
+   $subjID = $_GET['inputSubj'];
+   $sectView = new SectionsView();
+   $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
+   echo json_encode($sects);
+   exit();
+}
+if (isset($_GET['inputProf'])) {
+   $subjID = $_GET['inputSubj'];
+   $profView = new ProfessorsView();
+   $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
+   echo json_encode($profs);
+   exit();
+}
+
 $value = '';
 $state = $_GET['state'];
 $page = $_GET['page'];

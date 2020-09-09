@@ -36,7 +36,7 @@ $searchValue = $_GET['q'] ?? '';
       </select>
     </form>
     <div class="module__Logo">
-      <img src="drawables/icons/section.svg" alt="Sections">
+      <img src="drawables/icons/calendar.svg" alt="Settings">
       <a href='?#' class="button">School Year<?php echo $subTitle ?></a>
     </div>
     <div class="module__Links">

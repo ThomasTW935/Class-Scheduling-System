@@ -12,11 +12,6 @@ class SubjectsView extends Subjects
       $results = $this->getSubjectsBySearch($search, $state, $page, $limit);
       return $results;
    }
-   public function FetchSubjectByLatest()
-   {
-      $results = $this->getSubjectByLatest();
-      return $results;
-   }
    public function FetchSubjectByCode($code)
    {
       $results = $this->getSubjectByCode($code);
@@ -27,6 +22,12 @@ class SubjectsView extends Subjects
       $results = $this->getSubjectByID($id);
       return $results;
    }
+   public function FetchSubjectsByDeptID($deptID)
+   {
+      $results = $this->getSubjectsByDeptID($deptID);
+      return $results;
+   }
+
    public function DisplaySubjectsInSearch($results)
    {
       $schedView = new SchedulesView();

@@ -137,32 +137,32 @@ let timeToInput = document.querySelector('#timeToInput')
 
 
 
-let FetchDataFromDataList = () => {
-  let searchInputs = document.querySelectorAll('.search__Input')
-  for (x of searchInputs) {
-    x.addEventListener('change', FetchDatalistValue)
-  }
+// let FetchDataFromDataList = () => {
+//   let searchInputs = document.querySelectorAll('.search__Input')
+//   for (x of searchInputs) {
+//     x.addEventListener('change', FetchDatalistValue)
+//   }
 
-  function FetchDatalistValue(e) {
-    let input = e.target
-    let name = input.className.split(' ')[0]
-    let inputHidden = document.querySelector('.' + name + '--Hidden')
-    let inputList = document.querySelector('.' + name + '--List')
-    let options = inputList.options
-    for (let i = 0; i < options.length; i++) {
-      let option = options[i]
-      let inputValue = input.value
-      if (inputValue.trim() == '') {
-        input.value = ''
-        break
-      } else if (inputValue == option.value) {
-        inputHidden.value = option.dataset.value
-        console.log(name + ': ' + option.dataset.value)
-        break
-      }
-    }
-  }
-}
+//   function FetchDatalistValue(e) {
+//     let input = e.target
+//     let name = input.className.split(' ')[0]
+//     let inputHidden = document.querySelector('.' + name + '--Hidden')
+//     let inputList = document.querySelector('.' + name + '--List')
+//     let options = inputList.options
+//     for (let i = 0; i < options.length; i++) {
+//       let option = options[i]
+//       let inputValue = input.value
+//       if (inputValue.trim() == '') {
+//         input.value = ''
+//         break
+//       } else if (inputValue == option.value) {
+//         inputHidden.value = option.dataset.value
+//         console.log(name + ': ' + option.dataset.value)
+//         break
+//       }
+//     }
+//   }
+// }
 
 // Confirm that CheckBox have a value
 
@@ -248,15 +248,70 @@ let PrintContent = () => {
 
 // Conditions
 
-let schedulesForm = document.querySelector('.module__Form')
-if (schedulesForm != null) {
-  FetchDataFromDataList()
+// let schedulesForm = document.querySelector('.module__Form')
+// if (schedulesForm != null) {
+//   FetchDataFromDataList()
+// }
+
+// SChedules Form On Subject Change 
+
+let onSubjectChange = () => {
+  let subj = document.querySelector('#subjectsList')
+  let name = subj.name
+  let value = subj.value
+  let con = document.querySelector('#sectionsList')
+  if (con) {
+    let query = `${name}=${value}&${con.name}`
+    let optVal = {
+      value: 'sect_id',
+      text: ['sect_name']
+    }
+    RemoveOptions(con)
+    searchData(query, con, optVal)
+  }
+  con = document.querySelector('#professorsList')
+  if (con) {
+    let query = `${name}=${value}&${con.name}`
+    let optVal = {
+      value: 'id',
+      text: ['dept_name', 'full_name']
+    }
+    RemoveOptions(con)
+    searchData(query, con, optVal)
+  }
 }
 
-// Actions 
+function searchData(query, con, optVal) {
+  let xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status) {
+      let response = this.responseText
+      console.log(this.responseURL)
+      console.log(this.response)
+      let datas = JSON.parse(this.responseText)
+      datas.forEach(data => {
+        let option = document.createElement('option')
+        option.value = data[optVal.value]
+        for (let i = 0; i < optVal.text.length; i++) {
+          option.innerHTML += data[optVal.text[i]]
+          if (i != optVal.text.length - 1) option.innerHTML += ' | '
+        }
+        // let label = optVal.text.join(' | ')
+        console.log(optVal)
+        con.appendChild(option)
+      })
+    }
+  }
+  xhr.open("GET", 'includes/ajax.inc.php?' + query, true)
+  xhr.send()
+}
 
-
-
+// let RemoveOptions = (sel) => {
+//   let len = sel.options.length
+//   for (let i = len - 1; i >= 0; i--) {
+//     sel.removeChild(sel.options[i])
+//   }
+// }
 
 
 

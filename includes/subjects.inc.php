@@ -27,10 +27,6 @@ if (!isset($_POST['submitStatus'])) {
 if (isset($_POST['submit'])) {
 
    $subjContr->CreateSubject($_POST);
-   $subj = $subjView->FetchSubjectByLatest();
-   $subjID = $subj[0]["subj_id"];
-   $schedContr = new SchedulesContr();
-   $schedContr->CreateDisplayTime("subj", $subjID);
 } else if (isset($_POST['update'])) {
    $subjContr->ModifySubject($_POST);
 } else if (isset($_POST['submitStatus'])) {

@@ -26,4 +26,17 @@ class Dbh
          die();
       }
    }
+   protected function tryCatchBlock($sql, $datas = [], $hasReturn = false, $type = '')
+   {
+      try {
+         $stmt = $this->connect()->prepare($sql);
+         $stmt->execute($datas);
+         if ($hasReturn) {
+            $results = $stmt->fetchAll();
+            return $results;
+         }
+      } catch (PDOException $e) {
+         trigger_error("Error $type: $e");
+      }
+   }
 }

@@ -2,29 +2,11 @@
 
 class Schoolyear extends Dbh
 {
-  protected function tryCatchBlock($sql, $datas = [], $hasReturn = false)
-  {
-    $stmt;
-    try {
-      $stmt = $this->connect()->prepare($sql);
-      if (!empty($datas)) {
-        $data = implode(',', $datas);
-        $stmt->execute([$data]);
-      } else {
-        $stmt->execute();
-      }
-      if ($hasReturn) {
-        $results = $stmt->fetchAll();
-        return $results;
-      }
-    } catch (PDOException $e) {
-      trigger_error("Error: $e");
-    }
-  }
+
   protected function setSchoolyear($data)
   {
     $sql = "INSERT INTO school_year(year, term, operation_start,operation_end) VALUES(?,?,?,?)";
-    $this->tryCatchBlock($sql, [$data['year'], $data['term'], $data['start'], $data['end']]);
+    $this->tryCatchBlock($sql, [$data['year'], $data['term'], $data['start'], $data['end']], false, 'School Year');
   }
   protected function updateSchoolyear($data)
   {

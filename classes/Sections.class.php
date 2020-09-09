@@ -2,6 +2,7 @@
 
 class Sections extends Dbh
 {
+  private $type = 'Sections';
   protected function getSectionsByState($schoolYearID, $state, $page, $limit)
   {
     $jump = $limit * ($page - 1);
@@ -85,19 +86,11 @@ class Sections extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  // protected function getSectionByLatest()
-  // {
-  //   $sql = 'SELECT sect_id FROM sections ORDER BY sect_id DESC LIMIT 1';
-  //   try {
-  //     $stmt = $this->connect()->prepare($sql);
-  //     $stmt->execute();
-  //     $results = $stmt->fetchAll();
-  //     return $results;
-  //   } catch (PDOException $e) {
-  //     trigger_error('Error: ' . $e);
-  //   }
-  // }
-
+  protected function getSectionsBySubj($schoolYearID, $subjID)
+  {
+    $sql = "SELECT * FROM sections s INNER JOIN sections_details sd ON s.sect_id = sd.sect_id INNER JOIN subjects_to_checklist stc ON s.chk_id = stc.chk_id WHERE school_year_id = ? AND is_active = 1 AND subj_id = ? ORDER BY sect_name";
+    return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true, $this->type);
+  }
   protected function setSection($name, $chkID, $levelID)
   {
     $sql = "INSERT INTO sections (sect_name,chk_id,level_id) VALUES(?,?,?)";

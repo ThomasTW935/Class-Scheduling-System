@@ -2,26 +2,6 @@
 
 class Professors extends Dbh
 {
-   protected function tryCatchBlock($sql, $datas = [], $hasReturn = false)
-   {
-      $stmt;
-      try {
-         $stmt = $this->connect()->prepare($sql);
-         if (!empty($datas)) {
-            $data = implode(', ', $datas);
-            $stmt->execute($datas);
-         } else {
-            $stmt->execute();
-         }
-         if ($hasReturn) {
-            $results = $stmt->fetchAll();
-            return $results;
-         }
-      } catch (PDOException $e) {
-         trigger_error("Error Professors: $e");
-      }
-   }
-
    protected function setProfessors($employeeID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName)
    {
       $sql = "INSERT INTO professors(emp_no,last_name,first_name,middle_initial,suffix,type,dept_id,prof_img) VALUES(?,?,?,?,?,?,?,?)";
@@ -96,7 +76,7 @@ class Professors extends Dbh
       INNER JOIN departments d ON p.dept_id = d.dept_id
       INNER JOIN professors_details pd ON p.id = pd.prof_id WHERE pd.is_active = 1 AND school_year_id = ? AND p.dept_id = (SELECT dept_id FROM subjects WHERE subj_id = ?)";
 
-      return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true);
+      return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true, 'Professors');
    }
 
    // Professors Details Queries
@@ -106,6 +86,6 @@ class Professors extends Dbh
    protected function setProfessorDetails($schoolYearID)
    {
       $sql = "INSERT INTO professors_details(prof_id,school_year_id) SELECT id, ? FROM professors ORDER BY id DESC LIMIT 1";
-      $this->tryCatchBlock($sql, [$schoolYearID]);
+      $this->tryCatchBlock($sql, [$schoolYearID], false, 'Professors');
    }
 }

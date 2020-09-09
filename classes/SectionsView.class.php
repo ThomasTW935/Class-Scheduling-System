@@ -27,6 +27,11 @@ class SectionsView extends Sections
         $results = $this->getSectionsBySearch($search, $schoolYearID, $state, $page, $limit);
         return $results;
     }
+    public function FetchSectionsBySubj($schoolYearID, $subjID)
+    {
+        $results = $this->getSectionsBySubj($schoolYearID, $subjID);
+        return $results;
+    }
     public function DisplaySectionsInSearch($results)
     {
         $schedView = new SchedulesView();

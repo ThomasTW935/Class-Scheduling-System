@@ -2,7 +2,6 @@
 
 class Subjects extends Dbh
 {
-
    protected function getSubjectsByState($state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
@@ -17,18 +16,18 @@ class Subjects extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getSubjectByLatest()
-   {
-      $sql = "SELECT subj_id FROM subjects ORDER BY subj_id DESC LIMIT 1";
-      try {
-         $stmt = $this->connect()->prepare($sql);
-         $stmt->execute();
-         $results = $stmt->fetchAll();
-         return $results;
-      } catch (PDOException $e) {
-         trigger_error('Error: ' . $e);
-      }
-   }
+   // protected function getSubjectByLatest()
+   // {
+   //    $sql = "SELECT subj_id FROM subjects ORDER BY subj_id DESC LIMIT 1";
+   //    try {
+   //       $stmt = $this->connect()->prepare($sql);
+   //       $stmt->execute();
+   //       $results = $stmt->fetchAll();
+   //       return $results;
+   //    } catch (PDOException $e) {
+   //       trigger_error('Error: ' . $e);
+   //    }
+   // }
    protected function getSubjectsBySearch($search, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);
@@ -59,6 +58,11 @@ class Subjects extends Dbh
       $stmt->execute([$id]);
       $results = $stmt->fetchAll();
       return $results;
+   }
+   protected function getSubjectsByDeptID($deptID)
+   {
+      $sql = "SELECT * FROM subjects WHERE dept_id = ?";
+      return $this->tryCatchBlock($sql, [$deptID], true, 'Subjects');
    }
    protected function setSubject($code, $desc, $units, $hours, $deptID, $type)
    {

@@ -108,10 +108,12 @@ if ($schedIDExist) {
     echo "<div class='form__Container'>
   <label for=''>Select Subject</label>
   <div class='form__Input'>
-    <select name='inputSubj'>";
+    <select name='inputSubj' onchange='onSubjectChange()' id='subjectsList'>";
 
     if ($type == 'sect') {
       $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
+    } else {
+      $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
     }
     foreach ($subjs as $subj) {
       $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
@@ -123,7 +125,6 @@ if ($schedIDExist) {
   </div>
 </div>";
   }
-
 
 
   if ($type != 'room') {
@@ -156,6 +157,7 @@ if ($schedIDExist) {
     echo "<input type='hidden' name='inputRoom' value='" . $ID . "'>";
   }
 
+  $subjID = (empty($subjID)) ? $subjs[0]['subj_id'] : $subjID;
 
   if ($type != 'prof') {
 
@@ -164,8 +166,7 @@ if ($schedIDExist) {
       <label for=''>Select Professor</label>
       <div class='form__Input'>";
 
-    echo "<select name='inputProf'>";
-    $subjID = (empty($subjID)) ? $subjs[0]['subj_id'] : $subjID;
+    echo "<select name='inputProf' id='professorsList'>";
     $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
     foreach ($profs as $prof) {
       $selOpt = ($profID == $prof['id']) ? 'selected' : '';
@@ -179,28 +180,17 @@ if ($schedIDExist) {
     echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
   if ($type != 'sect') {
-    if (!empty($result) && !empty($result['sect_id'])) {
-      $selSect = $sectView->FetchSectionByID($result['sect_id'])[0];
-      $optionData = $schedView->GenerateOptionDataValue($selSect['sect_id'], [$selSect['sect_name'], $selSect['sect_year'], $selSect['dept_name']]);
-      $optionValue = $optionData['value'];
-      $optionID = $optionData['id'];
-    }
-    if (empty($result['sect_id'])) {
-      $optionValue = '';
-      $optionID = '';
-    }
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>
       <div class='form__Input'>
-        <input class='input__Sect search__Input' list='sectList'  value='$optionValue'>
-        <input class='input__Sect--Hidden' name='inputSect' type='hidden' value='$optionID'>
-        <datalist class='input__Sect--List' id='sectList'>";
+        <select name='inputSect' id='sectionsList'>";
 
-    $sects = $sectView->FetchSectionsByState(1);
-    $sectView->DisplaySectionsInSearch($sects);
+    $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
+    foreach ($sects as $sect) {
+      echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
+    }
 
-    echo "</datalist>
-    <div class='form__Error'>$errorSect</div>
+    echo "</select>
       </div>
     </div>";
   } else {

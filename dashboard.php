@@ -43,7 +43,7 @@ if ($sessionType == 1) {
       </a>
       <a class="dashboard__Card card__Design" href="./settings.php?page=1">
          <h3>School Year</h3>
-         <img src="./drawables/icons/settings.svg" alt="School Year">
+         <img src="./drawables/icons/calendar.svg" alt="School Year">
       </a>
       <?php
 
