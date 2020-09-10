@@ -27,8 +27,8 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
 
     <?php
 
-    $checklistView = new ChecklistView();
     $levels = $checklistView->FetchDistinctLevel($id);
+    $type = ($checkList['dept_type'] == 'course') ? 'Units' : 'Hours';
 
     foreach ($levels as $level) {
       echo "<table class='module__Table'>
@@ -37,7 +37,7 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
           <tr>
             <th>Code</th>
             <th>Name</th>
-            <th>Units</th>
+            <th>$type</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -70,7 +70,7 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
         <tfoot>
           <tr>
           <td></td>
-          <td style='text-align: end;'>Total Units: </td>
+          <td style='text-align: end;'>Total $type: </td>
           <td>$totalUnits</td>
           </tr>
         </tfoot>

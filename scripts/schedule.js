@@ -296,7 +296,6 @@ function searchData(query, con, optVal) {
           option.innerHTML += data[optVal.text[i]]
           if (i != optVal.text.length - 1) option.innerHTML += ' | '
         }
-        // let label = optVal.text.join(' | ')
         console.log(optVal)
         con.appendChild(option)
       })

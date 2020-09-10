@@ -204,12 +204,7 @@ class Functions
     $tableRestore = ($isActive) ? '' : "class='table__Restore'";
     if ($type == "subj") {
       if ($result['subj_active'] == 1) {
-        $action .= "<form method='POST' action='./schedules.php'>
-            <input type='hidden' name='type' value='subj'>
-            <input type='hidden' name='id' value='" . $result['subj_id'] . "'>
-            <button name='submitType' type='submit'><img src='drawables/icons/checkschedule.svg' alter='Schedule'/></button>
-            <span>Schedule</span></form>
-            <a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
+        $action .= "<a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['subj_active'] == 1) ? '' : "class='table__Restore'";
@@ -224,7 +219,9 @@ class Functions
       }
     } else if ($type == 'dept') {
       if ($result['dept_active'] == 1) {
-        $action .= "<a href='checklist.php?deptid={$result['dept_id']}&page=1'><img src='drawables/icons/clipboard.svg' alter='Checklists'/><span>Checklists</span></a>";
+        if ($result['dept_type'] != 'faculty') {
+          $action .= "<a href='checklist.php?deptid={$result['dept_id']}&page=1'><img src='drawables/icons/clipboard.svg' alter='Checklists'/><span>Checklists</span></a>";
+        }
         $action .= "<a href='?dept={$result['dept_type']}&page=$page&id={$result['dept_id']}'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['dept_active'] == 1) ? 'delete' : 'restore';
