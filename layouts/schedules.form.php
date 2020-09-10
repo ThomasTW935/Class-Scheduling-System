@@ -12,7 +12,6 @@ $errorRoom = $errors['errorRoom'] ?? "";
 $errorSect = $errors['errorSect'] ?? "";
 $errorSubj = $errors['errorSubj'] ?? "";
 $errorTime = $errors['errorTime'] ?? "";
-$baseStartTime =  $newStartTime;
 
 $subjID = $errors['inputSubj'] ?? '';
 $profID = $errors['inputProf'] ?? '';
@@ -25,7 +24,6 @@ if ($schedIDExist) {
   $profID = $result['prof_id'];
   $button = "update";
   $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
-  $baseStartTime = strtotime($result['sched_from']);
 }
 ?>
 
@@ -45,7 +43,7 @@ if ($schedIDExist) {
         <?php
 
         $selected = strtotime($result['sched_from']) ?? "";
-        $schedView->GenerateTimeOptions($newStartTime, $newEndTime - (60 * 60), $selected, $jump = $jumpTime)
+        $schedView->GenerateTimeOptions($startTime, $endTime - (60 * 60 * 2), $selected, $jump = $jumpTime)
 
         ?>
 
@@ -53,12 +51,11 @@ if ($schedIDExist) {
     </div>
     <div class="form__Input">
       <label for='timeTo' class='form__Label'>To:</label>
-      <select id='timeTo' name="timeTo" class='end-time'>
+      <select id='timeTo' name="timeTo" class='end-time' disabled>
         <?php
 
         $selected = strtotime($result['sched_to']) ?? "";
-        $baseEndTime = strtotime('22:00');
-        $schedView->GenerateTimeOptions($baseStartTime + (60 * 90), $baseEndTime, $selected, $jump = $jumpTime, true)
+        $schedView->GenerateTimeOptions($startTime + (60 * 90), $endTime, $selected, $jump = $jumpTime, true)
 
         ?>
       </select>
@@ -94,37 +91,25 @@ if ($schedIDExist) {
 
   <?php
 
-  if ($type != 'subj') {
-    // if (!empty($result) && !empty($result['subj_id'])) {
-    //   $selSubj = $subjView->FetchSubjectByID($result['subj_id'])[0];
-    //   $optionData = $schedView->GenerateOptionDataValue($selSubj['subj_id'], [$selSubj['subj_code'], $selSubj['subj_desc']]);
-    //   $optionValue = $optionData['value'];
-    //   $optionID = $optionData['id'];
-    // }
-    // if (empty($result['subj_id'])) {
-    //   $optionValue = '';
-    //   $optionID = '';
-    // }
-    echo "<div class='form__Container'>
-  <label for=''>Select Subject</label>
-  <div class='form__Input'>
+  echo "<div class='form__Container'>
+    <label for=''>Select Subject</label>
+    <div class='form__Input'>
     <select name='inputSubj' onchange='onSubjectChange()' id='subjectsList'>";
 
-    if ($type == 'sect') {
-      $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
-    } else {
-      $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
-    }
-    foreach ($subjs as $subj) {
-      $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
-      echo "<option value='{$subj['subj_id']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
-    }
+  if ($type == 'sect') {
+    $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
+  } else {
+    $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
+  }
+  foreach ($subjs as $subj) {
+    $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
+    echo "<option value='{$subj['subj_id']}' data-hours='{$subj['hours']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
+  }
 
-    echo "</select>
+  echo "</select>
   <div class='form__Error'>$errorSubj</div>
   </div>
 </div>";
-  }
 
 
   if ($type != 'room') {

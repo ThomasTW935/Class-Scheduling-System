@@ -41,13 +41,15 @@ if ($sessionType == 1) {
          <h3>Faculty</h3>
          <img src="./drawables/icons/faculty.svg" alt="faculty">
       </a>
-      <a class="dashboard__Card card__Design" href="./settings.php?page=1">
-         <h3>School Year</h3>
-         <img src="./drawables/icons/calendar.svg" alt="School Year">
-      </a>
       <?php
 
-      if ($_SESSION['type'] == 4) {
+      if ($_SESSION['type'] == 'Academic Head' || $_SESSION['type'] == 'MIS') {
+         echo "<a class='dashboard__Card card__Design' href='./settings.php?page=1'>
+            <h3>School Year</h3>
+            <img src='./drawables/icons/calendar.svg' alt='School Year'>
+            </a>";
+      }
+      if ($_SESSION['type'] == 'MIS') {
          echo "<a class='dashboard__Card card__Design' href='./users.php?page=1'>
          <h3>Users</h3>
          <img src='./drawables/icons/student.svg'; alt='Users'>

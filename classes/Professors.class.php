@@ -70,6 +70,11 @@ class Professors extends Dbh
       $result = $stmt->fetchAll();
       return $result;
    }
+   protected function getProfessorByUserID($userID)
+   {
+      $sql = "SELECT * FROM professors p INNER JOIN users u ON p.id = u.prof_id WHERE user_id = ?";
+      return $this->tryCatchBlock($sql, [$userID], true, 'Professors');
+   }
    protected function getProfessorsBySubj($schoolYearID, $subjID)
    {
       $sql = "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name, school_year_id, dept_name, pd.is_active FROM professors p 

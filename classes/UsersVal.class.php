@@ -20,6 +20,9 @@ class UsersVal
     $this->validateName();
     $this->validateEmail();
 
+
+
+
     return $this->errors;
   }
   private function validateName()
@@ -33,10 +36,10 @@ class UsersVal
       $results = $usersView->FetchUserByUsername($val);
       if (!empty($results)) {
         $id = trim($this->data['id']);
-        $idResult = $results[0]['id'] ?? '';
+        $idResult = $results[0]['user_id'] ?? '';
         if (isset($this->data['update'])) {
           $user = $usersView->FetchUserByID($id);
-          $idOrig = $user[0]['id'] ?? '';
+          $idOrig = $user[0]['user_id'] ?? '';
           if ($idOrig == $idResult) {
             return;
           }

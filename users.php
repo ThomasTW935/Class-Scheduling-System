@@ -19,7 +19,7 @@ $searchValue = $_GET['q'] ?? '';
       <div class="module__Links">
          <?php
 
-         $func->GenerateModuleLinks($page);
+         $func->GenerateModuleLinks($page, '', false, true);
 
          ?>
       </div>
@@ -41,7 +41,7 @@ $searchValue = $_GET['q'] ?? '';
       ?>
    </div>
    <?php
-   if (isset($_GET['add']) || isset($_GET['id'])) {
+   if (isset($_GET['id'])) {
       include_once './layouts/users.form.php';
    }
    ?>

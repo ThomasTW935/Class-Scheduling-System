@@ -15,8 +15,8 @@ if (!isset($type) xor empty($type)) {
    header('Location: ./dashboard.php');
    exit();
 }
-$startTime = $schoolYear['operation_start'];
-$endTime   = $schoolYear['operation_end'];
+$startTime = strtotime($schoolYear['operation_start']);
+$endTime   = strtotime($schoolYear['operation_end']);
 $jumpTime  = 30;
 
 $sideBarText = '';
@@ -77,9 +77,9 @@ if ($type == 'sect' || empty($type) || $type == null) {
       <div class='schedules__Nav'>
          <input type="radio" name="schedule-details" id="information" onclick="ToggleSchedNav()" checked>
          <label for='information'>Information</label>
-         <span>\</span>
+         <!-- <span>\</span>
          <input type="radio" name="schedule-details" id="settings" onclick="ToggleSchedNav()">
-         <label for='settings'>Settings</label>
+         <label for='settings'>Settings</label> -->
       </div>
       <section class="schedules__Information" id='information-con'>
          <div>
@@ -91,7 +91,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
          </div>
          <a href='<?php echo "?type=$type&id=$ID&action" ?>' class='form__Toggle schedules__Add'>Add Schedule</a>
       </section>
-      <section class='schedules__Settings' id='settings-con'>
+      <!-- <section class='schedules__Settings' id='settings-con'>
          <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
             <input type="hidden" name="opID" value=<?php echo $dTime['op_id'] ?>>
             <input type="hidden" name="id" value=<?php echo $ID ?>>
@@ -101,8 +101,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
                <select id='timeStart' class='start-time' name="startTime">
                   <?php
 
-                  $newStartTime = strtotime($startTime);
-                  $schedView->GenerateTimeOptions(strtotime('6:00'), strtotime('23:00'), $newStartTime);
+                  $schedView->GenerateTimeOptions($startTime, $endTime, $startTime);
 
                   ?>
                </select>
@@ -112,8 +111,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
                <select id="timeEnd" class="end-time" name="endTime">
                   <?php
 
-                  $newEndTime = strtotime($endTime);
-                  $schedView->GenerateTimeOptions($newStartTime + (60 * 60),  $newStartTime + (60 * 60 * 23), $newEndTime);
+                  $schedView->GenerateTimeOptions($startTime + (60 * 60),  $endTime, $endTime);
 
 
                   ?>
@@ -133,13 +131,13 @@ if ($type == 'sect' || empty($type) || $type == null) {
             </div>
             <button class='button' type="submit" name="scheduleSave">Save</button>
          </form>
-      </section>
+      </section> -->
    </div>
    <div class='schedules__Table'>
       <?php
 
 
-      $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $ID, $schoolYearID);
+      $schedView->DisplaySchedule($caption, $startTime, $endTime, $jumpTime, $type, $ID, $schoolYearID);
 
       ?>
 

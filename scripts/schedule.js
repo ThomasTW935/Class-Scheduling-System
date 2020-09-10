@@ -228,17 +228,17 @@ let validateForm = () => {
 
 
 
-let ToggleSchedNav = () => {
-  let radioButtons = document.querySelectorAll(".schedules__Nav input")
-  radioButtons.forEach(radio => {
-    con = document.querySelector("#" + radio.id + "-con")
-    if (radio.checked) {
-      con.style.display = 'flex'
-    } else {
-      con.style.display = 'none'
-    }
-  })
-}
+// let ToggleSchedNav = () => {
+//   let radioButtons = document.querySelectorAll(".schedules__Nav input")
+//   radioButtons.forEach(radio => {
+//     con = document.querySelector("#" + radio.id + "-con")
+//     if (radio.checked) {
+//       con.style.display = 'flex'
+//     } else {
+//       con.style.display = 'none'
+//     }
+//   })
+// }
 
 // Print Button 
 
@@ -257,6 +257,23 @@ let PrintContent = () => {
 
 let onSubjectChange = () => {
   let subj = document.querySelector('#subjectsList')
+
+  // Change Time base on subject hours
+  let timeFrom = document.querySelector('#timeFrom')
+  let timeFromDate = new Date('January 1 2000 ' + timeFrom.value)
+  let selSubj = subj[subj.selectedIndex].getAttribute('data-hours')
+  let subjTime = selSubj.split('.')
+  let hours = Number(subjTime[0])
+  let minutes = (subjTime[1] == '5') ? 30 : '0'
+  // timeFromDate.setHours()
+
+  let outputTime = timeFromDate.getHours() + hours + ":" + (timeFromDate.getMinutes() + minutes)
+  let timeTo = document.querySelector('#timeTo')
+  timeTo.value = outputTime
+  console.log(timeFromDate)
+  console.log(outputTime)
+  console.log(minutes)
+
   let name = subj.name
   let value = subj.value
   let con = document.querySelector('#sectionsList')

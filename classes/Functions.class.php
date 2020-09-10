@@ -72,15 +72,17 @@ class Functions
     echo "</ul>";
     echo "</div>";
   }
-  public function GenerateModuleLinks($page, $dept = '', $check = false)
+  public function GenerateModuleLinks($page, $dept = '', $check = false, $isUsers = false)
   {
     $destination = (!empty($dept)) ? "dept=$dept&" : "";
     $destination = ($check) ? "deptid=$dept&" : $destination;
     if (!isset($_GET['archive'])) {
-      echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
-      <span>Add</span>
-      </a>";
-      if ($_SESSION['type'] > 2) {
+      if (!$isUsers) {
+        echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
+        <span>Add</span>
+        </a>";
+      }
+      if ($_SESSION['type'] == 'MIS' || $_SESSION['type'] == 'Academic Head') {
         echo "<a href='?{$destination}archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
          <span>Archive</span>
          </a>";

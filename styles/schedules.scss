@@ -81,14 +81,6 @@
       input {
         display: none;
       }
-      input[type="radio"] + label {
-        font-style: italic;
-        cursor: pointer;
-      }
-      input[type="radio"]:checked + label {
-        text-decoration: underline;
-        font-style: normal;
-      }
     }
     .schedules__Information {
       display: flex;

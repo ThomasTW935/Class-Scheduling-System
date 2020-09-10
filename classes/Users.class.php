@@ -82,7 +82,7 @@ class Users extends Dbh
    }
    protected function getUserByUsername($username)
    {
-      $sql = 'SELECT * FROM users WHERE username = ? LIMIT 1';
+      $sql = 'SELECT * FROM users u INNER JOIN professors p ON u.prof_id = p.id WHERE username = ? LIMIT 1';
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$username]);
       $results = $stmt->fetchAll();

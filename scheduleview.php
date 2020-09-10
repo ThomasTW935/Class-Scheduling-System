@@ -9,27 +9,18 @@ include_once './layouts/__header.php';
   $profView = new ProfessorsView();
 
   $userID = $sessionID;
-  $prof = $profView->FetchProfessorByUserID($userID);
-  if (empty($prof)) {
-    echo "Schedule Not Applicable";
-    header("Location: ./dashboard.php");
-    exit();
-  }
-  $prof = $prof[0];
+  $prof = $profView->FetchProfessorByUserID($userID)[0];
   $profID = $prof['id'];
 
   $caption =   $profView->GenerateFullName($prof['last_name'], $prof['first_name'], $prof['middle_initial'], $prof['suffix']);
   $type = 'prof';
-  $dTime = $schedView->FetchDisplayTime($type, $profID)[0];
-  $startTime = $dTime['op_start'];
-  $endTime   = $dTime['op_end'];
-  $jumpTime  = $dTime['op_jump'];
 
-  $newStartTime = strtotime($startTime);
-  $newEndTime = strtotime($endTime);
+
+  $newStartTime = strtotime($schoolYear['operation_start']);
+  $newEndTime = strtotime($schoolYear['operation_end']);
 
   echo "<div class='schedules__Table'>";
-  $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $profID);
+  $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, 30, $type, $profID, $schoolYearID);
   echo "</div>";
 
   ?>

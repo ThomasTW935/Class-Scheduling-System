@@ -123,16 +123,6 @@
   display: none;
 }
 
-.schedules__Details .schedules__Nav input[type="radio"] + label {
-  font-style: italic;
-  cursor: pointer;
-}
-
-.schedules__Details .schedules__Nav input[type="radio"]:checked + label {
-  text-decoration: underline;
-  font-style: normal;
-}
-
 .schedules__Details .schedules__Information {
   display: -webkit-box;
   display: -ms-flexbox;
