@@ -284,7 +284,7 @@ let onSubjectChange = () => {
       text: ['sect_name']
     }
     RemoveOptions(con)
-    searchData(query, con, optVal)
+    FetchData(query, con, optVal)
   }
   con = document.querySelector('#professorsList')
   if (con) {
@@ -298,7 +298,7 @@ let onSubjectChange = () => {
   }
 }
 
-function searchData(query, con, optVal) {
+function FetchData(query, con, optVal) {
   let xhr = new XMLHttpRequest()
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status) {
