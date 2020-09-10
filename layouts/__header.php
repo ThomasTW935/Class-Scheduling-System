@@ -61,7 +61,7 @@ $schoolYearID = $schoolYear['id'];
 
       ?>
       <div class='nav__Profile'>
-         <a href='./scheduleview.php' class='nav__User'><?php echo $sessionUsername ?></a>
+         <a href='./scheduleview.php' class='nav__User'><?php echo $_SESSION['name'] ?></a>
          <ul>
             <li>
                <a href='./profile.php'>Profile</a>

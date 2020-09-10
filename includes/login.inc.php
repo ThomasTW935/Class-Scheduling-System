@@ -35,6 +35,7 @@ if (isset($_POST['submit'])) {
    session_start();
    $_SESSION['id'] = $user['user_id'];
    $_SESSION['username'] = $user['username'];
+   $_SESSION['name'] = $user['last_name'] . ', ' . $user['first_name'];
    $_SESSION['type'] = $user['type'];
    $destination = ($_SESSION['type'] == 'Instructor') ? "scheduleview" : "dashboard";
    header("Location: ../$destination.php?signin=success");

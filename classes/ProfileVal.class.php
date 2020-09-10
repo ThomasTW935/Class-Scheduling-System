@@ -5,7 +5,7 @@ class ProfileVal
 {
   private $data;
   private $errors = [];
-  private static $fields = ['id', 'current-password', 'new-password', 'confirm-password'];
+  private static $fields = ['userID', 'current-password', 'new-password', 'confirm-password'];
   public function __construct($post_data)
   {
     $this->data = $post_data;
@@ -27,7 +27,7 @@ class ProfileVal
   {
 
     $val = trim($this->data['current-password']);
-    $id = $this->data['id'];
+    $id = $this->data['userID'];
 
     if (empty($val)) {
       $this->addError('errorPassword', 'Password is empty.');

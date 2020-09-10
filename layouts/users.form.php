@@ -23,7 +23,6 @@ if (isset($_GET['id'])) {
    $username = $user['username'];
    $email = $user['email'];
    $password = $user['password'];
-   $roleLevel = $user['role_level'];
    $resetPassword = "<button type='submit' name='reset-password' class='form__Button btn__Secondary'>Reset Password</button>";
 }
 ?>
@@ -62,14 +61,6 @@ if (isset($_GET['id'])) {
    }
 
    ?>
-
-   <div class="form__Container">
-      <label for="" class="form__Label">Role Level:</label>
-      <div class="form__Input">
-         <input class='form__Input' type='number' value='<?php echo $roleLevel ?>' name='roleLevel'>
-      </div>
-   </div>
-
 
    <?php
 

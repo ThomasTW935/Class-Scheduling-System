@@ -148,7 +148,7 @@ if ($schedIDExist) {
 
 
     echo "<div class='form__Container'>
-      <label for=''>Select Professor</label>
+      <label for=''>Select Instructor</label>
       <div class='form__Input'>";
 
     echo "<select name='inputProf' id='professorsList'>";
