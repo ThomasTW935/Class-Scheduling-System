@@ -27,9 +27,6 @@ class SchedulesVal
         $prof = $this->validateProfessor($datas['prof']);
         $room = $this->validateRoom($datas['room']);
         $sect = $this->validateSection($datas['sect']);
-        if (empty($prof) && empty($room) && empty($sect)) {
-          $subj = $this->validateSubject($datas['subj']);
-        }
       }
     }
 
@@ -106,13 +103,6 @@ class SchedulesVal
     if (!empty($result)) {
       $this->addError('errorRoom', '*Room occupied');
       return $result;
-    }
-  }
-  private function validateSubject($con)
-  {
-    $result = $this->CheckIfExist($con, 'inputSubj');
-    if (!empty($result)) {
-      $this->addError('errorSubj', '*Subject occupied');
     }
   }
   private function validateProfessor($con)
