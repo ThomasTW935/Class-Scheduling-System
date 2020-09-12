@@ -129,6 +129,11 @@ class Checklist extends Dbh
       trigger_error("Error: $e");
     }
   }
+  protected function getChecklistSubjectBySubjiDAndLevelID($chkID, $subjID, $levelID)
+  {
+    $sql = "SELECT * FROM subjects_to_checklist WHERE chk_id = ? AND subj_id = ? AND level_id = ?";
+    return $this->tryCatchBlock($sql, [$chkID, $subjID, $levelID], true, 'Checklist Subjects');
+  }
   protected function getChecklistSubjectsByChkID($chkID, $levelID, $sectID)
   {
     $sql = "SELECT stc.id, chk_id, stc.subj_id, subj_code,subj_desc,hours FROM subjects_to_checklist stc 

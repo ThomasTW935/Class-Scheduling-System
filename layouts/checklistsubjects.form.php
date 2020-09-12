@@ -4,16 +4,16 @@ $url = $_SERVER['REQUEST_URI'];
 $query = parse_url($url, PHP_URL_QUERY);
 $button = "submit";
 parse_str($query, $errors);
-$errorName = $errors['errorName'] ?? '';
+$errorSubject = $errors['errorSubject'] ?? '';
 
 
 $subjID  = '';
-$levelID  = '';
+$levelID  = $errors['levelID'] ?? '';
 $buttonName = 'add';
 $stcID = '';
 if (isset($_GET['stcid'])) {
   $stcID = $_GET['stcid'];
-  $stcResult = $checklistView->FetchCheclistSubject($stcID)[0];
+  $stcResult = $checklistView->FetchChecklistSubject($stcID)[0];
   $subjID  = $stcResult['subj_id'];
   $levelID  = $stcResult['level_id'];
   $buttonName = 'update';
@@ -42,6 +42,7 @@ if (isset($_GET['stcid'])) {
 
         ?>
       </select>
+      <div class='form__Error'><?php echo $errorSubject ?></div>
     </div>
   </div>
   <div class="form__Container">

@@ -1133,6 +1133,10 @@ a {
   background: var(--color-background-light);
 }
 
+#checklistSubjects {
+  overflow: hidden;
+}
+
 #checklistSubjects .module__Header {
   display: -ms-grid;
   display: grid;
@@ -1156,6 +1160,7 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow: scroll;
 }
 
 #checklistSubjects .module__Content table {

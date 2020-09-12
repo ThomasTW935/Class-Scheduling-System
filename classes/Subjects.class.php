@@ -6,7 +6,7 @@ class Subjects extends Dbh
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT * FROM subjects s LEFT JOIN departments d ON s.dept_id = d.dept_id WHERE subj_active = ? $withLimit";
+      $sql = "SELECT * FROM subjects s LEFT JOIN departments d ON s.dept_id = d.dept_id WHERE subj_active = ? ORDER BY subj_code $withLimit ";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$state]);
