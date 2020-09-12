@@ -88,7 +88,7 @@ class Functions
          </a>";
       }
     } else {
-      echo "<a class= 'module__Return' href='?{$destination}page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
+      echo "<a class='module__Return' href='?{$destination}page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
     }
   }
 
@@ -204,13 +204,14 @@ class Functions
     $isActive = (isset($result['is_active'])) ? $result['is_active'] == 1 : '';
     $iconName = ($isActive) ? 'delete' : 'restore';
     $tableRestore = ($isActive) ? '' : "class='table__Restore'";
+    $isAdmin = $_SESSION['type'] == 'MIS' || $_SESSION['type'] == 'Academic Head';
     if ($type == "subj") {
       if ($result['subj_active'] == 1) {
         $action .= "<a href='?page=$page&id=" . $result['subj_id'] . "'><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
       $iconName = ($result['subj_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['subj_active'] == 1) ? '' : "class='table__Restore'";
-      if ($_SESSION['type'] >= 3) {
+      if ($isAdmin) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/subjects.inc.php' method='POST' $tableRestore>
         <input type='hidden' name='page' value='$page'>
         <input name='subjID' type='hidden' value='" . $result['subj_id'] . "'>
@@ -245,7 +246,7 @@ class Functions
         <span>Schedule</span></form>
         <a href=?page=$page&id=" . $result['sect_id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
-      if ($_SESSION['type'] >= 3) {
+      if ($isAdmin) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/sections.inc.php' method='POST' $tableRestore>
         <input name='page' type='hidden' value='$page'>
         <input name='sectID' type='hidden' value='" . $result['sect_id'] . "'>
@@ -266,7 +267,7 @@ class Functions
       }
       $iconName = ($result['rm_active'] == 1) ? 'delete' : 'restore';
       $tableRestore = ($result['rm_active'] == 1) ? '' : "class='table__Restore'";
-      if ($_SESSION['type'] >= 3) {
+      if ($isAdmin) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/rooms.inc.php' method='POST'  $tableRestore>
                   <input name='page' type='hidden' value='$page'>
                   <input name='rmID' type='hidden' value='" . $result['rm_id'] . "'>
@@ -284,7 +285,7 @@ class Functions
         <span>Schedule</span></form>
         <a href=?page=$page&id=" . $result['id'] . "><img src='drawables/icons/edit.svg' alter='Edit'/><span>Edit</span></a>";
       }
-      if ($_SESSION['type'] >= 3) {
+      if ($isAdmin) {
         $action .= "<form onsubmit='return submitForm(this)' action='./includes/professors.inc.php' method='POST'  $tableRestore>
                 <input name='page' type='hidden' value='$page'>
                 <input name='profID' type='hidden' value='" . $result['id'] . "'>

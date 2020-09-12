@@ -16,18 +16,6 @@ class Subjects extends Dbh
          trigger_error('Error: ' . $e);
       }
    }
-   // protected function getSubjectByLatest()
-   // {
-   //    $sql = "SELECT subj_id FROM subjects ORDER BY subj_id DESC LIMIT 1";
-   //    try {
-   //       $stmt = $this->connect()->prepare($sql);
-   //       $stmt->execute();
-   //       $results = $stmt->fetchAll();
-   //       return $results;
-   //    } catch (PDOException $e) {
-   //       trigger_error('Error: ' . $e);
-   //    }
-   // }
    protected function getSubjectsBySearch($search, $state, $page, $limit)
    {
       $jump = $limit * ($page - 1);

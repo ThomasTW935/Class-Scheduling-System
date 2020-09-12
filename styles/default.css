@@ -213,6 +213,23 @@ a {
   margin: 0.5rem 0 0.25rem;
 }
 
+.module__Header .module__Return {
+  position: relative;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3em;
+  width: 100px;
+}
+
+.module__Header .module__Return:hover {
+  text-decoration: underline;
+}
+
 .module__Header .module__Logo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -315,30 +332,6 @@ a {
 .module__Header .module__Links a:hover span {
   opacity: 1;
   visibility: visible;
-}
-
-.module__Header .module__Links .module__Return {
-  position: relative;
-  color: black;
-  left: -15px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100px;
-}
-
-.module__Header .module__Links .module__Return img {
-  margin-right: 10px;
-}
-
-.module__Header .module__Links .module__Return:hover {
-  text-decoration: underline;
 }
 
 .module__Header .liveSearch__Form {

@@ -11,7 +11,7 @@ $deptName = $dept['dept_name'];
 <main class='professors module'>
   <div class="module__Header">
     <div class='module__Actions'>
-      <a href='<?php echo "./department.php?dept=$deptType&page=1" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
+      <a class='module__Return' href='<?php echo "./department.php?dept=$deptType&page=1" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
     </div>
     <div class="module__Logo">
       <img src=" drawables/icons/professor.svg">

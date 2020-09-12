@@ -154,6 +154,17 @@ a {
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0 0.25rem;
+    .module__Return {
+      position: relative;
+      color: black;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      width: 100px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     .module__Logo {
       display: flex;
       flex-direction: column;
@@ -189,6 +200,7 @@ a {
         }
       }
     }
+
     .module__Links {
       display: flex;
       justify-content: space-evenly;
@@ -226,21 +238,6 @@ a {
         &:hover span {
           opacity: 1;
           visibility: visible;
-        }
-      }
-      .module__Return {
-        position: relative;
-        color: black;
-        left: -15px;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        width: 100px;
-        img {
-          margin-right: 10px;
-        }
-        &:hover {
-          text-decoration: underline;
         }
       }
     }
