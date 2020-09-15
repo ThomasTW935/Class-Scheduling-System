@@ -27,7 +27,7 @@ if ($schedIDExist) {
 }
 ?>
 
-<form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()'>
+<form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()' draggable="true" id='scheduleForm'>
   <input type="hidden" name="type" value='<?php echo $type ?>'>
   <input type="hidden" name="id" value='<?php echo $ID ?>'>
   <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>

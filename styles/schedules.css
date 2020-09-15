@@ -7,9 +7,19 @@
   padding: 0;
 }
 
+.schedules .invisible {
+  display: none;
+}
+
+.schedules .hold {
+  border: 4px solid #ccc;
+  z-index: 1000000;
+}
+
 .schedules .module__Form {
   width: 50vw;
   font-size: 1rem;
+  background: white;
 }
 
 .schedules .module__Form .form__Error {

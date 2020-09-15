@@ -3,9 +3,17 @@
   display: grid;
   grid-template-columns: 1fr 4fr;
   padding: 0;
+  .invisible {
+    display: none;
+  }
+  .hold {
+    border: 4px solid #ccc;
+    z-index: 1000000;
+  }
   .module__Form {
     width: 50vw;
     font-size: 1rem;
+    background: white;
     .form__Error {
       color: red;
       font-size: 0.8rem;

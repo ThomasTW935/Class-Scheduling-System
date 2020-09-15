@@ -290,13 +290,22 @@ function FetchData(query, con, optVal) {
   xhr.send()
 }
 
-// let RemoveOptions = (sel) => {
-//   let len = sel.options.length
-//   for (let i = len - 1; i >= 0; i--) {
-//     sel.removeChild(sel.options[i])
-//   }
-// }
+// Schedules Form Draggable 
 
-
+const scheduleForm = document.querySelector('#scheduleForm')
+if (scheduleForm) {
+  const formBg = document.querySelector('.module__formBackground')
+  scheduleForm.addEventListener('dragstart', dragStart)
+  scheduleForm.addEventListener('dragend', dragEnd)
+  function dragStart() {
+    this.classList.toggle('hold')
+    setTimeout(() => this.classList.toggle('invisible'), 0)
+    formBg.classList.toggle('invisible')
+  }
+  function dragEnd() {
+    this.className = 'module__Form'
+    formBg.classList.toggle('invisible')
+  }
+}
 
 
