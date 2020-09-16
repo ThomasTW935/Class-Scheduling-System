@@ -44,8 +44,9 @@ class Users extends Dbh
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT user_id,username,email,password,u.prof_id,school_year_id, is_active FROM users u 
+      $sql = "SELECT user_id,username,email,password,u.prof_id,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,school_year_id, is_active FROM users u 
       INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      INNER JOIN professors p ON u.prof_id = p.id
       WHERE school_year_id = ? AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
@@ -61,7 +62,9 @@ class Users extends Dbh
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
-      $sql = "SELECT user_id,username,email,password,u.prof_id,school_year_id, is_active FROM users u INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      $sql = "SELECT user_id,username,email,password,u.prof_id,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,school_year_id, is_active FROM users u 
+      INNER JOIN professors_details pd ON u.prof_id = pd.prof_id 
+      INNER JOIN professors p ON u.prof_id = p.id
       WHERE (username LIKE ? OR email LIKE ?) AND school_year_id = ? AND is_active = ? $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);

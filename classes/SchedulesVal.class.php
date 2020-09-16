@@ -29,17 +29,6 @@ class SchedulesVal
         $sect = $this->validateSection($datas['sect']);
       }
     }
-
-    // echo "<br>";
-    // echo "<br>";
-    // var_dump($this->data);
-    // echo "<br>";
-    // echo "<br>";
-    // echo "Errors: ";
-    // var_dump($this->errors);
-    // exit();
-
-
     return $this->errors;
   }
 
@@ -76,7 +65,6 @@ class SchedulesVal
   {
     $input = "input" . ucfirst($type);
     $result = $this->CheckIfExist($con, $input);
-    var_dump($result);
     $timeFrom = trim($this->data['timeFrom']);
     $timeTo = trim($this->data['timeTo']);
     if (empty($timeFrom) || empty($timeTo)) {

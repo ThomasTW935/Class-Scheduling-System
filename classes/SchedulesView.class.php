@@ -58,10 +58,10 @@ class SchedulesView extends Schedules
       "</option>";
     }
   }
-  public function GenerateDayChoices($display, $value, $isChecked = false)
+  public function GenerateDayChoices($display, $value, $isChecked = false, $isProgHead = '')
   {
     $checked = ($isChecked) ? 'checked' : '';
-    echo "<input type='checkbox' name='days[]' id='$display' value='$value' $checked>";
+    echo "<input type='checkbox' name='days[]' id='$display' value='$value' $checked $isProgHead>";
     echo "<label for='$display'>$display</label>";
   }
   public function GenerateOptionDataValue($id, $data)

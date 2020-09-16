@@ -13,18 +13,10 @@ $schedVal = new SchedulesVal($_POST);
 $returnURL = "?type={$_POST['type']}&id={$_POST['id']}";
 
 
-if (isset($_POST['scheduleSave'])) {
-  $schedContr->ModifyDisplayTime($_POST);
-}
-
 
 if (isset($_POST['submit']) || isset($_POST['update'])) {
   $schedID = $_POST['schedID'];
   $errors = $schedVal->validateForm($_POST);
-  echo "<br>";
-  echo "<br>";
-  echo "Error: ";
-  var_dump($errors);
   if (!empty($errors)) {
     $query = '&' . http_build_query($errors);
     if (isset($_POST['update'])) {

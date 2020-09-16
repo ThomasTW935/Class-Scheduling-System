@@ -16,15 +16,28 @@ $errorTime = $errors['errorTime'] ?? "";
 $subjID = $errors['inputSubj'] ?? '';
 $profID = $errors['inputProf'] ?? '';
 
+$isProgHead = $_SESSION['type'] == 'Program Head';
+$isDisabled = ($isProgHead) ? 'disabled' : '';
+
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $subjID = $result['subj_id'];
   $profID = $result['prof_id'];
+  $roomID = $result['room_id'];
+  $sectID = $result['sect_id'];
   $button = "update";
-  $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
+  if (!$isProgHead) {
+    $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
+  }
 }
+$selectedFrom = strtotime($result['sched_from']) ?? "";
+$selectedTo = strtotime($result['sched_to']) ?? "";
+
+
+
+
 ?>
 
 <form action='./includes/schedules.inc.php' class='module__Form' method='POST' onsubmit='return validateForm()' draggable="true" id='scheduleForm'>
@@ -32,6 +45,24 @@ if ($schedIDExist) {
   <input type="hidden" name="id" value='<?php echo $ID ?>'>
   <input type="hidden" name="schedID" value='<?php echo $schedID ?>'>
   <input type="hidden" name="schoolYearID" value='<?php echo $schoolYearID ?>'>
+
+  <?php
+
+  if ($isProgHead) {
+    $selectedFromNew = date('G:i', $selectedFrom);
+    $selectedToNew = date('G:i', $selectedTo);
+    echo "<input type='hidden' name='timeFrom' value='$selectedFromNew'>";
+    echo "<input type='hidden' name='timeTo' value='$selectedToNew'>";
+    echo "<input type='hidden' name='inputSubj' value='$subjID'>";
+    echo "<input type='hidden' name='inputRoom' value='$roomID'>";
+    echo "<input type='hidden' name='inputSect' value='$sectID'>";
+    foreach ($schedDays as $schedDay) {
+      echo "<input type='hidden' name='days[]' value='{$schedDay['sched_day']}'>";
+    }
+  }
+
+  ?>
+
   <section class="form__Title">
     <label>Schedules's Information</label>
     <a href='<?php echo "?type=$type&id=$ID" ?>' class='form__Toggle'>X</a>
@@ -39,11 +70,11 @@ if ($schedIDExist) {
   <div class="form__TimeContainer">
     <div class="form__Input">
       <label for='timeFrom' class='form__Label'>From:</label>
-      <select id='timeFrom' name="timeFrom" class='start-time'>
+      <select id='timeFrom' name="timeFrom" class='start-time' <?php echo  $isDisabled ?>>
         <?php
 
-        $selected = strtotime($result['sched_from']) ?? "";
-        $schedView->GenerateTimeOptions($startTime, $endTime - (60 * 60 * 2), $selected, $jump = $jumpTime)
+
+        $schedView->GenerateTimeOptions($startTime, $endTime - (60 * 60 * 2), $selectedFrom, $jump = $jumpTime)
 
         ?>
 
@@ -51,11 +82,10 @@ if ($schedIDExist) {
     </div>
     <div class="form__Input">
       <label for='timeTo' class='form__Label'>To:</label>
-      <select id='timeTo' name="timeTo" class='end-time' disabled>
+      <select id='timeTo' name="timeTo" class='end-time' <?php echo  $isDisabled ?>>
         <?php
 
-        $selected = strtotime($result['sched_to']) ?? "";
-        $schedView->GenerateTimeOptions($startTime + (60 * 90), $endTime, $selected, $jump = $jumpTime, true)
+        $schedView->GenerateTimeOptions($startTime + (60 * 90), $endTime, $selectedTo, $jump = $jumpTime, true)
 
         ?>
       </select>
@@ -82,7 +112,7 @@ if ($schedIDExist) {
           }
         }
       }
-      $schedView->GenerateDayChoices($key, $value, $checked);
+      $schedView->GenerateDayChoices($key, $value, $checked, $isDisabled);
     }
 
     ?>
@@ -94,7 +124,7 @@ if ($schedIDExist) {
   echo "<div class='form__Container'>
     <label for=''>Select Subject</label>
     <div class='form__Input'>
-    <select name='inputSubj' onchange='onSubjectChange()' id='subjectsList'>";
+    <select name='inputSubj' onchange='onSubjectChange()' id='subjectsList'  $isDisabled>";
 
   if ($type == 'sect') {
     $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
@@ -127,7 +157,7 @@ if ($schedIDExist) {
     echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
-        <input class='input__Room search__Input' list='roomList' value='$optionValue' >
+        <input class='input__Room search__Input' list='roomList' value='$optionValue' $isDisabled>
         <input class='input__Room--Hidden' name='inputRoom' type='hidden' value='$optionID' >
         <datalist class='input__Room--List' id='roomList'>";
 
@@ -157,10 +187,10 @@ if ($schedIDExist) {
       $selOpt = ($profID == $prof['id']) ? 'selected' : '';
       echo "<option value='{$prof['id']}' $selOpt> {$prof['dept_name']} | {$prof['full_name']}</option>";
     }
-    echo "</select>";
-
-    echo "</div>
-    </div>";
+    echo "</select>
+        <div class='form__Error'>$errorProf</div>
+      </div>
+      </div>";
   } else {
     echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
@@ -168,7 +198,7 @@ if ($schedIDExist) {
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>
       <div class='form__Input'>
-        <select name='inputSect' id='sectionsList'>";
+        <select name='inputSect' id='sectionsList' $isDisabled>";
 
     $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
     foreach ($sects as $sect) {
@@ -176,6 +206,7 @@ if ($schedIDExist) {
     }
 
     echo "</select>
+          <div class='form__Error'>$errorSect</div>
       </div>
     </div>";
   } else {
@@ -183,7 +214,7 @@ if ($schedIDExist) {
   }
 
   echo "<div class='btn__Container'>";
-  echo "<button id='schedulesButton' class='form__Button button' type='submit'    name='$button'>$button</button>";
+  echo "<button id='schedulesButton' class='form__Button button' type='submit' name='$button'>$button</button>";
   echo $deleteButton ?? "";
   echo "</div>";
 

@@ -184,8 +184,8 @@ class Functions
       $tableHead = [" ", "Employee ID", "Employee Name", "Position", "Department", "Actions"];
       $tableBody = ["emp_no", "full_name", 'type', "dept_name"];
     } else if ($type == 'user') {
-      $tableHead = ["Username", "Email", "Actions"];
-      $tableBody = ["username", "email"];
+      $tableHead = ["Username", "Email", 'Empoyee Name', "Actions"];
+      $tableBody = ["username", "email", 'full_name'];
     } else if ($type == 'checklist') {
       $tableHead = ["Name", "Actions"];
       $tableBody = ["name"];
