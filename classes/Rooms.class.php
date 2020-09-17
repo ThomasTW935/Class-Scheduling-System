@@ -67,6 +67,12 @@ class Rooms extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function getRoomsBySubj($isLab)
+  {
+
+    $sql = "SELECT * FROM rooms WHERE is_laboratory = ?";
+    return $this->tryCatchBlock($sql, [$isLab], true, 'Rooms');
+  }
   protected function setRoom($name, $desc, $floor, $capacity)
   {
     $sql = 'INSERT INTO rooms (rm_name, rm_desc, rm_floor,rm_capacity) VALUES (?,?,?,?)';

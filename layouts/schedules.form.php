@@ -32,8 +32,8 @@ if ($schedIDExist) {
     $deleteButton = "<button class='form__Button btn__Secondary' type='submit' name='delete'>delete</button>";
   }
 }
-$selectedFrom = strtotime($result['sched_from']) ?? "";
-$selectedTo = strtotime($result['sched_to']) ?? "";
+$selectedFrom = ($schedIDExist) ? strtotime($result['sched_from']) : "";
+$selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
 
 
 
@@ -141,45 +141,14 @@ $selectedTo = strtotime($result['sched_to']) ?? "";
   </div>
 </div>";
 
-
-  if ($type != 'room') {
-    if (!empty($result) && !empty($result['room_id'])) {
-      $selRoom = $roomView->FetchRoomByID($result['room_id'])[0];
-      $capacity = "Capacity: {$selRoom['rm_capacity']}";
-      $optionData = $schedView->GenerateOptionDataValue($selRoom['rm_id'], [$selRoom['rm_name'], $selRoom['rm_desc'], $selRoom['rm_floor'], $capacity]);
-      $optionValue = $optionData['value'];
-      $optionID = $optionData['id'];
-    }
-    if (empty($result['room_id'])) {
-      $optionValue = '';
-      $optionID = '';
-    }
-    echo "<div class='form__Container'>
-      <label for=''>Select Room</label>
-      <div class='form__Input'>
-        <input class='input__Room search__Input' list='roomList' value='$optionValue' $isDisabled>
-        <input class='input__Room--Hidden' name='inputRoom' type='hidden' value='$optionID' >
-        <datalist class='input__Room--List' id='roomList'>";
-
-    $rooms = $roomView->FetchRoomsByState(1);
-    $roomView->DisplayRoomsInSearch($rooms);
-
-    echo "</datalist>
-      <div class='form__Error'>$errorRoom</div>
-      </div>
-    </div>";
-  } else {
-    echo "<input type='hidden' name='inputRoom' value='" . $ID . "'>";
-  }
-
   $subjID = (empty($subjID)) ? $subjs[0]['subj_id'] : $subjID;
 
   if ($type != 'prof') {
 
 
     echo "<div class='form__Container'>
-      <label for=''>Select Instructor</label>
-      <div class='form__Input'>";
+    <label for=''>Select Instructor</label>
+    <div class='form__Input'>";
 
     echo "<select name='inputProf' id='professorsList'>";
     $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
@@ -188,12 +157,29 @@ $selectedTo = strtotime($result['sched_to']) ?? "";
       echo "<option value='{$prof['id']}' $selOpt> {$prof['dept_name']} | {$prof['full_name']}</option>";
     }
     echo "</select>
-        <div class='form__Error'>$errorProf</div>
-      </div>
-      </div>";
+      <div class='form__Error'>$errorProf</div>
+    </div>
+    </div>";
   } else {
     echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
+
+
+  echo "<div class='form__Container'>
+      <label for=''>Select Room</label>
+      <div class='form__Input'>
+        <select name='inputRoom' $isDisabled>";
+  $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
+  $rooms = $roomView->FetchRoomsBySubj($isLab);
+  echo "<option disabled>asdasdasd</option>";
+  foreach ($rooms as $room) {
+    echo "<option value='{$room['rm_id']}'>{$room['rm_name']} | {$room['rm_desc']} | Max: {$room['rm_capacity']}</option>";
+  }
+  echo "</select>
+        <div class='form__Error'>$errorRoom</div>
+      </div>
+  </div>";
+
   if ($type != 'sect') {
     echo "<div class='form__Container'>
       <label for=''>Select Section</label>

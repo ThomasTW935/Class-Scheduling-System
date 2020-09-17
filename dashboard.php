@@ -16,10 +16,6 @@ if ($sessionType == 1) {
          <h3>Instructor</h3>
          <img src="./drawables/icons/professor.svg" alt="Professors">
       </a>
-      <a class="dashboard__Card card__Design" href="./rooms.php?page=1">
-         <h3>Rooms</h3>
-         <img src="./drawables/icons/rooms.svg" alt="Professors">
-      </a>
       <a class="dashboard__Card card__Design" href="./sections.php?page=1">
          <h3>Sections</h3>
          <img src="./drawables/icons/section.svg" alt="SECTIONS">
@@ -28,7 +24,10 @@ if ($sessionType == 1) {
          <h3>Subjects</h3>
          <img src="./drawables/icons/subjects.svg" alt="SUBJECTS">
       </a>
-
+      <a class="dashboard__Card card__Design" href="./rooms.php?page=1">
+         <h3>Rooms</h3>
+         <img src="./drawables/icons/rooms.svg" alt="Professors">
+      </a>
       <a class="dashboard__Card card__Design" href="./department.php?dept=course&page=1">
          <h3>Courses</h3>
          <img src="./drawables/icons/course.svg" alt="course">

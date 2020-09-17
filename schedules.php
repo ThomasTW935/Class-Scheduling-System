@@ -43,13 +43,6 @@ if ($type == 'sect' || empty($type) || $type == null) {
    $sideBarText .= "<h4>{$room['rm_floor']}</h4>";
    $caption = "Rm.{$room['rm_name']}";
    $returnDestination = 'rooms';
-} else if ($type == 'subj') {
-   $subjID = $ID;
-   $subj = $subjView->FetchSubjectByID($subjID)[0];
-   $sideBarText .= "<h2>" . $subj['subj_code'] . ' - ' . $subj['subj_desc'] . "</h2>";
-   $sideBarText .= "<h3>" . $subj['units'] . " Unit/s</h3>";
-   $caption = "{$subj['subj_code']}";
-   $returnDestination = 'subjects';
 } else if ($type == 'prof') {
    $profID = $ID;
    $prof = $profView->FetchProfessorByID($profID)[0];
@@ -74,13 +67,13 @@ if ($type == 'sect' || empty($type) || $type == null) {
          <a class='schedules__Action' href='<?php echo "./$returnDestination.php" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
          <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' /><span>Print</span></button>
       </div>
-      <div class='schedules__Nav'>
+      <!-- <div class='schedules__Nav'>
          <input type="radio" name="schedule-details" id="information" onclick="ToggleSchedNav()" checked>
          <label for='information'>Information</label>
-         <!-- <span>\</span>
+          <span>\</span>
          <input type="radio" name="schedule-details" id="settings" onclick="ToggleSchedNav()">
-         <label for='settings'>Settings</label> -->
-      </div>
+         <label for='settings'>Settings</label>
+   </div> -->
       <section class="schedules__Information" id='information-con'>
          <div>
             <?php
@@ -89,49 +82,13 @@ if ($type == 'sect' || empty($type) || $type == null) {
 
             ?>
          </div>
-         <a href='<?php echo "?type=$type&id=$ID&action" ?>' class='form__Toggle schedules__Add'>Add Schedule</a>
+         <?php
+
+         if ($_SESSION['type'] != 'Program Head') {
+            echo "<a href='?type=$type&id=$ID&action' class='form__Toggle schedules__Add'>Add Schedule</a>";
+         }
+         ?>
       </section>
-      <!-- <section class='schedules__Settings' id='settings-con'>
-         <form id='formSettings' action="./includes/schedules.inc.php" method='POST'>
-            <input type="hidden" name="opID" value=<?php echo $dTime['op_id'] ?>>
-            <input type="hidden" name="id" value=<?php echo $ID ?>>
-            <input type="hidden" name="type" value=<?php echo $type ?>>
-            <div>
-               <label for="timeStart">Start:</label>
-               <select id='timeStart' class='start-time' name="startTime">
-                  <?php
-
-                  $schedView->GenerateTimeOptions($startTime, $endTime, $startTime);
-
-                  ?>
-               </select>
-            </div>
-            <div>
-               <label for="timeEnd">End:</label>
-               <select id="timeEnd" class="end-time" name="endTime">
-                  <?php
-
-                  $schedView->GenerateTimeOptions($startTime + (60 * 60),  $endTime, $endTime);
-
-
-                  ?>
-               </select>
-            </div>
-            <div>
-               <label for="timeJump">View By:</label>
-               <select id='timeJump' name='jumpTime'>
-                  <?php
-                  for ($i = 15; $i <= 60; $i += 15) {
-                     $selected = ($jumpTime == $i) ? 'selected' : '';
-                     echo "<option value='$i' $selected>$i minutes</option>";
-                  }
-
-                  ?>
-               </select>
-            </div>
-            <button class='button' type="submit" name="scheduleSave">Save</button>
-         </form>
-      </section> -->
    </div>
    <div class='schedules__Table'>
       <?php
