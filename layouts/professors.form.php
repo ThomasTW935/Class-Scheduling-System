@@ -71,13 +71,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
          <div></div>
       </div>
    </div>
-   <!-- <div class="form__Container">
-      <label for='' class='form__Label'>Username:</label>
-      <div class="form__Input">
-         <input id="userName" type='text' value='<?php echo $username ?? '' ?>' name='username' required>
-         <div class="form__Error"><?php echo $errorUsername ?></div>
-      </div>
-   </div> -->
    <div class="form__Container">
       <label class='form__Label'>Email:</label>
       <div class="form__Input">

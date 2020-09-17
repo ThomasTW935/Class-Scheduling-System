@@ -8,9 +8,11 @@ $errorName = $errors['errorName'] ?? '';
 
 $rmID = '';
 $name = '';
-$desc = $errors['desc'] ?? '';
+$desc = $errors['desc'] ?? 'Lecture Room';
 $floor = $errors['floor'] ?? '';
-var_dump($name);
+$type = $errors['is_laboratory'] ?? '';
+$isHidden = 'invisible';
+
 if (isset($_GET['id'])) {
    $id = $_GET['id'];
    $result = $roomsView->FetchRoomByID($id);
@@ -20,6 +22,8 @@ if (isset($_GET['id'])) {
    $name = $room['rm_name'];
    $desc = $room['rm_desc'];
    $floor = $room['rm_floor'];
+   $type = $room['is_laboratory'];
+   $isHidden = ($room['is_laboratory'] == 0) ? 'invisible' : '';
 }
 $setFloors = ["Ground Floor", "2nd Floor", "3rd Floor", "4th Floor", "5th Floor", "6th Floor", "7th Floor", "8th Floor"];
 ?>
@@ -39,9 +43,35 @@ $setFloors = ["Ground Floor", "2nd Floor", "3rd Floor", "4th Floor", "5th Floor"
       </div>
    </div>
    <div class="form__Container">
+      <label for="" class="form__Label">Type:</label>
+      <div class="form__Radio" id='roomType-Con'>
+         <?php
+
+         $types = ["Lecture", "Laboratory"];
+         for ($i = 0; $i < sizeof($types); $i++) {
+            $selOpt = ($type == $i) ? 'checked' : '';
+            echo "<input type='radio' name='type' id='$types[$i]' value='$i' $selOpt>";
+            echo "<label for='$types[$i]'>$types[$i]</label>";
+         }
+
+         ?>
+      </div>
+   </div>
+   <div <?php echo "class='form__Container $isHidden'" ?> id='roomDesc-Con'>
       <label for="" class="form__Label">Description:</label>
       <div class="form__Input">
-         <input class='form__Input' type='text' value='<?php echo $desc ?>' name='desc' required>
+         <input class='form__Input' id='roomDesc-Input' list='roomTypes' type='text' value='<?php echo $desc ?>' name='desc' required autocomplete="off">
+         <datalist id='roomTypes'>
+            <?php
+
+            $roomTypes = $roomsView->FetchRoomTypes();
+            foreach ($roomTypes as $roomType) {
+               echo "<option value='{$roomType['rm_desc']}'>{$roomType['rm_desc']}</option>";
+            }
+
+
+            ?>
+         </datalist>
       </div>
    </div>
    <div class="form__Container">

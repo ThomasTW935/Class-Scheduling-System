@@ -4,11 +4,11 @@ class RoomsContr extends Rooms
 {
   public function CreateRoom($data)
   {
-    $this->setRoom($data['name'], $data['desc'], $data['floor'], $data['capacity']);
+    $this->setRoom($data['name'], $data['desc'], $data['floor'], $data['capacity'], $data['type']);
   }
   public function ModifyRoom($data)
   {
-    $this->updateRoom($data['name'], $data['desc'], $data['floor'], $data['capacity'], $data['rmID']);
+    $this->updateRoom($data['name'], $data['desc'], $data['floor'], $data['capacity'], $data['type'], $data['rmID']);
   }
   public function ModifyRoomState($state, $id)
   {

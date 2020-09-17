@@ -28,18 +28,6 @@ class Rooms extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
-  protected function getRoomByLatest()
-  {
-    $sql = 'SELECT rm_id FROM rooms ORDER BY rm_id DESC LIMIT 1';
-    try {
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
-      $result = $stmt->fetchAll();
-      return $result;
-    } catch (PDOException $e) {
-      trigger_error('Error: ' . $e);
-    }
-  }
   protected function getRoomByName($name)
   {
     $sql = 'SELECT * FROM rooms WHERE rm_name = ? LIMIT 1';
@@ -67,31 +55,28 @@ class Rooms extends Dbh
       trigger_error('Error: ' . $e);
     }
   }
+  protected function getRoomTypes()
+  {
+    $sql = "SELECT DISTINCT rm_desc FROM rooms WHERE rm_desc != 'Lecture Room'";
+    return $this->tryCatchBlock($sql, [], true, 'Rooms');
+  }
   protected function getRoomsBySubj($isLab)
   {
 
     $sql = "SELECT * FROM rooms WHERE is_laboratory = ?";
     return $this->tryCatchBlock($sql, [$isLab], true, 'Rooms');
   }
-  protected function setRoom($name, $desc, $floor, $capacity)
+
+
+  protected function setRoom($name, $desc, $floor, $capacity, $isLab)
   {
-    $sql = 'INSERT INTO rooms (rm_name, rm_desc, rm_floor,rm_capacity) VALUES (?,?,?,?)';
-    try {
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$name, $desc, $floor, $capacity]);
-    } catch (PDOException $e) {
-      trigger_error('Error: ' . $e);
-    }
+    $sql = 'INSERT INTO rooms (rm_name, rm_desc, rm_floor,rm_capacity,is_laboratory) VALUES (?,?,?,?,?)';
+    $this->tryCatchBlock($sql, [$name, $desc, $floor, $capacity, $isLab], false, 'Rooms');
   }
-  protected function updateRoom($name, $desc, $floor, $capacity, $id)
+  protected function updateRoom($name, $desc, $floor, $capacity, $isLab, $id)
   {
-    $sql = 'UPDATE rooms SET rm_name = ?, rm_desc = ?, rm_floor = ?,rm_capacity = ? WHERE rm_id = ?';
-    try {
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$name, $desc, $floor, $capacity, $id]);
-    } catch (PDOException $e) {
-      trigger_error('Error: ' . $e);
-    }
+    $sql = 'UPDATE rooms SET rm_name = ?, rm_desc = ?, rm_floor = ?,rm_capacity = ?, is_laboratory = ? WHERE rm_id = ?';
+    $this->tryCatchBlock($sql, [$name, $desc, $floor, $capacity, $isLab, $id], false, 'Rooms');
   }
   protected function updateRoomState($state, $id)
   {

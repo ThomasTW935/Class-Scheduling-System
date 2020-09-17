@@ -13,11 +13,6 @@ class RoomsView extends Rooms
     $results = $this->getRoomBySearch($search, $state, $page, $limit);
     return $results;
   }
-  public function FetchRoomByLatest()
-  {
-    $result = $this->getRoomByLatest();
-    return $result;
-  }
   public function FetchRoomByID($id)
   {
     $result = $this->getRoomByID($id);
@@ -31,6 +26,11 @@ class RoomsView extends Rooms
   public function FetchRoomsBySubj($isLab)
   {
     $results = $this->getRoomsBySubj($isLab);
+    return $results;
+  }
+  public function FetchRoomTypes()
+  {
+    $results = $this->getRoomTypes();
     return $results;
   }
   public function DisplayRooms($results, $page, $totalPages, $destination)

@@ -626,6 +626,10 @@ a {
   width: 80px;
 }
 
+.module__Form .invisible {
+  display: none;
+}
+
 .module__Form .form__Error {
   color: red;
   font-size: 0.8rem;

@@ -11,7 +11,7 @@ function submitForm(e) {
 let liveSearch = document.querySelector('#liveSearch')
 let searchStatus = document.querySelector('#liveSearch--Status')
 let searchPage = document.querySelector('#liveSearch--Page')
-if (liveSearch != null) {
+if (liveSearch) {
    if (liveSearch.value != '') SearchQuery(searchPage.value)
    liveSearch.addEventListener('keyup', () => {
       SearchQuery(1)
@@ -93,15 +93,6 @@ function searchData(query, target) {
    xhr.send()
 }
 
-let empID = document.querySelector("#empID")
-let userName = document.querySelector("#userName")
-
-if (empID != null) {
-   empID.addEventListener("input", () => {
-      userName.value = empID.value
-   })
-}
-
 let newPass = document.querySelector('#new');
 let ConfirmPassword = () => {
    let confirm = document.querySelector('#confirm');
@@ -125,3 +116,24 @@ if (newPass) {
 }
 
 
+// Rooms Form Hide Description base on checked radio button
+
+const roomRadioButtons = document.querySelectorAll('#roomType-Con input')
+if (roomRadioButtons) {
+   const roomDesc = document.querySelector('#roomDesc-Con')
+   const roomInput = document.querySelector('#roomDesc-Input')
+   // Change Listener
+   roomRadioButtons.forEach(radio => {
+      radio.addEventListener('change', typeChange)
+   })
+
+   function typeChange() {
+      if (this.id == 'Lecture') {
+         roomInput.value = this.id + ' Room'
+      } else {
+         roomInput.value = ' '
+      }
+      roomDesc.classList.toggle('invisible')
+   }
+
+}

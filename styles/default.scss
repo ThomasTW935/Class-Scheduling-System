@@ -431,6 +431,7 @@ a {
       display: flex;
       justify-content: space-evenly;
     }
+
     .form__Container {
       display: grid;
       grid-template-columns: 1fr 2fr;
@@ -462,6 +463,9 @@ a {
           }
         }
       }
+    }
+    .invisible {
+      display: none;
     }
     .form__Error {
       color: red;
@@ -509,6 +513,7 @@ a {
     cursor: default;
   }
 }
+
 @media screen and (min-width: 1441px) {
   html {
     font-size: 16px;
