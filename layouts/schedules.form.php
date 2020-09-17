@@ -74,7 +74,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
         <?php
 
 
-        $schedView->GenerateTimeOptions($startTime, $endTime - (60 * 60 * 2), $selectedFrom, $jump = $jumpTime)
+        $schedView->GenerateTimeOptions($startTime, $endTime - (60 * 90), $selectedFrom, $jump = $jumpTime)
 
         ?>
 

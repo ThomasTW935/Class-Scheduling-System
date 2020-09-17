@@ -1,75 +1,96 @@
 // Selecting Time of Container
-let timeStarts = document.querySelectorAll('.start-time')
+let timeStart = document.querySelector('#timeFrom')
+let timeEnd = document.querySelector('#timeTo')
+console.log(timeStart.options[timeStart.options.length - 1])
 let ChangeFormatTime = (e) => {
-  let target = e.target
-  let id = target.id
-  let timeStart = document.querySelector('#timeFrom')
-  let timeEnd = document.querySelector('#timeTo')
-
+  const target = e.target.id
   let startDate = new Date('January 1 2000 ' + timeStart.value)
-  let startDate_Hour = startDate.getHours()
-  let startDate_Time = startDate.getTime()
-  let endValue = timeEnd.value
-  let endDate = new Date('January 1 2000 ' + endValue)
-  let endDate_Time = endDate.getTime()
-
-  for (let k = timeEnd.options.length - 1; k >= 0; k--) {
-    timeEnd.remove(k)
-  }
-  for (let i = startDate_Hour + 1; i <= 22; i++) {
-    let timeValue = i
-    let timePeriod = 'AM'
-    if (timeValue > 12) {
-      timeValue = i - 12
-      timePeriod = 'PM'
+  if (target == 'timeFrom') {
+    let startDate_Hour = startDate.getHours()
+    let startDate_Time = startDate.getTime()
+    let timeEndLastOption = timeEnd.options[timeEnd.options.length - 1]
+    let endDateLastOption = new Date('January 1 2000 ' + timeEndLastOption.value)
+    for (let k = timeEnd.options.length - 1; k >= 0; k--) {
+      timeEnd.remove(k)
     }
-    if (timeValue == 12) {
-      timePeriod = 'PM'
-    }
-    let jumpValue = 30
-    for (let k = 0; k < 60; k += jumpValue) {
-      if (i == 22 && k > 0) break;
-      let timeDiff = new Date('January 1 2000')
-      timeDiff.setHours(i)
-      timeDiff.setMinutes(k)
-      let diff = timeDiff - startDate_Time
-      let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-      if (hours < 1 || hours == 1 && minutes == 0) {
-        continue
+    for (let i = startDate_Hour + 1; i <= endDateLastOption.getHours(); i++) {
+      let timeValue = i
+      let timePeriod = 'AM'
+      if (timeValue > 12) {
+        timeValue = i - 12
+        timePeriod = 'PM'
       }
-      let convertMinutes = (minutes / 60) * 100
-      convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
-      let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''
-      let diffResult = `(${hours}${formatMinutes} hour/s)`
-      let m = (k == 0) ? ":00" : `:${k}`;
-      let option = document.createElement('option')
-      option.value = i + m
-      option.innerHTML = timeValue + m + ` ${timePeriod}` + diffResult
-      timeEnd.add(option)
+      if (timeValue == 12) {
+        timePeriod = 'PM'
+      }
+      let jumpValue = 30
+      for (let k = 0; k < 60; k += jumpValue) {
+        if (i == endDateLastOption.getHours() && k > 0) break;
+        let timeDiff = new Date('January 1 2000')
+        timeDiff.setHours(i)
+        timeDiff.setMinutes(k)
+        let diff = timeDiff - startDate_Time
+        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        if (hours < 1 || hours == 1 && minutes == 0) {
+          continue
+        }
+        let convertMinutes = (minutes / 60) * 100
+        convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
+        let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''
+        let diffResult = `(${hours}${formatMinutes} hour/s)`
+        let m = (k == 0) ? ":00" : `:${k}`;
+        let option = document.createElement('option')
+        option.value = i + m
+        option.innerHTML = timeValue + m + ` ${timePeriod}` + diffResult
+        timeEnd.add(option)
+      }
     }
   }
 
   // Change Time base on subject hours
+  let endDate = new Date('January 1 2000 ' + timeEnd.value)
   let subj = document.querySelector('#subjectsList')
   let selSubj = subj[subj.selectedIndex].getAttribute('data-hours')
   let subjTime = selSubj.split('.')
   let hours = Number(subjTime[0])
   let minutes = (subjTime[1] == '5') ? 30 : 0
   let outputDate = new Date('January 1 2000 ')
-  outputDate.setHours(startDate.getHours() + hours)
-  outputDate.setMinutes(startDate.getMinutes() + minutes)
+
+  if (target == 'timeFrom') {
+
+    outputDate.setHours(startDate.getHours() + hours)
+    outputDate.setMinutes(startDate.getMinutes() + minutes)
+  } else {
+    outputDate.setHours(endDate.getHours() - hours)
+    outputDate.setMinutes(endDate.getMinutes() - minutes)
+  }
   let formatMinutes = (outputDate.getMinutes() == 0) ? '00' : outputDate.getMinutes()
   let outputTime = outputDate.getHours() + ":" + formatMinutes
-  timeEnd.value = outputTime
-  console.log(outputDate.getMinutes())
+
+  if (target == 'timeFrom') {
+    timeEnd.value = outputTime
+    if (timeEnd.value == '') {
+      console.log(timeEnd.value)
+      timeStart.value = timeStart.options[0].value
+      ChangeFormatTime()
+    }
+  } else {
+    timeStart.value = outputTime
+    // if (timeStart.value == '') {
+    //   console.log(timeEnd.value)
+    //   timeStart.value = timeStart.options[0].value
+    //   ChangeFormatTime()
+    // }
+  }
+
+  console.log(target)
   console.log(outputDate)
 }
 
-if (timeStarts != null) {
-  timeStarts.forEach(timeStart => {
-    timeStart.addEventListener('change', ChangeFormatTime)
-  })
+if (timeStart) {
+  timeStart.addEventListener('change', ChangeFormatTime)
+  timeEnd.addEventListener('change', ChangeFormatTime)
 }
 
 
