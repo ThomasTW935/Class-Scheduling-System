@@ -1,7 +1,6 @@
 // Selecting Time of Container
 let timeStart = document.querySelector('#timeFrom')
 let timeEnd = document.querySelector('#timeTo')
-console.log(timeStart.options[timeStart.options.length - 1])
 let ChangeFormatTime = (e) => {
   const target = e.target.id
   let startDate = new Date('January 1 2000 ' + timeStart.value)
@@ -83,9 +82,6 @@ let ChangeFormatTime = (e) => {
     //   ChangeFormatTime()
     // }
   }
-
-  console.log(target)
-  console.log(outputDate)
 }
 
 if (timeStart) {
