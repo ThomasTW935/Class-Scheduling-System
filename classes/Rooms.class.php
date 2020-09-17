@@ -63,7 +63,7 @@ class Rooms extends Dbh
   protected function getRoomsBySubj($isLab)
   {
 
-    $sql = "SELECT * FROM rooms WHERE is_laboratory = ?";
+    $sql = "SELECT * FROM rooms WHERE is_laboratory = ? ORDER BY rm_name,rm_desc";
     return $this->tryCatchBlock($sql, [$isLab], true, 'Rooms');
   }
 

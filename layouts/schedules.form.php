@@ -168,7 +168,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
   echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
-        <select name='inputRoom' $isDisabled>";
+        <select name='inputRoom' id='roomsList' $isDisabled>";
   $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
   $rooms = $roomView->FetchRoomsBySubj($isLab);
   echo "<option disabled>asdasdasd</option>";

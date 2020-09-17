@@ -245,28 +245,39 @@ let onSubjectChange = () => {
 
 
 
-  let name = subj.name
-  let value = subj.value
+
   let con = document.querySelector('#sectionsList')
   if (con) {
-    let query = `${name}=${value}&${con.name}`
     let optVal = {
       value: 'sect_id',
       text: ['sect_name']
     }
-    RemoveOptions(con)
-    FetchData(query, con, optVal)
+    SetOptionValues(con, optVal, subj)
   }
   con = document.querySelector('#professorsList')
   if (con) {
-    let query = `${name}=${value}&${con.name}`
     let optVal = {
       value: 'id',
       text: ['dept_name', 'full_name']
     }
-    RemoveOptions(con)
-    FetchData(query, con, optVal)
+    SetOptionValues(con, optVal, subj)
   }
+  con = document.querySelector('#roomsList')
+  if (con) {
+    let optVal = {
+      value: 'rm_id',
+      text: ['rm_name', 'rm_desc', 'rm_capacity']
+    }
+    SetOptionValues(con, optVal, subj)
+  }
+}
+
+function SetOptionValues(con, optVal, subjCon) {
+  let name = subjCon.name
+  let value = subjCon.value
+  let query = `${name}=${value}&${con.name}`
+  RemoveOptions(con)
+  FetchData(query, con, optVal)
 }
 
 function FetchData(query, con, optVal) {
@@ -281,7 +292,6 @@ function FetchData(query, con, optVal) {
           option.innerHTML += data[optVal.text[i]]
           if (i != optVal.text.length - 1) option.innerHTML += ' | '
         }
-        console.log(optVal)
         con.appendChild(option)
       })
     }

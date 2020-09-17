@@ -73,19 +73,29 @@ if (isset($_GET['schoolYear-Change'])) {
    exit();
 }
 
-if (isset($_GET['inputSect'])) {
+if (isset($_GET['inputSubj'])) {
    $subjID = $_GET['inputSubj'];
-   $sectView = new SectionsView();
-   $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
-   echo json_encode($sects);
-   exit();
-}
-if (isset($_GET['inputProf'])) {
-   $subjID = $_GET['inputSubj'];
-   $profView = new ProfessorsView();
-   $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
-   echo json_encode($profs);
-   exit();
+   if (isset($_GET['inputSect'])) {
+      $sectView = new SectionsView();
+      $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
+      echo json_encode($sects);
+      exit();
+   }
+   if (isset($_GET['inputRoom'])) {
+      $roomsView = new RoomsView();
+      $subjView = new SubjectsView();
+      $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
+      $rooms = $roomsView->FetchRoomsBySubj($isLab);
+      echo json_encode($rooms);
+      exit();
+   }
+
+   if (isset($_GET['inputProf'])) {
+      $profView = new ProfessorsView();
+      $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
+      echo json_encode($profs);
+      exit();
+   }
 }
 
 $value = '';
