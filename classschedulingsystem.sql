@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2020 at 11:02 AM
+-- Generation Time: Sep 17, 2020 at 05:48 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -277,6 +277,7 @@ CREATE TABLE `rooms` (
   `rm_desc` text NOT NULL,
   `rm_floor` enum('Ground Floor','2nd Floor','3rd Floor','4th Floor','5th Floor','6th Floor','7th Floor','8th Floor') NOT NULL,
   `rm_capacity` smallint(6) NOT NULL,
+  `is_laboratory` tinyint(1) NOT NULL DEFAULT 0,
   `rm_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -284,40 +285,40 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_capacity`, `rm_active`) VALUES
-(3, '101', 'Computer Laboratory', '2nd Floor', 30, 1),
-(5, '201', 'Lecture Room', '2nd Floor', 30, 1),
-(6, '202', 'Lecture Room', '2nd Floor', 30, 1),
-(7, '203', 'Lecture Room', '2nd Floor', 30, 1),
-(8, '204', 'Lecture Room', '2nd Floor', 30, 1),
-(9, '205', 'Lecture Room', '2nd Floor', 30, 1),
-(10, '206', 'Lecture Room', '2nd Floor', 30, 1),
-(11, '207', 'Lecture Room', '2nd Floor', 30, 1),
-(12, '208', 'Lecture Room', '2nd Floor', 50, 1),
-(13, '209', 'Lecture Room', '2nd Floor', 50, 1),
-(14, '210', 'Lecture Room', '2nd Floor', 50, 1),
-(15, '211', 'Lecture Room', '2nd Floor', 50, 1),
-(16, '301', 'Lecture Room', '3rd Floor', 30, 1),
-(17, '302', 'Lecture Room', '3rd Floor', 30, 1),
-(18, '303', 'Lecture Room', '3rd Floor', 30, 1),
-(19, '304', 'Lecture Room', '3rd Floor', 30, 1),
-(20, '305', 'Lecture Room', '3rd Floor', 30, 1),
-(21, '306', 'Lecture Room', '3rd Floor', 30, 1),
-(22, '307', 'Lecture Room', '3rd Floor', 30, 1),
-(23, '308', 'Lecture Room', '3rd Floor', 50, 1),
-(24, '309', 'Lecture Room', '3rd Floor', 50, 1),
-(25, '310', 'Lecture Room', '3rd Floor', 50, 1),
-(26, '311', 'Lecture Room', '3rd Floor', 50, 1),
-(27, '501', 'Retail', '5th Floor', 30, 1),
-(28, '502', 'Broad Casting Studio', '5th Floor', 30, 1),
-(29, '503', 'Bar and Dinning', '5th Floor', 30, 1),
-(30, '504', 'Computer Laboratory', '5th Floor', 50, 1),
-(31, '505', 'Computer Laboratory', '5th Floor', 50, 1),
-(32, '506', 'Computer Laboratory', '5th Floor', 50, 1),
-(33, '507', 'Computer Laboratory', '5th Floor', 50, 1),
-(34, '601', 'Lecture Room', '6th Floor', 30, 1),
-(35, '508', 'THM Laboratory', '5th Floor', 30, 1),
-(43, '555', 'Computer Laboratory', '5th Floor', 50, 1);
+INSERT INTO `rooms` (`rm_id`, `rm_name`, `rm_desc`, `rm_floor`, `rm_capacity`, `is_laboratory`, `rm_active`) VALUES
+(3, '101', 'Computer Laboratory', '2nd Floor', 30, 1, 1),
+(5, '201', 'Lecture Room', '2nd Floor', 50, 0, 1),
+(6, '202', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(7, '203', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(8, '204', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(9, '205', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(10, '206', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(11, '207', 'Lecture Room', '2nd Floor', 30, 0, 1),
+(12, '208', 'Lecture Room', '2nd Floor', 50, 0, 1),
+(13, '209', 'Lecture Room', '2nd Floor', 50, 0, 1),
+(14, '210', 'Lecture Room', '2nd Floor', 50, 0, 1),
+(15, '211', 'Lecture Room', '2nd Floor', 50, 0, 1),
+(16, '301', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(17, '302', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(18, '303', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(19, '304', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(20, '305', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(21, '306', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(22, '307', 'Lecture Room', '3rd Floor', 30, 0, 1),
+(23, '308', 'Lecture Room', '3rd Floor', 50, 0, 1),
+(24, '309', 'Lecture Room', '3rd Floor', 50, 0, 1),
+(25, '310', 'Lecture Room', '3rd Floor', 50, 0, 1),
+(26, '311', 'Lecture Room', '3rd Floor', 50, 0, 1),
+(27, '501', 'Retail', '5th Floor', 30, 1, 1),
+(28, '502', 'Broad Casting Studio', '5th Floor', 30, 1, 1),
+(29, '503', 'Bar and Dinning', '5th Floor', 30, 1, 1),
+(30, '504', 'Computer Laboratory', '5th Floor', 50, 1, 1),
+(31, '505', 'Computer Laboratory', '5th Floor', 50, 1, 1),
+(32, '506', 'Computer Laboratory', '5th Floor', 50, 1, 1),
+(33, '507', 'Computer Laboratory', '5th Floor', 50, 1, 1),
+(34, '601', 'Lecture Room', '6th Floor', 30, 0, 1),
+(35, '508', 'THM Laboratory', '5th Floor', 30, 1, 1),
+(43, '555', 'Computer Laboratory', '5th Floor', 50, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -346,9 +347,9 @@ INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`,
 (36, '07:00:00', '08:30:00', '2020-09-08 17:26:33', 34, 7, 0, 0, 2),
 (39, '10:30:00', '12:00:00', '2020-09-08 17:26:33', 0, 8, 6, 0, 2),
 (50, '07:00:00', '08:00:00', '2020-09-08 17:26:33', 33, 12, 0, 8, 2),
-(69, '10:00:00', '12:00:00', '2020-09-08 17:26:33', 33, 12, 44, 6, 2),
+(69, '09:00:00', '11:00:00', '2020-09-16 08:50:21', 30, 12, 0, 6, 2),
 (75, '07:00:00', '08:00:00', '2020-09-08 17:26:33', 35, 6, 6, 9, 2),
-(79, '14:00:00', '17:00:00', '2020-09-08 17:26:33', 34, 6, 7, 6, 2),
+(79, '07:00:00', '08:30:00', '2020-09-16 08:51:08', 30, 6, 7, 6, 2),
 (80, '07:00:00', '08:30:00', '2020-09-08 17:26:33', 32, 11, 8, 2, 2),
 (81, '10:00:00', '12:00:00', '2020-09-08 17:26:33', 32, 10, 8, 7, 2),
 (82, '07:00:00', '08:30:00', '2020-09-08 17:26:33', 0, 138, 31, 16, 2),
@@ -1494,8 +1495,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `prof_id`) VALU
 (38, '195375465', '', '$2y$10$0XXOng7q6MUnuwRyWbGIjuX63iEpSpyD9tR.luH61.vTUzmwd7.wi', 38),
 (39, '1236544789', '', '$2y$10$jkzqN9in/voKfVB9RDYzoOMIrtDp.hXZkJqmIfL/LkunAep7ehq1.', 39),
 (40, 'isabelthomas', 'Isabelthomas@yahoo.com', '$2y$10$ZrwGj8V.waDuoIdsp8pC5.VStErNRyVjlXzg5oQWO05JhaBArwFV.', 40),
-(46, '123456', '', '$2y$10$yuG0lhWcOkzUUzsxwjaJZ.Ya9DoCDpvFWkZa/WgxmFdE2hMBx3cMO', 45),
-(47, '12385739', '', '$2y$10$Imj.aOue9P1O89lRplzCzO/KW/v4cwfUNYB8WPW1faIKTuduNw/8q', 46);
+(46, 'MIS', '', '$2y$10$846T3wb7zLRaZ5nHk5IhquTHkxKtNNzqluAkO6jv1dXhQ3i2ydyl2', 45),
+(47, 'ProgHead', '', '$2y$10$W5ohC9sky1KKwBtfqhODrebh81/8vHCuE1809AsjGzDM3sdkkcxRC', 46);
 
 --
 -- Indexes for dumped tables
