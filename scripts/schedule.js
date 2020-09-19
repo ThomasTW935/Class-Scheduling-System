@@ -36,12 +36,10 @@ let ChangeFormatTime = (e) => {
         }
         let convertMinutes = (minutes / 60) * 100
         convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
-        let formatMinutes = (minutes > 0) ? `.${convertMinutes}` : ''
-        let diffResult = `(${hours}${formatMinutes} hour/s)`
         let m = (k == 0) ? ":00" : `:${k}`;
         let option = document.createElement('option')
         option.value = i + m
-        option.innerHTML = timeValue + m + ` ${timePeriod}` + diffResult
+        option.innerHTML = timeValue + m + ` ${timePeriod}`
         timeEnd.add(option)
       }
     }
@@ -54,34 +52,19 @@ let ChangeFormatTime = (e) => {
   let subjTime = selSubj.split('.')
   let hours = Number(subjTime[0])
   let minutes = (subjTime[1] == '5') ? 30 : 0
-  let outputDate = new Date('January 1 2000 ')
-
+  let outputTime = ''
   if (target == 'timeFrom') {
-
-    outputDate.setHours(startDate.getHours() + hours)
-    outputDate.setMinutes(startDate.getMinutes() + minutes)
+    outputTime = FormatTime(startDate, hours, minutes)
   } else {
-    outputDate.setHours(endDate.getHours() - hours)
-    outputDate.setMinutes(endDate.getMinutes() - minutes)
+    outputTime = FormatTime(endDate, hours, minutes, false)
   }
-  let formatMinutes = (outputDate.getMinutes() == 0) ? '00' : outputDate.getMinutes()
-  let outputTime = outputDate.getHours() + ":" + formatMinutes
 
   if (target == 'timeFrom') {
     timeEnd.value = outputTime
-    if (timeEnd.value == '') {
-      console.log(timeEnd.value)
-      timeStart.value = timeStart.options[0].value
-      ChangeFormatTime()
-    }
   } else {
     timeStart.value = outputTime
-    // if (timeStart.value == '') {
-    //   console.log(timeEnd.value)
-    //   timeStart.value = timeStart.options[0].value
-    //   ChangeFormatTime()
-    // }
   }
+
 }
 
 if (timeStart) {
@@ -197,17 +180,6 @@ let validateForm = () => {
     }
   })
 
-  // searchInputs.forEach(input => {
-  //   value = input.value.trim()
-  //   if (value == '' || value == null) {
-  //     nullValues++
-  //   }
-  // })
-
-  // if (nullValues > 0) {
-  //   errors[1].isError = true
-  // }
-
   let submitForm = true
 
   errors.forEach(error => {
@@ -260,8 +232,28 @@ let onSubjectChange = () => {
   let timeTo = document.querySelector('#timeTo')
   timeTo.value = outputTime
 
+  // Change Time From and To in schedules form when subjects is changed
+
+  let timeStartLastOption = new Date('January 1 2000 ' + timeStart.options[timeStart.options.length - 1].value)
+  let timeStartFirstOption = new Date('January 1 2000 ' + timeStart.options[0].value)
+  let timeToLastOption = new Date('January 1 2000 ' + timeTo.options[timeTo.options.length - 1].value)
+  let timeDiff = timeToLastOption.getTime() - timeStartLastOption.getTime()
+
+  let timeDiffHours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  let timeDiffMinutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))
+
+  let formatDiffTime = timeDiffHours + ':' + timeDiffMinutes
+  let formatTime = `${hours}:${minutes}`
+
+  if (formatDiffTime != formatTime) {
+    let fromOutputTime = FormatTime(timeToLastOption, hours, minutes, false)
+    SetTimeOptionsValues(timeStart.options[0].value, fromOutputTime, timeFrom, minutes)
+    let toOutputTime = FormatTime(timeStartFirstOption, hours, minutes)
+    SetTimeOptionsValues(toOutputTime, timeTo.options[timeTo.options.length - 1].value, timeTo, minutes, false)
+  }
 
 
+  // Change Section Options on schedules form
 
   let con = document.querySelector('#sectionsList')
   if (con) {
@@ -271,6 +263,9 @@ let onSubjectChange = () => {
     }
     SetOptionValues(con, optVal, subj)
   }
+
+  // Change Professors Options
+
   con = document.querySelector('#professorsList')
   if (con) {
     let optVal = {
@@ -279,6 +274,9 @@ let onSubjectChange = () => {
     }
     SetOptionValues(con, optVal, subj)
   }
+
+  // Change Rooms Options
+
   con = document.querySelector('#roomsList')
   if (con) {
     let optVal = {
@@ -286,6 +284,61 @@ let onSubjectChange = () => {
       text: ['rm_name', 'rm_desc', 'rm_capacity']
     }
     SetOptionValues(con, optVal, subj)
+  }
+}
+function FormatTime(target, hours, minutes, isAdd = true) {
+  let outputDate = new Date('January 1 2000 ')
+  if (isAdd) {
+    outputDate.setHours(target.getHours() + hours)
+    outputDate.setMinutes(target.getMinutes() + minutes)
+  } else {
+    outputDate.setHours(target.getHours() - hours)
+    outputDate.setMinutes(target.getMinutes() - minutes)
+  }
+  let formatMinutes = (outputDate.getMinutes() == 0) ? '00' : outputDate.getMinutes()
+  let outputTime = outputDate.getHours() + ":" + formatMinutes
+  return outputTime
+}
+
+function SetTimeOptionsValues(startTime, endTime, con, checkMinutes = 0, isStart = true) {
+  RemoveOptions(con)
+
+  let start = new Date('January 1 2000 ' + startTime)
+  let end = new Date('January 1 2000 ' + endTime)
+  console.log(end)
+  let jumpValue = 30
+  for (let i = start.getHours(); i < end.getHours() + 1; i++) {
+    let timeValue = i
+    let timePeriod = 'AM'
+    if (timeValue > 12) {
+      timeValue = i - 12
+      timePeriod = 'PM'
+    }
+    if (timeValue == 12) {
+      timePeriod = 'PM'
+    }
+    for (let k = 0; k < 60; k += jumpValue) {
+      if ((i == end.getHours() && k > 0)) {
+        if (isStart && checkMinutes == 0) {
+          break;
+        } else if (!isStart) break
+      }
+      if (i == start.getHours() && checkMinutes > 0 && !isStart) {
+        k = checkMinutes
+      }
+      let timeDiff = new Date('January 1 2000')
+      timeDiff.setHours(i)
+      timeDiff.setMinutes(k)
+      let diff = timeDiff - start.getTime()
+      let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+      let convertMinutes = (minutes / 60) * 100
+      convertMinutes = (convertMinutes == 50) ? 5 : convertMinutes
+      let m = (k == 0) ? ":00" : `:${k}`;
+      let option = document.createElement('option')
+      option.value = i + m
+      option.innerHTML = timeValue + m + ` ${timePeriod}`
+      con.add(option)
+    }
   }
 }
 

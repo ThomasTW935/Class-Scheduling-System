@@ -151,6 +151,10 @@ class Functions
       foreach ($tableValues["body"] as $key => $value) {
         echo "<td>{$result[$value]}</td>";
       }
+      if ($type == 'schoolyear') {
+        $isHidden = ($result['hide_schedules']) ? 'True' : 'False';
+        echo "<td>$isHidden</td>";
+      }
       $action = $this->BuildTableActions($type, $result, $currentPage);
       echo "<td>
       <div class='table-actions'>$action</div>
@@ -169,7 +173,7 @@ class Functions
       $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department', "Actions"];
       $tableBody = ["subj_code", "subj_desc", "units", 'hours', 'dept_name'];
     } else if ($type == 'schoolyear') {
-      $tableHead = ["School Year", "Term", "Operation Start", "Operation End", "Actions"];
+      $tableHead = ["School Year", "Term", "Operation Start", "Operation End", 'Hide Schedules', "Actions"];
       $tableBody = ["year", "term", "operation_start", "operation_end"];
     } else if ($type == 'dept') {
       $tableHead = ["Program", "Description", "Actions"];

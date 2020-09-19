@@ -61,7 +61,7 @@ if (isset($_GET['id'])) {
          <select name="hours" id="hours">
             <?php
 
-            $optsHour = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+            $optsHour = [1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
             foreach ($optsHour as $opt) {
                $selOpt = ($opt == $hours) ? "selected" : "";
                echo "<option value='$opt' $selOpt>$opt hour/s</option>";

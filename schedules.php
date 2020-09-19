@@ -84,7 +84,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
          </div>
          <?php
 
-         if ($_SESSION['type'] != 'Program Head') {
+         if ($_SESSION['type'] != 'Program Head' && $type != 'room') {
             echo "<a href='?type=$type&id=$ID&action' class='form__Toggle schedules__Add'>Add Schedule</a>";
          }
          ?>

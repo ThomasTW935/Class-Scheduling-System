@@ -17,7 +17,7 @@ $subjID = $errors['inputSubj'] ?? '';
 $profID = $errors['inputProf'] ?? '';
 
 $isProgHead = $_SESSION['type'] == 'Program Head';
-$isDisabled = ($isProgHead) ? 'disabled' : '';
+$isDisabled = ($isProgHead || $type == 'room') ? 'disabled' : '';
 
 if ($schedIDExist) {
   $schedID = $_GET['schedid'];
@@ -48,7 +48,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
 
   <?php
 
-  if ($isProgHead) {
+  if ($isProgHead || $type == 'room') {
     $selectedFromNew = date('G:i', $selectedFrom);
     $selectedToNew = date('G:i', $selectedTo);
     echo "<input type='hidden' name='timeFrom' value='$selectedFromNew'>";
@@ -85,7 +85,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
       <select id='timeTo' name="timeTo" class='end-time' <?php echo  $isDisabled ?>>
         <?php
 
-        $schedView->GenerateTimeOptions($startTime + (60 * 90), $endTime, $selectedTo, $jump = $jumpTime, true)
+        $schedView->GenerateTimeOptions($startTime + (60 * 90), $endTime, $selectedTo, $jump = $jumpTime)
 
         ?>
       </select>
@@ -128,12 +128,14 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
 
   if ($type == 'sect') {
     $subjs = $checklistView->FetchCheclistSubjectsByChkID($sect['chk_id'], $sect['level_id'], $sect['sect_id']);
+  } else if ($type == 'room') {
+    $subjs = $subjView->FetchSubjectByID($subjID);
   } else {
     $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
   }
   foreach ($subjs as $subj) {
     $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
-    echo "<option value='{$subj['subj_id']}' data-hours='{$subj['hours']}' $selOpt>{$subj['subj_desc']} | {$subj['subj_code']}</option>";
+    echo "<option value='{$subj['subj_id']}' data-hours='{$subj['hours']}' $selOpt> {$subj['subj_code']} | {$subj['subj_desc']} | {$subj['hours']} hours </option>";
   }
 
   echo "</select>
