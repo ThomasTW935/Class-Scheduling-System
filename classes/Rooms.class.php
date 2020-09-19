@@ -63,7 +63,7 @@ class Rooms extends Dbh
   protected function getRoomsBySubj($isLab)
   {
 
-    $sql = "SELECT * FROM rooms WHERE is_laboratory = ? ORDER BY rm_name,rm_desc";
+    $sql = "SELECT rm_id,rm_name,rm_desc,rm_floor, CONCAT('Max: ', rm_capacity) as rm_capacity, is_laboratory, rm_active FROM rooms WHERE is_laboratory = ? AND rm_active = 1 ORDER BY rm_name,rm_desc";
     return $this->tryCatchBlock($sql, [$isLab], true, 'Rooms');
   }
 
