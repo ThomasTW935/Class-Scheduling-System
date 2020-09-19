@@ -146,7 +146,7 @@ class Schedules extends Dbh
       $newDays .= "'$days[$x]'$comma";
     }
     $ifUpdate = (!empty($schedID)) ? "AND s.sched_id != $schedID" : '';
-    $sql = "SELECT * FROM schedules s INNER JOIN schedules_day sd ON s.sched_id = sd.sched_id WHERE ((sched_from BETWEEN '$timeFrom' AND '$timeTo') OR (sched_to BETWEEN '$timeFrom' AND '$timeTo')) AND sched_day IN($newDays) $ifUpdate AND school_year_id = ?";
+    $sql = "SELECT * FROM schedules s INNER JOIN schedules_day sd ON s.sched_id = sd.sched_id WHERE ((sched_from > '$timeFrom' AND sched_from < '$timeTo') OR (sched_to > '$timeFrom' AND sched_to < '$timeTo')) AND sched_day IN($newDays) $ifUpdate AND school_year_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$schoolYearID]);

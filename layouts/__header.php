@@ -43,8 +43,9 @@ $schoolYearID = $schoolYear['id'];
       } else {
          echo '<div></div>';
       }
-
+      echo "<div class='nav__Year'>$schoolYearText</div>";
       ?>
+
       <div class='nav__Profile'>
          <a href='./scheduleview.php' class='nav__User'><?php echo $_SESSION['name'] ?></a>
          <ul>

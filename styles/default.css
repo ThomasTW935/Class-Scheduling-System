@@ -121,6 +121,15 @@ a {
   background: white;
 }
 
+.nav__Year {
+  color: white;
+  font-weight: bold;
+  font-size: 1.15rem;
+  display: -ms-grid;
+  display: grid;
+  place-content: Center;
+}
+
 .nav__Profile {
   display: -ms-grid;
   display: grid;

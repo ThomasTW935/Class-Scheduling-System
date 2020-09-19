@@ -10,7 +10,6 @@ if ($sessionType == 1) {
 ?>
 
 <main class="dashboard">
-   <h3><?php echo $schoolYearText ?></h3>
    <div class="dashboard__Container">
       <a class="dashboard__Card card__Design" href="./professors.php?page=1">
          <h3>Instructor</h3>

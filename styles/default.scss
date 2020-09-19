@@ -91,7 +91,13 @@ a {
       }
     }
   }
-
+  &__Year {
+    color: white;
+    font-weight: bold;
+    font-size: 1.15rem;
+    display: grid;
+    place-content: Center;
+  }
   &__Profile {
     display: grid;
     place-content: center;

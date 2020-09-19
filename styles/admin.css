@@ -121,6 +121,15 @@ a {
   background: white;
 }
 
+.nav__Year {
+  color: white;
+  font-weight: bold;
+  font-size: 1.15rem;
+  display: -ms-grid;
+  display: grid;
+  place-content: Center;
+}
+
 .nav__Profile {
   display: -ms-grid;
   display: grid;
@@ -1061,11 +1070,6 @@ a {
   border-radius: 50%;
   -webkit-transition: border-color 0.3s ease-in-out;
   transition: border-color 0.3s ease-in-out;
-}
-
-.dashboard__Card h3 {
-  font-family: "Times New Roman", Times, serif;
-  text-transform: capitalize;
 }
 
 .profile {

@@ -62,7 +62,7 @@ $opEnd = (isset($_GET['id'])) ? strtotime($result['operation_end']) : "";
 
         $endFrom = strtotime('16:00');
         $endTo = strtotime('22:00');
-        for ($i = $endFrom; $i < $endTo; $i += 60 * 60) {
+        for ($i = $endFrom; $i <= $endTo; $i += 60 * 60) {
           $optSelect = ($i == $opEnd) ? 'selected' : '';
           echo "<option value='" . date('G:i', $i) . "' $optSelect>" . date('g:i A', $i) . "</option>";
         }

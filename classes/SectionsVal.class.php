@@ -24,7 +24,6 @@ class SectionsVal
   }
   private function validateName()
   {
-
     $val = trim($this->data['name']);
     $id = trim($this->data['sectID']);
     if (empty($val)) {
