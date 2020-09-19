@@ -62,7 +62,7 @@ if (isset($_GET['selectSection'])) {
    $newEndTime = strtotime($endTime);
 
    $schedView = new SchedulesView();
-   $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id, $schoolYearID);
+   $schedView->DisplaySchedule($caption, $newStartTime, $newEndTime, $jumpTime, $type, $id, $schoolYearID, false);
    exit();
 }
 

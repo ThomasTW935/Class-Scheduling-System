@@ -106,7 +106,7 @@ class SchedulesView extends Schedules
     }
     return $newArray;
   }
-  public function DisplaySchedule($caption, $start, $end, $jump, $type, $ID, $schoolYearID)
+  public function DisplaySchedule($caption, $start, $end, $jump, $type, $ID, $schoolYearID, $hasLink = true)
   {
 
     echo "<table>";
@@ -138,9 +138,9 @@ class SchedulesView extends Schedules
           foreach ($schedSlots as $schedSlot) {
             if ($days == $schedSlot['sched_day']) {
               if ($i >= strtotime($schedSlot['sched_from']) && $i < strtotime($schedSlot['sched_to'])) {
-
+                $link = ($hasLink) ? "?type=$type&id=$ID&schedid={$schedSlot['sched_id']}" : '#';
                 $cellValues = $this->GenerateCellValue($type, $schedSlot);
-                $cellValue = "<td class='slot'><a class='form__Toggle' href='?type=$type&id=$ID&schedid={$schedSlot['sched_id']}'>
+                $cellValue = "<td class='slot'><a class='form__Toggle' href='$link'>
                                 <span>{$cellValues[0]}</span>
                                 <span>{$cellValues[1]}</span> 
                                 <span>{$cellValues[2]}</span>
