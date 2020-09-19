@@ -2,16 +2,26 @@
 
 class Schoolyear extends Dbh
 {
-
+  private $type = 'School Year';
   protected function setSchoolyear($data)
   {
-    $sql = "INSERT INTO school_year(year, term, operation_start,operation_end) VALUES(?,?,?,?)";
-    $this->tryCatchBlock($sql, [$data['year'], $data['term'], $data['start'], $data['end']], false, 'School Year');
+    $sql = "INSERT INTO school_year(year, operation_start,operation_end) VALUES(?,?,?)";
+    $this->tryCatchBlock($sql, [$data['year'], $data['opStart'], $data['opEnd']], false, 'School Year');
+  }
+  protected function addSchoolYearToProfessors()
+  {
+    $sql = "INSERT INTO professors_details(prof_id, school_year_id, is_active) SELECT DISTINCT prof_id, (SELECT id FROM school_year ORDER BY id DESC LIMIT 1), is_active FROM professors_details";
+    $this->tryCatchBlock($sql, []);
+  }
+  protected function addSchoolYearToSections()
+  {
+    $sql = "INSERT INTO sections_details(sect_id, school_year_id, is_active) SELECT DISTINCT sect_id, (SELECT id FROM school_year ORDER BY id DESC LIMIT 1), is_active FROM sections_details";
+    $this->tryCatchBlock($sql, []);
   }
   protected function updateSchoolyear($data)
   {
-    $sql = "UPDATE school_year SET year = ?, term = ?, operation_start = ?, operation_end = ? WHERE id = ?";
-    $this->tryCatchBlock($sql, [$data['year'], $data['term'], $data['start'], $data['end'], $data['id']]);
+    $sql = "UPDATE school_year SET year = ?, operation_start = ?, operation_end = ? WHERE id = ?";
+    $this->tryCatchBlock($sql, [$data['year'], $data['opStart'], $data['opEnd'], $data['id']]);
   }
   protected function updateSchoolyearActive($id)
   {
@@ -29,8 +39,13 @@ class Schoolyear extends Dbh
   {
     $jump = $limit * ($page - 1);
     $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-    $sql = "SELECT * FROM school_year ORDER BY year,term DESC  $withLimit";
+    $sql = "SELECT * FROM school_year ORDER BY year DESC  $withLimit";
     return $this->tryCatchBlock($sql, [], true);
+  }
+  protected function getSchoolYearByID($id)
+  {
+    $sql = "SELECT * FROM school_year WHERE id = ? LIMIT 1";
+    return $this->tryCatchBlock($sql, [$id], true, $this->type);
   }
   protected function getOperationHours($id)
   {

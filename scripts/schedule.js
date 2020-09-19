@@ -114,7 +114,6 @@ let timeToInput = document.querySelector('#timeToInput')
 // Confirm that CheckBox have a value
 
 let validateForm = () => {
-  let searchInputs = document.querySelectorAll('.search__Input')
   let checkBoxCon = document.querySelectorAll('.form__DayContainer input')
 
   let errors = [
@@ -123,12 +122,6 @@ let validateForm = () => {
       'con': document.querySelector('#errorDay'),
       'isError': false,
       'count': checkBoxCon.length
-    },
-    inputs = {
-      'msg': '*Select at least 1',
-      'con': document.querySelector('#errorInput'),
-      'isError': false,
-      'count': searchInputs.length
     }
   ]
 

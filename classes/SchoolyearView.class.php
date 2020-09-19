@@ -17,6 +17,11 @@ class SchoolyearView extends Schoolyear
     $results = $this->getActiveSchoolYear();
     return $results;
   }
+  public function FetchSchoolYearByID($id)
+  {
+    $results = $this->getSchoolYearByID($id);
+    return $results;
+  }
   public function DisplaySchoolyear($results, $page, $totalPages, $destination)
   {
     $func = new Functions();

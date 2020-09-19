@@ -3,6 +3,8 @@ include_once './layouts/__header.php';
 $state = isset($_GET['archive']) ? 0 : 1;
 $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 $searchValue = $_GET['q'] ?? '';
+$schoolyearView = new SchoolyearView();
+
 ?>
 
 <main class='sections module'>
@@ -11,25 +13,10 @@ $searchValue = $_GET['q'] ?? '';
       <select id='schoolYearSelect' name='schoolYear-Change' onchange="SchoolYearOnChange()">
 
         <?php
-        $schoolyearView = new SchoolyearView();
         $results = $schoolyearView->FetchSchoolyear();
         foreach ($results as $schoolYear) {
           $optSel = ($schoolYear['id'] == $schoolYearID) ? 'selected' : '';
-          switch ($schoolYear['term'] % 10) {
-            case 1:
-              $term = 'st';
-              break;
-            case 2:
-              $term = 'nd';
-              break;
-            case 3:
-              $term = 'rd';
-              break;
-            default:
-              $term = 'th';
-              break;
-          }
-          echo "<option value='{$schoolYear['id']}' $optSel>SY{$schoolYear['year']} {$schoolYear['term']}<sup>$term</sup> Term</option>";
+          echo "<option value='{$schoolYear['id']}' $optSel>{$schoolYear['year']}</option>";
         }
 
         ?>

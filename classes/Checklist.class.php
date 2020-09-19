@@ -95,7 +95,7 @@ class Checklist extends Dbh
 
   protected function getDistinctLevel($id)
   {
-    $sql = "SELECT DISTINCT level_id, description FROM subjects_to_checklist stc INNER JOIN level l ON stc.level_id = l.id WHERE chk_id = ? ORDER BY level_id";
+    $sql = "SELECT DISTINCT level_id, description FROM subjects_to_checklist stc INNER JOIN level l ON stc.level_id = l.id WHERE chk_id = ? ORDER BY description,level_id";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$id]);
@@ -139,7 +139,6 @@ class Checklist extends Dbh
     $sql = "SELECT stc.id, chk_id, stc.subj_id, subj_code,subj_desc,hours FROM subjects_to_checklist stc 
     INNER JOIN checklist c ON stc.chk_id = c.id
     INNER JOIN subjects s ON stc.subj_id = s.subj_id WHERE chk_id = ? AND stc.level_id = ? ORDER BY subj_desc";
-    //  AND s.subj_id NOT IN (SELECT subj_id FROM schedules WHERE sect_id = ?)
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$chkID, $levelID]);

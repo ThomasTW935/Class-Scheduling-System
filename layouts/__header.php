@@ -13,22 +13,7 @@ $page = $_GET['page'] ?? '1';
 $func = new Functions();
 $schoolyearView = new SchoolyearView();
 $schoolYear = $schoolyearView->FetchActiveSchoolYear()[0];
-
-switch ($schoolYear['term'] % 10) {
-   case 1:
-      $term = 'st';
-      break;
-   case 2:
-      $term = 'nd';
-      break;
-   case 3:
-      $term = 'rd';
-      break;
-   default:
-      $term = 'th';
-      break;
-}
-$schoolYearText = "SY. {$schoolYear['year']} {$schoolYear['term']}<sup>$term</sup> Term";
+$schoolYearText = $schoolYear['year'];
 $schoolYearID = $schoolYear['id'];
 
 ?>

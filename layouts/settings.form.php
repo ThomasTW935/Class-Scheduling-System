@@ -7,39 +7,68 @@ parse_str($query, $errors);
 
 $errorName = $errors['errorName'] ?? '';
 
-$sectID  = '';
 $name    = '';
 $year    = $errors['year'] ?? '';
-$deptID  = $errors['deptID'] ?? '';
-$levelID  = $errors['levelID'] ?? '';
-$chkID  = $errors['chkID'] ?? '';
+$id = '';
+
 if (isset($_GET['id'])) {
   $id      = $_GET['id'];
-  $result  = $sectView->FetchSectionByID($id);
-  $sect    = $result[0];
-  $button  = "update";
-  $sectID  = $sect['sect_id'];
-  $name    = $sect['sect_name'];
-  $year    = $sect['sect_year'];
-  $deptID  = $sect['dept_id'];
-  $levelID = $sect['level_id'];
-  $chkID = $sect['chk_id'];
+  $result  = $schoolyearView->FetchSchoolYearByID($id)[0];
+  $year = $result['year'];
+  $button = 'update';
 }
+
+$opStart = (isset($_GET['id'])) ? strtotime($result['operation_start']) : "";
+$opEnd = (isset($_GET['id'])) ? strtotime($result['operation_end']) : "";
 
 ?>
 
-<form action='./includes/sections.inc.php' class='module__Form' method='POST'>
+<form action='./includes/settings.inc.php' class='module__Form' method='POST'>
   <section class="form__Title">
     <label>Section's Information</label>
     <a href='settings.php?page=<?php echo $page ?>'>X</a>
   </section>
   <input class='form__Input' type='hidden' value='<?php echo $page ?>' name='page'>
-  <input class='form__Input' type='hidden' value='<?php echo $sectID ?>' name='sectID'>
+  <input class='form__Input' type='hidden' value='<?php echo $id ?>' name='id'>
   <div class='form__Container'>
     <label for='' class='form__Label'>School Year:</label>
     <div class='form__Input'>
-      <input type="date" name="" id="">
+      <input type="text" name="year" id="" value='<?php echo $year ?>'>
       <div class='form__Error'><?php echo $errorName ?></div>
+    </div>
+  </div>
+  <div class='form__Container'>
+    <label for='' class='form__Label'>Start:</label>
+    <div class='form__Input'>
+      <select name='opStart'>
+        <?php
+
+        $startFrom = strtotime('5:00');
+        $startTo = strtotime('12:00');
+        for ($i = $startFrom; $i < $startTo; $i += 60 * 60) {
+          $optSelect = ($i == $opStart) ? 'selected' : '';
+          echo "<option value='" . date('G:i', $i) . "' $optSelect>" . date('g:i A', $i) . "</option>";
+        }
+
+        ?>
+      </select>
+    </div>
+  </div>
+  <div class='form__Container'>
+    <label for='' class='form__Label'>End:</label>
+    <div class='form__Input'>
+      <select name='opEnd'>
+        <?php
+
+        $endFrom = strtotime('16:00');
+        $endTo = strtotime('22:00');
+        for ($i = $endFrom; $i < $endTo; $i += 60 * 60) {
+          $optSelect = ($i == $opEnd) ? 'selected' : '';
+          echo "<option value='" . date('G:i', $i) . "' $optSelect>" . date('g:i A', $i) . "</option>";
+        }
+
+        ?>
+      </select>
     </div>
   </div>
 

@@ -173,7 +173,6 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
         <select name='inputRoom' id='roomsList' $isDisabled>";
   $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
   $rooms = $roomView->FetchRoomsBySubj($isLab);
-  echo "<option disabled>asdasdasd</option>";
   foreach ($rooms as $room) {
     echo "<option value='{$room['rm_id']}'>{$room['rm_name']} | {$room['rm_desc']} | {$room['rm_capacity']}</option>";
   }
