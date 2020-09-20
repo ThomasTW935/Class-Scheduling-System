@@ -131,7 +131,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
   } else if ($type == 'room') {
     $subjs = $subjView->FetchSubjectByID($subjID);
   } else {
-    $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
+    // $subjs = $subjView->FetchSubjectsByDeptID($prof['dept_id']);
   }
   foreach ($subjs as $subj) {
     $selOpt = ($subjID == $subj['subj_id']) ? 'selected' : '';
