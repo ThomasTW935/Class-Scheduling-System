@@ -153,6 +153,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
     <div class='form__Input'>";
 
     echo "<select name='inputProf' id='professorsList'>";
+    echo "<option value='0'>Instructor</option>";
     $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
     foreach ($profs as $prof) {
       $selOpt = ($profID == $prof['id']) ? 'selected' : '';
