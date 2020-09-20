@@ -49,7 +49,7 @@ class Subjects extends Dbh
    }
    protected function getSubjectsByDeptID($deptID)
    {
-      $sql = "SELECT * FROM subjects WHERE dept_id = ? AND subj_id IN (SELECT subj_id FROM subjects_to_checklist) ORDER BY subj_code,subj_desc";
+      $sql = "SELECT * FROM subjects s INNER JOIN subjects_to_checklist stc ON s.subj_id = stc.subj_id  WHERE dept_id = ? AND stc.chk_id IN (SELECT chk_id FROM sections) ORDER BY subj_code,subj_desc";
       return $this->tryCatchBlock($sql, [$deptID], true, 'Subjects');
    }
    protected function setSubject($code, $desc, $units, $hours, $deptID, $type)
