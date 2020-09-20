@@ -174,7 +174,8 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
   $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
   $rooms = $roomView->FetchRoomsBySubj($isLab);
   foreach ($rooms as $room) {
-    echo "<option value='{$room['rm_id']}'>{$room['rm_name']} | {$room['rm_desc']} | {$room['rm_capacity']}</option>";
+    $selOpt = ($room['rm_id'] == $roomID) ? 'selected' : '';
+    echo "<option value='{$room['rm_id']}' $selOpt>{$room['rm_name']} | {$room['rm_desc']} | {$room['rm_capacity']}</option>";
   }
   echo "</select>
         <div class='form__Error'>$errorRoom</div>
