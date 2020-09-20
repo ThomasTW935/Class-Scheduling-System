@@ -88,7 +88,9 @@ class Sections extends Dbh
   }
   protected function getSectionsBySubj($schoolYearID, $subjID)
   {
-    $sql = "SELECT * FROM sections s INNER JOIN sections_details sd ON s.sect_id = sd.sect_id INNER JOIN subjects_to_checklist stc ON s.chk_id = stc.chk_id WHERE school_year_id = ? AND is_active = 1 AND subj_id = ? ORDER BY sect_name";
+    $sql = "SELECT * FROM sections s INNER JOIN sections_details sd ON s.sect_id = sd.sect_id 
+    WHERE school_year_id = ? AND is_active = 1 
+    AND chk_id IN (SELECT chk_id FROM subjects_to_checklist WHERE subj_id = ? AND level_id = s.level_id)";
     return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true, $this->type);
   }
   protected function setSection($name, $chkID, $levelID)
