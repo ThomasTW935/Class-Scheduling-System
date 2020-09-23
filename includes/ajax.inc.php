@@ -81,19 +81,26 @@ if (isset($_GET['inputSubj'])) {
       echo json_encode($sects);
       exit();
    }
+   $schedFrom = $_GET['timeFrom'];
+   $schedTo = $_GET['timeTo'];
+   $schedDays = explode(',', $_GET['days']);
+
    if (isset($_GET['inputRoom'])) {
       $roomsView = new RoomsView();
       $subjView = new SubjectsView();
       $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
       $rooms = $roomsView->FetchRoomsBySubj($isLab);
-      echo json_encode($rooms);
+
+      $occupiedRooms = $roomsView->FetchRoomsByTime($schedFrom, $schedTo, $schedDays, $schoolYearID);
+      echo json_encode(array("list" => $rooms, "occupied" => $occupiedRooms));
       exit();
    }
 
    if (isset($_GET['inputProf'])) {
       $profView = new ProfessorsView();
       $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
-      echo json_encode($profs);
+      $occupiedProfs = $profView->FetchProfessorsByTime($schedFrom, $schedTo, $schedDays, $schoolYearID, $subjID);
+      echo json_encode(array("list" => $profs, "occupied" => $occupiedProfs));
       exit();
    }
 }
@@ -105,12 +112,12 @@ $page = $_GET['page'];
 if (isset($_GET['searchProf'])) {
    $profView = new ProfessorsView();
    $value = $_GET['searchProf'];
-
-   $results = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state);
+   $deptID = $_SESSION['department'];
+   $results = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state, 0, 0, $deptID);
 
    $isArchived = ($state == 0);
    $table = $func->TableProperties('prof', $results, !$state, $value);
-   $paginatedResults = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state, $page, $table['limit']);
+   $paginatedResults = $profView->FetchProfessorsBySearch($value, $schoolYearID, $state, $page, $table['limit'], $deptID);
    $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
    exit();
 }

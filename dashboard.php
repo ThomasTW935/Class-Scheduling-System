@@ -36,7 +36,7 @@ if ($sessionType == 1) {
          <img src="./drawables/icons/strand.svg" alt="strand">
       </a>
       <a class="dashboard__Card card__Design" href="./department.php?dept=faculty&page=1">
-         <h3>Faculty</h3>
+         <h3>Department</h3>
          <img src="./drawables/icons/faculty.svg" alt="faculty">
       </a>
       <?php

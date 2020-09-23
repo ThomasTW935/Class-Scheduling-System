@@ -28,17 +28,26 @@ $searchValue = $_GET['q'] ?? '';
 
       if (empty($searchValue)) {
          $profView = new ProfessorsView();
-         $results = $profView->FetchProfessorsByState($schoolYearID, $state);
+         $isProgramHead = $_SESSION['type'] == 'Program Head';
+         $deptID = $_SESSION['department'];
+         if (!$isProgramHead) {
+            $results = $profView->FetchProfessorsByState($schoolYearID, $state);
+         } else {
+            $results = $profView->FetchProfessorsByState($schoolYearID, $state, $deptID);
+         }
 
          $isArchived = isset($_GET['archive']);
          $table = $func->TableProperties('prof', $results, $isArchived);
-         $paginatedResults = $profView->FetchProfessorsByState($schoolYearID, $state, $page, $table['limit']);
+         if (!$isProgramHead) {
+            $paginatedResults = $profView->FetchProfessorsByState($schoolYearID, $state, 0, $page, $table['limit']);
+         } else {
+            $paginatedResults = $profView->FetchProfessorsByState($schoolYearID, $state, $deptID, $page, $table['limit']);
+         }
          $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
       ?>
    </div>
    <?php
-
    if (isset($_GET['add']) || isset($_GET['id'])) {
       include_once './layouts/professors.form.php';
    }

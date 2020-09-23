@@ -47,6 +47,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
    $profID = $ID;
    $prof = $profView->FetchProfessorByID($profID)[0];
    $dept = $deptView->FetchDeptByID($prof['dept_id'])[0];
+   $totalUnits = $profView->FetchProfessorUnits($prof['id'])[0]['total_units'];
    $imgSrc = $prof['prof_img'];
    if (empty($prof['prof_img']))
       $imgSrc = "professor.png";
@@ -55,6 +56,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
    $sideBarText .= "<img src='./drawables/images/" . $imgSrc . "'>";
    $sideBarText .= "<h2>" . $fullName . "</h2>";
    $sideBarText .= "<h3>" . $dept['dept_desc'] . "</h3>";
+   $sideBarText .= "<h3>$totalUnits Units</h3>";
    $caption = "{$fullName}";
    $returnDestination = 'professors';
 }

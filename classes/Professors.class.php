@@ -20,25 +20,27 @@ class Professors extends Dbh
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$empID, $lastName, $firstName, $middleInitial, $suffix, $type, $deptID, $imgName, $id]);
    }
-   protected function getProfessorsByState($schoolYearID, $state, $page, $limit)
+   protected function getProfessorsByState($schoolYearID, $state, $deptID, $page, $limit)
    {
+      $department = ($deptID > 0) ? " AND p.dept_id = $deptID" : '';
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $sql = "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,  COALESCE(prof_img,'professor.png') as img , dept_name, school_year_id, pd.is_active FROM professors p 
       INNER JOIN departments d ON p.dept_id = d.dept_id 
       INNER JOIN professors_details pd ON p.id = pd.prof_id
-      WHERE school_year_id = ? AND is_active = ? $withLimit";
+      WHERE school_year_id = ? AND is_active = ? $department $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$schoolYearID, $state]);
-         $result = $stmt->fetchAll();
-         return $result;
+         $results = $stmt->fetchAll();
+         return $results;
       } catch (PDOException $e) {
          trigger_error('Error: ' . $e);
       }
    }
-   protected function getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit)
+   protected function getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit, $deptID)
    {
+      $department = ($deptID > 0) ? " AND p.dept_id = $deptID" : '';
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
       $search = "%{$search}%";
@@ -46,7 +48,7 @@ class Professors extends Dbh
       INNER JOIN departments d ON p.dept_id = d.dept_id 
       INNER JOIN professors_details pd ON p.id = pd.prof_id
       WHERE (emp_no LIKE ? OR last_name LIKE ? OR first_name LIKE ? OR suffix LIKE ? OR type LIKE ? OR dept_name LIKE ?) 
-      AND school_year_id = ? AND is_active = ? $withLimit";
+      AND school_year_id = ? AND is_active = ? $department $withLimit";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$search, $search, $search, $search, $search, $search, $schoolYearID, $state]);
       $results = $stmt->fetchAll();
@@ -83,6 +85,33 @@ class Professors extends Dbh
 
       return $this->tryCatchBlock($sql, [$schoolYearID, $subjID], true, 'Professors');
    }
+   protected function getProfessorUnits($profID)
+   {
+      $sql = "SELECT SUM(units) as total_units FROM schedules sc 
+      INNER JOIN subjects su ON sc.subj_id = su.subj_id  
+      WHERE prof_id = ?";
+      return $this->tryCatchBlock($sql, [$profID], true, 'Professors');
+   }
+   protected function getProfessorsByTime($timeFrom, $timeTo, $days, $schoolYearID, $subjID)
+   {
+      $newDays = '';
+      for ($x = 0; $x < sizeof($days); $x++) {
+         $comma = ',';
+         if ($x == sizeof($days) - 1) {
+            $comma = '';
+         }
+         $newDays .= "'$days[$x]'$comma";
+      }
+      $sql = "SELECT DISTINCT sc.prof_id FROM schedules sc 
+      INNER JOIN schedules_day sd ON sc.sched_id = sd.sched_id
+      INNER JOIN professors p ON sc.prof_id = p.id
+      INNER JOIN professors_details pd ON sc.prof_id = pd.prof_id 
+      WHERE sc.school_year_id = $schoolYearID AND pd.school_year_id = $schoolYearID 
+      AND ((sched_from >= '$timeFrom' AND sched_from < '$timeTo') OR (sched_to > '$timeFrom' AND sched_to < '$timeTo')) AND sched_day IN($newDays)
+      AND dept_id = (SELECT dept_id FROM subjects WHERE subj_id = ?)";
+      return $this->tryCatchBlock($sql, [$subjID], true, 'Schedules');
+   }
+
 
    // Professors Details Queries
 

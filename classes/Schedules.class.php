@@ -101,7 +101,7 @@ class Schedules extends Dbh
   }
   protected function getScheduleByID($schedID)
   {
-    $sql = "SELECT * FROM schedules WHERE sched_id = ? LIMIT 1";
+    $sql = "SELECT * FROM schedules sc INNER JOIN subjects s ON sc.subj_id = s.subj_id WHERE sched_id = ? LIMIT 1";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$schedID]);
@@ -146,7 +146,7 @@ class Schedules extends Dbh
       $newDays .= "'$days[$x]'$comma";
     }
     $ifUpdate = (!empty($schedID)) ? "AND s.sched_id != $schedID" : '';
-    $sql = "SELECT * FROM schedules s INNER JOIN schedules_day sd ON s.sched_id = sd.sched_id WHERE ((sched_from > '$timeFrom' AND sched_from < '$timeTo') OR (sched_to > '$timeFrom' AND sched_to < '$timeTo')) AND sched_day IN($newDays) $ifUpdate AND school_year_id = ?";
+    $sql = "SELECT * FROM schedules s INNER JOIN schedules_day sd ON s.sched_id = sd.sched_id WHERE ((sched_from >= '$timeFrom' AND sched_from < '$timeTo') OR (sched_to > '$timeFrom' AND sched_to < '$timeTo')) AND sched_day IN($newDays) $ifUpdate AND school_year_id = ?";
     try {
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute([$schoolYearID]);

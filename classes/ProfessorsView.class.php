@@ -19,19 +19,29 @@ class ProfessorsView extends Professors
       return $results;
    }
 
-   public function FetchProfessorsBySearch($search, $schoolYearID, $state, $page = 0, $limit = 0)
+   public function FetchProfessorsBySearch($search, $schoolYearID, $state, $page = 0, $limit = 0, $deptID = 0)
    {
-      $results = $this->getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit);
+      $results = $this->getProfessorsBySearch($search, $schoolYearID, $state, $page, $limit, $deptID);
       return $results;
    }
-   public function FetchProfessorsByState($schoolYearID, $state, $page = 0, $limit = 0)
+   public function FetchProfessorsByState($schoolYearID, $state, $deptID = 0, $page = 0, $limit = 0)
    {
-      $results = $this->getProfessorsByState($schoolYearID, $state, $page, $limit);
+      $results = $this->getProfessorsByState($schoolYearID, $state, $deptID, $page, $limit);
       return $results;
    }
    public function FetchProfessorsBySubj($schoolYearID, $subjID)
    {
       $results = $this->getProfessorsBySubj($schoolYearID, $subjID);
+      return $results;
+   }
+   public function FetchProfessorUnits($profID)
+   {
+      $results = $this->getProfessorUnits($profID);
+      return $results;
+   }
+   public function FetchProfessorsByTime($timeFrom, $timeTo, $days, $schoolYearID, $subjID)
+   {
+      $results = $this->getProfessorsByTime($timeFrom, $timeTo, $days, $schoolYearID, $subjID);
       return $results;
    }
    public function DisplayProfessorsInSearch($results)

@@ -1,34 +1,34 @@
 # Summary
 
-Date : 2020-09-18 15:54:06
+Date : 2020-09-20 15:54:59
 
 Directory f:\Apps\xampp\htdocs\WebDev\Class-Scheduling-System
 
-Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
+Total : 129 files,  10634 codes, 430 comments, 1152 blanks, all 12216 lines
 
 [details](details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| PHP | 82 | 4,864 | 115 | 586 | 5,565 |
-| CSS | 8 | 2,412 | 16 | 324 | 2,752 |
-| SQL | 1 | 1,376 | 199 | 106 | 1,681 |
-| SCSS | 7 | 1,136 | 29 | 27 | 1,192 |
-| JavaScript | 4 | 528 | 79 | 88 | 695 |
+| PHP | 83 | 4,892 | 113 | 594 | 5,599 |
+| CSS | 8 | 2,422 | 16 | 325 | 2,763 |
+| SQL | 1 | 1,472 | 199 | 106 | 1,777 |
+| SCSS | 7 | 1,139 | 29 | 26 | 1,194 |
+| JavaScript | 4 | 537 | 70 | 96 | 703 |
 | XML | 24 | 148 | 3 | 4 | 155 |
 | JSON | 2 | 24 | 0 | 1 | 25 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 128 | 10,488 | 441 | 1,136 | 12,065 |
-| classes | 39 | 2,616 | 102 | 203 | 2,921 |
+| . | 129 | 10,634 | 430 | 1,152 | 12,216 |
+| classes | 39 | 2,647 | 100 | 200 | 2,947 |
 | drawables | 24 | 148 | 3 | 4 | 155 |
 | drawables\icons | 24 | 148 | 3 | 4 | 155 |
-| includes | 15 | 573 | 4 | 113 | 690 |
-| layouts | 12 | 896 | 9 | 122 | 1,027 |
-| scripts | 4 | 528 | 79 | 88 | 695 |
-| styles | 15 | 3,548 | 45 | 351 | 3,944 |
+| includes | 16 | 586 | 4 | 119 | 709 |
+| layouts | 12 | 909 | 9 | 127 | 1,045 |
+| scripts | 4 | 537 | 70 | 96 | 703 |
+| styles | 15 | 3,561 | 45 | 351 | 3,957 |
 
 [details](details.md)

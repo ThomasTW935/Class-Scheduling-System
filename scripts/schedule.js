@@ -30,8 +30,56 @@ let ChangeFormatTime = (e) => {
 if (timeStart) {
   timeStart.addEventListener('change', ChangeFormatTime)
   timeEnd.addEventListener('change', ChangeFormatTime)
+  timeStart.addEventListener('change', ChangeOptionsBasedOnTimeAndDay)
+  timeEnd.addEventListener('change', ChangeOptionsBasedOnTimeAndDay)
+  let checkBoxCon = document.querySelectorAll('.form__DayContainer input')
+  checkBoxCon.forEach(checkBox => {
+    checkBox.addEventListener('change', ChangeOptionsBasedOnTimeAndDay)
+  })
 }
 
+function ChangeOptionsBasedOnTimeAndDay() {
+  let timeFrom = document.querySelector('#timeFrom')
+  let timeTo = document.querySelector('#timeTo')
+  let subj = document.querySelector('#subjectsList')
+
+
+  // Fetch values of days checkboxes
+
+  let checkBoxCon = document.querySelectorAll('.form__DayContainer input')
+  let days = []
+  checkBoxCon.forEach(checkBox => {
+    if (checkBox.checked) {
+      days.push(checkBox.value)
+    }
+  })
+
+
+  // Change Professors Options
+
+  let con = document.querySelector('#professorsList')
+  if (con) {
+    let optVal = {
+      value: 'id',
+      text: ['dept_name', 'full_name']
+    }
+    let query = `${timeFrom.name}=${timeFrom.value}&${timeTo.name}=${timeTo.value}&days=${days}`
+    SetOptionValues(con, optVal, subj, query)
+  }
+
+
+  // Change Rooms Options
+
+  con = document.querySelector('#roomsList')
+  if (con) {
+    let optVal = {
+      value: 'rm_id',
+      text: ['rm_name', 'rm_desc', 'rm_capacity']
+    }
+    let query = `${timeFrom.name}=${timeFrom.value}&${timeTo.name}=${timeTo.value}&days=${days}`
+    SetOptionValues(con, optVal, subj, query)
+  }
+}
 
 
 //Fixing Schedules Labels
@@ -208,6 +256,8 @@ let onSubjectChange = () => {
 
   // Change Section Options on schedules form
 
+
+
   let con = document.querySelector('#sectionsList')
   if (con) {
     let optVal = {
@@ -217,27 +267,8 @@ let onSubjectChange = () => {
     SetOptionValues(con, optVal, subj)
   }
 
-  // Change Professors Options
+  ChangeOptionsBasedOnTimeAndDay()
 
-  con = document.querySelector('#professorsList')
-  if (con) {
-    let optVal = {
-      value: 'id',
-      text: ['dept_name', 'full_name']
-    }
-    SetOptionValues(con, optVal, subj)
-  }
-
-  // Change Rooms Options
-
-  con = document.querySelector('#roomsList')
-  if (con) {
-    let optVal = {
-      value: 'rm_id',
-      text: ['rm_name', 'rm_desc', 'rm_capacity']
-    }
-    SetOptionValues(con, optVal, subj)
-  }
 }
 function FormatTime(target, hours, minutes, isAdd = true) {
   let outputDate = new Date('January 1 2000 ')
@@ -297,10 +328,13 @@ function SetTimeOptionsValues(startTime, endTime, con, checkMinutes = 0, isStart
   }
 }
 
-function SetOptionValues(con, optVal, subjCon) {
+function SetOptionValues(con, optVal, subjCon, customQuery = '') {
   let name = subjCon.name
   let value = subjCon.value
   let query = `${name}=${value}&${con.name}`
+  if (query.length > 0) {
+    query += `&${customQuery}`
+  }
   RemoveOptions(con)
   FetchData(query, con, optVal)
 }
@@ -310,19 +344,42 @@ function FetchData(query, con, optVal) {
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status) {
       let datas = JSON.parse(this.responseText)
-      datas.forEach(data => {
-        let option = document.createElement('option')
-        option.value = data[optVal.value]
-        for (let i = 0; i < optVal.text.length; i++) {
-          option.innerHTML += data[optVal.text[i]]
-          if (i != optVal.text.length - 1) option.innerHTML += ' | '
-        }
-        con.appendChild(option)
-      })
+      if (con.id == 'roomsList' || con.id == 'professorsList') {
+        datas.list.forEach(listItem => {
+          let isDisabled = false
+          datas.occupied.forEach(occupiedListItem => {
+            if (con.id == 'roomsList') {
+              if (listItem['rm_id'] == occupiedListItem['room_id']) {
+                isDisabled = true
+              }
+            } else {
+              if (listItem['id'] == occupiedListItem['prof_id']) {
+                isDisabled = true
+              }
+            }
+          })
+          SelectOptionValues(con, listItem, optVal, isDisabled)
+        })
+      } else {
+        datas.forEach(data => {
+          SelectOptionValues(con, data, optVal)
+        })
+      }
     }
   }
   xhr.open("GET", 'includes/ajax.inc.php?' + query, true)
   xhr.send()
+}
+
+function SelectOptionValues(con, data, optVal, isDisabled = false) {
+  let option = document.createElement('option')
+  option.value = data[optVal.value]
+  for (let i = 0; i < optVal.text.length; i++) {
+    option.innerHTML += data[optVal.text[i]]
+    if (i != optVal.text.length - 1) option.innerHTML += ' | '
+  }
+  if (isDisabled) option.disabled = `true`
+  con.appendChild(option)
 }
 
 // Schedules Form Draggable 

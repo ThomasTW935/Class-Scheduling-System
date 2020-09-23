@@ -66,6 +66,23 @@ class Rooms extends Dbh
     $sql = "SELECT rm_id,rm_name,rm_desc,rm_floor, CONCAT('Max: ', rm_capacity) as rm_capacity, is_laboratory, rm_active FROM rooms WHERE is_laboratory = ? AND rm_active = 1 ORDER BY rm_name,rm_desc";
     return $this->tryCatchBlock($sql, [$isLab], true, 'Rooms');
   }
+  protected function getRoomsByTime($timeFrom, $timeTo, $days, $schoolYearID)
+  {
+    $newDays = '';
+    for ($x = 0; $x < sizeof($days); $x++) {
+      $comma = ',';
+      if ($x == sizeof($days) - 1) {
+        $comma = '';
+      }
+      $newDays .= "'$days[$x]'$comma";
+    }
+    $sql = "SELECT DISTINCT sc.room_id as room_id FROM schedules sc 
+    INNER JOIN schedules_day sd ON sc.sched_id = sd.sched_id
+    INNER JOIN rooms rm ON sc.room_id = rm.rm_id 
+    WHERE sc.school_year_id = $schoolYearID 
+    AND ((sched_from >= '$timeFrom' AND sched_from < '$timeTo') OR (sched_to > '$timeFrom' AND sched_to < '$timeTo')) AND sched_day IN($newDays)";
+    return $this->tryCatchBlock($sql, [], true, 'Rooms');
+  }
 
 
   protected function setRoom($name, $desc, $floor, $capacity, $isLab)

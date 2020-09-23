@@ -1,10 +1,10 @@
 # Details
 
-Date : 2020-09-18 15:54:06
+Date : 2020-09-20 15:54:59
 
 Directory f:\Apps\xampp\htdocs\WebDev\Class-Scheduling-System
 
-Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
+Total : 129 files,  10634 codes, 430 comments, 1152 blanks, all 12216 lines
 
 [summary](results.md)
 
@@ -13,16 +13,16 @@ Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
 | :--- | :--- | ---: | ---: | ---: | ---: |
 | [checklist.php](/checklist.php) | PHP | 46 | 0 | 8 | 54 |
 | [checklistsubjects.php](/checklistsubjects.php) | PHP | 84 | 0 | 11 | 95 |
-| [classes/Checklist.class.php](/classes/Checklist.class.php) | PHP | 157 | 3 | 7 | 167 |
+| [classes/Checklist.class.php](/classes/Checklist.class.php) | PHP | 157 | 2 | 7 | 166 |
 | [classes/ChecklistContr.class.php](/classes/ChecklistContr.class.php) | PHP | 28 | 1 | 6 | 35 |
 | [classes/ChecklistVal.class.php](/classes/ChecklistVal.class.php) | PHP | 44 | 0 | 7 | 51 |
 | [classes/ChecklistView.class.php](/classes/ChecklistView.class.php) | PHP | 50 | 2 | 5 | 57 |
-| [classes/Dbh.class.php](/classes/Dbh.class.php) | PHP | 33 | 7 | 4 | 44 |
+| [classes/Dbh.class.php](/classes/Dbh.class.php) | PHP | 34 | 6 | 4 | 44 |
 | [classes/Departments.class.php](/classes/Departments.class.php) | PHP | 113 | 0 | 3 | 116 |
 | [classes/DepartmentsContr.class.php](/classes/DepartmentsContr.class.php) | PHP | 16 | 0 | 2 | 18 |
 | [classes/DepartmentsVal.class.php](/classes/DepartmentsVal.class.php) | PHP | 59 | 0 | 6 | 65 |
 | [classes/DepartmentsView.class.php](/classes/DepartmentsView.class.php) | PHP | 40 | 34 | 5 | 79 |
-| [classes/Functions.class.php](/classes/Functions.class.php) | PHP | 319 | 0 | 12 | 331 |
+| [classes/Functions.class.php](/classes/Functions.class.php) | PHP | 323 | 0 | 12 | 335 |
 | [classes/LoginVal.class.php](/classes/LoginVal.class.php) | PHP | 55 | 0 | 9 | 64 |
 | [classes/Professors.class.php](/classes/Professors.class.php) | PHP | 89 | 1 | 7 | 97 |
 | [classes/ProfessorsContr.class.php](/classes/ProfessorsContr.class.php) | PHP | 21 | 0 | 5 | 26 |
@@ -36,13 +36,13 @@ Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
 | [classes/Schedules.class.php](/classes/Schedules.class.php) | PHP | 182 | 36 | 9 | 227 |
 | [classes/SchedulesContr.class.php](/classes/SchedulesContr.class.php) | PHP | 33 | 8 | 5 | 46 |
 | [classes/SchedulesVal.class.php](/classes/SchedulesVal.class.php) | PHP | 105 | 2 | 10 | 117 |
-| [classes/SchedulesView.class.php](/classes/SchedulesView.class.php) | PHP | 149 | 6 | 12 | 167 |
-| [classes/Schoolyear.class.php](/classes/Schoolyear.class.php) | PHP | 41 | 0 | 5 | 46 |
-| [classes/SchoolyearContr.class.php](/classes/SchoolyearContr.class.php) | PHP | 17 | 0 | 2 | 19 |
-| [classes/SchoolyearView.class.php](/classes/SchoolyearView.class.php) | PHP | 25 | 0 | 2 | 27 |
-| [classes/Sections.class.php](/classes/Sections.class.php) | PHP | 133 | 0 | 2 | 135 |
+| [classes/SchedulesView.class.php](/classes/SchedulesView.class.php) | PHP | 150 | 6 | 11 | 167 |
+| [classes/Schoolyear.class.php](/classes/Schoolyear.class.php) | PHP | 57 | 0 | 4 | 61 |
+| [classes/SchoolyearContr.class.php](/classes/SchoolyearContr.class.php) | PHP | 19 | 0 | 2 | 21 |
+| [classes/SchoolyearView.class.php](/classes/SchoolyearView.class.php) | PHP | 30 | 0 | 2 | 32 |
+| [classes/Sections.class.php](/classes/Sections.class.php) | PHP | 135 | 0 | 2 | 137 |
 | [classes/SectionsContr.class.php](/classes/SectionsContr.class.php) | PHP | 19 | 0 | 2 | 21 |
-| [classes/SectionsVal.class.php](/classes/SectionsVal.class.php) | PHP | 48 | 0 | 6 | 54 |
+| [classes/SectionsVal.class.php](/classes/SectionsVal.class.php) | PHP | 48 | 0 | 5 | 53 |
 | [classes/SectionsView.class.php](/classes/SectionsView.class.php) | PHP | 52 | 0 | 2 | 54 |
 | [classes/Subjects.class.php](/classes/Subjects.class.php) | PHP | 76 | 0 | 2 | 78 |
 | [classes/SubjectsContr.class.php](/classes/SubjectsContr.class.php) | PHP | 18 | 0 | 2 | 20 |
@@ -52,11 +52,11 @@ Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
 | [classes/UsersContr.class.php](/classes/UsersContr.class.php) | PHP | 27 | 0 | 2 | 29 |
 | [classes/UsersVal.class.php](/classes/UsersVal.class.php) | PHP | 72 | 1 | 8 | 81 |
 | [classes/UsersView.class.php](/classes/UsersView.class.php) | PHP | 30 | 0 | 2 | 32 |
-| [classschedulingsystem.sql](/classschedulingsystem.sql) | SQL | 1,376 | 199 | 106 | 1,681 |
+| [classschedulingsystem.sql](/classschedulingsystem.sql) | SQL | 1,472 | 199 | 106 | 1,777 |
 | [composer.json](/composer.json) | JSON | 5 | 0 | 0 | 5 |
 | [composer.lock](/composer.lock) | JSON | 19 | 0 | 1 | 20 |
 | [credits.php](/credits.php) | PHP | 1 | 0 | 0 | 1 |
-| [dashboard.php](/dashboard.php) | PHP | 57 | 0 | 9 | 66 |
+| [dashboard.php](/dashboard.php) | PHP | 56 | 0 | 9 | 65 |
 | [demo.php](/demo.php) | PHP | 25 | 0 | 10 | 35 |
 | [department.php](/department.php) | PHP | 45 | 0 | 10 | 55 |
 | [drawables/icons/add.svg](/drawables/icons/add.svg) | XML | 1 | 0 | 0 | 1 |
@@ -96,19 +96,20 @@ Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
 | [includes/rooms.inc.php](/includes/rooms.inc.php) | PHP | 32 | 0 | 6 | 38 |
 | [includes/schedules.inc.php](/includes/schedules.inc.php) | PHP | 57 | 2 | 14 | 73 |
 | [includes/sections.inc.php](/includes/sections.inc.php) | PHP | 32 | 0 | 5 | 37 |
+| [includes/settings.inc.php](/includes/settings.inc.php) | PHP | 13 | 0 | 6 | 19 |
 | [includes/subjects.inc.php](/includes/subjects.inc.php) | PHP | 33 | 0 | 6 | 39 |
 | [includes/users.inc.php](/includes/users.inc.php) | PHP | 44 | 0 | 8 | 52 |
-| [index.php](/index.php) | PHP | 93 | 0 | 14 | 107 |
+| [index.php](/index.php) | PHP | 79 | 0 | 13 | 92 |
 | [layouts/__footer.php](/layouts/__footer.php) | PHP | 2 | 0 | 0 | 2 |
-| [layouts/__header.php](/layouts/__header.php) | PHP | 70 | 0 | 6 | 76 |
+| [layouts/__header.php](/layouts/__header.php) | PHP | 57 | 0 | 5 | 62 |
 | [layouts/checklist.form.php](/layouts/checklist.form.php) | PHP | 34 | 0 | 7 | 41 |
 | [layouts/checklistsubjects.form.php](/layouts/checklistsubjects.form.php) | PHP | 61 | 0 | 11 | 72 |
 | [layouts/departments.form.php](/layouts/departments.form.php) | PHP | 45 | 0 | 5 | 50 |
 | [layouts/professors.form.php](/layouts/professors.form.php) | PHP | 110 | 5 | 6 | 121 |
 | [layouts/rooms.form.php](/layouts/rooms.form.php) | PHP | 93 | 0 | 10 | 103 |
-| [layouts/schedules.form.php](/layouts/schedules.form.php) | PHP | 172 | 0 | 38 | 210 |
+| [layouts/schedules.form.php](/layouts/schedules.form.php) | PHP | 175 | 0 | 38 | 213 |
 | [layouts/sections.form.php](/layouts/sections.form.php) | PHP | 103 | 4 | 15 | 122 |
-| [layouts/settings.form.php](/layouts/settings.form.php) | PHP | 43 | 0 | 6 | 49 |
+| [layouts/settings.form.php](/layouts/settings.form.php) | PHP | 66 | 0 | 12 | 78 |
 | [layouts/subjects.form.php](/layouts/subjects.form.php) | PHP | 98 | 0 | 10 | 108 |
 | [layouts/users.form.php](/layouts/users.form.php) | PHP | 65 | 0 | 8 | 73 |
 | [professors.php](/professors.php) | PHP | 44 | 0 | 7 | 51 |
@@ -118,14 +119,14 @@ Total : 128 files,  10488 codes, 441 comments, 1136 blanks, all 12065 lines
 | [scheduleview.php](/scheduleview.php) | PHP | 22 | 0 | 10 | 32 |
 | [scripts/demo.js](/scripts/demo.js) | JavaScript | 31 | 17 | 5 | 53 |
 | [scripts/index.js](/scripts/index.js) | JavaScript | 129 | 7 | 28 | 164 |
-| [scripts/schedule.js](/scripts/schedule.js) | JavaScript | 240 | 53 | 46 | 339 |
+| [scripts/schedule.js](/scripts/schedule.js) | JavaScript | 249 | 44 | 54 | 347 |
 | [scripts/script.js](/scripts/script.js) | JavaScript | 128 | 2 | 9 | 139 |
 | [sections.php](/sections.php) | PHP | 44 | 0 | 9 | 53 |
-| [settings.php](/settings.php) | PHP | 63 | 0 | 12 | 75 |
-| [styles/admin.css](/styles/admin.css) | CSS | 1,040 | 1 | 150 | 1,191 |
-| [styles/admin.scss](/styles/admin.scss) | SCSS | 122 | 0 | 2 | 124 |
-| [styles/default.css](/styles/default.css) | CSS | 615 | 1 | 85 | 701 |
-| [styles/default.scss](/styles/default.scss) | SCSS | 511 | 28 | 14 | 553 |
+| [settings.php](/settings.php) | PHP | 49 | 0 | 13 | 62 |
+| [styles/admin.css](/styles/admin.css) | CSS | 1,043 | 1 | 150 | 1,194 |
+| [styles/admin.scss](/styles/admin.scss) | SCSS | 118 | 0 | 2 | 120 |
+| [styles/default.css](/styles/default.css) | CSS | 622 | 1 | 86 | 709 |
+| [styles/default.scss](/styles/default.scss) | SCSS | 518 | 28 | 13 | 559 |
 | [styles/demo.css](/styles/demo.css) | CSS | 49 | 1 | 9 | 59 |
 | [styles/demo.scss](/styles/demo.scss) | SCSS | 50 | 0 | 6 | 56 |
 | [styles/index.css](/styles/index.css) | CSS | 261 | 1 | 33 | 295 |

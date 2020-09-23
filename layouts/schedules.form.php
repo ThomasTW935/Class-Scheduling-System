@@ -24,6 +24,7 @@ if ($schedIDExist) {
   $result = $schedView->FetchScheduleByID($schedID)[0];
   $schedDays = $schedView->FetchDayBySchedID($schedID);
   $subjID = $result['subj_id'];
+  $deptID = $result['dept_id'];
   $profID = $result['prof_id'];
   $roomID = $result['room_id'];
   $sectID = $result['sect_id'];
@@ -106,10 +107,12 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
     foreach ($days as $key => $value) {
       $checked = '';
       if (!empty($schedDays)) {
+        $arrDays = [];
         foreach ($schedDays as $schedDay) {
           if ($schedDay['sched_day'] === $value) {
             $checked = true;
           }
+          array_push($arrDays, $schedDay['sched_day']);
         }
       }
       $schedView->GenerateDayChoices($key, $value, $checked, $isDisabled);
@@ -146,18 +149,27 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
   $subjID = (empty($subjID)) ? $subjs[0]['subj_id'] : $subjID;
 
   if ($type != 'prof') {
-
-
+    $occupiedProfs = [];
+    if ($schedIDExist) {
+      $occupiedProfs = $profView->FetchProfessorsByTime($result['sched_from'], $result['sched_to'], $arrDays, $schoolYearID, $subjID);
+    }
+    $disableProfs = ($deptID != $_SESSION['department'] && $isProgHead) ? 'disabled' : '';
     echo "<div class='form__Container'>
     <label for=''>Select Instructor</label>
     <div class='form__Input'>";
 
-    echo "<select name='inputProf' id='professorsList'>";
+    echo "<select name='inputProf' id='professorsList' $disableProfs>";
     echo "<option value='0'>Instructor</option>";
     $profs = $profView->FetchProfessorsBySubj($schoolYearID, $subjID);
     foreach ($profs as $prof) {
+      $selOptDisabled = '';
+      if (!empty($occupiedProfs) && $profID != $prof['id']) {
+        foreach ($occupiedProfs as $occProfs) {
+          if ($occProfs['prof_id'] == $prof['id']) $selOptDisabled = 'disabled';
+        }
+      }
       $selOpt = ($profID == $prof['id']) ? 'selected' : '';
-      echo "<option value='{$prof['id']}' $selOpt> {$prof['dept_name']} | {$prof['full_name']}</option>";
+      echo "<option value='{$prof['id']}' $selOpt $selOptDisabled> {$prof['dept_name']} | {$prof['full_name']} </option>";
     }
     echo "</select>
       <div class='form__Error'>$errorProf</div>
@@ -167,21 +179,32 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
     echo "<input type='hidden' name='inputProf' value='" . $ID . "'>";
   }
 
-
   echo "<div class='form__Container'>
       <label for=''>Select Room</label>
       <div class='form__Input'>
         <select name='inputRoom' id='roomsList' $isDisabled>";
   $isLab = $subjView->FetchSubjectByID($subjID)[0]['is_laboratory'];
   $rooms = $roomView->FetchRoomsBySubj($isLab);
+  $occupiedRooms = [];
+  if ($schedIDExist) {
+    $occupiedRooms = $roomView->FetchRoomsByTime($result['sched_from'], $result['sched_to'], $arrDays, $schoolYearID);
+  }
   foreach ($rooms as $room) {
+    $selOptDisabled = '';
+    if (!empty($occupiedRooms) && $room['rm_id'] != $roomID) {
+      foreach ($occupiedRooms as $occRooms) {
+        if ($occRooms['room_id'] == $room['rm_id']) $selOptDisabled = 'disabled';
+      }
+    }
     $selOpt = ($room['rm_id'] == $roomID) ? 'selected' : '';
-    echo "<option value='{$room['rm_id']}' $selOpt>{$room['rm_name']} | {$room['rm_desc']} | {$room['rm_capacity']}</option>";
+    echo "<option value='{$room['rm_id']}' $selOpt $selOptDisabled>{$room['rm_name']} | {$room['rm_desc']} | {$room['rm_capacity']}</option>";
   }
   echo "</select>
         <div class='form__Error'>$errorRoom</div>
       </div>
   </div>";
+
+
 
   if ($type != 'sect') {
     echo "<div class='form__Container'>
@@ -191,6 +214,7 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
 
     $sects = $sectView->FetchSectionsBySubj($schoolYearID, $subjID);
     foreach ($sects as $sect) {
+
       echo "<option value='{$sect['sect_id']}'>{$sect['sect_name']}</option>";
     }
 
@@ -203,7 +227,9 @@ $selectedTo = ($schedIDExist) ? strtotime($result['sched_to']) : "";
   }
 
   echo "<div class='btn__Container'>";
-  echo "<button id='schedulesButton' class='form__Button button' type='submit' name='$button'>$button</button>";
+  if (empty($disableProfs)) {
+    echo "<button id='schedulesButton' class='form__Button button' type='submit' name='$button'>$button</button>";
+  }
   echo $deleteButton ?? "";
   echo "</div>";
 

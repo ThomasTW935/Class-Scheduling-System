@@ -5,6 +5,7 @@ $department = $_GET['dept'];
 $state = isset($_GET['archive']) ? 0 : 1;
 $subTitle = isset($_GET['archive']) ? '(Archive)' : '';
 $searchValue = $_GET['q'] ?? '';
+$departmentText = ($department == 'faculty') ? 'Department' : $department;
 ?>
 
 <main class='departments module'>
@@ -16,7 +17,7 @@ $searchValue = $_GET['q'] ?? '';
       </form>
       <div class="module__Logo">
          <img src="drawables/icons/<?php echo $department ?>.svg" alt="<?php echo $department ?>">
-         <a href='?dept=<?php echo $department ?>' class="button"><?php echo $department . $subTitle ?></a>
+         <a href='?dept=<?php echo $department ?>' class="button"><?php echo $departmentText . $subTitle ?></a>
       </div>
       <div class="module__Links">
          <?php

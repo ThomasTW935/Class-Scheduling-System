@@ -28,6 +28,11 @@ class RoomsView extends Rooms
     $results = $this->getRoomsBySubj($isLab);
     return $results;
   }
+  public function FetchRoomsByTime($timeFrom, $timeTo, $days, $schoolYearID)
+  {
+    $results = $this->getRoomsByTime($timeFrom, $timeTo, $days, $schoolYearID);
+    return $results;
+  }
   public function FetchRoomTypes()
   {
     $results = $this->getRoomTypes();
