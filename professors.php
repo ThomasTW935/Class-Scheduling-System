@@ -26,10 +26,10 @@ $searchValue = $_GET['q'] ?? '';
    <div class='module__Content'>
       <?php
 
+      $deptID = $_SESSION['department'];
+      $isProgramHead = $_SESSION['type'] == 'Program Head';
       if (empty($searchValue)) {
          $profView = new ProfessorsView();
-         $isProgramHead = $_SESSION['type'] == 'Program Head';
-         $deptID = $_SESSION['department'];
          if (!$isProgramHead) {
             $results = $profView->FetchProfessorsByState($schoolYearID, $state);
          } else {
@@ -45,8 +45,8 @@ $searchValue = $_GET['q'] ?? '';
          }
          $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
+      echo "<iframe src='./reports.php?professors&dept=$deptID&programhead=$isProgramHead' frameborder='0' id='iframe' name='iframe'></iframe>"
       ?>
-      <iframe src="./reports.php?professors" frameborder="0" id='iframe' name='iframe'></iframe>
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {

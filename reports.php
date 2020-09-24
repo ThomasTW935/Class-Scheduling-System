@@ -29,8 +29,14 @@ $schoolYearID = $schoolYear['id'];
     $page = 1;
     $total = 1;
     if (isset($_GET['professors'])) {
+      $deptID = $_GET['dept'];
+      $isProgramHead = $_GET['programhead'];
       $profView = new ProfessorsView();
-      $results = $profView->FetchProfessorsByState($schoolYearID, $state);
+      if (!$isProgramHead) {
+        $results = $profView->FetchProfessorsByState($schoolYearID, $state);
+      } else {
+        $results = $profView->FetchProfessorsByState($schoolYearID, $state, $deptID);
+      }
       $table = $func->TableProperties('prof', $results);
       $profView->DisplayProfessors($results, $page, $total, $table['destination'], $isPrint);
     } else if (isset($_GET['sections'])) {

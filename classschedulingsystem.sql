@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2020 at 08:05 PM
+-- Generation Time: Sep 24, 2020 at 03:08 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -214,12 +214,12 @@ INSERT INTO `professors` (`id`, `emp_no`, `last_name`, `first_name`, `middle_ini
 (34, 987654321, 'De peralta', 'hush', '', '', 'Instructor', 51, 1, NULL),
 (35, 147258369, 'Legarde', 'Dianne', '', '', 'Instructor', 43, 1, NULL),
 (36, 963852741, 'Abalos', 'Romabel ', 'S', '', 'Instructor', 43, 1, NULL),
-(37, 852147963, 'Pacleb', 'Roland', 'P', '', 'Program Head', 51, 1, 'Pacleb.5f5793578529d.jpg'),
+(37, 852147963, 'Pacleb', 'Roland', 'P', '', 'Program Head', 43, 1, 'Pacleb.5f5793578529d.jpg'),
 (38, 195375465, 'Gajasan', 'Jonathan', 'F', '', 'Instructor', 43, 1, NULL),
 (39, 1236544789, 'Teruel', 'Jasper Jeric', 'B', '', 'Instructor', 43, 1, NULL),
 (40, 14562487, 'Thomas', 'Isab', 'P', '', 'Instructor', 43, 1, NULL),
 (45, 123456, 'Doe', 'John', 'L', '', 'MIS', 51, 1, 'Doe.5f5651f3b1ecb.jpg'),
-(46, 12385739, 'Doe', 'Jane', '', '', 'Program Head', 51, 1, NULL);
+(46, 12385739, 'Doe', 'Jane', '', '', 'Program Head', 43, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -358,11 +358,12 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`sched_id`, `sched_from`, `sched_to`, `sched_modified`, `prof_id`, `subj_id`, `room_id`, `sect_id`, `school_year_id`) VALUES
-(2, '07:00:00', '08:30:00', '2020-09-19 17:54:10', 32, 26, 5, 6, 4),
-(5, '08:30:00', '10:00:00', '2020-09-19 17:54:28', 30, 25, 5, 6, 4),
+(2, '07:00:00', '08:30:00', '2020-09-19 18:21:26', 34, 26, 5, 6, 4),
+(5, '08:30:00', '10:00:00', '2020-09-23 05:45:46', 30, 25, 6, 6, 4),
 (6, '07:00:00', '08:30:00', '2020-09-19 17:55:10', 30, 31, 5, 6, 4),
 (7, '08:30:00', '10:00:00', '2020-09-19 17:55:29', 30, 31, 5, 6, 4),
-(8, '10:00:00', '13:00:00', '2020-09-19 17:56:06', 30, 32, 3, 6, 4);
+(8, '10:00:00', '13:00:00', '2020-09-20 04:02:04', 38, 32, 43, 6, 4),
+(11, '08:30:00', '10:00:00', '2020-09-23 04:21:02', 36, 77, 13, 451, 4);
 
 -- --------------------------------------------------------
 
@@ -387,7 +388,9 @@ INSERT INTO `schedules_day` (`id`, `sched_id`, `sched_day`) VALUES
 (14, 5, 'Thursday'),
 (15, 6, 'Wednesday'),
 (16, 7, 'Wednesday'),
-(17, 8, 'Wednesday');
+(17, 8, 'Wednesday'),
+(21, 11, 'Monday'),
+(22, 11, 'Thursday');
 
 -- --------------------------------------------------------
 
@@ -845,7 +848,6 @@ INSERT INTO `sections_details` (`id`, `sect_id`, `school_year_id`, `is_active`, 
 (614, 901, 4, 1, '2020-09-19 17:10:49'),
 (615, 911, 4, 0, '2020-09-19 17:10:49'),
 (616, 921, 4, 0, '2020-09-19 17:10:49'),
-(617, 3, 4, 0, '2020-09-19 17:10:49'),
 (619, 131, 4, 0, '2020-09-19 17:10:49'),
 (620, 141, 4, 0, '2020-09-19 17:10:49'),
 (621, 151, 4, 0, '2020-09-19 17:10:49'),
@@ -1171,17 +1173,10 @@ CREATE TABLE `subjects_to_checklist` (
 --
 
 INSERT INTO `subjects_to_checklist` (`id`, `chk_id`, `subj_id`, `level_id`) VALUES
-(5, 1, 6, 3),
 (8, 1, 6, 3),
-(9, 1, 9, 3),
-(10, 1, 10, 3),
-(11, 1, 9, 3),
 (12, 1, 59, 8),
 (13, 1, 18, 7),
-(14, 1, 15, 4),
-(15, 1, 25, 5),
 (16, 1, 29, 9),
-(21, 1, 10, 3),
 (31, 1, 11, 3),
 (41, 1, 12, 3),
 (51, 1, 13, 3),
@@ -1195,7 +1190,6 @@ INSERT INTO `subjects_to_checklist` (`id`, `chk_id`, `subj_id`, `level_id`) VALU
 (131, 1, 22, 4),
 (141, 1, 23, 4),
 (151, 1, 24, 4),
-(161, 1, 25, 7),
 (171, 1, 26, 7),
 (181, 1, 27, 7),
 (191, 1, 46, 7),
@@ -1714,7 +1708,7 @@ ALTER TABLE `professors`
 -- AUTO_INCREMENT for table `professors_details`
 --
 ALTER TABLE `professors_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -1726,13 +1720,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `sched_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `schedules_day`
 --
 ALTER TABLE `schedules_day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `school_year`
@@ -1750,7 +1744,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `sections_details`
 --
 ALTER TABLE `sections_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=769;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=645;
 
 --
 -- AUTO_INCREMENT for table `subjects`
