@@ -41,6 +41,7 @@ $departmentText = ($department == 'faculty') ? 'Department' : $department;
          $deptView->DisplayDepts($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
 
+      echo "<iframe src='./reports.php?department=$department' frameborder='0' id='iframe' name='iframe'></iframe>";
       ?>
    </div>
    <?php

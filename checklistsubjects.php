@@ -16,12 +16,12 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
     <div class="module__Links">
       <?php
 
-      echo "<a href='?id=$id&add'><img src='drawables/icons/add.svg' alter='Add' />
+      echo "<button><a href='?id=$id&add'><img src='drawables/icons/add.svg' alter='Add' /></a>
       <p>Add</p>
-      </a>";
+      </button>";
 
       ?>
-      <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' />
+      <button class='schedules__Action' onclick=" printContentWithoutIframe() "><img src='./drawables/icons/printer.svg' />
         <p>Print</p>
       </button>
     </div>

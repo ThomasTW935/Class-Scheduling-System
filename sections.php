@@ -38,7 +38,7 @@ $searchValue = $_GET['q'] ?? '';
       }
 
       ?>
-
+      <iframe src="./reports.php?sections" frameborder="0" id='iframe' name='iframe'></iframe>
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {

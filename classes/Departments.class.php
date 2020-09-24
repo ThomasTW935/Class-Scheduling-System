@@ -7,7 +7,7 @@ class Departments extends Dbh
    {
       $jump = $limit * ($page - 1);
       $withLimit = ($page > 0) ? "LIMIT $jump,$limit" : "";
-      $sql = "SELECT * FROM departments WHERE dept_type = ? AND dept_active = ? $withLimit";
+      $sql = "SELECT * FROM departments WHERE dept_type = ? AND dept_active = ? ORDER BY dept_name $withLimit";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$type, $state]);

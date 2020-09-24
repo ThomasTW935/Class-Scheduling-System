@@ -28,7 +28,7 @@ class Professors extends Dbh
       $sql = "SELECT p.id,emp_no, last_name,first_name,middle_initial,suffix,CONCAT(last_name,', ', first_name,' ', middle_initial, ' ',suffix ) as full_name,type, p.dept_id,  COALESCE(prof_img,'professor.png') as img , dept_name, school_year_id, pd.is_active FROM professors p 
       INNER JOIN departments d ON p.dept_id = d.dept_id 
       INNER JOIN professors_details pd ON p.id = pd.prof_id
-      WHERE school_year_id = ? AND is_active = ? $department $withLimit";
+      WHERE school_year_id = ? AND is_active = ? $department ORDER BY dept_name,full_name $withLimit ";
       try {
          $stmt = $this->connect()->prepare($sql);
          $stmt->execute([$schoolYearID, $state]);

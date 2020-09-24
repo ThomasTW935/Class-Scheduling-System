@@ -63,10 +63,12 @@ class ProfessorsView extends Professors
       return $fullName;
    }
 
-   public function DisplayProfessors($results, $page, $totalPages, $destination)
+   public function DisplayProfessors($results, $page, $totalPages, $destination, $isPrint = false)
    {
       $func = new Functions();
-      $func->TableTemplate("prof", $results, $page);
-      $func->BuildPagination($page, $totalPages, $destination);
+      $func->TableTemplate("prof", $results, $page, $isPrint);
+      if (!$isPrint) {
+         $func->BuildPagination($page, $totalPages, $destination);
+      }
    }
 }

@@ -300,7 +300,23 @@ a {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  gap: 0.6em;
   width: 100px;
+}
+
+.module__Header .module__Links button {
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.module__Header .module__Links button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.module__Header .module__Links span,
+.module__Header .module__Links p {
+  font-size: 0.8rem;
 }
 
 .module__Header .module__Links a {
@@ -308,34 +324,7 @@ a {
 }
 
 .module__Header .module__Links a span {
-  font-size: 1rem;
-  text-transform: capitalize;
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 2;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-}
-
-.module__Header .module__Links a span::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  font-size: 0.8rem;
 }
 
 .module__Header .module__Links a:hover span {
@@ -508,6 +497,10 @@ a {
 
 .module__Pages a.disabled {
   visibility: hidden;
+}
+
+.module iframe {
+  display: none;
 }
 
 .module__Form {

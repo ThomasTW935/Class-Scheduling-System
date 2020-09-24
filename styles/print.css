@@ -37,13 +37,30 @@ html {
   background: rgba(255, 255, 0, 0.4);
 }
 
-#checklistSubjects .module__Actions,
-#checklistSubjects .module__Links {
+.nav * {
   display: none;
 }
 
-#checklistSubjects .module__Links * {
+.module__Header {
   display: none;
+}
+
+.module__Content table,
+.module__Content .module__Pages {
+  display: none;
+}
+
+#iframe {
+  display: block;
+}
+
+#checklistSubjects .module__Links,
+#checklistSubjects .module__Actions {
+  display: none;
+}
+
+#checklistSubjects .module__Links button {
+  visibility: hidden;
 }
 
 #checklistSubjects .module__Logo {
@@ -56,12 +73,18 @@ html {
   margin: 0;
 }
 
-#checklistSubjects .module__Content table {
+#checklistSubjects .module__Content .module__Table {
+  display: table;
   width: 100%;
 }
 
-#checklistSubjects .module__Content table tr th:last-child,
-#checklistSubjects .module__Content table tr td:last-child {
+#checklistSubjects .module__Content .module__Table tr th:first-child,
+#checklistSubjects .module__Content .module__Table tr td:first-child {
+  border-left: 1px solid #7a7a7a;
+}
+
+#checklistSubjects .module__Content .module__Table tr th:last-child,
+#checklistSubjects .module__Content .module__Table tr td:last-child {
   display: none;
 }
 /*# sourceMappingURL=print.css.map */

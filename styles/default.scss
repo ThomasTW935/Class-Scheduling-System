@@ -210,36 +210,47 @@ a {
     .module__Links {
       display: flex;
       justify-content: space-evenly;
+      gap: 0.6em;
       width: 100px;
+      button {
+        transition: 0.2s ease;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      span,
+      p {
+        font-size: 0.8rem;
+      }
       a {
         position: relative;
         span {
-          font-size: 1rem;
-          text-transform: capitalize;
-          visibility: hidden;
-          width: 120px;
-          background-color: #555;
-          color: #fff;
-          text-align: center;
-          border-radius: 6px;
-          padding: 5px 0;
-          position: absolute;
-          z-index: 2;
-          bottom: 125%;
-          left: 50%;
-          margin-left: -60px;
-          opacity: 0;
-          transition: opacity 0.3s;
-          &::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-          }
+          font-size: 0.8rem;
+          // text-transform: capitalize;
+          // visibility: hidden;
+          // width: 120px;
+          // background-color: #555;
+          // color: #fff;
+          // text-align: center;
+          // border-radius: 6px;
+          // padding: 5px 0;
+          // position: absolute;
+          // z-index: 2;
+          // bottom: 125%;
+          // left: 50%;
+          // margin-left: -60px;
+          // opacity: 0;
+          // transition: opacity 0.3s;
+          // &::after {
+          //   content: "";
+          //   position: absolute;
+          //   top: 100%;
+          //   left: 50%;
+          //   margin-left: -5px;
+          //   border-width: 5px;
+          //   border-style: solid;
+          //   border-color: #555 transparent transparent transparent;
+          // }
         }
         &:hover span {
           opacity: 1;
@@ -382,6 +393,9 @@ a {
         visibility: hidden;
       }
     }
+  }
+  iframe {
+    display: none;
   }
   &__Form {
     z-index: 10000000;

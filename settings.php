@@ -29,7 +29,7 @@ $schoolyearView = new SchoolyearView();
     <div class="module__Links">
       <?php
 
-      $func->GenerateModuleLinks($page);
+      $func->GenerateModuleLinks($page, false, false, 'schoolYear');
 
       ?>
 

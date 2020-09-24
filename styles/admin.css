@@ -300,7 +300,23 @@ a {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  gap: 0.6em;
   width: 100px;
+}
+
+.module__Header .module__Links button {
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.module__Header .module__Links button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.module__Header .module__Links span,
+.module__Header .module__Links p {
+  font-size: 0.8rem;
 }
 
 .module__Header .module__Links a {
@@ -308,34 +324,7 @@ a {
 }
 
 .module__Header .module__Links a span {
-  font-size: 1rem;
-  text-transform: capitalize;
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 2;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-}
-
-.module__Header .module__Links a span::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  font-size: 0.8rem;
 }
 
 .module__Header .module__Links a:hover span {
@@ -508,6 +497,10 @@ a {
 
 .module__Pages a.disabled {
   visibility: hidden;
+}
+
+.module iframe {
+  display: none;
 }
 
 .module__Form {
@@ -1025,6 +1018,9 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 0.5em 2rem;
 }
 
@@ -1036,12 +1032,16 @@ a {
 .dashboard__Container {
   display: -ms-grid;
   display: grid;
-  width: 80%;
-  -ms-grid-columns: (minmax(120px, 250px))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  row-gap: 0.5em;
+  width: 60%;
+  -ms-grid-columns: (minmax(100px, 250px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
 }
 
 .dashboard__Card {
@@ -1165,20 +1165,7 @@ a {
 
 #checklistSubjects .module__Header .module__Links p {
   font-size: 0.9rem;
-  text-transform: uppercase;
-}
-
-#checklistSubjects .module__Header .module__Links a,
-#checklistSubjects .module__Header .module__Links button {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 0.15em;
-  color: #111;
+  text-transform: capitalize;
 }
 
 #checklistSubjects .module__Content {
@@ -1210,5 +1197,23 @@ a {
 #checklistSubjects .module__Content table td,
 #checklistSubjects .module__Content table th {
   padding: 0.25em 0.5em;
+}
+
+#iframe {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#print-Content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+#print-Content .module__Content {
+  overflow: auto;
 }
 /*# sourceMappingURL=admin.css.map */

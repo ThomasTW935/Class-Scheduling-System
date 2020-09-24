@@ -32,27 +32,45 @@ html {
     }
   }
 }
-
-#checklistSubjects {
-  .module__Actions,
-  .module__Links {
+.nav {
+  * {
     display: none;
   }
-  .module__Links {
-    * {
-      display: none;
-    }
+}
+.module__Header {
+  display: none;
+}
+.module__Content {
+  table,
+  .module__Pages {
+    display: none;
+  }
+}
+#iframe {
+  display: block;
+}
+#checklistSubjects {
+  .module__Links,
+  .module__Actions {
+    display: none;
+  }
+  .module__Links button {
+    visibility: hidden;
   }
   .module__Logo {
     grid-column: 1/4;
   }
   .module__Content {
     margin: 0;
-    table {
+    .module__Table {
+      display: table;
       width: 100%;
       tr {
         th,
         td {
+          &:first-child {
+            border-left: 1px solid rgb(122, 122, 122);
+          }
           &:last-child {
             display: none;
           }

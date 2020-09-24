@@ -1,0 +1,31 @@
+.module__Table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 2px solid #c8c8c8;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+.module__Table th {
+  background-color: #ebebeb;
+}
+
+.module__Table tr:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+.module__Table td,
+.module__Table th {
+  border: 1px solid #bebebe;
+  padding: 0.25em 0.5em;
+}
+
+.module__Table td {
+  text-align: center;
+}
+
+.module__Table caption {
+  padding: 10px;
+}
+/*# sourceMappingURL=reports.css.map */

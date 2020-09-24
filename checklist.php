@@ -20,7 +20,7 @@ $deptName = $dept['dept_name'];
     <div class="module__Links">
       <?php
 
-      $func->GenerateModuleLinks($page, $deptID, true);
+      $func->GenerateModuleLinks($page, $deptID, true, false, "checklist");
 
       ?>
     </div>

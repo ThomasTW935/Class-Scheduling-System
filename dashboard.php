@@ -52,10 +52,6 @@ if ($sessionType == 1) {
          <img src='./drawables/icons/student.svg'; alt='Users'>
          </a>";
          }
-         echo "<a class='dashboard__Card card__Design' href='./reports.php'>
-            <h3>Reports</h3>
-            <img src='./drawables/icons/calendar.svg' alt='School Year'>
-            </a>";
       }
 
       ?>

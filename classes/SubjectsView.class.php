@@ -39,10 +39,10 @@ class SubjectsView extends Subjects
             </ul></option>";
       }
    }
-   public function DisplaySubjects($results, $page, $totalPages, $destination)
+   public function DisplaySubjects($results, $page, $totalPages, $destination, $isPrint = false)
    {
       $func = new Functions();
-      $func->TableTemplate("subj", $results, $page);
-      $func->BuildPagination($page, $totalPages, $destination);
+      $func->TableTemplate("subj", $results, $page, $isPrint);
+      if (!$isPrint) $func->BuildPagination($page, $totalPages, $destination);
    }
 }

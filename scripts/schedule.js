@@ -203,6 +203,10 @@ let validateForm = () => {
 // Print Button 
 
 let PrintContent = () => {
+  window.frames['iframe'].focus()
+  window.frames['iframe'].print()
+}
+function printContentWithoutIframe() {
   window.print()
 }
 

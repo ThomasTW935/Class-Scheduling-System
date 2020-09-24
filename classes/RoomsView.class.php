@@ -38,10 +38,10 @@ class RoomsView extends Rooms
     $results = $this->getRoomTypes();
     return $results;
   }
-  public function DisplayRooms($results, $page, $totalPages, $destination)
+  public function DisplayRooms($results, $page, $totalPages, $destination, $isPrint = false)
   {
     $func = new Functions();
-    $func->TableTemplate("room", $results, $page);
-    $func->BuildPagination($page, $totalPages, $destination);
+    $func->TableTemplate("room", $results, $page, $isPrint);
+    if (!$isPrint) $func->BuildPagination($page, $totalPages, $destination);
   }
 }

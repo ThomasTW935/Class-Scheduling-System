@@ -44,10 +44,10 @@ class SectionsView extends Sections
             </ul></option>";
         }
     }
-    public function DisplaySections($results, $page, $totalPages, $destination)
+    public function DisplaySections($results, $page, $totalPages, $destination, $isPrint = false)
     {
         $func = new Functions();
-        $func->TableTemplate("sect", $results, $page);
-        $func->BuildPagination($page, $totalPages, $destination);
+        $func->TableTemplate("sect", $results, $page, $isPrint);
+        if (!$isPrint) $func->BuildPagination($page, $totalPages, $destination);
     }
 }

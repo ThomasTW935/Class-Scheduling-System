@@ -72,20 +72,24 @@ class Functions
     echo "</ul>";
     echo "</div>";
   }
-  public function GenerateModuleLinks($page, $dept = '', $check = false, $isUsers = false)
+  public function GenerateModuleLinks($page, $dept = '', $check = false, $isUsers = false, $type = '')
   {
     $destination = (!empty($dept)) ? "dept=$dept&" : "";
     $destination = ($check) ? "deptid=$dept&" : $destination;
     if (!isset($_GET['archive'])) {
       if (!$isUsers) {
-        echo "   <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
+        echo " <button>  <a href='?{$destination}page=$page&add'><img src='drawables/icons/add.svg' alter='Add' />
+        </a>
         <span>Add</span>
-        </a>";
+        </button>";
+        if (empty($type)) echo "<button class='schedules__Action' onclick=' PrintContent()'><img src='./drawables/icons/printer.svg' /><span>Print</span></button>";
       }
       if ($_SESSION['type'] == 'MIS' || $_SESSION['type'] == 'Academic Head') {
-        echo "<a href='?{$destination}archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
-         <span>Archive</span>
-         </a>";
+        echo "
+        <button><a href='?{$destination}archive&page=1'><img src='drawables/icons/archive.svg' alter='Archive' />
+        </a>
+        <p>Archive</p>
+         </button>";
       }
     } else {
       echo "<a class='module__Return' href='?{$destination}page=1'><img src='drawables/icons/return.svg'/>BACK</a>";
@@ -131,9 +135,9 @@ class Functions
 
     return $newArray;
   }
-  public function TableTemplate($type, $results, $currentPage)
+  public function TableTemplate($type, $results, $currentPage, $isPrint = false)
   {
-    $tableValues = $this->SetTableValues($type);
+    $tableValues = $this->SetTableValues($type, $isPrint);
     echo "<table class='module__Table'>";
     echo "<thead>";
     echo "<tr class=''>";
@@ -145,7 +149,7 @@ class Functions
     echo "<tbody>";
     foreach ($results as $result) {
       echo "<tr class=''>";
-      if ($type == 'prof') {
+      if ($type == 'prof' && !$isPrint) {
         echo "<td class='prof-image'><img src='./drawables/images/" . $result['img'] . "'></td>";
       }
       foreach ($tableValues["body"] as $key => $value) {
@@ -155,44 +159,52 @@ class Functions
         $isHidden = ($result['hide_schedules']) ? 'True' : 'False';
         echo "<td>$isHidden</td>";
       }
-      $action = $this->BuildTableActions($type, $result, $currentPage);
-      echo "<td>
-      <div class='table-actions'>$action</div>
-      </td>";
+      if (!$isPrint) {
+        $action = $this->BuildTableActions($type, $result, $currentPage);
+        echo "<td>
+        <div class='table-actions'>$action</div>
+        </td>";
+      }
       echo "</tr>";
     }
     echo "</tbody>";
     echo "</table>";
   }
-  public function SetTableValues($type)
+  public function SetTableValues($type, $isPrint)
   {
     $tableHead = [];
     $tableBody = [];
     $newArray = [];
     if ($type == 'subj') {
-      $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department', "Actions"];
+      $tableHead = ["Subject Code", "Subject Description", "Unit/s", "Hour/s", 'Department'];
       $tableBody = ["subj_code", "subj_desc", "units", 'hours', 'dept_name'];
     } else if ($type == 'schoolyear') {
-      $tableHead = ["School Year", "Operation Start", "Operation End", 'Hide Schedules', "Actions"];
+      $tableHead = ["School Year", "Operation Start", "Operation End", 'Hide Schedules'];
       $tableBody = ["year", "operation_start", "operation_end"];
     } else if ($type == 'dept') {
-      $tableHead = ["Program", "Description", "Actions"];
+      $tableHead = ["Program", "Description"];
       $tableBody = ["dept_name", "dept_desc"];
     } else if ($type == 'sect') {
-      $tableHead = ["Section", "Year And Semester", "Department", "Actions"];
+      $tableHead = ["Section", "Year And Semester", "Department"];
       $tableBody = ["sect_name", "sect_year", "dept_name"];
     } else if ($type == 'room') {
-      $tableHead = ["Room", "Description", "Floor", "Capacity", "Actions"];
+      $tableHead = ["Room", "Description", "Floor", "Capacity"];
       $tableBody = ["rm_name", "rm_desc", "rm_floor", "rm_capacity"];
     } else if ($type == 'prof') {
-      $tableHead = [" ", "Employee ID", "Employee Name", "Position", "Department", "Actions"];
+      $tableHead = ["Employee ID", "Employee Name", "Position", "Department"];
       $tableBody = ["emp_no", "full_name", 'type', "dept_name"];
+      if (!$isPrint) {
+        array_unshift($tableHead, ' ');
+      }
     } else if ($type == 'user') {
-      $tableHead = ["Username", "Email", 'Empoyee Name', "Actions"];
+      $tableHead = ["Username", "Email", 'Empoyee Name'];
       $tableBody = ["username", "email", 'full_name'];
     } else if ($type == 'checklist') {
-      $tableHead = ["Name", "Actions"];
+      $tableHead = ["Name"];
       $tableBody = ["name"];
+    }
+    if (!$isPrint) {
+      array_push($tableHead, "Actions");
     }
     $newArray["head"] = $tableHead;
     $newArray["body"] = $tableBody;

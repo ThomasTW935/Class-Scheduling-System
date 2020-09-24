@@ -46,6 +46,7 @@ $searchValue = $_GET['q'] ?? '';
          $profView->DisplayProfessors($paginatedResults, $page, $table['totalpages'], $table['destination']);
       }
       ?>
+      <iframe src="./reports.php?professors" frameborder="0" id='iframe' name='iframe'></iframe>
    </div>
    <?php
    if (isset($_GET['add']) || isset($_GET['id'])) {
