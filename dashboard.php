@@ -46,12 +46,16 @@ if ($sessionType == 1) {
             <h3>School Year</h3>
             <img src='./drawables/icons/calendar.svg' alt='School Year'>
             </a>";
-      }
-      if ($_SESSION['type'] == 'MIS') {
-         echo "<a class='dashboard__Card card__Design' href='./users.php?page=1'>
+         if ($_SESSION['type'] == 'MIS') {
+            echo "<a class='dashboard__Card card__Design' href='./users.php?page=1'>
          <h3>Users</h3>
          <img src='./drawables/icons/student.svg'; alt='Users'>
          </a>";
+         }
+         echo "<a class='dashboard__Card card__Design' href='./reports.php'>
+            <h3>Reports</h3>
+            <img src='./drawables/icons/calendar.svg' alt='School Year'>
+            </a>";
       }
 
       ?>

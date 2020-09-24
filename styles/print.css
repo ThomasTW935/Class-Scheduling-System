@@ -36,4 +36,32 @@ html {
 .schedules__Table .slot a {
   background: rgba(255, 255, 0, 0.4);
 }
+
+#checklistSubjects .module__Actions,
+#checklistSubjects .module__Links {
+  display: none;
+}
+
+#checklistSubjects .module__Links * {
+  display: none;
+}
+
+#checklistSubjects .module__Logo {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1/4;
+}
+
+#checklistSubjects .module__Content {
+  margin: 0;
+}
+
+#checklistSubjects .module__Content table {
+  width: 100%;
+}
+
+#checklistSubjects .module__Content table tr th:last-child,
+#checklistSubjects .module__Content table tr td:last-child {
+  display: none;
+}
 /*# sourceMappingURL=print.css.map */

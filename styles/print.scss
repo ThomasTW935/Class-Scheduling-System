@@ -32,3 +32,32 @@ html {
     }
   }
 }
+
+#checklistSubjects {
+  .module__Actions,
+  .module__Links {
+    display: none;
+  }
+  .module__Links {
+    * {
+      display: none;
+    }
+  }
+  .module__Logo {
+    grid-column: 1/4;
+  }
+  .module__Content {
+    margin: 0;
+    table {
+      width: 100%;
+      tr {
+        th,
+        td {
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

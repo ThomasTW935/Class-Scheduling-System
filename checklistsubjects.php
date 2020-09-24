@@ -17,10 +17,13 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
       <?php
 
       echo "<a href='?id=$id&add'><img src='drawables/icons/add.svg' alter='Add' />
-      <span>Add</span>
+      <p>Add</p>
       </a>";
 
       ?>
+      <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' />
+        <p>Print</p>
+      </button>
     </div>
   </div>
   <div class='module__Content'>
@@ -72,6 +75,7 @@ $checkList = $checklistView->FetchChecklistByID($id)[0];
           <td></td>
           <td style='text-align: end;'>Total $type: </td>
           <td>$totalUnits</td>
+          <td></td>
           </tr>
         </tfoot>
       </table>";

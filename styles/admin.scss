@@ -12,8 +12,9 @@
   }
   &__Container {
     display: grid;
-    grid-template-columns: repeat(3, minmax(120px, 250px));
-    gap: 0.5em;
+    width: 80%;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
+    justify-content: center;
   }
   &__Card {
     height: 220px;
@@ -86,12 +87,24 @@
   }
 }
 #checklistSubjects {
-  overflow: hidden;
   .module__Header {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     .module__Links {
       justify-self: end;
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+      }
+      a,
+      button {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15em;
+        color: #111;
+      }
     }
   }
   .module__Content {
@@ -99,7 +112,6 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    overflow: scroll;
     table {
       margin: 0.5em 0;
       min-width: 300px;

@@ -1036,9 +1036,12 @@ a {
 .dashboard__Container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(120px, 250px))[3];
-      grid-template-columns: repeat(3, minmax(120px, 250px));
-  gap: 0.5em;
+  width: 80%;
+  -ms-grid-columns: (minmax(120px, 250px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(120px, 250px));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .dashboard__Card {
@@ -1143,10 +1146,6 @@ a {
   background: var(--color-background-light);
 }
 
-#checklistSubjects {
-  overflow: hidden;
-}
-
 #checklistSubjects .module__Header {
   display: -ms-grid;
   display: grid;
@@ -1155,8 +1154,31 @@ a {
 }
 
 #checklistSubjects .module__Header .module__Links {
-  -ms-grid-column-align: end;
-      justify-self: end;
+  justify-self: end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#checklistSubjects .module__Header .module__Links p {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+#checklistSubjects .module__Header .module__Links a,
+#checklistSubjects .module__Header .module__Links button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.15em;
+  color: #111;
 }
 
 #checklistSubjects .module__Content {
@@ -1170,7 +1192,6 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  overflow: scroll;
 }
 
 #checklistSubjects .module__Content table {

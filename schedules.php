@@ -69,13 +69,6 @@ if ($type == 'sect' || empty($type) || $type == null) {
          <a class='schedules__Action' href='<?php echo "./$returnDestination.php" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
          <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' /><span>Print</span></button>
       </div>
-      <!-- <div class='schedules__Nav'>
-         <input type="radio" name="schedule-details" id="information" onclick="ToggleSchedNav()" checked>
-         <label for='information'>Information</label>
-          <span>\</span>
-         <input type="radio" name="schedule-details" id="settings" onclick="ToggleSchedNav()">
-         <label for='settings'>Settings</label>
-   </div> -->
       <section class="schedules__Information" id='information-con'>
          <div>
             <?php
