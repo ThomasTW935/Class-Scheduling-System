@@ -4,7 +4,7 @@
 # # Ignore node_modules folder
 # node_modules
 vendor
-
+classes/Dbh.class.php
 # Ignore all text files
 *.txt
 
