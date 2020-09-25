@@ -1,24 +1,12 @@
 <?php
-
-class Dbh
+class Dbh extends Environment
 {
-
-   // private $host = 'localhost';
-   // private $user = "root";
-   // private $pwd = "";
-   // private $dbName = "ClassSchedulingSystem";
-   private $host = 'us-cdbr-east-02.cleardb.com';
-   private $user = "b9e547a06bfec3";
-   private $pwd = "0e937125";
-   private $dbName = "heroku_47a94c0a6cb5111";
-   private $test = ';';
-   // $herokuHost = mysql -u b9e547a06bfec3 -h us-cdbr-east-02.cleardb.com -p heroku_47a94c0a6cb5111 < classschedulingsystem.sql
-
    protected function connect()
    {
       try {
-         $dsn = "mysql:host=" . $this->host . "; dbname=" . $this->dbName;
-         $pdo = new PDO($dsn, $this->user, $this->pwd);
+
+         $dsn = "mysql:host=" . $this->getHost() . "; dbname=" . $this->getDBName();
+         $pdo = new PDO($dsn, $this->getUser(), $this->getPassword());
          // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          return $pdo;

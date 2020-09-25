@@ -4,12 +4,13 @@
 # # Ignore node_modules folder
 # node_modules
 vendor
-classes/Dbh.class.php
+/classes/Environment.class.php
 # Ignore all text files
 *.txt
 
 # Ignore files related to API keys
 .env
+env.php
 
 # # Ignore SASS config files
 # .sass-cache
