@@ -67,7 +67,7 @@ if ($type == 'sect' || empty($type) || $type == null) {
    <div class='schedules__Details'>
       <div class='schedules__Actions'>
          <a class='schedules__Action' href='<?php echo "./$returnDestination.php" ?>'><img src='./drawables/icons/return.svg' /><span>Back</span></a>
-         <button class='schedules__Action' onclick=" PrintContent() "><img src='./drawables/icons/printer.svg' /><span>Print</span></button>
+         <button class='schedules__Action' onclick=" printContentWithoutIframe() "><img src='./drawables/icons/printer.svg' /><span>Print</span></button>
       </div>
       <section class="schedules__Information" id='information-con'>
          <div>

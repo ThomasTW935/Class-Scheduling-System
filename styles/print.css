@@ -22,17 +22,6 @@ html {
   height: 100vh;
 }
 
-.schedules__Table td,
-.schedules__Table th,
-.schedules__Table tr {
-  font-size: 1.5rem;
-  height: 2rem;
-}
-
-.schedules__Table tr {
-  height: 2rem;
-}
-
 .schedules__Table .slot a {
   background: rgba(255, 255, 0, 0.4);
 }
