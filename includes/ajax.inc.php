@@ -23,6 +23,12 @@ if (isset($_GET['chkID'])) {
    echo json_encode($levels);
    exit();
 }
+if(isset($_GET['load'])){
+   $subjView = new SubjectsView();
+   $results = $subjView->FetchSubjectsByState(1);
+   echo json_encode($results);
+   exit();
+}
 
 if (isset($_GET['selectLevel']) || isset($_GET['selectDept'])) {
 

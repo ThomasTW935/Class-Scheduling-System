@@ -54,7 +54,10 @@ let SchoolYearOnChange = () => {
    let query = `${name}=${value}`
    searchData(query, 'schoolYear')
 }
-
+function displayDatas(){
+   let query = `load=subjects`
+   searchData(query,'')
+}
 function searchData(query, target) {
    let xhr = new XMLHttpRequest()
    xhr.onreadystatechange = function () {
@@ -86,6 +89,10 @@ function searchData(query, target) {
                option.innerHTML = data['description']
                con.appendChild(option)
             })
+         } else{
+            let con = document.querySelector('#sectionsLevel')
+            let data = JSON.parse(this.responseText)
+            console.log(data[0].subj_id)
          }
       }
    }
@@ -136,4 +143,18 @@ if (roomRadioButtons) {
       roomDesc.classList.toggle('invisible')
    }
 
+}
+
+displayDatas();
+
+function testAjax(){
+   let xhr = new XMLHttpRequest()
+   xhr.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status) {
+         let datas = JSON.parse(this.responseText)
+         console.log(datas)
+      }
+   }
+   xhr.open("GET", 'includes/ajax.inc.php?' + query, true)
+   xhr.send()
 }
